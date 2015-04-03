@@ -1,3 +1,8 @@
+##Fixometer
+Building a tool to track impact of repaired electronic devices
+
+- We've chosen Laravel to build the Fixometer. Please look the [Laravel website](http://laravel.com/docs). 
+
 ## Laravel PHP Framework
 
 [![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
