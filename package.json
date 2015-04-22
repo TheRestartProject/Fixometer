@@ -2,6 +2,30 @@
   "private": true,
   "devDependencies": {
     "gulp": "^3.8.8",
-    "laravel-elixir": "*"
+    "laravel-elixir": "*",
+    "grunt": "~0.4.5",
+    "grunt-contrib-less": "~1.0.1",
+    "grunt-contrib-concat": "~0.5.1",
+    "grunt-contrib-uglify": "~0.9.1",
+    "grunt-contrib-watch": "~0.6.1"
+  },
+  "name": "Fixometer",
+  "description": "Building a tool to track impact of repaired electronic devices",
+  "version": "0.0.0",
+  "main": "Gruntfile.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TheRestartProject/Fixometer.git"
+  },
+  "author": "Alan Zard",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/TheRestartProject/Fixometer/issues"
   }
 }
