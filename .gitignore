@@ -1,4 +1,5 @@
 /vendor
 /node_modules
+/config/database.php
 .env
 readme.md
