@@ -52,7 +52,8 @@
                 $objectUser = $stmt->fetch(PDO::FETCH_OBJ);
                 
                 if(is_object($objectUser)){
-                    $objectUser->permissions = User::getRolePermissions($objectUser->role);    
+                    $User = new User;
+                    $objectUser->permissions = $User->getRolePermissions($objectUser->role);    
                 }
                 
                 echo "<pre>";
