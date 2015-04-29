@@ -11,7 +11,7 @@
         protected $table;
         
         public function __construct() {
-            if(!$this->handle){
+            if(!$this->database){
                 
                 $dns = DBTYPE . ':dbname=' . DBNAME . ';host=' . DBHOST;
                 
@@ -27,7 +27,29 @@
             
         }
         
-        public function find($params){}
+        public function find($params){
+            $sql = 'SELECT * FROM ' . $this->table . ' WHERE ';
+            $clauses = array();
+            foreach($params as $field => $value) {
+                $clauses[] = $field . ' = :' . $field;
+            }
+            $sql .= implode(' AND ', $clauses);
+            
+            $stmt = $this->database->prepare($sql);
+            foreach($params as $field => &$value){
+                $stmt->bindParam(':'.$field, $value);
+            }
+            $q = $stmt->execute();
+            
+            if(!$q){
+                $Error = new Error(601, 'Could not execute query.');
+                $Error->display();
+                return false;
+            }
+            else {
+                return $stmt->fetchAll(PDO::FETCH_OBJ);
+            }
+        }
         public function findOne($id){}
         public function findAll(){}
         

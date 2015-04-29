@@ -13,5 +13,6 @@ define('DS', DIRECTORY_SEPARATOR);
 define('ROOT', $_SERVER['DOCUMENT_ROOT'] );
 
 /** session keys **/
-define('SESSIONKEY', md5(time()));
+define('SESSIONKEY', md5(APPNAME));
 define('SESSIONNAME', md5(APPNAME . SESSIONKEY));
+define('SESSIONSALT', strrev(SESSIONKEY));

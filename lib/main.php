@@ -34,46 +34,42 @@
     function init(){
         global $url;
     
-        $Auth =  new Auth($url);
-        if(!$Auth->verify()){
-            header('Location: /user/login');
-        }
-        else { 
-            $a_url=array();
-            $a_url=explode('/', $url);
-            $controller=$a_url[0];
+    
+        $a_url=array();
+        $a_url=explode('/', $url);
+        $controller=$a_url[0];
+        
+        array_shift($a_url);
             
+        if(!empty($a_url)){
+            $action=$a_url[0];
             array_shift($a_url);
-                
-            if(!empty($a_url)){
-                $action=$a_url[0];
-                array_shift($a_url);
-                $qs=$a_url;
-            }
-            else {
-                $action='index';
-                $qs=array();
-            }
-            
-            // manage defaults and routing 
-            if(empty($controller)){
-                $controller='homepage';
-                $action='index';
-            }
-            
-            $controllerName=$controller;
-            $controller=ucwords($controller);
-            $model=rtrim($controller);
-            $controller .= 'Controller';
-            $dispatch = new $controller($model, $controllerName, $action);
-            
-            if((int)method_exists($controller, $action)){
-                call_user_func_array(array($dispatch,$action),$qs);
-            } else {
-                $Error = new Error(502, 'Controller <strong>'.$controller.'</strong> Not Found. Program Shutdown.');
-                $Error->display();
-            }
+            $qs=$a_url;
         }
+        else {
+            $action='index';
+            $qs=array();
+        }
+        
+        // manage defaults and routing 
+        if(empty($controller)){
+            $controller='dashboard';
+            $action='index';
+        }
+        
+        $controllerName=$controller;
+        $controller=ucwords($controller);
+        $model=rtrim($controller);
+        $controller .= 'Controller';
+        $dispatch = new $controller($model, $controllerName, $action);
+        
+        if((int)method_exists($controller, $action)){
+            call_user_func_array(array($dispatch,$action),$qs);
+        } else {
+            $Error = new Error(502, 'Controller <strong>'.$controller.'</strong> Not Found. Program Shutdown.');
+            $Error->display();
+        }
+        
         
     }
     
@@ -92,7 +88,9 @@
         }
         
         else {
-            die('Class "'.ucfirst($className).'" not found. Program shutdown.');
+            $Error = new Error(501, 'Class <strong>'.ucfirst($className).'</strong> Not Found. Program Shutdown.');
+            $Error->display();
+            die();
         }
         
     }
