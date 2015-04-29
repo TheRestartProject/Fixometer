@@ -4,7 +4,7 @@
         
         
         public function login(){
-            
+            $this->set('title', 'Login');
             
             
         }
