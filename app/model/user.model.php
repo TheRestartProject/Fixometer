@@ -68,4 +68,37 @@
             return $Users;
         }
         
+        public function create($data){
+            $sql = 'INSERT INTO `' . $this->table . '`(`name`, `email`, `password`, `role`';
+            if(!is_null($data['group'])){
+                $sql .= ', `group`';
+            }
+            $sql .= ') VALUES (:name, :email, :password, :role';
+            if(!is_null($data['group'])){
+                $sql .= ', :group';
+            }
+            $sql .= ')';
+           
+            $stmt = $this->database->prepare($sql);
+            $stmt->bindParam(':name', $data['name'], PDO::PARAM_STR);
+            $stmt->bindParam(':email', $data['email'], PDO::PARAM_STR);
+            $stmt->bindParam(':password', $data['password'], PDO::PARAM_STR);
+            $stmt->bindParam(':role', $data['role'], PDO::PARAM_INT);
+            
+            if(!is_null($data['group'])){
+                $stmt->bindParam(':group', $data['group'], PDO::PARAM_INT);
+            }
+            $q = $stmt->execute();
+            
+            if(!$q){
+                dbga($stmt->errorInfo());
+                $response = false;
+            }
+            else {
+                $response = $this->database->lastInsertId();
+            }
+            
+            return $response;
+        }
+        
     }

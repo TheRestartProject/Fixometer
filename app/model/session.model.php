@@ -6,12 +6,12 @@
         
         
         public function createSession($user){
-            
+            $session = 'noToken';
             $sql = 'INSERT INTO `sessions`(`session`, `user`) VALUES (:session, :user)';
             
             $stmt = $this->database->prepare($sql);
             
-            $stmt->bindParam(':session', $sessionToken, PDO::PARAM_STR);
+            $stmt->bindParam(':session', $session, PDO::PARAM_STR);
             $stmt->bindParam(':user', $user, PDO::PARAM_INT);
             
             $q = $stmt->execute();

@@ -8,18 +8,23 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
+                    
+                    <?php if(isset($response)) { printResponse($response); } ?>
+                    
                     <form action="/user/create" method="post">
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="form-group">
+                                <div class="form-group <?php if(isset($error) && isset($error['name']) && !empty($error['name'])) { echo "has-error"; } ?>">
                                     <label for="name">User Name:</label>
-                                    <input type="text" name="name" id="name" class="form-control"> 
+                                    <input type="text" name="name" id="name" class="form-control">
+                                    <?php if(isset($error) && isset($error['name']) && !empty($error['name'])) { echo '<span class="help-block text-danger">' . $error['name'] . '</span>'; } ?>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group <?php if(isset($error) && isset($error['email']) && !empty($error['email'])) { echo "has-error"; } ?>">
                                     <label for="email">Email:</label>
-                                    <input type="email" name="email" id="email" class="form-control"> 
+                                    <input type="email" name="email" id="email" class="form-control">
+                                    <?php if(isset($error) && isset($error['email']) && !empty($error['email'])) { echo '<span class="help-block text-danger">' . $error['email'] . '</span>'; } ?>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group <?php if(isset($error) && isset($error['role']) && !empty($error['role'])) { echo "has-error"; } ?>">
                                     <label for="role">User Role:</label>
                                     <select id="role" name="role"  class="form-control selectpicker">
                                         <option></option>
@@ -27,17 +32,19 @@
                                         <option value="<?php echo $role->idroles; ?>"><?php echo $role->role; ?></option>
                                         <?php } ?>
                                     </select>
+                                    <?php if(isset($error) && isset($error['role']) && !empty($error['role'])) { echo '<span class="help-block text-danger">' . $error['role'] . '</span>'; } ?>
                                 </div>
                                 
                             </div>    
                             <div class="col-md-6">
-                                <div class="form-group">
+                                <div class="form-group <?php if(isset($error) && isset($error['name']) && !empty($error['name'])) { echo "has-error"; } ?>">
                                     <label for="password">Password:</label>
-                                    <input type="password" name="password" id="password" class="form-control"> 
+                                    <input type="password" name="password" id="password" class="form-control">
+                                    <?php if(isset($error) && isset($error['password']) && !empty($error['password'])) { echo '<span class="help-block text-danger">' . $error['password'] . '</span>'; } ?>
                                 </div>
                                 <div class="form-group">
-                                    <label for="c-password">Confirm Password:</label>
-                                    <input type="password" name="c-password" id="c-password" class="form-control"> 
+                                    <label for="c_password">Confirm Password:</label>
+                                    <input type="password" name="c_password" id="c_password" class="form-control"> 
                                 </div>
                                 
                                 <div class="form-group">

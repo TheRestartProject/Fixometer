@@ -88,12 +88,70 @@
                 $user = $Auth->getProfile();
                 $this->set('user', $user);
                 $this->set('header', true);
-                if(hasRole($user, 'Administrator')){
+                
+                // Administrators can add users.
+                if(hasRole($user, 'Administrator')){ 
                     
                     $Roles = new Role;
                     $Roles =$Roles->findAll();
                     
                     $this->set('roles', $Roles);
+                    
+                    if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST)) {
+                        $error = array();
+                        
+                        // We got data! Elaborate.
+                        $name   =       $_POST['name'];
+                        $email  =       $_POST['email'];
+                        $pwd    =       $_POST['password'];
+                        $cpwd   =       $_POST['c_password'];
+                        $role   =       $_POST['role'];
+                        $group  =       $_POST['group'];
+                        
+                        if(empty($name)){
+                            $error['name'] = 'Please input a name.';
+                        }
+                        
+                        if(empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)){
+                            $error['email'] = 'Please input a <strong>valid</strong> email.';
+                        }
+                        
+                        if(empty($pwd) || empty($cpwd) || !($pwd === $cpwd)){
+                            $error['password'] = 'The password cannot be emtpy and must match with the confirmation field.';
+                        }
+                        
+                        if(empty($role)){
+                            $error['role'] = 'Please select a role for the User.';
+                        }
+                        
+                        if(empty($group)){
+                            $group = NULL;
+                        }
+                        
+                        if(empty($error)) {
+                           // No errors. We can proceed and create the User.
+                            $data = array(  'name'     => $name,
+                                            'email'    => $email,
+                                            'password' => crypt($pwd, '$1$'.SECRET),
+                                            'role'     => $role,
+                                            'group'    => $group
+                                        );
+                            $idUser = $this->User->create($data);
+                            if($idUser){
+                                $Session = new Session;
+                                $Session->createSession($idUser);
+                            }
+                            $response['success'] = 'User created correctly.';
+                        }
+                        else {
+                            $response['danger'] = 'User could <strong>not</strong> be created. Please look at the reported errors, correct them, and try again.';
+                            
+                        }
+                        
+                        $this->set('response', $response);
+                        $this->set('error', $error);
+                        $this->set('originalData', $data);
+                    }
                     
                 }
                 else {
