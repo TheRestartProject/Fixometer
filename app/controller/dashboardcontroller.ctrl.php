@@ -12,7 +12,8 @@
             else {
                 
                 $user = $Auth->getProfile();
-                
+                $this->set('user', $user);
+                $this->set('header', true);
             }
         }
         
@@ -21,7 +22,6 @@
             
             $this->set('title', 'Dashboard');
             
-            //print_r($_SESSION);
             
         }
         

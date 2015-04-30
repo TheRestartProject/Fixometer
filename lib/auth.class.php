@@ -32,6 +32,7 @@
         public function isLoggedIn(){
             if(isset($_SESSION['FIXOMETER'][SESSIONKEY]) && !empty($_SESSION['FIXOMETER'][SESSIONKEY])){
                 $this->authorized = true;
+                
                 return true;
             }
             else {
@@ -59,7 +60,7 @@
         
         public function getProfile(){
             $session = $this->getSession();
-            //print_r($session);
+            return $session; 
         }
         
     }

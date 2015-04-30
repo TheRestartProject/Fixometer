@@ -47,4 +47,25 @@
             return $stmt->fetchAll(PDO::FETCH_OBJ);
         }
         
+        public function getUserList () {
+            
+            $sql = 'SELECT users.idusers AS id, users.name, users.email, roles.role FROM users
+                    INNER JOIN roles ON roles.idroles = users.role
+                    ORDER BY users.role ASC';
+            $stmt = $this->database->prepare($sql);
+            $stmt->execute();
+            $Users = $stmt->fetchAll(PDO::FETCH_OBJ);
+            
+            if(is_array($Users)){
+                
+                
+                $User = new User;
+                foreach($Users as $key => $user) {
+                    
+                    $Users[$key]->permissions = $User->getRolePermissions($user->role);
+                }
+            }
+            return $Users;
+        }
+        
     }

@@ -52,15 +52,54 @@
                 else {
                     $this->set('response', $response);
                 }
-                
-                
             }
         }
         
-        public function auth(){
+        
+        public function all() {
+            $this->set('title', 'Users');
             
+            $Auth = new Auth($url);
+            if(!$Auth->isLoggedIn()){
+                header('Location: /user/login');
+            }
+            else {                
+                $user = $Auth->getProfile();
+                $this->set('user', $user);
+                $this->set('header', true);
+                if(hasRole($user, 'Administrator')){
+                    $userlist = $this->User->getUserList();
+                    $this->set('userlist', $userlist);
+                }
+                else {
+                    header('Location: /user/forbidden', true, 404);
+                }
+            }
+        }
+        
+        public function create() {
+            $this->set('title', 'New User');
             
-            
+            $Auth = new Auth($url);
+            if(!$Auth->isLoggedIn()){
+                header('Location: /user/login');
+            }
+            else {                
+                $user = $Auth->getProfile();
+                $this->set('user', $user);
+                $this->set('header', true);
+                if(hasRole($user, 'Administrator')){
+                    
+                    $Roles = new Role;
+                    $Roles =$Roles->findAll();
+                    
+                    $this->set('roles', $Roles);
+                    
+                }
+                else {
+                    header('Location: /user/forbidden', true, 404);
+                }
+            }
             
         }
         

@@ -51,7 +51,22 @@
             }
         }
         public function findOne($id){}
-        public function findAll(){}
+        
+        public function findAll(){
+            $sql = 'SELECT * FROM ' . $this->table;
+            $stmt = $this->database->prepare($sql);
+            $q = $stmt->execute();
+            
+            if(!$q){
+                $Error = new Error(601, 'Could not execute query.');
+                $Error->display();
+                return false;
+            }
+            else {
+                return $stmt->fetchAll(PDO::FETCH_OBJ);
+            }
+            
+        }
         
         public function create(){}
         public function update(){}
