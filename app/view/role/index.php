@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            
+            <h1>Roles</h1>
             <table class="table table-hover table-responsive">
                 <thead>
                     <tr>
@@ -15,7 +15,7 @@
                     <?php foreach($roleList as $role){ ?>
                     <tr>
                         <td><?php echo $role->id; ?></td>
-                        <td><?php echo $role->role; ?></td>
+                        <td><a href="/role/edit/<?php echo $role->id; ?>" title="edit role permissions"><?php echo $role->role; ?></a></td>
                         <td><?php echo $role->permissions_list; ?></td>
                     </tr>
                     <?php } ?>

@@ -50,7 +50,23 @@
                 return $stmt->fetchAll(PDO::FETCH_OBJ);
             }
         }
-        public function findOne($id){}
+        public function findOne($id){
+            
+            $sql = 'SELECT * FROM ' . $this->table . ' WHERE id' . $this->table . ' = :id';
+            $stmt = $this->database->prepare($sql);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $q = $stmt->execute();
+            
+            if(!$q){
+                $Error = new Error(601, 'Could not execute query.');
+                $Error->display();
+                return false;
+            }
+            else {
+                return $stmt->fetch(PDO::FETCH_OBJ);
+            }
+            
+        }
         
         public function findAll(){
             $sql = 'SELECT * FROM ' . $this->table;

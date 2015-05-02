@@ -44,8 +44,8 @@
                 return false;
             }
             else {
-                unset($_SESSION['FIXOMETER']);
-                $_SESSION['FIXOMETER'][SESSIONKEY] = $sessionToken;
+                unset($_SESSION[APPNAME]);
+                $_SESSION[APPNAME][SESSIONKEY] = $sessionToken;
 
                 return true;
             }
@@ -53,7 +53,7 @@
         }
         
         protected function getSession() {
-            $session = $_SESSION['FIXOMETER'][SESSIONKEY];
+            $session = $_SESSION[APPNAME][SESSIONKEY];
             
             $sql = 'SELECT users.idusers AS id, users.name, users.email, roles.role FROM users
                     INNER JOIN roles ON roles.idroles = users.role

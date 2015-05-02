@@ -30,7 +30,7 @@
         
         
         public function isLoggedIn(){
-            if(isset($_SESSION['FIXOMETER'][SESSIONKEY]) && !empty($_SESSION['FIXOMETER'][SESSIONKEY])){
+            if(isset($_SESSION[APPNAME][SESSIONKEY]) && !empty($_SESSION[APPNAME][SESSIONKEY])){
                 $this->authorized = true;
                 
                 return true;
