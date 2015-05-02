@@ -54,7 +54,7 @@
         }
         
         private function token(){
-            $salt = '$1$' . SESSIONSALT;
+            $salt = '$1$' . md5(substr(time(), -8))  . SESSIONSALT;
             return crypt($token, $salt);
         }
         

@@ -3,7 +3,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <h2>Welcome, <?php echo $user->name; ?></h2>
             
-            <h3>There's going to e stuff here.</h3>
+            <h6>There's going to be stuff here.</h6>
         </div>
         
         

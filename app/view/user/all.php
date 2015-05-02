@@ -21,14 +21,22 @@
                 
                 <tbody>
                     <?php 
-                    foreach($userlist as $user){
+                    foreach($userlist as $u){
                     ?>
                     <tr>
-                        <td><?php echo $user->id; ?></td>
-                        <td><?php echo $user->name; ?></td>
-                        <td><?php echo $user->email; ?></td>
-                        <td><?php echo $user->role; ?></td>
-                        <td><?php foreach ($user->permissions as $permission) { echo $permission->permission . ' '; } ?></td>
+                        <td><?php echo $u->id; ?></td>
+                        <td>
+                            
+                            <?php if(hasRole($user, 'Administrator')){ ?>
+                            <a href="/user/edit/<?php echo $u->id; ?>"><?php echo $u->name; ?></a>    
+                            <?php } else { ?>
+                            <?php echo $u->name; ?>
+                            <?php } ?>
+                            
+                        </td>
+                        <td><?php echo $u->email; ?></td>
+                        <td><?php echo $u->role; ?></td>
+                        <td><?php foreach ($u->permissions as $permission) { echo $permission->permission . ' '; } ?></td>
                         
                     </tr>
                     <?php 

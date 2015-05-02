@@ -27,7 +27,7 @@
         foreach($response as $type => $text){
             switch($type) {
                 case 'success':
-                    $icon = 'tick';
+                    $icon = 'check';
                     break;
                 case 'danger':
                     $icon = 'exclamation-triangle';

@@ -5,10 +5,7 @@
             <h1 class="text-center">FIX-O-METER</h1>
             <h3 class="text-center">login</h3>
             
-            <?php
-                print_r($response);
-            ?>
-            
+            <?php if(isset($response)) { printResponse($response); } ?>
             
             <form class="" method="post" action="/user/login">
                 <div class="form-group">

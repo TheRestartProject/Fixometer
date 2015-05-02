@@ -6,7 +6,7 @@
         
         
         public function createSession($user){
-            $session = 'noToken';
+            $session = 'noToken'.md5(substr(time(), -8));
             $sql = 'INSERT INTO `sessions`(`session`, `user`) VALUES (:session, :user)';
             
             $stmt = $this->database->prepare($sql);
@@ -40,6 +40,7 @@
             
             if(!$q){
                 new Error(601, 'Could not create user session.');
+                dbga($stmt->errorInfo());
                 return false;
             }
             else {
