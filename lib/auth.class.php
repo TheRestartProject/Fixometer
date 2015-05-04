@@ -1,15 +1,18 @@
 <?php
-
+    
+    /**
+     * Authorizes URL and checks for users being Logged In
+     * Validates and authorizes user sessions
+     * */
+    
     class Auth extends Session {
         
         public $url;
         protected $authorized = false;
         protected $openroutes = array(
                                 'user/login',
-                                'lol/lol'
+                                
                                 );
-        
-        
         
         public function checkRoute($url){
             
@@ -31,8 +34,7 @@
         
         public function isLoggedIn(){
             if(isset($_SESSION[APPNAME][SESSIONKEY]) && !empty($_SESSION[APPNAME][SESSIONKEY])){
-                $this->authorized = true;
-                
+                $this->authorized = true;                
                 return true;
             }
             else {
@@ -62,5 +64,6 @@
             $session = $this->getSession();
             return $session; 
         }
+        
         
     }

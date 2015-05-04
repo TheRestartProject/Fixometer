@@ -1,0 +1,105 @@
+<?php
+
+    class GroupController extends Controller {
+        
+        public function __construct($model, $controller, $action){
+            parent::__construct($model, $controller, $action);
+            
+            $Auth = new Auth($url);
+            if(!$Auth->isLoggedIn()){
+                header('Location: /user/login');
+            }
+            else {
+                
+                $user = $Auth->getProfile();
+                $this->user = $user;
+                $this->set('user', $user);
+                $this->set('header', true);
+            }
+        }
+        
+        public function index(){
+            
+            $this->set('title', 'Groups');
+            
+            $this->set('list', $this->Group->findAll()); 
+            
+        }
+        
+        public function create(){
+            
+            // Administrators can add Groups.
+            if(hasRole($this->user, 'Administrator')){
+                
+                $this->set('title', 'New Group');
+                
+                $this->set('gmaps', true);
+                $this->set('js', 
+                            array('head' => array(
+                                            '/ext/geocoder.js'
+                            )));
+                
+                if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST)) {
+                    $error = array();
+                    
+                    // We got data! Elaborate.
+                    $name       =       $_POST['name'];
+                    $area       =       $_POST['area'];
+                    $freq       =       $_POST['frequency'];
+                    $location   =       $_POST['location'];
+                    $latitude   =       $_POST['latitude'];
+                    $longitude  =       $_POST['longitude'];
+                    
+                    if(empty($name)){
+                        $error['name'] = 'Please input a name.';
+                    }
+                    if(!empty($latitude) || !empty($longitude)) {
+                        // check that these values are floats.
+                        $check_lat = filter_var($latitude, FILTER_VALIDATE_FLOAT);
+                        $check_lon = filter_var($longitude, FILTER_VALIDATE_FLOAT);
+                        
+                        if(!$check_lat || !$check_lon){
+                            $error['location'] = 'Coordinates must be in the correct format.';
+                        }
+                        
+                    }
+                    
+                    
+                    if(empty($error)) {
+                        // No errors. We can proceed and create the User.
+                        $data = array(  'name'          => $name,
+                                        'area'          => $area,
+                                        'frequency'     => $freq,
+                                        'location'      => $location,
+                                        'latitude'      => $latitude,
+                                        'longitude'     => $longitude
+                                        );
+                        $idGroup = $this->Group->create($data);
+                        if($idGroup){
+                            $response['success'] = 'Group created correctly.';   
+                        }
+                        else {
+                            $response['danger'] = 'Group could <strong>not</strong> be created. Something went wrong with the database.';
+                        }
+                        
+                    }
+                    else {
+                        $response['danger'] = 'Group could <strong>not</strong> be created. Please look at the reported errors, correct them, and try again.';
+                        
+                    }
+                    
+                    $this->set('response', $response);
+                    $this->set('error', $error);
+                    $this->set('originalData', $data);
+                    
+                }
+                
+            }
+            else {
+                header('Location: /user/forbidden', true, 403);
+            }
+        }
+        
+        
+    }
+    

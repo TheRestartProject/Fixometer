@@ -84,9 +84,45 @@
             
         }
         
-        public function create($data){}
+        public function create($data){
+            
+            array_filter($data); // remove empty entries. 
+            $fields = array_keys($data);
+            $holders = array();
+            foreach($fields as $i => $field){
+                $fields[$i] = '`' . $field . '`';
+                $holders[]  = ':' . $field;
+            }
+            
+            $sql = 'INSERT INTO `' . $this->table . '`(' . implode(', ', $fields) .  ') VALUES (' . implode(', ', $holders) . ')';
+           
+            $stmt = $this->database->prepare($sql);
+            
+            if(!$stmt && SYSTEM_STATUS == 'development'){
+                dbga($this->database->errorInfo());   
+            }
+            
+            foreach($data as $field => &$value){
+                $stmt->bindParam(':'.$field, $value, PDO::PARAM_STR);    
+            }
+            
+            $q = $stmt->execute();
+            
+            if(!$q && SYSTEM_STATUS == 'development'){
+                dbga($stmt->errorInfo());
+                $response = false;
+            }
+            else {
+                $response = $this->database->lastInsertId();
+            }
+            
+            return $response;
+            
+        }
         public function update(){}
         
         public function delete(){}
         
     }
+    
+    

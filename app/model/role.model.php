@@ -66,7 +66,12 @@
                 $stmt->execute();    
             }
             
-            
+            if($stmt->errorCode() == '00000'){
+                return true;
+            }
+            else {
+                return false; 
+            }
         }
     }
     

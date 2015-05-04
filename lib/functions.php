@@ -18,6 +18,8 @@
         }        
     }
     
+    
+    
     /** Prints out Bootstrap alerts
      * finds key of response and
      * uses it to format the alert

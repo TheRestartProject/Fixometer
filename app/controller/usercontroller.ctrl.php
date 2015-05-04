@@ -157,7 +157,7 @@
                     
                 }
                 else {
-                    header('Location: /user/forbidden', true, 404);
+                    header('Location: /user/forbidden', true, 403);
                 }
             }
             

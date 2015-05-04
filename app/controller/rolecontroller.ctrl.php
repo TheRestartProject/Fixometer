@@ -36,6 +36,13 @@
                     $formid = (int)substr(strrchr($_POST['formId'], '_'), 1);
                     
                     $update = $this->Role->edit($formid, $permissions);
+                    if(!$update) {
+                        $response['danger'] = 'Something went wrong. Could <strong>not</strong> update the permissions.';
+                    }
+                    else {
+                        $response['success'] = 'Permissions for this Role have been updated.';
+                    }
+                    $this->set('response', $response);
                     
                 }
                 
@@ -52,9 +59,6 @@
                 $this->set('formId', $role->idroles);                 
                 $this->set('permissions', $this->Role->permissions());
                 $this->set('activePermissions', $activePerms);
-                
-                
-                
                 
             }
         }

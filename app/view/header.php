@@ -16,7 +16,7 @@
                                         <i class="fa fa-group"></i> 
                                         Users
                                     </a>
-                                    <ul class="dropdown-menu" role="menu" aria-labelledby="user-profile-dropdown">
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="user-management-dropdown">
                                         <li role="presentation"><a role="menuitem" tabindex="-1" href="/user/all"> User List</a></li>
                                         <li role="presentation"><a role="menuitem" tabindex="-1" href="/user/create">New User</a></li>
                                         <li role="presentation"><a role="menuitem" tabindex="-1" href="/role">Roles</a></li>
@@ -37,9 +37,15 @@
                             </li>
                             <li class="">
                                  
-                                <a class="" href="#">
+                                <a class="dropdown-toggle" id="taxonomies-dropdown" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
                                    <i class="fa fa-sitemap"></i> Taxonomies
                                 </a>
+                                
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="taxonomies-dropdown">
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="/group"> Groups</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="">Categories</a></li>
+                                    
+                                </ul>
                             </li>
                         </ul>
                     </div>

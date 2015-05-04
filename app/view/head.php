@@ -18,6 +18,23 @@
         <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
+        <?php
+        if(isset($gmaps) && $gmaps == true) {
+        ?>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+        <?php
+        }
+        ?>
+        <?php
+        if(isset($js) && isset($js['head']) && !empty($js['head'])){
+            foreach($js['head'] as $script){
+        ?>
+        <script src="<?php echo $script; ?>"></script>
+        <?php
+            }
+        }
+        ?>
+        
     </head>
     <body>
     
