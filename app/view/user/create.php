@@ -24,12 +24,14 @@
                                     <input type="email" name="email" id="email" class="form-control">
                                     <?php if(isset($error) && isset($error['email']) && !empty($error['email'])) { echo '<span class="help-block text-danger">' . $error['email'] . '</span>'; } ?>
                                 </div>
+                        
                                 <div class="form-group <?php if(isset($error) && isset($error['role']) && !empty($error['role'])) { echo "has-error"; } ?>">
+                                    
                                     <label for="role">User Role:</label>
                                     <select id="role" name="role"  class="form-control selectpicker">
                                         <option></option>
                                         <?php foreach($roles as $role){ ?>
-                                        <option value="<?php echo $role->idroles; ?>"><?php echo $role->role; ?></option>
+                                        <option value="<?php echo $role->id; ?>"><?php echo $role->role; ?></option>
                                         <?php } ?>
                                     </select>
                                     <?php if(isset($error) && isset($error['role']) && !empty($error['role'])) { echo '<span class="help-block text-danger">' . $error['role'] . '</span>'; } ?>
@@ -47,6 +49,17 @@
                                     <input type="password" name="c_password" id="c_password" class="form-control"> 
                                 </div>
                                 
+                                <div class="form-group <?php if(isset($error) && isset($error['group']) && !empty($error['group'])) { echo "has-error"; } ?>">
+                                    <label for="group">Group:</label>
+                                    <select id="group" name="group"  class="form-control selectpicker">
+                                        <option></option>
+                                        <?php foreach($groups as $group){ ?>
+                                        <option value="<?php echo $group->idgroups; ?>"><?php echo $group->name; ?></option>
+                                        <?php } ?>
+                                    </select>
+                                    <?php if(isset($error) && isset($error['group']) && !empty($error['group'])) { echo '<span class="help-block text-danger">' . $error['group'] . '</span>'; } ?>
+                                </div>
+        
                                 <div class="form-group">
                                     <button class="btn btn-default" type="reset"><i class="fa fa-refresh"></i> reset</button>
                                     <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> save</button>

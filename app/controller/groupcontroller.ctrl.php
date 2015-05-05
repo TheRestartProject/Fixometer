@@ -30,14 +30,13 @@
             
             // Administrators can add Groups.
             if(hasRole($this->user, 'Administrator')){
-                
                 $this->set('title', 'New Group');
-                
                 $this->set('gmaps', true);
                 $this->set('js', 
                             array('head' => array(
                                             '/ext/geocoder.js'
                             )));
+                    
                 
                 if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST)) {
                     $error = array();
@@ -85,12 +84,12 @@
                     }
                     else {
                         $response['danger'] = 'Group could <strong>not</strong> be created. Please look at the reported errors, correct them, and try again.';
-                        
                     }
+                    
                     
                     $this->set('response', $response);
                     $this->set('error', $error);
-                    $this->set('originalData', $data);
+                    $this->set('udata', $_POST);
                     
                 }
                 
@@ -101,5 +100,32 @@
         }
         
         
+    
+        public function edit($id) {
+            
+            if(hasRole($this->user, 'Administrator')){ 
+                
+                if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST)){
+                    
+                    $data = $_POST;
+                    $u = $this->Group->update($data, $id);
+                    
+                    if(!$u) {
+                        $response['danger'] = 'Something went wrong. Please check the data and try again.';
+                    }
+                    else {
+                        $response['success'] = 'Group updated!';
+                    }
+                    
+                    $this->set('response', $response);
+                }
+            }
+            $this->set('gmaps', true);
+            $this->set('js', array( 'head' => array( '/ext/geocoder.js')));
+            
+            $Group = $this->Group->findOne($id);
+            $this->set('title', 'Edit Group ' . $Group->name);
+            $this->set('formdata', $Group);
+        }
     }
     

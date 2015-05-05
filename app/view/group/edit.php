@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1>Create New Group</h1>
+            <h1><?php echo $title; ?></h1>
         </div>
     </div>
     
@@ -9,21 +9,21 @@
         <div class="col-md-12">
             <?php if(isset($response)) { printResponse($response); } ?>
             
-            <form action="/group/create" method="post">
+            <form action="/group/edit/<?php echo $formdata->idgroups; ?>" method="post">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group <?php if(isset($error) && isset($error['name']) && !empty($error['name'])) { echo "has-error"; } ?>">
                             <label for="name">Name:</label>
-                            <input type="text" name="name" id="name" class="form-control" <?php if(isset($error) && !empty($error) && !empty($udata)) echo 'value="'.$udata['name'].'"' ; ?>>
+                            <input type="text" name="name" id="name" class="form-control" value="<?php echo $formdata->name; ?>">
                             <?php if(isset($error) && isset($error['name']) && !empty($error['name'])) { echo '<span class="help-block text-danger">' . $error['name'] . '</span>'; } ?>
                         </div>
                         <div class="form-group">
                             <label for="frequency">Frequency:</label>
-                            <input type="text" name="frequency" id="frequency" class="form-control" <?php if(isset($error) && !empty($error) && !empty($udata)) echo 'value="'.$udata['frequency'].'"' ; ?>>
+                            <input type="text" name="frequency" id="frequency" class="form-control" value="<?php echo $formdata->frequency; ?>">
                         </div>
                         <div class="form-group">
                             <label for="area">Area:</label>
-                            <input type="text" name="area" id="area" class="form-control" <?php if(isset($error) && !empty($error) && !empty($udata)) echo 'value="'.$udata['area'].'"' ; ?>>
+                            <input type="text" name="area" id="area" class="form-control" value="<?php echo $formdata->area; ?>">
                         </div>
                     </div>
                     
@@ -31,7 +31,7 @@
                         <div class="form-inline">
                             <div class="form-group">
                                 <label for="location">Location:</label>
-                                <input type="text" name="location" id="location" class="form-control" <?php if(isset($error) && !empty($error) && !empty($udata)) echo 'value="'.$udata['location'].'"' ; ?>>
+                                <input type="text" name="location" id="location" class="form-control" value="<?php echo $formdata->location; ?>">
                                 
                             </div>
                             <div class="form-group">
@@ -40,19 +40,19 @@
                         </div>
                         
                         
-                        <div class="" id="map-canvas" style="height: 350px; ">
-                            <i class="fa fa-spinner"></i>
+                        <div class="" id="map-canvas" style="height: 350px; padding: 25px 0px; ">
+                            <i class="fa fa-spinner fa-pulse"></i>
                         </div>
                         
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" name="latitude" id="latitude" class="form-control" placeholder="latitude..." <?php if(isset($error) && !empty($error) && !empty($udata)) echo 'value="'.$udata['latitude'].'"' ; ?>>
+                                    <input type="text" name="latitude" id="latitude" class="form-control" placeholder="latitude..." value="<?php echo $formdata->latitude; ?>">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" name="longitude" id="longitude" class="form-control" placeholder="longitude..." <?php if(isset($error) && !empty($error) && !empty($udata)) echo 'value="'.$udata['longitude'].'"' ; ?>>
+                                    <input type="text" name="longitude" id="longitude" class="form-control" placeholder="longitude..." value="<?php echo $formdata->longitude; ?>">
                                 </div>
                             </div>
                             

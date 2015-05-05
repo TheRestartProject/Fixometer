@@ -97,7 +97,11 @@
                     $Roles = new Role;
                     $Roles =$Roles->findAll();
                     
+                    $Groups = new Group;
+                    $Groups = $Groups->findAll();
+                    
                     $this->set('roles', $Roles);
+                    $this->set('groups', $Groups);
                     
                     if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST)) {
                         $error = array();

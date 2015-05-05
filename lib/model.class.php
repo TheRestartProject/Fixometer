@@ -119,7 +119,40 @@
             return $response;
             
         }
-        public function update(){}
+        public function update($data, $id){
+            
+            $fields = array_keys($data);
+            $holders = array();
+            foreach($fields as $i => $field){
+                $fields[$i] = '`' . $field . '` = :' . $field;
+            }
+            
+            $sql = 'UPDATE `' . $this->table . '` SET ' . implode(', ', $fields) . ' WHERE `id' . $this->table . '` = :id'; 
+            $stmt = $this->database->prepare($sql);
+            if(!$stmt && SYSTEM_STATUS == 'development'){
+                dsql($sql);
+                dbga($this->database->errorInfo());   
+            }
+            
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            foreach($data as $field => &$value){
+                if(empty($value) || is_null($value)) { $value == 'NULL'; }
+                $g = $stmt->bindParam(':' . $field, $value);
+            }
+            
+            $q = $stmt->execute();
+            
+            if(!$q && SYSTEM_STATUS == 'development'){
+                dbga($stmt->errorInfo());
+                $response = false;
+            }
+            
+            else {
+                $response = true;
+            }
+            
+            return $response;
+        }
         
         public function delete(){}
         

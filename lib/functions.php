@@ -58,3 +58,9 @@
         print_r($array);
         echo '</pre></div>';
     }
+    
+    function dsql($sql){
+        echo '<div class="dbg"><pre>';
+        echo $sql;
+        echo '</pre></div>';
+    }

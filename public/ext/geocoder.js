@@ -3,9 +3,22 @@
                 var map;
                 function initialize() {
                   geocoder = new google.maps.Geocoder();
-                  var latlng = new google.maps.LatLng(51.5286416, -0.1015987); //London 
+                  var baseLat = document.getElementById('latitude').value;
+                  var baseLon = document.getElementById('longitude').value;
+                  
+                  console.log(baseLat);
+                  
+                  // If nulls, set center in london
+                  if (baseLat === '') {
+                    baseLat = 51.5286416;
+                  }
+                  if (baseLon === '') {
+                    baseLon =  -0.1015987;
+                  }
+                  
+                  var latlng = new google.maps.LatLng(baseLat, baseLon);  
                   var mapOptions = {
-                    zoom: 4,
+                    zoom: 6,
                     center: latlng
                   }
                   map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
