@@ -17,3 +17,9 @@ define('ROOT', $_SERVER['DOCUMENT_ROOT'] );
 define('SESSIONKEY', md5(APPKEY));
 define('SESSIONNAME', md5(APPKEY . SESSIONKEY));
 define('SESSIONSALT', strrev(SESSIONKEY));
+
+/** date/time 
+ * w/out this PHP throws warnings all over the place.
+ * Should be set to same timezone as MySQL server for consistency.
+ * */
+date_default_timezone_set('Europe/Rome');

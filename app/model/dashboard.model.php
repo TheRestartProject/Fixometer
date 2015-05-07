@@ -1,5 +1,5 @@
 <?php
 
-class Dashboard extends Model {
-    #code
-}
+    class Dashboard extends Model {
+    
+    }

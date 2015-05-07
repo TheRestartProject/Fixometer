@@ -3,7 +3,7 @@
     class Session extends Model {
         
         protected $table = 'sessions';
-        
+        protected $dates = true;
         
         public function createSession($user){
             $session = 'noToken'.md5(substr(time(), -8));
@@ -55,7 +55,7 @@
         protected function getSession() {
             $session = $_SESSION[APPNAME][SESSIONKEY];
             
-            $sql = 'SELECT users.idusers AS id, users.name, users.email, roles.role FROM users
+            $sql = 'SELECT users.idusers AS id, users.name, users.email, users.group, roles.role FROM users
                     INNER JOIN roles ON roles.idroles = users.role
                     INNER JOIN sessions ON sessions.user = users.idusers
                     WHERE sessions.session = :session';

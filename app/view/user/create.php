@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-4">
-            <h1>Create New User</h1>
+            <h1><?php echo $title; ?></h1>
         </div>
     </div>
     <div class="row">

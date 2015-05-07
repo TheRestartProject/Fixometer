@@ -171,6 +171,50 @@
         public function edit($id){
             $this->set('title', 'Edit User');
             
+            $Auth = new Auth($url);
+            if(!$Auth->isLoggedIn()){
+                header('Location: /user/login');
+            }
+            
+            else {                
+                $user = $Auth->getProfile();
+                $this->set('user', $user);
+                $this->set('header', true);
+                
+                // Administrators can edit users.
+                if(hasRole($user, 'Administrator')){ 
+                    
+                    if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST)){
+                        $data = $_POST;
+                        $u = $this->User->update($data, $id);
+                        
+                        if(!$u) {
+                            $response['danger'] = 'Something went wrong. Please check the data and try again.';
+                        }
+                        else {
+                            $response['success'] = 'User updated!';
+                        }
+                        
+                        $this->set('response', $response);
+                    }
+                    
+                    $Roles = new Role;
+                    $Roles =$Roles->findAll();
+                    
+                    $Groups = new Group;
+                    $Groups = $Groups->findAll();
+                    
+                    $this->set('roles', $Roles);
+                    $this->set('groups', $Groups);
+                    
+                    $this->set('data', $this->User->findOne($id));
+                    
+                    
+                }
+            }
+            
+            
+            
         }
         
         public function logout() {

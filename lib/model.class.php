@@ -9,6 +9,7 @@
         
         protected $database;
         protected $table;
+        protected $dates = false;
         
         public function __construct() {
             if(!$this->database){
@@ -87,6 +88,9 @@
         public function create($data){
             
             array_filter($data); // remove empty entries. 
+            if($this->dates == true){
+                $data['created_at'] = date('Y-m-d H:i:s', time() );
+            }
             $fields = array_keys($data);
             $holders = array();
             foreach($fields as $i => $field){
@@ -95,7 +99,7 @@
             }
             
             $sql = 'INSERT INTO `' . $this->table . '`(' . implode(', ', $fields) .  ') VALUES (' . implode(', ', $holders) . ')';
-           
+            
             $stmt = $this->database->prepare($sql);
             
             if(!$stmt && SYSTEM_STATUS == 'development'){

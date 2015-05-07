@@ -48,7 +48,7 @@
                 
                 
                 $role = $this->Role->findOne($id);
-                $this->set('title', 'Edit ' . $role->role . ' Role');
+                $this->set('title', 'Edit <span class="orange">' . $role->role . '</span> Role');
                 
                 $permissionsList = $this->Role->rolePermissions($role->idroles);
                 $activePerms = array();

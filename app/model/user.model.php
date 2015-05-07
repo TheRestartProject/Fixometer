@@ -3,6 +3,8 @@
     class User extends Model {
         
         protected $table = 'users';
+        protected $dates = true;
+        
         
         public function find($params){
             $sql = 'SELECT * FROM ' . $this->table . '
@@ -49,7 +51,7 @@
         
         public function getUserList () {
             
-            $sql = 'SELECT users.idusers AS id, users.name, users.email, roles.role FROM users
+            $sql = 'SELECT users.idusers AS id, users.name, users.email, roles.role, users.group FROM users
                     INNER JOIN roles ON roles.idroles = users.role
                     ORDER BY users.role ASC';
             $stmt = $this->database->prepare($sql);
@@ -69,21 +71,24 @@
         }
         
         public function create($data){
-            $sql = 'INSERT INTO `' . $this->table . '`(`name`, `email`, `password`, `role`';
+            $sql = 'INSERT INTO `' . $this->table . '`(`created_at`, `name`, `email`, `password`, `role`';
             if(!is_null($data['group'])){
                 $sql .= ', `group`';
             }
-            $sql .= ') VALUES (:name, :email, :password, :role';
+            $sql .= ') VALUES (:created_at, :name, :email, :password, :role';
             if(!is_null($data['group'])){
                 $sql .= ', :group';
             }
             $sql .= ')';
-           
+            
+            $data['created_at'] = date('Y-m-d H:i:s', time() );
+            
             $stmt = $this->database->prepare($sql);
             $stmt->bindParam(':name', $data['name'], PDO::PARAM_STR);
             $stmt->bindParam(':email', $data['email'], PDO::PARAM_STR);
             $stmt->bindParam(':password', $data['password'], PDO::PARAM_STR);
             $stmt->bindParam(':role', $data['role'], PDO::PARAM_INT);
+            $stmt->bindParam(':created_at', $data['created_at']);
             
             if(!is_null($data['group'])){
                 $stmt->bindParam(':group', $data['group'], PDO::PARAM_INT);
