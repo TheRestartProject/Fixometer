@@ -8,7 +8,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <table class="table table-hover table-responsive">
+            <table class="table table-hover table-responsive sortable">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -16,6 +16,7 @@
                         <th>Email</th>
                         <th>Role</th>
                         <th>Permissions</th>
+                        <th>Last Login</th>
                     </tr>
                 </thead>
                 
@@ -37,9 +38,10 @@
                         <td><?php echo $u->email; ?></td>
                         <td><?php echo $u->role; ?></td>
                         <td><?php foreach ($u->permissions as $permission) { echo $permission->permission . ' '; } ?></td>
-                        
+                        <td><?php echo dateFormat($u->modified_at); ?></td>
                     </tr>
-                    <?php 
+                    <?php
+                    //
                     }
                     ?>
                 </tbody>

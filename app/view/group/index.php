@@ -3,7 +3,7 @@
         <div class="col-md-12">
             <h1><?php echo $title; ?></h1>
             <a class="btn btn-primary" href="/group/create"><i class="fa fa-plus"></i> New Group</a>
-            <table class="table table-hover table-responsive">
+            <table class="table table-hover table-responsive sortable">
                 <thead>
                     <tr>
                         <th>ID</th>

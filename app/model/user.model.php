@@ -51,8 +51,9 @@
         
         public function getUserList () {
             
-            $sql = 'SELECT users.idusers AS id, users.name, users.email, roles.role, users.group FROM users
+            $sql = 'SELECT users.idusers AS id, users.name, users.email, roles.role, users.group, UNIX_TIMESTAMP(sessions.modified_at) AS modified_at FROM users
                     INNER JOIN roles ON roles.idroles = users.role
+                    INNER JOIN sessions ON sessions.user = users.idusers 
                     ORDER BY users.role ASC';
             $stmt = $this->database->prepare($sql);
             $stmt->execute();

@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-12">
             <h1>Roles</h1>
-            <table class="table table-hover table-responsive">
+            <table class="table table-hover table-responsive sortable">
                 <thead>
                     <tr>
                         <th>ID</th>

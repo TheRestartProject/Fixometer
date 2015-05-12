@@ -25,7 +25,7 @@
                             </li>
                             <li class="">
                                 
-                                <a class="" href="#">
+                                <a class="" href="/party">
                                     <i class="fa fa-recycle"></i> Parties
                                 </a>
                             </li>

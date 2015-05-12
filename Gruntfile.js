@@ -37,7 +37,7 @@ module.exports = function (grunt) {
                     preserveComments: false
                 },
                 files: {
-                    'public/dist/js/script.min.js': ['public/src/js/<%= pkg.name %>.js']
+                    'public/dist/js/script.min.js': ['public/dist/js/<%= pkg.name %>.js']
                 }
             }
         },
@@ -54,7 +54,7 @@ module.exports = function (grunt) {
                 }
             },
             uglify: {
-                files: ['public/dist/js/<%= pkg.name %>.js'],
+                files: 'public/dist/js/<%= pkg.name %>.js',
                 tasks: 'uglify:js'
             }
         }
@@ -66,5 +66,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     
     grunt.registerTask('default', ['watch']);
+    
     
 };

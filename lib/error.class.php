@@ -19,11 +19,15 @@
             else {
                 $this->error_Severity = 'Fatal';
             }
+            
+           
+            
+            die( $this->display() );
         }
         
         public function display(){
             
-            echo $this->error_Message;
+            echo '<strong>' . $this->error_Severity . '</strong><br />[ERROR CODE ' . $this->error_Code . ']<br />' . $this->error_Message;
             
             
         }

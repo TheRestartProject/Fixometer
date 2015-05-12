@@ -5,9 +5,6 @@
                   geocoder = new google.maps.Geocoder();
                   var baseLat = document.getElementById('latitude').value;
                   var baseLon = document.getElementById('longitude').value;
-                  
-                  console.log(baseLat);
-                  
                   // If nulls, set center in london
                   if (baseLat === '') {
                     baseLat = 51.5286416;
@@ -22,6 +19,11 @@
                     center: latlng
                   }
                   map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+                  var marker = new google.maps.Marker({
+                      position: latlng,
+                      map: map,
+                      title: document.getElementById('location').value
+                  });
                 }
                 
                 function codeAddress() {
@@ -33,9 +35,6 @@
                           map: map,
                           position: results[0].geometry.location
                       });
-                      
-                      console.log(results[0].geometry.location);
-                      
                       document.getElementById('latitude').value = results[0].geometry.location.A;
                       document.getElementById('longitude').value = results[0].geometry.location.F;
                       

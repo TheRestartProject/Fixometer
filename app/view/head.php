@@ -12,6 +12,9 @@
         <link rel="stylesheet" href="/dist/css/main.css">
         <link rel="stylesheet" href="/components/fontawesome/css/font-awesome.min.css">
         <link rel="stylesheet" href="/components/bootstrap-select/dist/css/bootstrap-select.min.css">
+        <link rel="stylesheet" href="/components/bootstrap-sortable/Contents/bootstrap-sortable.css">
+        <link rel="stylesheet" href="/components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
+        <link rel="stylesheet" href="/components/summernote/dist/summernote.css">
         
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>

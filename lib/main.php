@@ -6,6 +6,7 @@
      * /config/config.php
      * */
     function errorReporting() {
+        
         if(SYSTEM_STATUS === 'development'){
             error_reporting(E_ALL ^ E_NOTICE);
             ini_set('display_errors', 'On');
@@ -25,15 +26,12 @@
      * controller is within controller dir
      * with appended .ctrl.php extension
      * views are managed by subdir
-     *
-     * Note that user Auth is checked here because
-     * the App has no public frontend here
      * */
     
     
     function init(){
-        global $url;
-    
+        
+        global $url;    
     
         $a_url=array();
         $a_url=explode('/', $url);
