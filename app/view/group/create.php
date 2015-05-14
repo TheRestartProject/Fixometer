@@ -22,24 +22,32 @@
                             <input type="text" name="frequency" id="frequency" class="form-control" <?php if(isset($error) && !empty($error) && !empty($udata)) echo 'value="'.$udata['frequency'].'"' ; ?>>
                         </div>
                         <div class="form-group">
-                            <label for="area">Area:</label>
-                            <input type="text" name="area" id="area" class="form-control" <?php if(isset($error) && !empty($error) && !empty($udata)) echo 'value="'.$udata['area'].'"' ; ?>>
+                            <label for="free_text">Description:</label>
+                            <textarea class="form-control rte" rows="6" name="free_text" id="free_text"></textarea>
                         </div>
                     </div>
                     
                     <div class="col-md-6">
-                        <div class="form-inline">
-                            <div class="form-group">
-                                <label for="location">Location:</label>
-                                <input type="text" name="location" id="location" class="form-control" <?php if(isset($error) && !empty($error) && !empty($udata)) echo 'value="'.$udata['location'].'"' ; ?>>
-                                
-                            </div>
-                            <div class="form-group">
-                                <button type="button" class="btn btn-primary" onclick="codeAddress()"><i class="fa fa-map-marker"></i> geocode</button>
-                            </div>
+                        
+                        <div class="form-group">
+                            <label for="area">Area:</label>
+                            <input type="text" name="area" id="area" class="form-control" <?php if(isset($error) && !empty($error) && !empty($udata)) echo 'value="'.$udata['area'].'"' ; ?>>
                         </div>
                         
                         
+                        <div class="form-group">
+                            <label for="location">Location:</label>
+                            
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    <input type="text" name="location" id="location" class="form-control" <?php if(isset($error) && !empty($error) && !empty($udata)) echo 'value="'.$udata['location'].'"' ; ?>>
+                                    <button type="button" class="btn btn-primary" onclick="codeAddress()"><i class="fa fa-map-marker"></i> geocode</button>
+                                </div>    
+                            </div>
+                        
+                        </div>
+                    
+                    
                         <div class="" id="map-canvas" style="height: 350px; ">
                             <i class="fa fa-spinner"></i>
                         </div>

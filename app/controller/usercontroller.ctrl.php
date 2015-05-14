@@ -112,7 +112,9 @@
                         $pwd    =       $_POST['password'];
                         $cpwd   =       $_POST['c_password'];
                         $role   =       $_POST['role'];
-                        $group  =       $_POST['group'];
+                        $groups  =       $_POST['groups'];
+                        
+                        // dbga($group);
                         
                         if(empty($name)){
                             $error['name'] = 'Please input a name.';
@@ -140,14 +142,26 @@
                                             'email'    => $email,
                                             'password' => crypt($pwd, '$1$'.SECRET),
                                             'role'     => $role,
-                                            'group'    => $group
+                                            //'group'    => $group
                                         );
                             $idUser = $this->User->create($data);
                             if($idUser){
+                                
+                                if(isset($groups) && !empty($groups)){
+                                    $Usersgroups = new Usersgroups;
+                                    $Usersgroups->createUsersGroups($idUser, $groups);
+                                }
+                                
                                 $Session = new Session;
                                 $Session->createSession($idUser);
+                                
                             }
-                            $response['success'] = 'User created correctly.';
+                            if($idUser){ 
+                                $response['success'] = 'User created correctly.';
+                            }
+                            else {
+                                $response['danger'] = 'User could not be created';
+                            }
                         }
                         else {
                             $response['danger'] = 'User could <strong>not</strong> be created. Please look at the reported errors, correct them, and try again.';
@@ -186,7 +200,13 @@
                     
                     if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST)){
                         $data = $_POST;
+                        
+                        $sent_groups = $data['groups'];
+                        unset($data['groups']);
                         $u = $this->User->update($data, $id);
+                        
+                        $ug = new Usersgroups;
+                        $ug->createUsersGroups($id, $sent_groups);
                         
                         if(!$u) {
                             $response['danger'] = 'Something went wrong. Please check the data and try again.';
@@ -207,7 +227,15 @@
                     $this->set('roles', $Roles);
                     $this->set('groups', $Groups);
                     
-                    $this->set('data', $this->User->findOne($id));
+                    $userdata = $this->User->findOne($id);
+                    
+                    $usergroups = array();
+                    $ugroups = $this->User->getUserGroups($id);
+                    foreach($ugroups as $g){
+                        $usergroups[] = $g->group;
+                    }
+                    $userdata->groups = $usergroups;
+                    $this->set('data', $userdata);
                     
                     
                 }

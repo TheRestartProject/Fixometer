@@ -43,6 +43,7 @@
                     $error = array();
                     
                     // We got data! Elaborate.
+                    $event_date =       $_POST['event_date'];
                     $start      =       $_POST['start'];
                     $end        =       $_POST['end'];
                     $pax        =       $_POST['pax'];
@@ -53,10 +54,18 @@
                     $group      =       $_POST['group'];
                     
                     // formatting dates for the DB
+                    $event_date = date('Y-m-d', strtotime($event_date));
+                    
+                    die($event_date);
+                      
+                    /*
                     $start = dbDate($start);
                     $end = dbDate($end);
-                   
+                    */                   
                     
+                    if(empty($event_date)){
+                        $error['event_date'] = 'We must have a starting date and time.';
+                    }
                     if(empty($start)){
                         $error['name'] = 'We must have a starting date and time.';
                     }
@@ -74,7 +83,9 @@
                     
                     if(empty($error)) {
                         // No errors. We can proceed and create the Party.
-                        $data = array(  'start'         => $start,
+                        $data = array(
+                                        'event_date'    => $event_date,
+                                        'start'         => $start,
                                         'end'           => $end,
                                         'pax'           => $pax,
                                         'free_text'     => $free_text,

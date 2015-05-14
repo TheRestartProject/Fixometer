@@ -50,14 +50,16 @@
                                 </div>
                                 
                                 <div class="form-group <?php if(isset($error) && isset($error['group']) && !empty($error['group'])) { echo "has-error"; } ?>">
-                                    <label for="group">Group:</label>
-                                    <select id="group" name="group"  class="form-control selectpicker">
-                                        <option></option>
+                                    <label for="group">Group(s):</label>
                                         <?php foreach($groups as $group){ ?>
-                                        <option value="<?php echo $group->idgroups; ?>"><?php echo $group->name; ?></option>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input value="<?php echo $group->idgroups; ?>" type="checkbox" name="groups[]" id="group-<?php echo $group->idgroups; ?>"> <?php echo $group->name; ?>
+                                            </label>
+                                        </div>
+                                        
                                         <?php } ?>
-                                    </select>
-                                    <?php if(isset($error) && isset($error['group']) && !empty($error['group'])) { echo '<span class="help-block text-danger">' . $error['group'] . '</span>'; } ?>
+                                        <?php if(isset($error) && isset($error['group']) && !empty($error['group'])) { echo '<span class="help-block text-danger">' . $error['group'] . '</span>'; } ?>
                                 </div>
         
                                 <div class="form-group">

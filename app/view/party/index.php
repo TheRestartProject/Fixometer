@@ -3,12 +3,13 @@
         <div class="col-md-12">
             <h1><?php echo $title; ?></h1>
             <a class="btn btn-primary" href="/party/create"><i class="fa fa-plus"></i> New Party</a>
-            <table class="table table-hover table-responsive">
+            <table class="table table-hover table-responsive sortable">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Group (Host)</th>
+                        <th>Group</th>
                         <th>Location</th>
+                        <th>Date</th>
                         <th>Start</th>
                         <th>End</th>
                         <th>Pax</th>
@@ -23,17 +24,17 @@
                             <?php
                             if(hasRole($user, 'Administrator') || hasRole($user, 'Host') || $user->group == $g->id) {
                             ?>
-                            <a href="/party/edit/<?php echo $p->id; ?>" title="edit group"><?php echo $p->group_name . ' (' . $p->host_name . ')'; ?></a>
+                            <a href="/party/edit/<?php echo $p->id; ?>" title="edit group"><?php echo $p->group_name; ?></a>
                             <?php
                             } else {
                             ?>
-                            <?php echo $p->group_name . ' (' . $p->host_name . ')'; ?>
+                            <?php echo $p->group_name; ?>
                             <?php } ?>    
                         </td>
                         <td><?php echo $p->location; ?></td>
-                        
-                        <td><?php echo dateFormat($p->start); ?></td>
-                        <td><?php echo dateFormat($p->end); ?></td>
+                        <td><?php echo date('m/d/Y', $p->event_date); ?></td>
+                        <td><?php echo $p->start; ?></td>
+                        <td><?php echo $p->end; ?></td>
                         
                         <td><?php echo $p->pax; ?></td>
                         

@@ -7,10 +7,19 @@ $(document).ready(function(){
                     date: "fa fa-calendar",
                     up: "fa fa-arrow-up",
                     down: "fa fa-arrow-down"
-                }
+                },
+                format: 'MM/DD/YYYY'
             });
-    
-    
+    $('.time').datetimepicker({
+            icons: {
+                time: "fa fa-clock-o",
+                date: "fa fa-calendar",
+                up: "fa fa-arrow-up",
+                down: "fa fa-arrow-down"
+            },
+            format: 'HH:mm'
+        });    
+
     /** Rich Text Editors **/
     $('.rte').summernote({
         height:     300,

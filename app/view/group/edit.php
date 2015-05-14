@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1><?php echo $title; ?></h1>
+            <h1>Edit Group <span class="orange"><?php echo $formdata->name; ?></span></h1>
         </div>
     </div>
     
@@ -21,20 +21,25 @@
                             <label for="frequency">Frequency:</label>
                             <input type="text" name="frequency" id="frequency" class="form-control" value="<?php echo $formdata->frequency; ?>">
                         </div>
+                        
+                        <div class="form-group">
+                            <label for="free_text">Description:</label>
+                            <textarea class="form-control rte" rows="6" name="free_text" id="free_text"><?php echo $formdata->free_text; ?></textarea>
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label for="area">Area:</label>
                             <input type="text" name="area" id="area" class="form-control" value="<?php echo $formdata->area; ?>">
                         </div>
-                    </div>
-                    
-                    <div class="col-md-6">
-                        <div class="form-inline">
-                            <div class="form-group">
-                                <label for="location">Location:</label>
+                        <div class="form-group">
+                            
+                            <label for="location">Location:</label>
+                            
+                            <div class="form-inline">
                                 <input type="text" name="location" id="location" class="form-control" value="<?php echo $formdata->location; ?>">
-                                
-                            </div>
-                            <div class="form-group">
                                 <button type="button" class="btn btn-primary" onclick="codeAddress()"><i class="fa fa-map-marker"></i> geocode</button>
                             </div>
                         </div>

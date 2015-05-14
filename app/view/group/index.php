@@ -10,16 +10,18 @@
                         <th>Group</th>
                         <th>Location</th>
                         <th>Frequency</th>
+                        <th>Restarters</th>
                     </tr>
                 </thead>
                 
                 <tbody>
                     <?php foreach($list as $g){ ?>
                     <tr>
-                        <td><?php echo $g->idgroups; ?></td>
+                        <td><?php echo $g->id; ?></td>
                         <td><a href="/group/edit/<?php echo $g->idgroups; ?>" title="edit group"><?php echo $g->name; ?></a></td>
                         <td><?php echo $g->location . ', ' . $g->area; ?></td>
                         <td><?php echo $g->frequency; ?> Parties/Year</td>
+                        <td><?php echo $g->user_list; ?></td>
                     </tr>
                     <?php } ?>
                 </tbody>

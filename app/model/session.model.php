@@ -7,12 +7,14 @@
         
         public function createSession($user){
             $session = 'noToken'.md5(substr(time(), -8));
-            $sql = 'INSERT INTO `sessions`(`session`, `user`) VALUES (:session, :user)';
+            $created_at = date('Y-m-d H:i:s', time() );
+            $sql = 'INSERT INTO `sessions`(`session`, `user`, created_at) VALUES (:session, :user, :tm)';
             
             $stmt = $this->database->prepare($sql);
             
             $stmt->bindParam(':session', $session, PDO::PARAM_STR);
             $stmt->bindParam(':user', $user, PDO::PARAM_INT);
+            $stmt->bindParam(':tm', $created_at, PDO::PARAM_STR);
             
             $q = $stmt->execute();
             
@@ -55,9 +57,10 @@
         protected function getSession() {
             $session = $_SESSION[APPNAME][SESSIONKEY];
             
-            $sql = 'SELECT users.idusers AS id, users.name, users.email, users.group, roles.role FROM users
-                    INNER JOIN roles ON roles.idroles = users.role
-                    INNER JOIN sessions ON sessions.user = users.idusers
+            $sql = 'SELECT users.idusers AS id, users.name, users.email, roles.role FROM users
+                        INNER JOIN roles ON roles.idroles = users.role
+                        INNER JOIN sessions ON sessions.user = users.idusers
+                        
                     WHERE sessions.session = :session';
             
             $stmt = $this->database->prepare($sql);

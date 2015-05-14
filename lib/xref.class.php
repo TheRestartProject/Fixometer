@@ -13,6 +13,10 @@
         private $search_id;
         private $search_type;
         
+        /**
+         * @ object -> can be image, link, or any other shared asset
+         * @ reference -> the main App Element that needs the object (user, event, device, group)
+         * */
         public function __construct($index, $object = null, $objectType = null, $reference = null, $referenceType = null){
             
             parent::__construct();

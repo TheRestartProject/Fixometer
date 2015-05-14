@@ -71,6 +71,7 @@
     function dateFormat($timestamp){
         return date('D, j M Y, H:i', $timestamp);
     }
+
     function dbDate($date){
         return date('Y-m-d H:i:s', strtotime($date));
     }

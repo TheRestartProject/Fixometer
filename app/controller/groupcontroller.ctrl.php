@@ -21,8 +21,9 @@
         public function index(){
             
             $this->set('title', 'Groups');
+            $this->set('list', $this->Group->findAll());
             
-            $this->set('list', $this->Group->findAll()); 
+            
             
         }
         
@@ -48,6 +49,7 @@
                     $location   =       $_POST['location'];
                     $latitude   =       $_POST['latitude'];
                     $longitude  =       $_POST['longitude'];
+                    $text       =       $_POST['free_text'];
                     
                     if(empty($name)){
                         $error['name'] = 'Please input a name.';
@@ -71,7 +73,8 @@
                                         'frequency'     => $freq,
                                         'location'      => $location,
                                         'latitude'      => $latitude,
-                                        'longitude'     => $longitude
+                                        'longitude'     => $longitude,
+                                        'free_text'     => $text,
                                         );
                         $idGroup = $this->Group->create($data);
                         if($idGroup){
@@ -108,6 +111,9 @@
                 if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST)){
                     
                     $data = $_POST;
+                    // remove the extra "files" field that Summernote generates -
+                    unset($data['files']);
+                    
                     $u = $this->Group->update($data, $id);
                     
                     if(!$u) {
@@ -124,7 +130,7 @@
             $this->set('js', array( 'head' => array( '/ext/geocoder.js')));
             
             $Group = $this->Group->findOne($id);
-            $this->set('title', 'Edit Group ' . $Group->name);
+            $this->set('title', 'Edit Group ' . $Group->name );
             $this->set('formdata', $Group);
         }
     }

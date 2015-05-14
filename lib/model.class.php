@@ -43,8 +43,7 @@
             $q = $stmt->execute();
             
             if(!$q){
-                $Error = new Error(601, 'Could not execute query.');
-                $Error->display();
+                new Error(601, 'Could not execute query. (model.class.php, 46)');
                 return false;
             }
             else {
@@ -59,8 +58,7 @@
             $q = $stmt->execute();
             
             if(!$q){
-                $Error = new Error(601, 'Could not execute query.');
-                $Error->display();
+                new Error(601, 'Could not execute query. (model.class.php, 61)');
                 return false;
             }
             else {
@@ -75,8 +73,7 @@
             $q = $stmt->execute();
             
             if(!$q){
-                $Error = new Error(601, 'Could not execute query.');
-                $Error->display();
+                new Error(601, 'Could not execute query. (model.class.php, 76)');
                 return false;
             }
             else {
@@ -134,7 +131,7 @@
             $sql = 'UPDATE `' . $this->table . '` SET ' . implode(', ', $fields) . ' WHERE `id' . $this->table . '` = :id'; 
             $stmt = $this->database->prepare($sql);
             if(!$stmt && SYSTEM_STATUS == 'development'){
-                dsql($sql);
+                dsql($sql . ' (model.class.php, 134)');
                 dbga($this->database->errorInfo());   
             }
             

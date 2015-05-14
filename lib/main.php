@@ -64,8 +64,7 @@
         if((int)method_exists($controller, $action)){
             call_user_func_array(array($dispatch,$action),$qs);
         } else {
-            $Error = new Error(502, 'Controller <strong>'.$controller.'</strong> Not Found. Program Shutdown.');
-            $Error->display();
+            new Error(502, 'Controller <strong>'.$controller.'</strong> Not Found. Program Shutdown. (main.php, 67)');
         }
         
         
@@ -86,9 +85,8 @@
         }
         
         else {
-            $Error = new Error(501, 'Class <strong>'.ucfirst($className).'</strong> Not Found. Program Shutdown.');
-            $Error->display();
-            die();
+           new Error(501, 'Class <strong>'.ucfirst($className).'</strong> Not Found. Program Shutdown. (main.php, 88)');
+           die();
         }
         
     }

@@ -25,11 +25,7 @@
                                     <?php if(isset($error) && isset($error['email']) && !empty($error['email'])) { echo '<span class="help-block text-danger">' . $error['email'] . '</span>'; } ?>
                                 </div>
                         
-                                
-                            </div>    
-                            <div class="col-md-6">  
-                                
-                                <div class="form-group <?php if(isset($error) && isset($error['role']) && !empty($error['role'])) { echo "has-error"; } ?>">
+                                 <div class="form-group <?php if(isset($error) && isset($error['role']) && !empty($error['role'])) { echo "has-error"; } ?>">
                                     
                                     <label for="role">User Role:</label>
                                     <select id="role" name="role"  class="form-control selectpicker">
@@ -41,15 +37,28 @@
                                     <?php if(isset($error) && isset($error['role']) && !empty($error['role'])) { echo '<span class="help-block text-danger">' . $error['role'] . '</span>'; } ?>
                                 </div>
                                 
+                            </div>    
+                            <div class="col-md-6">  
+                                
+                               
                                 
                                 <div class="form-group <?php if(isset($error) && isset($error['group']) && !empty($error['group'])) { echo "has-error"; } ?>">
-                                    <label for="group">Group:</label>
-                                    <select id="group" name="group"  class="form-control selectpicker">
-                                        <option></option>
+                                    <label for="group">Group(s):</label>
+                                    
                                         <?php foreach($groups as $group){ ?>
-                                        <option value="<?php echo $group->idgroups; ?>" <?php echo ($group->idgroups == $data->group ? 'selected' : ''); ?>><?php echo $group->name; ?></option>
+                                         <div class="checkbox">
+                                            <label>
+                                                <input
+                                                    value="<?php echo $group->id; ?>"
+                                                    type="checkbox"
+                                                    name="groups[]"
+                                                    id="group-<?php echo $group->id; ?>"
+                                                    <?php echo (in_array($group->id, $data->groups) ? ' checked ' : ''); ?>
+                                                >    
+                                                <?php echo $group->name; ?>
+                                            </label>
+                                        </div>
                                         <?php } ?>
-                                    </select>
                                     <?php if(isset($error) && isset($error['group']) && !empty($error['group'])) { echo '<span class="help-block text-danger">' . $error['group'] . '</span>'; } ?>
                                 </div>
         

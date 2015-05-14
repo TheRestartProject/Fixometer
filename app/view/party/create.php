@@ -15,26 +15,48 @@
                         <div class="row">
                             <div class="col-md-6">
                                 
-                                <div class="form-group <?php if(isset($error) && isset($error['start']) && !empty($error['start'])) { echo "has-error"; } ?>">
-                                    <label for="start">Start:</label>
+                                <div class="form-group <?php if(isset($error) && isset($error['event_date']) && !empty($error['event_date'])) { echo "has-error"; } ?>">
+                                    <label for="event_date">Date:</label>
                                     <div class="input-group date">
-                                        <input type="text" name="start" id="start" class="form-control datepicker">
+                                        <input type="text" name="event_date" id="event_date" class="form-control datepicker">
                                         <span class="input-group-addon">
-                                            <i class="fa fa-clock-o"></i>
+                                            <i class="fa fa-calendar"></i>
                                         </span>
                                     </div>
                                     <?php if(isset($error) && isset($error['start']) && !empty($error['start'])) { echo '<span class="help-block text-danger">' . $error['start'] . '</span>'; } ?>
                                 </div>
-                                <div class="form-group <?php if(isset($error) && isset($error['end']) && !empty($error['end'])) { echo "has-error"; } ?>">
-                                    <label for="end">End:</label>
-                                    <div class="input-group date">
-                                        <input type="text" name="end" id="end" class="form-control datepicker">
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-clock-o"></i>
-                                        </span>
+                                
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group <?php if(isset($error) && isset($error['start']) && !empty($error['start'])) { echo "has-error"; } ?>">
+                                            <label for="start">Start:</label>
+                                            <div class="input-group time">
+                                                <input type="text" name="start" id="start" class="form-control datepicker">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-clock-o"></i>
+                                                </span>
+                                            </div>
+                                            <?php if(isset($error) && isset($error['start']) && !empty($error['start'])) { echo '<span class="help-block text-danger">' . $error['start'] . '</span>'; } ?>
+                                        </div>
+                                        
                                     </div>
-                                    <?php if(isset($error) && isset($error['end']) && !empty($error['end'])) { echo '<span class="help-block text-danger">' . $error['end'] . '</span>'; } ?>
+                                    <div class="col-md-6">
+                                        <div class="form-group <?php if(isset($error) && isset($error['end']) && !empty($error['end'])) { echo "has-error"; } ?>">
+                                            <label for="end">End:</label>
+                                            <div class="input-group time">
+                                                <input type="text" name="end" id="end" class="form-control datepicker">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-clock-o"></i>
+                                                </span>
+                                            </div>
+                                            <?php if(isset($error) && isset($error['end']) && !empty($error['end'])) { echo '<span class="help-block text-danger">' . $error['end'] . '</span>'; } ?>
+                                        </div>
+                                        
+                                    </div>
+                                    
                                 </div>
+                                
+                                
                         
                                 <div class="form-group">
                                     <label for="free_text">Description:</label>
@@ -55,22 +77,24 @@
                                     <select id="group" name="group"  class="form-control selectpicker">
                                         <option></option>
                                         <?php foreach($group_list as $group){ ?>
-                                        <option value="<?php echo $group->idgroups; ?>"><?php echo $group->name; ?></option>
+                                        <option value="<?php echo $group->id; ?>"><?php echo $group->name; ?></option>
                                         <?php } ?>
                                     </select>
                                     <?php if(isset($error) && isset($error['group']) && !empty($error['group'])) { echo '<span class="help-block text-danger">' . $error['group'] . '</span>'; } ?>
                                 </div>
             
-                                <div class="form-inline">
+                               
                                     <div class="form-group">
                                         <label for="location">Location:</label>
-                                        <input type="text" name="location" id="location" class="form-control" <?php if(isset($error) && !empty($error) && !empty($udata)) echo 'value="'.$udata['location'].'"' ; ?>>
+                               
+                                        <div class="form-inline">
+                                            <div class="form-group">
+                                                <input type="text" name="location" id="location" class="form-control" <?php if(isset($error) && !empty($error) && !empty($udata)) echo 'value="'.$udata['location'].'"' ; ?>>
+                                                <button type="button" class="btn btn-primary" onclick="codeAddress()"><i class="fa fa-map-marker"></i> geocode</button>
+                                            </div>
+                                        </div>
                                         
                                     </div>
-                                    <div class="form-group">
-                                        <button type="button" class="btn btn-primary" onclick="codeAddress()"><i class="fa fa-map-marker"></i> geocode</button>
-                                    </div>
-                                </div>
                                 
                                 
                                 <div class="" id="map-canvas" style="height: 350px; ">
