@@ -18,7 +18,7 @@
                     <?php foreach($list as $g){ ?>
                     <tr>
                         <td><?php echo $g->id; ?></td>
-                        <td><a href="/group/edit/<?php echo $g->idgroups; ?>" title="edit group"><?php echo $g->name; ?></a></td>
+                        <td><a href="/group/edit/<?php echo $g->id; ?>" title="edit group"><?php echo $g->name; ?></a></td>
                         <td><?php echo $g->location . ', ' . $g->area; ?></td>
                         <td><?php echo $g->frequency; ?> Parties/Year</td>
                         <td><?php echo $g->user_list; ?></td>

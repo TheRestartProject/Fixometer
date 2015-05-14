@@ -52,7 +52,7 @@
         }
         public function findOne($id){
             
-            $sql = 'SELECT * FROM ' . $this->table . ' WHERE id' . $this->table . ' = :id';
+            $sql = 'SELECT * FROM `' . $this->table . '` WHERE `id' . $this->table . '` = :id';
             $stmt = $this->database->prepare($sql);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $q = $stmt->execute();
