@@ -55,9 +55,6 @@
                     
                     // formatting dates for the DB
                     $event_date = date('Y-m-d', strtotime($event_date));
-                    
-                    die($event_date);
-                      
                     /*
                     $start = dbDate($start);
                     $end = dbDate($end);
