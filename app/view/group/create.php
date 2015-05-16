@@ -9,7 +9,7 @@
         <div class="col-md-12">
             <?php if(isset($response)) { printResponse($response); } ?>
             
-            <form action="/group/create" method="post">
+            <form action="/group/create" method="post" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group <?php if(isset($error) && isset($error['name']) && !empty($error['name'])) { echo "has-error"; } ?>">
@@ -25,6 +25,7 @@
                             <label for="free_text">Description:</label>
                             <textarea class="form-control rte" rows="6" name="free_text" id="free_text"></textarea>
                         </div>
+                        
                     </div>
                     
                     <div class="col-md-6">
@@ -38,11 +39,11 @@
                         <div class="form-group">
                             <label for="location">Location:</label>
                             
-                            <div class="form-inline">
-                                <div class="form-group">
-                                    <input type="text" name="location" id="location" class="form-control" <?php if(isset($error) && !empty($error) && !empty($udata)) echo 'value="'.$udata['location'].'"' ; ?>>
+                            <div class="input-group">
+                                <input type="text" name="location" id="location" class="form-control" <?php if(isset($error) && !empty($error) && !empty($udata)) echo 'value="'.$udata['location'].'"' ; ?>>
+                                <span class="input-group-btn">
                                     <button type="button" class="btn btn-primary" onclick="codeAddress()"><i class="fa fa-map-marker"></i> geocode</button>
-                                </div>    
+                                </span>
                             </div>
                         
                         </div>
@@ -65,15 +66,26 @@
                             </div>
                             
                         </div>
+                        <div class="form-group">
+                            <label for="images">Images:</label>
+                            <input type="file" class="form-control file" name="images[]" multiple="true" data-show-upload="false" data-show-caption="true">
+                        </div>
                     </div>
                     
                     
                 </div>
-                <div class="row">
-                    <div class="col-md-6 col-md-offset-6">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> save</button>
-                    </div>
-                </div>
+                <div class="row buttons">
+                            
+                            <div class="col-md-6 col-md-offset-6">
+                                
+                                <div class="form-group">
+                                    <button class="btn btn-default" type="reset"><i class="fa fa-refresh"></i> reset</button>
+                                    <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> save</button>
+                                </div>
+                                
+                            </div>
+                            
+                        </div>
             </form>
             
         </div>

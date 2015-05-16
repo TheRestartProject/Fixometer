@@ -51,6 +51,14 @@
                     $longitude  =       $_POST['longitude'];
                     $text       =       $_POST['free_text'];
                     
+                    
+                    
+                    $images = $_FILES['images'];
+                    
+                    dbga(rearrange($images));
+                    
+                    die();
+                    
                     if(empty($name)){
                         $error['name'] = 'Please input a name.';
                     }

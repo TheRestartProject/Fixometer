@@ -29,7 +29,6 @@
                 
                 $Groups = new Group;
                 
-                
                 $this->set('title', 'New Party');
                 $this->set('gmaps', true);
                 $this->set('js', 
@@ -55,6 +54,7 @@
                     
                     // formatting dates for the DB
                     $event_date = date('Y-m-d', strtotime($event_date));
+                    
                     /*
                     $start = dbDate($start);
                     $end = dbDate($end);
@@ -79,6 +79,15 @@
                     
                     
                     if(empty($error)) {
+                        
+                        $startTime = date('Y-m-d', $event_date) . ' ' . $start;
+                        $endTime = date('Y-m-d', $event_date) . ' ' . $end;
+                        
+                        $dtStart = new DateTime($startTime);
+                        $dtDiff = $dtStart->diff(new DateTime($endTime));
+                        
+                        $hours = $dtDiff->h;
+                        
                         // No errors. We can proceed and create the Party.
                         $data = array(
                                         'event_date'    => $event_date,
@@ -89,12 +98,19 @@
                                         'location'      => $location,
                                         'latitude'      => $latitude,
                                         'longitude'     => $longitude,
-                                        'group'         => $group
+                                        'group'         => $group,
+                                        'hours'         => $hours
                                         );
                         $idParty = $this->Party->create($data);
                         
                         if($idParty){
                             $response['success'] = 'Party created correctly.';
+                            /** check and create User List **/
+                            if(isset($_POST['users']) && !empty($_POST['users'])){
+                                $users = $_POST['users'];
+                                $this->Party->createUserList($idParty, $users);
+                            }
+                            
                             
                             /** let's create the image attachment! **/
                             if(isset($_FILES) && !empty($_FILES)){

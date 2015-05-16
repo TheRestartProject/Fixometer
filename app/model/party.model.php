@@ -27,4 +27,32 @@
             
             return $stmt->fetchAll(PDO::FETCH_OBJ);
         }
+        
+        public function createUserList($party, $users){
+            /** reset user list **/
+            if(!self::deleteUserList($party)){
+                return false;    
+            }
+            $sql = 'INSERT INTO `events_users`(`event`, `user`) VALUES (:party, :user)';
+            $stmt = $this->database->prepare($sql);
+            $stmt->bindParam(':party', $party, PDO::PARAM_INT);
+            foreach($users as $k => &$user){
+                $stmt->bindParam(':user', $user, PDO::PARAM_INT);
+                
+                $q = $stmt->execute();
+                if(!$q){
+                    if(SYSTEM_STATUS == 'development'){
+                        $err = $stmt->errorInfo();
+                        new Error(601, $err[2]);
+                    }
+                }
+            }
+        }
+        
+        public function deleteUserList($party){
+            $sql = 'DELETE FROM `events_users` WHERE `event` = :party';
+            $stmt = $this->database->prepare($sql);
+            $stmt->bindParam(':party', $party, PDO::PARAM_INT);
+            return $stmt->execute();
+        }
     } 

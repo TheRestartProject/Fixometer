@@ -13,7 +13,7 @@
          * to database, depending on filetype
          * */
         
-        public function upload($file, $type, $reference = null, $referenceType = null){
+        public function upload($file, $type, $reference = null, $referenceType = null, $multiple = false){
             $user_file = $_FILES[$file];
             
             

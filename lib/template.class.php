@@ -7,7 +7,10 @@
         protected $_action;
         
         /** array to exclude certain routes (like csv exports or AJAX urls) **/
-        private $exclude = array( 'ajax' );
+        private $exclude = array(
+                            'restarters_in_group',
+                            
+                            );
         
         function __construct($controller,$action) {
             $this->_controller = $controller;

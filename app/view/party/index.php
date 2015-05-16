@@ -2,6 +2,24 @@
     <div class="row">
         <div class="col-md-12">
             <h1><?php echo $title; ?></h1>
+            
+            <div>
+                <?php
+                /*
+                    $party = $list[0];
+                    $start = date('Y-m-d', $party->event_date) . ' ' . $party->start;
+                    $end = date('Y-m-d', $party->event_date) . ' ' . $party->end;
+                    
+                    $a = new DateTime($start);
+                    dbga($a);
+                    
+                    $diff = $a->diff(new DateTime($end));
+                    dbga($diff);
+                    */
+                ?>
+                
+            </div>
+            
             <a class="btn btn-primary" href="/party/create"><i class="fa fa-plus"></i> New Party</a>
             <table class="table table-hover table-responsive sortable">
                 <thead>
@@ -12,6 +30,7 @@
                         <th>Date</th>
                         <th>Start</th>
                         <th>End</th>
+                        <th>Hours</th>
                         <th>Pax</th>
                     </tr>
                 </thead>
@@ -35,7 +54,7 @@
                         <td><?php echo date('m/d/Y', $p->event_date); ?></td>
                         <td><?php echo $p->start; ?></td>
                         <td><?php echo $p->end; ?></td>
-                        
+                        <td><?php echo $p->hours; ?></td>
                         <td><?php echo $p->pax; ?></td>
                         
                     </tr>

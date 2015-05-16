@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="/components/bootstrap-sortable/Contents/bootstrap-sortable.css">
         <link rel="stylesheet" href="/components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
         <link rel="stylesheet" href="/components/summernote/dist/summernote.css">
+        <link rel="stylesheet" href="/components/bootstrap-fileinput/css/fileinput.min.css">
         
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>

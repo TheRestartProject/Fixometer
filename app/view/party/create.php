@@ -74,27 +74,29 @@
                                 
                                 <div class="form-group <?php if(isset($error) && isset($error['group']) && !empty($error['group'])) { echo "has-error"; } ?>">
                                     <label for="group">Group:</label>
-                                    <select id="group" name="group"  class="form-control selectpicker">
+                                    <select id="group" name="group"  class="form-control selectpicker users_group">
                                         <option></option>
                                         <?php foreach($group_list as $group){ ?>
                                         <option value="<?php echo $group->id; ?>"><?php echo $group->name; ?></option>
                                         <?php } ?>
                                     </select>
                                     <?php if(isset($error) && isset($error['group']) && !empty($error['group'])) { echo '<span class="help-block text-danger">' . $error['group'] . '</span>'; } ?>
+                                    
+                                    <div class="users_group_list">
+                                        
+                                    </div>    
                                 </div>
             
                                
-                                    <div class="form-group">
-                                        <label for="location">Location:</label>
-                               
-                                        <div class="form-inline">
-                                            <div class="form-group">
-                                                <input type="text" name="location" id="location" class="form-control" <?php if(isset($error) && !empty($error) && !empty($udata)) echo 'value="'.$udata['location'].'"' ; ?>>
-                                                <button type="button" class="btn btn-primary" onclick="codeAddress()"><i class="fa fa-map-marker"></i> geocode</button>
-                                            </div>
-                                        </div>
-                                        
+                                <div class="form-group">
+                                    <label for="location">Location:</label>
+                                    <div class="input-group">
+                                        <input type="text" name="location" id="location" class="form-control" <?php if(isset($error) && !empty($error) && !empty($udata)) echo 'value="'.$udata['location'].'"' ; ?>>
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-primary" onclick="codeAddress()"><i class="fa fa-map-marker"></i> geocode</button>
+                                        </span>
                                     </div>
+                                </div>
                                 
                                 
                                 <div class="" id="map-canvas" style="height: 350px; ">
@@ -117,19 +119,24 @@
                                 
                                 <div class="from-group">
                                     <label for="file">Image:</label>
-                                    <input type="file" name="file" id="file" class="form-control">
+                                    <input type="file" name="file" id="file" class="form-control file">
                                 </div>        
+                                        
+                            </div>
+                            
+                        </div>
+                        <div class="row buttons">
+                            
+                            <div class="col-md-6 col-md-offset-6">
                                 
-                
                                 <div class="form-group">
                                     <button class="btn btn-default" type="reset"><i class="fa fa-refresh"></i> reset</button>
                                     <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> save</button>
-                                </div>        
-                                        
-                                        
+                                </div>
+                                
                             </div>
+                            
                         </div>
-                        
                         
                     </form>
                 </div>

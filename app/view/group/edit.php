@@ -38,9 +38,11 @@
                             
                             <label for="location">Location:</label>
                             
-                            <div class="form-inline">
-                                <input type="text" name="location" id="location" class="form-control" value="<?php echo $formdata->location; ?>">
-                                <button type="button" class="btn btn-primary" onclick="codeAddress()"><i class="fa fa-map-marker"></i> geocode</button>
+                            <div class="input-group">
+                                <input type="text" name="location" id="location" class="form-control" <?php if(isset($error) && !empty($error) && !empty($udata)) echo 'value="'.$udata['location'].'"' ; ?>>
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-primary" onclick="codeAddress()"><i class="fa fa-map-marker"></i> geocode</button>
+                                </span>
                             </div>
                         </div>
                         
@@ -66,11 +68,18 @@
                     
                     
                 </div>
-                <div class="row">
-                    <div class="col-md-6 col-md-offset-6">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> save</button>
-                    </div>
-                </div>
+                <div class="row buttons">
+                            
+                            <div class="col-md-6 col-md-offset-6">
+                                
+                                <div class="form-group">
+                                    <button class="btn btn-default" type="reset"><i class="fa fa-refresh"></i> reset</button>
+                                    <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> save</button>
+                                </div>
+                                
+                            </div>
+                            
+                        </div>
             </form>
             
         </div>

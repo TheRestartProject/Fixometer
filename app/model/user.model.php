@@ -86,6 +86,41 @@
             return $Users;
         }
         
+        public function partyEligible(){
+            $sql = 'SELECT
+                        users.idusers AS id,
+                        users.name,
+                        users.email,
+                        roles.role
+                    FROM ' . $this->table . '
+                    INNER JOIN roles ON roles.idroles = users.role
+                    WHERE users.role > 1 
+                    ORDER BY users.name ASC';
+            $stmt = $this->database->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+            
+        }
+        
+        public function inGroup($group){
+            $sql = 'SELECT
+                        users.idusers AS id,
+                        users.name,
+                        users.email,
+                        roles.role
+                    FROM ' . $this->table . '
+                    INNER JOIN roles ON roles.idroles = users.role
+                    WHERE users.role > 1
+                        AND users.idusers IN
+                            (SELECT `user` FROM users_groups WHERE `group` = :group) 
+                    ORDER BY users.name ASC';
+            $stmt = $this->database->prepare($sql);
+            $stmt->bindParam(':group', $group, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+            
+        }
+        
         public function create($data){
             $sql = 'INSERT INTO `' . $this->table . '` (`created_at`, `name`, `email`, `password`, `role`)
                     VALUES (:created_at, :name, :email, :password, :role)';
