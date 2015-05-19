@@ -29,11 +29,11 @@ $(document).ready(function(){
         ]
     });
     
+    
+    /** Load list of invitable restarters ( /party/create ) **/
     $('.users_group').change(function(){ // selectpicker users_group
-       var groupId = $(this).val();
-       console.log(groupId);
-       
-       $.getJSON('/ajax/restarters_in_group', {'group': groupId}, function(data){
+        var groupId = $(this).val();
+        $.getJSON('/ajax/restarters_in_group', {'group': groupId}, function(data){
             var checkboxes = '';
             data.forEach(function(e){
                 checkboxes +=   '<div class="checkbox">' + 
@@ -45,8 +45,16 @@ $(document).ready(function(){
             });
             $('.users_group_list').html(checkboxes);
         });
-       
-        
     });
     
+    /** Show/Hide repairable details ( /device/create ) **/
+    $('[name="repair_status"]').click(function(){
+        if($(this).is(':checked') && $(this).attr('id') == 'repair_status_2') {
+            
+            $('#repairable-details').slideDown('slow');
+        }
+        else {
+            $('#repairable-details').hide('fast');
+        }
+    });
 });

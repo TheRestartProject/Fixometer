@@ -74,7 +74,7 @@
                     $this->set('userlist', $userlist);
                 }
                 else {
-                    header('Location: /user/forbidden', true, 404);
+                    header('Location: /user/forbidden');
                 }
             }
         }
@@ -175,7 +175,7 @@
                     
                 }
                 else {
-                    header('Location: /user/forbidden', true, 403);
+                    header('Location: /user/forbidden');
                 }
             }
             
@@ -245,6 +245,11 @@
             
         }
         
+        public function forbidden(){
+            $this->set('title',  'Nope.');
+        }
+
+
         public function logout() {
             
             unset($_SESSION[APPNAME][SESSIONKEY]);

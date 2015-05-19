@@ -25,15 +25,26 @@
                             </li>
                             <li class="">
                                 
-                                <a class="" href="/party">
+                                <a class="dropdown-toggle" id="party-management-dropdown" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
                                     <i class="fa fa-recycle"></i> Parties
                                 </a>
+                                
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="party-management-dropdown">
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="/party"> All Parties</a></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="/party/create">New Party</a></li>
+                                        
+                                    </ul>
                             </li>
                             <li class="">
                                 
-                                <a class="" href="#">
-                                    <i class="fa fa-database"></i> Data
+                                <a  class="dropdown-toggle" id="device-management-dropdown" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                                    <i class="fa fa-wrench"></i> Devices
                                 </a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="device-management-dropdown">
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="/device"> All Devices</a></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="/device/create">New Device</a></li>
+                                        
+                                    </ul>
                             </li>
                             <li class="">
                                  

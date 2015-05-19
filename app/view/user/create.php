@@ -8,7 +8,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    
                     <?php if(isset($response)) { printResponse($response); } ?>
                     
                     <form action="/user/create" method="post">
@@ -54,7 +53,7 @@
                                         <?php foreach($groups as $group){ ?>
                                         <div class="checkbox">
                                             <label>
-                                                <input value="<?php echo $group->idgroups; ?>" type="checkbox" name="groups[]" id="group-<?php echo $group->idgroups; ?>"> <?php echo $group->name; ?>
+                                                <input value="<?php echo $group->id; ?>" type="checkbox" name="groups[]" id="group-<?php echo $group->id; ?>"> <?php echo $group->name; ?>
                                             </label>
                                         </div>
                                         

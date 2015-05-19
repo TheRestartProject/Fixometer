@@ -25,7 +25,10 @@
         
         public function create(){
             
-            if(hasRole($this->user, 'Host') || hasRole($this->user, 'Administrator') ){
+            if( !hasRole($this->user, 'Host') || !hasRole($this->user, 'Administrator')){
+                header('Location: /user/forbidden');
+            }
+            else {
                 
                 $Groups = new Group;
                 
@@ -60,10 +63,10 @@
                     $end = dbDate($end);
                     */                   
                     
-                    if(empty($event_date)){
+                    if(!verify($event_date)){
                         $error['event_date'] = 'We must have a starting date and time.';
                     }
-                    if(empty($start)){
+                    if(!verify($start)){
                         $error['name'] = 'We must have a starting date and time.';
                     }
                     if(!empty($latitude) || !empty($longitude)) {
@@ -136,9 +139,9 @@
                 }
                 
             }
-            else {
-                header('Location: /user/forbidden', true, 403);
-            }
+            
+            
+            
             
         }
     }

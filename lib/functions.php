@@ -5,6 +5,7 @@
      * returns boolean
      * */
     function hasRole($user, $role){
+        
         if($user->role == 'Root'){
             return true;
         }
@@ -49,6 +50,41 @@
         }
     }
     
+    /**
+     * verify that an array index exists and is not empty or null.
+     * can also do some type control.
+     * */
+    function verify($var, $strict = false, $type = 'string'){
+        if(!isset($var) || empty($var) || is_null($var)){
+            return false;
+        }
+        else {
+            if($strict){
+                switch($type){
+                    case 'number':
+                        if(is_numeric($var)){
+                            return true;
+                        }
+                        break;
+                    case 'string':
+                        return true;
+                        break;
+                    case 'array':
+                        if(is_array($var)){
+                            return true;
+                        }
+                        break;
+                    default:
+                        return false;
+                        break;
+                }
+            }
+            else {
+                return true;    
+            }
+            
+        }
+    }
     
     /** prints friendly arrays
      * used mainly for debugging
@@ -88,4 +124,31 @@
 
     function dbDate($date){
         return date('Y-m-d H:i:s', strtotime($date));
+    }
+    
+    /**
+     * make things look pretty.
+     * 1 = Fixed
+     * 2 = Repairable
+     * 3 = End of Lifecycle
+     * */
+    function parseRepairStatus($status){
+        $repClass = 'repair-status ';
+        switch($status){
+            case 1:
+                $repClass .= 'fixed';
+                $text = 'f';
+                break;
+            case 2:
+                $repClass .= 'repairable';
+                $text = 'r';
+                break;
+            case 3:
+                $repClass .= 'end-of-life';
+                $text = 'x';
+                break;
+            default:
+                break;
+        }
+        echo '<div class="'.$repClass.'">' . $text . '</div>';
     }
