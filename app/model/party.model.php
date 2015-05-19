@@ -16,6 +16,7 @@
                         `e`.`latitude`,
                         `e`.`longitude`,
                         `e`.`pax`,
+                        `e`.`hours`,
                         `g`.`name` AS `group_name`                        
                     FROM `events` AS `e`
                     INNER JOIN `groups` AS `g`

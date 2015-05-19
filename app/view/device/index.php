@@ -26,7 +26,7 @@
                         <td><?php echo $device->id; ?></td>
                         <td><a href="/device/edit/<?php echo $g->id; ?>" title="edit group"><?php echo $device->category_name; ?></a></td>
                         <td><?php echo $device->group_name; ?></td>
-                        <td><?php echo date('d/m/Y', strtotime($device->event_date)); ?></td>
+                        <td><?php echo date('d/m/Y', $device->event_date); ?></td>
                         <td><?php echo $device->event_location; ?></td>
                         <td><?php echo $device->restarter; ?></td>
                         
