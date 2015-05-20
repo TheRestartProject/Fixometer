@@ -12,6 +12,7 @@
                 <thead>
                     <tr>
                         <th>ID</th>
+                        <th>&nbsp;</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Role</th>
@@ -26,6 +27,7 @@
                     ?>
                     <tr>
                         <td><?php echo $u->id; ?></td>
+                        <td><a href="/user/profile/<?php echo $u->id; ?>"><i class="fa fa-user"></i></a></td>
                         <td>
                             
                             <?php if(hasRole($user, 'Administrator')){ ?>

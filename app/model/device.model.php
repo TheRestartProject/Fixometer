@@ -15,4 +15,12 @@
             
         }
         
+        public function ofThisUser($id){
+            $sql = 'SELECT * FROM `' . $this->table . '` WHERE `repaired_by` = :id';
+            $stmt = $this->database->prepare($sql);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+        }
+        
     }

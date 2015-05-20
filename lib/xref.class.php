@@ -30,10 +30,15 @@
             if($this->index === 'object'){
                 $this->search_id = $this->obj;
                 $this->search_type = $this->objType;
+                
+                
+                
             }
             elseif($this->index === 'reference'){
                 $this->search_id = $this->ref;
                 $this->search_type = $this->refType;
+                
+                
             }
             else {
                 return new Error(500, 'Invalid Index in Xref search. (xref.class.php, line 32)');
@@ -100,13 +105,14 @@
         public function deleteXref() {
             
             if($this->index){                
-                $sql = 'DELETE FROM `' . $this->table . '` WHERE `' . $this->index . '` = :id AND `' . $this->index . '_type` = :type';
+                $sql = 'DELETE FROM `' . $this->table . '` WHERE `reference` = :id AND `reference_type` = :type AND `object_type` = :objectType';
                 
                 $stmt = null;        
                 $stmt = $this->database->prepare($sql);
                 
-                $stmt->bindParam(':id', $this->search_id, PDO::PARAM_INT);
-                $stmt->bindParam(':type', $this->search_type, PDO::PARAM_INT);
+                $stmt->bindParam(':id', $this->ref, PDO::PARAM_INT);
+                $stmt->bindParam(':type', $this->refType, PDO::PARAM_INT);
+                $stmt->bindParam(':objectType', $this->objType, PDO::PARAM_INT);
                 
                 $q = $stmt->execute();
                 
@@ -114,11 +120,33 @@
                     dbga($stmt->errorInfo());
                 }
                 
-                return $stmt->fetchAll(PDO::FETCH_OBJ);
+                return true;
             }
             else {
                 return false;
             }
+            
+        }
+        
+        public function deleteObjectXref(){
+                $sql = 'DELETE FROM `' . $this->table . '` WHERE `object` = :id AND `object_type` = :type';
+                
+                
+                $stmt = null;        
+                $stmt = $this->database->prepare($sql);
+                
+                $stmt->bindParam(':id', $this->obj, PDO::PARAM_INT);
+                $stmt->bindParam(':type', $this->objType, PDO::PARAM_INT);
+                
+                $q = $stmt->execute();
+                
+                if(!$q && SYSTEM_STATUS == 'development'){
+                    dbga($stmt->errorInfo());
+                    return false;
+                }
+                else { 
+                    return true;
+                }
             
         }
         

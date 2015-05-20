@@ -57,10 +57,17 @@
         protected function getSession() {
             $session = $_SESSION[APPNAME][SESSIONKEY];
             
-            $sql = 'SELECT users.idusers AS id, users.name, users.email, roles.role FROM users
+            $sql = 'SELECT users.idusers AS id, users.name, users.email, roles.role, xi.path FROM users
                         INNER JOIN roles ON roles.idroles = users.role
                         INNER JOIN sessions ON sessions.user = users.idusers
-                        
+                        LEFT JOIN (
+                        SELECT * FROM `images`
+                            INNER JOIN `xref` ON `xref`.`object` = `images`.`idimages`
+                            WHERE `xref`.`object_type` = 5
+                            AND `xref`.`reference_type` = 1
+                            GROUP BY `images`.`path`
+                    ) AS `xi` 
+                    ON `xi`.`reference` = `users`.`idusers` 
                     WHERE sessions.session = :session';
             
             $stmt = $this->database->prepare($sql);

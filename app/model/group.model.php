@@ -23,4 +23,16 @@
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_OBJ);
         }
+        
+        public function ofThisUser($id){
+            $sql = 'SELECT * FROM `' . $this->table . '` AS `g` 
+                    INNER JOIN `users_groups` AS `ug`
+                        ON `ug`.`group` = `g`.`idgroups`
+                    WHERE `ug`.`user` = :id';
+                    
+            $stmt = $this->database->prepare($sql);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+        }
     }

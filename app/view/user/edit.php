@@ -11,7 +11,7 @@
                     
                     <?php if(isset($response)) { printResponse($response); } ?>
                     
-                    <form action="/user/edit/<?php echo $data->idusers; ?>" method="post">
+                    <form action="/user/edit/<?php echo $data->idusers; ?>" method="post" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group <?php if(isset($error) && isset($error['name']) && !empty($error['name'])) { echo "has-error"; } ?>">
@@ -40,7 +40,10 @@
                             </div>    
                             <div class="col-md-6">  
                                 
-                               
+                                <div class="form-group">
+                                    <label for="profile">Profile Picture:</label>
+                                    <input type="file" class="form-control file" name="profile" data-show-upload="false" data-show-caption="true">
+                                </div>
                                 
                                 <div class="form-group <?php if(isset($error) && isset($error['group']) && !empty($error['group'])) { echo "has-error"; } ?>">
                                     <label for="group">Group(s):</label>

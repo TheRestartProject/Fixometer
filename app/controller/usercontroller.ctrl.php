@@ -155,6 +155,11 @@
                                 $Session = new Session;
                                 $Session->createSession($idUser);
                                 
+                                if(isset($_FILES) && !empty($_FILES)){
+                                    $file = new File;
+                                    $file->upload('profile', 'image', $idUser, TBL_USERS, false, true);    
+                                }
+                                
                             }
                             if($idUser){ 
                                 $response['success'] = 'User created correctly.';
@@ -203,11 +208,19 @@
                         
                         $sent_groups = $data['groups'];
                         unset($data['groups']);
+                        unset($data['profile']);
                         $u = $this->User->update($data, $id);
                         
                         $ug = new Usersgroups;
                         $ug->createUsersGroups($id, $sent_groups);
                         
+                        
+                        
+                        if(isset($_FILES) && !empty($_FILES)){
+                            $file = new File;
+                            $file->upload('profile', 'image', $id, TBL_USERS, false, true);    
+                        }
+                                
                         if(!$u) {
                             $response['danger'] = 'Something went wrong. Please check the data and try again.';
                         }
@@ -249,7 +262,35 @@
             $this->set('title',  'Nope.');
         }
 
-
+        
+        public function profile($id = null){
+            $Auth = new Auth($url);
+            if(!$Auth->isLoggedIn()){
+                header('Location: /user/login');
+            }
+            
+            else {                
+                $user = $Auth->getProfile();
+                $this->set('user', $user);
+                $this->set('header', true);
+                $profile =  $this->User->profilePage($id);
+                
+                //load profile
+                $this->set('profile', $profile);
+                $this->set('title', $profile->name);
+                // Load statistics
+                $Groups  = new Group;
+                $Parties = new Party;
+                $Devices = new Device;
+                
+                
+                $this->set('devices', $Devices->ofThisUser($id));
+                $this->set('parties', $Parties->ofThisUser($id));
+                $this->set('groups',  $Groups->ofThisUser($id));
+                
+            }
+        }
+        
         public function logout() {
             
             unset($_SESSION[APPNAME][SESSIONKEY]);

@@ -65,7 +65,20 @@
                         
                         <div class="dropdown">
                             
-                            <button style="margin-top: 10px;" class="btn btn-primary dropdown-toggle" id="user-profile-dropdown" data-toggle="dropdown" aria-expanded="true"><?php echo $user->name; ?> <i class="fa fa-caret-down"></i></button>
+                            <button class="profile-picture dropdown-toggle" id="user-profile-dropdown" data-toggle="dropdown" aria-expanded="true">
+                                <?php
+                                if(!empty($user->path)){
+                                ?>
+                                <img src="<?php echo '/uploads/thumbnail_' . $user->path; ?>" alt="<?php echo $user->name; ?>" width="40" height="40">
+                                <?php
+                                }
+                                else {
+                                ?>
+                                <?php echo $user->name; ?>
+                                <?php    
+                                }
+                                ?>
+                                 <i class="fa fa-caret-down"></i></button>
                             
                             <ul class="dropdown-menu" role="menu" aria-labelledby="user-profile-dropdown">
                               <li role="presentation"><a role="menuitem" tabindex="-1" href="/user/logout"><i class="fa fa-sign-out"></i> Logout</a></li>
