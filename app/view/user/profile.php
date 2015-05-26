@@ -28,10 +28,10 @@
                 </div>
                 
                 <div class="col-md-3">
-                    <div class="badge toaster"></div>
-                    <div class="badge computer"></div>
-                    <div class="badge screen"></div>
-                    <div class="badge over-10"></div>
+                    <div class="badge toaster">badge</div>
+                    <div class="badge computer">badge</div>
+                    <div class="badge screen">badge</div>
+                    <div class="badge over-10">badge</div>
                 </div>
             </div>
             
@@ -41,12 +41,16 @@
     <div class="row">
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
-                    maps maybe?
+                <div class="col-md-3">
+                    Parties Attended?
                 </div>
-            
+                
                 <div class="col-md-6">
-                    latest device fixed
+                    Some sort of Graph?
+                </div>
+                
+                <div class="col-md-3">
+                    latest device(s) fixed
                     
                 </div>
             </div>

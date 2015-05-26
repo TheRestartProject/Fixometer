@@ -11,6 +11,7 @@
                     
                     <div class="col-md-8">
                         <ul id="" class="nav nav-pills">
+                            <?php if(hasRole($user, 'Administrator')){ ?> 
                             <li role="presentation" class="dropdown">
                                     <a class="dropdown-toggle" id="user-management-dropdown" data-toggle="dropdown" href="#" role="button" aria-expanded="false"> 
                                         <i class="fa fa-group"></i> 
@@ -23,6 +24,8 @@
                                     </ul>
                                 
                             </li>
+                            <?php } ?>
+                            
                             <li class="">
                                 
                                 <a class="dropdown-toggle" id="party-management-dropdown" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
@@ -30,10 +33,9 @@
                                 </a>
                                 
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="party-management-dropdown">
-                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="/party"> All Parties</a></li>
-                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="/party/create">New Party</a></li>
-                                        
-                                    </ul>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="/party"> All Parties</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="/party/create">New Party</a></li>
+                                </ul>
                             </li>
                             <li class="">
                                 
@@ -54,7 +56,7 @@
                                 
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="taxonomies-dropdown">
                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="/group"> Groups</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="">Categories</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="/category"> Categories</a></li>
                                     
                                 </ul>
                             </li>
@@ -81,10 +83,12 @@
                                  <i class="fa fa-caret-down"></i></button>
                             
                             <ul class="dropdown-menu" role="menu" aria-labelledby="user-profile-dropdown">
-                              <li role="presentation"><a role="menuitem" tabindex="-1" href="/user/logout"><i class="fa fa-sign-out"></i> Logout</a></li>
-                              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+                              
+                              <li role="presentation"><a role="menuitem" tabindex="-1" href="/user/profile/<?php echo $user->id; ?>"><i class="fa fa-user"></i> My Profile</a></li>
+                              
                               <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
-                              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+                              
+                              <li role="presentation"><a role="menuitem" tabindex="-1" href="/user/logout"><i class="fa fa-sign-out"></i> Logout</a></li>
                             </ul>
                           </div>
                         
