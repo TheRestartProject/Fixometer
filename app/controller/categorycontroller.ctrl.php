@@ -1,6 +1,6 @@
 <?php
 
-    class DashboardController extends Controller {
+    class CategoryController extends Controller {
         
         public function __construct($model, $controller, $action){
             parent::__construct($model, $controller, $action);
@@ -12,26 +12,16 @@
             else {
                 
                 $user = $Auth->getProfile();
+                $this->user = $user;
                 $this->set('user', $user);
                 $this->set('header', true);
             }
         }
         
-        
-        public function index() {
-            /** js setup **/
-            $this->set('gmaps', true);
+        public function index(){
             
+            $this->set('title', 'Categories');
+            $this->set('list', $this->Category->findAll());
             
-            $this->set('title', 'Dashboard');
-            
-            $Parties    = new Party;
-            $Devices    = new Device;
-            $Groups     = new Group;
-            
-            
-            $this->set('upcomingParties', $Parties->findNextParties());
         }
-        
     }
-    

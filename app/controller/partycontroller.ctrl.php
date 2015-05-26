@@ -2,6 +2,8 @@
     
     class PartyController extends Controller {
         
+        protected $hostParties = array();
+        
         public function __construct($model, $controller, $action){
             parent::__construct($model, $controller, $action);
             
@@ -15,6 +17,10 @@
                 $this->user = $user;
                 $this->set('user', $user);
                 $this->set('header', true);
+                
+                if(hasRole($this->user, 'Host') && !hasRole($this->user, 'Root')){
+                    $this->hostParties = $this->Party->ofThisUser($this->user);
+                }
             }
         }
         
@@ -143,6 +149,62 @@
             
             
             
+        }
+    
+        public function edit($id){
+            
+            if(hasRole($this->user, 'Administrator') || (hasRole($this->user, 'Host') && in_array($id, $hostParties))){
+                
+                $Groups = new Group;
+                
+                if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST)){
+                    
+                    $data = $_POST;
+                    // remove the extra "files" field that Summernote generates -
+                    unset($data['files']);
+                    unset($data['users']);
+                    
+                    // formatting dates for the DB
+                    $data['event_date'] = dbDateNoTime($data['event_date']);
+                    
+                    
+                    $u = $this->Party->update($data, $id);
+                    
+                    if(!$u) {
+                        $response['danger'] = 'Something went wrong. Please check the data and try again.';
+                    }
+                    else {
+                        $response['success'] = 'Party updated!';
+                        
+                        if(isset($_POST['users']) && !empty($_POST['users'])){
+                            $users = $_POST['users'];
+                            $this->Party->createUserList($idParty, $users);
+                        }
+                            
+                            
+                        /** let's create the image attachment! **/
+                        if(isset($_FILES) && !empty($_FILES)){
+                            $file = new File;
+                            $file->upload('file', 'image', $idParty, TBL_EVENTS);    
+                        }
+                            
+                    }
+                    
+                    $this->set('response', $response);
+                }
+            
+                $this->set('gmaps', true);
+                $this->set('js', array( 'head' => array( '/ext/geocoder.js')));
+                
+                $Party = $this->Party->findOne($id);
+                $this->set('title', 'Edit Party');
+                $this->set('group_list', $Groups->findAll());
+                $this->set('formdata', $Party);
+            
+            }
+            else {
+                header('Location: /user/forbidden');
+            }
         }
     }
     

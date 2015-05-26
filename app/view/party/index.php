@@ -3,23 +3,7 @@
         <div class="col-md-12">
             <h1><?php echo $title; ?></h1>
             
-            <div>
-                <?php
-                /*
-                    $party = $list[0];
-                    $start = date('Y-m-d', $party->event_date) . ' ' . $party->start;
-                    $end = date('Y-m-d', $party->event_date) . ' ' . $party->end;
-                    
-                    $a = new DateTime($start);
-                    dbga($a);
-                    
-                    $diff = $a->diff(new DateTime($end));
-                    dbga($diff);
-                    */
-                ?>
-                
-            </div>
-            
+         
             <a class="btn btn-primary" href="/party/create"><i class="fa fa-plus"></i> New Party</a>
             <table class="table table-hover table-responsive sortable">
                 <thead>

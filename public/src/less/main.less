@@ -5,6 +5,7 @@
 @import 'forms.less';
 @import 'footer.less';
 @import 'profile.less';
+@import 'dashboard.less';
 
 html {
   position: relative;
@@ -73,3 +74,32 @@ h3 {
     }
 }
 .status-header { width: 95px; }
+
+.indicator {
+    width: 100%;
+    height: 100%;
+    margin: -8px 0px;
+    padding: 8px; 
+    display: block;
+    &.indicator-1 {
+      background-color: crimson;
+      color: crimson;
+    }
+    &.indicator-2 {
+      background-color: darkorange;
+      color: darkorange;
+    }
+    &.indicator-3 {
+      background-color: gold;
+      color: gold;
+    }
+    &.indicator-4 {
+      background-color: greenyellow;
+      color: greenyellow;
+    }
+    &.indicator-5 {
+      background-color: darkgreen;
+      color: darkgreen;
+    }
+    
+}

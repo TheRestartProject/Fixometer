@@ -1,5 +1,13 @@
 $(document).ready(function(){
     
+    /** Dashboard Things **/
+    
+    /** maps for parties **/
+    if ($('#dashboard').length > 0) {
+        
+    }
+    
+    
     /** startup datepickers **/
     $('.date').datetimepicker({
                 icons: {
@@ -8,7 +16,8 @@ $(document).ready(function(){
                     up: "fa fa-arrow-up",
                     down: "fa fa-arrow-down"
                 },
-                format: 'MM/DD/YYYY'
+                format: 'DD/MM/YYYY',
+                defaultDate: $(this).val()
             });
     $('.time').datetimepicker({
             icons: {
@@ -17,9 +26,11 @@ $(document).ready(function(){
                 up: "fa fa-arrow-up",
                 down: "fa fa-arrow-down"
             },
-            format: 'HH:mm'
+            format: 'HH:mm',
+            defaultDate: $(this).val()
+        
         });    
-
+    
     /** Rich Text Editors **/
     $('.rte').summernote({
         height:     300,

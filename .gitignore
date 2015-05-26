@@ -4,4 +4,5 @@
 /assets
 /public/uploads
 .env
+/craft
 readme.md

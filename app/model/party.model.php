@@ -77,6 +77,26 @@
                 return $stmt->fetchAll(PDO::FETCH_OBJ);
             }
         }
+        
+        public function findNextParties() {
+            $sql = 'SELECT
+                        `e`.`idevents`,
+                        `e`.`location`,
+                        UNIX_TIMESTAMP(`e`.`event_date`) AS `event_date`,
+                        `e`.`start`,
+                        `e`.`end`,
+                        `e`.`latitude`,
+                        `e`.`longitude` 
+                    FROM `' . $this->table . '` AS `e` 
+                    WHERE `e`.`event_date` >= NOW()
+                    ORDER BY `e`.`event_date` ASC
+                    LIMIT 10';
+            $stmt = $this->database->prepare($sql);
+            $stmt->execute();
+            
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+        }
+        
     }
     
     
