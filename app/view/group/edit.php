@@ -39,7 +39,7 @@
                             <label for="location">Location:</label>
                             
                             <div class="input-group">
-                                <input type="text" name="location" id="location" class="form-control" <?php if(isset($error) && !empty($error) && !empty($udata)) echo 'value="'.$udata['location'].'"' ; ?>>
+                                <input type="text" name="location" id="location" class="form-control"  value="<?php echo $formdata->location; ?>">
                                 <span class="input-group-btn">
                                     <button type="button" class="btn btn-primary" onclick="codeAddress()"><i class="fa fa-map-marker"></i> geocode</button>
                                 </span>

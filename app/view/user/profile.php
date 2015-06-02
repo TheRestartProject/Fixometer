@@ -28,10 +28,10 @@
                 </div>
                 
                 <div class="col-md-3">
-                    <div class="badge toaster">badge</div>
-                    <div class="badge computer">badge</div>
-                    <div class="badge screen">badge</div>
-                    <div class="badge over-10">badge</div>
+                    <div class="badge toaster"><img src="/assets/icons/toaster.png" alt="Toaster Master"></div>
+                    <div class="badge computer"><img src="/assets/icons/lightbulb.png" alt="Ideas! Ideas Everywhere!"></div>
+                    <div class="badge screen"><img src="/assets/icons/photo.png" alt="Camera Wondera"></div>
+                    <div class="badge over-10"><img src="/assets/icons/flag.png" alt="10+ Restart Parties Attended"></div>
                 </div>
             </div>
             

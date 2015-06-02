@@ -38,8 +38,12 @@
             
             $stmt = $this->database->prepare($sql);
             foreach($params as $field => &$value){
-                $stmt->bindParam(':'.$field, $value);
+                $b = $stmt->bindParam(':'.$field, $value);
+                if(!$b && SYSTEM_STATUS == 'development'){
+                    dbga($stmt->errorInfo());
+                }
             }
+            
             $q = $stmt->execute();
             
             if(!$q){
@@ -50,6 +54,7 @@
                 return $stmt->fetchAll(PDO::FETCH_OBJ);
             }
         }
+        
         public function findOne($id){
             
             $sql = 'SELECT * FROM `' . $this->table . '` WHERE `id' . $this->table . '` = :id';

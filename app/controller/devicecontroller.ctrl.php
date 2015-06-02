@@ -22,7 +22,14 @@
             
             $this->set('title', 'Devices');
             
-            $this->set('list', $this->Device->getList()); 
+            $this->set('list', $this->Device->getList());
+            
+            
+            $weights = $this->Device->getWeights();
+            $stats['weights'] = $weights[0]->total_weights;
+            $stats['footprints'] = $weights[0]->total_footprints;
+            
+            $this->set('stats', $stats);
             
         }
         
