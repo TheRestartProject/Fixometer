@@ -71,6 +71,12 @@
                                     <?php if(isset($error) && isset($error['pax']) && !empty($error['pax'])) { echo '<span class="help-block text-danger">' . $error['pax'] . '</span>'; } ?>
                                 </div>
                                 
+                                <div class="form-group <?php if(isset($error) && isset($error['volunteers']) && !empty($error['volunteers'])) { echo "has-error"; } ?>">
+                                    <label for="volunteers">Volunteers (#):</label>
+                                    <input type="text" name="volunteers" id="volunteers" class="form-control" value="<?php echo $formdata->volunteers; ?>">
+                                    <?php if(isset($error) && isset($error['volunteers']) && !empty($error['volunteers'])) { echo '<span class="help-block text-danger">' . $error['volunteers'] . '</span>'; } ?>
+                                </div>
+                                
                                 <div class="form-group <?php if(isset($error) && isset($error['group']) && !empty($error['group'])) { echo "has-error"; } ?>">
                                     <label for="group">Group:</label>
                                     <select id="group" name="group"  class="form-control selectpicker users_group">

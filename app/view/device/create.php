@@ -46,8 +46,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Repair Status:</label>
-                                            <div class="radio">
-                                                
+                                            <div class="radio">                                                
                                                 <label>
                                                     <input type="radio" name="repair_status" id="repair_status_1" value="1" checked> Fixed
                                                 </label>
