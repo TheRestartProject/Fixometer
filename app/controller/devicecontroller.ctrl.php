@@ -30,6 +30,7 @@
             $stats['footprints'] = $weights[0]->total_footprints;
             
             $this->set('stats', $stats);
+            $this->set('counts', $this->Device->getCounts());
             
         }
         

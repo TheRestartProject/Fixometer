@@ -5,6 +5,8 @@
         protected $table = 'devices';
         protected $dates = true;
         
+        protected $displacement = 0.5;
+        
         public function getList(){
             
             $sql = 'SELECT * FROM `view_devices_list`
@@ -19,11 +21,10 @@
             
             $sql = 'SELECT
                         ROUND(SUM(`weight`), 3) AS `total_weights`,
-                        ROUND(SUM(`footprint`), 3) AS `total_footprints`
+                        (ROUND(SUM(`footprint`), 3) * ' . $this->displacement . ') AS `total_footprints`
                     FROM `'.$this->table.'` AS `d` 
                     INNER JOIN `categories` AS `c` ON  `d`.`category` = `c`.`idcategories`
-                    WHERE `d`.`repair_status` = 1
-                    ';
+                    WHERE `d`.`repair_status` = 1';
                     
             $stmt = $this->database->prepare($sql);
             $stmt->execute();
@@ -33,9 +34,11 @@
         public function getCounts(){
             $sql = 'SELECT
                         COUNT(`category`) AS `catcount`,
+                        ROUND(SUM(`weight`), 2) AS `catcount_weight`,
                         `name`
                     FROM `' . $this->table . '` AS `d` 
                     INNER JOIN `categories` AS `c` ON `c`.`idcategories` = `d`.`category`
+                    WHERE `d`.`repair_status` = 1
                     GROUP BY `category`
                     ORDER BY `catcount` DESC';
                     
