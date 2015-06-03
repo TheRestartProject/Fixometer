@@ -28,7 +28,7 @@
                     <?php foreach($list as $device){ ?>
                     <tr>
                         <td><?php echo $device->id; ?></td>
-                        <td><a href="/device/edit/<?php echo $g->id; ?>" title="edit group"><?php echo $device->category_name; ?></a></td>
+                        <td><a href="/device/edit/<?php echo $device->id; ?>" title="edit device"><?php echo $device->category_name; ?></a></td>
                         <td><?php echo $device->group_name; ?></td>
                         <td data-dateformat="DD/MM/YYYY"><?php echo date('d/m/Y', $device->event_date); ?></td>
                         <td><?php echo $device->event_location; ?></td>

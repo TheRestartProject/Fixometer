@@ -21,12 +21,30 @@
                         ROUND(SUM(`weight`), 3) AS `total_weights`,
                         ROUND(SUM(`footprint`), 3) AS `total_footprints`
                     FROM `'.$this->table.'` AS `d` 
-                    INNER JOIN `categories` AS `c` ON  `d`.`category` = `c`.`idcategories` ';
+                    INNER JOIN `categories` AS `c` ON  `d`.`category` = `c`.`idcategories`
+                    WHERE `d`.`repair_status` = 1
+                    ';
                     
             $stmt = $this->database->prepare($sql);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_OBJ);
         }
+        
+        public function getCounts(){
+            $sql = 'SELECT
+                        COUNT(`category`) AS `catcount`,
+                        `name`
+                    FROM `' . $this->table . '` AS `d` 
+                    INNER JOIN `categories` AS `c` ON `c`.`idcategories` = `d`.`category`
+                    GROUP BY `category`
+                    ORDER BY `catcount` DESC';
+                    
+            $stmt = $this->database->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+            
+        }
+        
         
         public function ofThisUser($id){
             $sql = 'SELECT * FROM `' . $this->table . '` WHERE `repaired_by` = :id';

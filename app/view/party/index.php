@@ -35,7 +35,7 @@
                             <?php } ?>    
                         </td>
                         <td><?php echo $p->location; ?></td>
-                        <td><?php echo date('m/d/Y', $p->event_date); ?></td>
+                        <td data-dateformat="DD/MM/YYYY"><?php echo date('d/m/Y', $p->event_date); ?></td>
                         <td><?php echo $p->start; ?></td>
                         <td><?php echo $p->end; ?></td>
                         <td><?php echo $p->hours; ?></td>

@@ -33,6 +33,11 @@
             
         }
         
+        public function edit($id){
+            $this->set('title', 'Edit Device');
+            
+        }
+        
         public function create(){
             if(hasRole($user, 'Guest')){
                 header('Location: /user/forbidden'); 
