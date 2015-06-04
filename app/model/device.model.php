@@ -7,8 +7,7 @@
         
         protected $displacement = 0.5;
         
-        public function getList(){
-            
+        public function getList(){            
             $sql = 'SELECT * FROM `view_devices_list`
                     ORDER BY `sorter` DESC';
             $stmt = $this->database->prepare($sql);
@@ -17,11 +16,10 @@
             
         }
         
-        public function getWeights(){
-            
+        public function getWeights(){            
             $sql = 'SELECT
-                        ROUND(SUM(`weight`), 3) AS `total_weights`,
-                        (ROUND(SUM(`footprint`), 3) * ' . $this->displacement . ') AS `total_footprints`
+                        ROUND(SUM(`weight`), 3) + 393 AS `total_weights`,
+                        (ROUND((SUM(`footprint`) + 16000.15), 3) * ' . $this->displacement . ')  AS `total_footprints`
                     FROM `'.$this->table.'` AS `d` 
                     INNER JOIN `categories` AS `c` ON  `d`.`category` = `c`.`idcategories`
                     WHERE `d`.`repair_status` = 1';
@@ -44,8 +42,7 @@
                     
             $stmt = $this->database->prepare($sql);
             $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_OBJ);
-            
+            return $stmt->fetchAll(PDO::FETCH_OBJ);            
         }
         
         

@@ -126,7 +126,10 @@
             
         }
         public function update($data, $id){
-            
+            if(!filter_var($id, FILTER_VALIDATE_INT)){
+                new Error(666, 'Invalid Update Parameter. (model.class.php, 130)');
+                return false;
+            }
             $fields = array_keys($data);
             $holders = array();
             foreach($fields as $i => $field){
@@ -136,7 +139,7 @@
             $sql = 'UPDATE `' . $this->table . '` SET ' . implode(', ', $fields) . ' WHERE `id' . $this->table . '` = :id'; 
             $stmt = $this->database->prepare($sql);
             if(!$stmt && SYSTEM_STATUS == 'development'){
-                dsql($sql . ' (model.class.php, 134)');
+                dsql($sql . ' (model.class.php, 142)');
                 dbga($this->database->errorInfo());   
             }
             

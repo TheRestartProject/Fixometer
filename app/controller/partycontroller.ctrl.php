@@ -50,6 +50,15 @@
                 if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST)) {
                     $error = array();
                     
+                    // Add SuperHero Restarter!
+                    $_POST['users'][] = 29;
+                    if(empty($_POST['volunteers'])) {
+                        $volunteers = count($_POST['users']);
+                    }
+                    else {
+                        $volunteers = $_POST['volunteers'];                        
+                    }
+                    
                     // We got data! Elaborate.
                     $event_date =       $_POST['event_date'];
                     $start      =       $_POST['start'];
@@ -108,13 +117,15 @@
                                         'latitude'      => $latitude,
                                         'longitude'     => $longitude,
                                         'group'         => $group,
-                                        'hours'         => $hours
+                                        'hours'         => $hours,
+                                        'volunteers'    => $volunteers
                                         );
                         $idParty = $this->Party->create($data);
                         
                         if($idParty){
                             $response['success'] = 'Party created correctly.';
                             /** check and create User List **/
+                            $_POST['users'][] = 29;
                             if(isset($_POST['users']) && !empty($_POST['users'])){
                                 $users = $_POST['users'];
                                 $this->Party->createUserList($idParty, $users);
@@ -162,7 +173,14 @@
                     $data = $_POST;
                     // remove the extra "files" field that Summernote generates -
                     unset($data['files']);
+                    unset($data['file']);
                     unset($data['users']);
+                    
+                    // Add SuperHero Restarter!
+                    $_POST['users'][] = 29;
+                    if(empty($data['volunteers'])) {
+                        $data['volunteers'] = count($_POST['users']);
+                    }
                     
                     // formatting dates for the DB
                     $data['event_date'] = dbDateNoTime($data['event_date']);
@@ -176,16 +194,17 @@
                     else {
                         $response['success'] = 'Party updated!';
                         
+                        
                         if(isset($_POST['users']) && !empty($_POST['users'])){
                             $users = $_POST['users'];
-                            $this->Party->createUserList($idParty, $users);
+                            $this->Party->createUserList($id, $users);
                         }
                             
                             
                         /** let's create the image attachment! **/
                         if(isset($_FILES) && !empty($_FILES)){
                             $file = new File;
-                            $file->upload('file', 'image', $idParty, TBL_EVENTS);    
+                            $file->upload('file', 'image', $id, TBL_EVENTS);    
                         }
                             
                     }

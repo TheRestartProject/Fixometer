@@ -36,8 +36,58 @@
         
         public function edit($id){
             $this->set('title', 'Edit Device');
+            if(hasRole($this->user, 'Administrator') || hasRole($this->user, 'Host') ){
+                
+                
+                if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST) && filter_var($id, FILTER_VALIDATE_INT)){
+                    
+                    $data = $_POST;
+                    // remove the extra "files" field that Summernote generates -
+                    unset($data['files']);
+                    unset($data['users']);
+                    
+                    // formatting dates for the DB
+                    //$data['event_date'] = dbDateNoTime($data['event_date']);
+                    
+                    
+                    $u = $this->Device->update($data, $id);
+                    
+                    if(!$u) {
+                        $response['danger'] = 'Something went wrong. Please check the data and try again.';
+                    }
+                    else {
+                        $response['success'] = 'Device updated!';
+                        
+                            
+                        /** let's create the image attachment! **/
+                        if(isset($_FILES) && !empty($_FILES)){
+                            $file = new File;
+                            $file->upload('file', 'image', $id, TBL_EVENTS);    
+                        }
+                            
+                    }
+                    
+                    $this->set('response', $response);
+                }
+                $Events = New Party;
+                $Categories = New Category;
+                
+                $UserEvents = $Events->findAll();    
+                
+                
+                $this->set('categories', $Categories->findAll());
+                $this->set('events', $UserEvents);
+                
+                $Device = $this->Device->findOne($id);
+                $this->set('title', 'Edit Device');
+                $this->set('formdata', $Device);
             
+            }
+            else {
+                header('Location: /user/forbidden');
+            }
         }
+        
         
         public function create(){
             if(hasRole($user, 'Guest')){
