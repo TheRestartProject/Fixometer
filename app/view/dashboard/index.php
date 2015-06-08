@@ -26,7 +26,63 @@
             </div>
         </div>
         
-        <div class="col-md-7"><div class="db-object">A Block Here</div></div>
+        <div class="col-md-7">
+            <div class="dbObject">
+                <canvas id="devicesYears"></canvas>
+                <?php dbga($devicesByYear); ?>
+                <script>
+                    var legends = {};
+                    
+                    var data = {
+                        labels: [ <?php echo implode(',', array_keys($devicesByYear[1])); ?>],
+                        datasets: [
+                            {
+                                label: "Fixed!",
+                                fillColor: "rgba(154,205, 50,0.2)",
+                                strokeColor: "rgba(154,205, 50,1)",
+                                pointColor: "rgba(154,205, 50,1)",
+                                pointStrokeColor: "#fff",
+                                pointHighlightFill: "#fff",
+                                pointHighlightStroke: "rgba(154,205, 50,1)",
+                                data: [<?php echo implode(', ', $devicesByYear[1]); ?> ]
+                            },
+                            {
+                                label: "Repairable",
+                                fillColor: "rgba(175,238,238,0.2)",
+                                strokeColor: "rgba(175,238,238,1)",
+                                pointColor: "rgba(175,238,238,1)",
+                                pointStrokeColor: "#fff",
+                                pointHighlightFill: "#fff",
+                                pointHighlightStroke: "rgba(175,238,238,1)",
+                                data: [<?php echo implode(', ', $devicesByYear[2]); ?> ]
+                            },
+                            {
+                                label: "End Of Life",
+                                fillColor: "rgba(0,0,0,0.2)",
+                                strokeColor: "rgba(0,0,0,1)",
+                                pointColor: "rgba(0,0,0,1)",
+                                pointStrokeColor: "#fff",
+                                pointHighlightFill: "#fff",
+                                pointHighlightStroke: "rgba(0,0,0,1)",
+                                data: [<?php echo implode(', ', $devicesByYear[3]); ?> ]
+                            },
+                        ]
+                    };
+                    
+                    var ctx = document.getElementById("devicesYears").getContext("2d");
+                    var myLineChart = new Chart(ctx).Line(data, {
+                        tooltipTemplate: "<%if (label){%><%=label%>: <%}%><%= value %>",
+                        datasetStrokeWidth : 0.5,
+                        legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
+                    });
+                    //then you just need to generate the legend
+                    legends.devicesYears = myLineChart.generateLegend();
+                    
+                   
+
+                </script>
+            </div>
+        </div>
         <div class="col-md-7"><div class="db-object">A Block Here</div></div>
     </div>
     

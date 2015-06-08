@@ -163,7 +163,34 @@
             return $response;
         }
         
-        public function delete(){}
+        public function delete($id){
+            if(!is_numeric($id)){
+                new Error(620, 'Invalid parameter. (model.class.php, 168)');
+                return false;
+                
+            }
+            else {
+                $sql = 'DELETE FROM `' . $this->table . '` WHERE `id' . $this->table . '` = :id';
+                $stmt = $this->database->prepare($sql);
+                if(!$stmt && SYSTEM_STATUS == 'development'){
+                    dbga($this->database->errorInfo());   
+                }
+                else {
+                    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+                    
+                    $q = $stmt->execute();
+                    if(!$q && SYSTEM_STATUS == 'development'){
+                        $err = $stmt->errorInfo();
+                        
+                        new Error(601, 'Could not execute query. ' . $err[2] . ' (model.class.php, 183)');
+                        return false;
+                    }
+                    else {
+                        return true;
+                    }
+                }
+            }
+        }
         
     }
     

@@ -9,6 +9,7 @@
     
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400|Patua+One">
+        <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
         <link rel="stylesheet" href="/dist/css/main.css">
         <link rel="stylesheet" href="/components/fontawesome/css/font-awesome.min.css">
         <link rel="stylesheet" href="/components/bootstrap-select/dist/css/bootstrap-select.min.css">
@@ -39,6 +40,18 @@
         }
         ?>
         
+        
+        <?php
+    if($charts) {
+    ?>
+    <script src="/components/Chart.js/Chart.min.js"></script>
+    <script>
+        // MAIN CHART CONFIG
+        Chart.defaults.global.responsive = true;
+    </script>
+    <?php
+    }
+    ?>
     </head>
     <body>
     

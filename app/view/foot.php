@@ -9,6 +9,15 @@
     <script src="/components/summernote/dist/summernote.min.js"></script>
     <script src="/components/bootstrap-fileinput/js/fileinput.min.js"></script>
     
+    
     <script src="/dist/js/script.min.js"></script>
+    <?php if($charts){ ?> 
+    <script>
+        // generate legends for the charts
+        if (legends) {
+            $('#devicesYears').after(legends.devicesYears);
+        }
+    </script>
+    <?php } ?>
     </body>
 </html>

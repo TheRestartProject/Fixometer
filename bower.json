@@ -27,6 +27,7 @@
   "devDependencies": {
     "eonasdan-bootstrap-datetimepicker": "~4.7.14",
     "summernote": "~0.6.6",
-    "bootstrap-fileinput": "~4.2.0"
+    "bootstrap-fileinput": "~4.2.0",
+    "Chart.js": "~1.0.2"
   }
 }

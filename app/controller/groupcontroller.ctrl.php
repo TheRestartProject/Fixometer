@@ -18,12 +18,14 @@
             }
         }
         
-        public function index(){
+        public function index($response = null){
             
             $this->set('title', 'Groups');
             $this->set('list', $this->Group->findAll());
             
-            
+            if(!is_null($response)){
+                $this->set('response', $response);
+            }
             
         }
         
@@ -142,6 +144,22 @@
             $Group = $this->Group->findOne($id);
             $this->set('title', 'Edit Group ' . $Group->name );
             $this->set('formdata', $Group);
+        }
+        
+        public function delete($id){
+            if(hasRole($this->user, 'Administrator')){
+                $r = $this->Group->delete($id);
+                if(!$r){
+                    $response = 'd:err';
+                }
+                else {
+                    $response = 'd:ok';
+                }
+                header('Location: /group/index/' . $response);
+            }
+            else {
+                header('Location: /user/forbidden');
+            }
         }
     }
     

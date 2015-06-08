@@ -68,4 +68,36 @@ $(document).ready(function(){
             $('#repairable-details').hide('fast');
         }
     });
+    
+    /** Delete object control **/
+    $('.delete-control').click(function(e){
+        e.preventDefault();
+        
+        var deleteTarget = $(this).attr('href');
+        var deleteControlBox =  '<div class="ctrl-box-wrap">' + 
+                                    '<div class="ctrl-box">' +
+                                        '<div class="ctrl-box-hdr">' +
+                                            '<h3>Are You Sure?<h3>' +
+                                        '</div>' +
+                                        '<div class="ctrl-box-body">' +
+                                        '<p>Please note that this operation is <strong>irreversible</strong>.</p>' +
+                                        '</div>' +
+                                        '<div class="ctrl-box-foot">' +
+                                            '<a href="' + deleteTarget + '" class="btn btn-primary"><i class="fa fa-trash"></i> Delete</a>' +
+                                            '<a href="#" class="btn btn-default ctrl-box-close">Cancel</a>' + 
+                                        '</div>' + 
+                                    '</div>' + 
+                                '</div>';
+        
+        
+        if ($('.ctrl-box-wrap').length > 0) {
+            $('.ctrl-box-wrap').remove();
+        }
+        
+        $('body').append(deleteControlBox);
+        $('.ctrl-box-close').click(function(){ $('.ctrl-box-wrap').remove(); });
+        
+        
+        return false;
+    });
 });

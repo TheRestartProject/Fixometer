@@ -45,6 +45,22 @@
             return $stmt->fetchAll(PDO::FETCH_OBJ);            
         }
         
+        public function getByYears($repair_status){
+            $sql = 'SELECT
+                        COUNT(`iddevices`) AS `total_devices`,
+                        YEAR(`event_date`) AS `event_year`
+                    FROM `' . $this->table . '` AS `d` 
+                    INNER JOIN `events` AS `e` ON `e`.`idevents` = `d`.`event`
+                    WHERE `d`.`repair_status` = :rp
+                    GROUP BY `event_year`
+                    ORDER BY `event_year` ASC';
+            $stmt = $this->database->prepare($sql);
+            $stmt->bindParam(':rp', $repair_status, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_OBJ);       
+            
+        }
+        
         
         public function ofThisUser($id){
             $sql = 'SELECT * FROM `' . $this->table . '` WHERE `repaired_by` = :id';

@@ -2,6 +2,7 @@
     <div class="row">
         <div class="col-md-12">
             <h1><?php echo $title; ?></h1>
+            <?php if($response) { printResponse(parseResponse($response)); } ?>
             <a class="btn btn-primary" href="/group/create"><i class="fa fa-plus"></i> New Group</a>
             <table class="table table-hover table-responsive sortable">
                 <thead>
@@ -11,6 +12,10 @@
                         <th>Location</th>
                         <th>Frequency</th>
                         <th>Restarters</th>
+                        <?php if(hasRole($user, 'Administrator')){ ?>  
+                        <th><i class="fa fa-pencil"></i></th>
+                        <th><i class="fa fa-trash"></i></th>
+                        <?php } ?>
                     </tr>
                 </thead>
                 
@@ -22,6 +27,10 @@
                         <td><?php echo $g->location . ', ' . $g->area; ?></td>
                         <td><?php echo $g->frequency; ?> Parties/Year</td>
                         <td><?php echo $g->user_list; ?></td>
+                        <?php if(hasRole($user, 'Administrator')){ ?>                        
+                        <td><a href="/group/edit/<?php echo $g->id; ?>"><i class="fa fa-pencil"></i></a></td>
+                        <td><a href="/group/delete/<?php echo $g->id; ?>" class="delete-control"><i class="fa fa-trash"></i></a></td>
+                        <?php } ?>
                     </tr>
                     <?php } ?>
                 </tbody>

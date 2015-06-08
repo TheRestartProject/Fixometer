@@ -50,6 +50,28 @@
         }
     }
     
+    /** Parse responses from deletion
+     * and passes off the info to printResponse
+     * */
+    function parseResponse($response){
+        $res = array();
+        $r = explode(':', $response);
+       
+        switch($r[0]){
+            case 'd':
+                if($r[1] == 'err') {
+                    $res['danger'] = 'Could not delete the desired element.';
+                }
+                elseif($r[1] == 'ok') {
+                    $res['success'] = 'Element permanently deleted.';
+                }
+                break;
+            default:
+                break;
+        }
+        return $res;
+    }
+    
     /**
      * verify that an array index exists and is not empty or null.
      * can also do some type control.

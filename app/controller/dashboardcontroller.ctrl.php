@@ -22,8 +22,8 @@
             /** js setup **/
             $this->set('gmaps', true);
             
-            
             $this->set('title', 'Dashboard');
+            $this->set('charts', true);
             
             $Parties    = new Party;
             $Devices    = new Device;
@@ -31,6 +31,20 @@
             
             
             $this->set('upcomingParties', $Parties->findNextParties());
+            
+            $devicesByYear = array();
+            for( $i = 1; $i < 4; $i++ ){
+                
+                $devices = $Devices->getByYears($i);
+                $deviceList = array();
+                foreach( $devices as $listed ) {
+                    $deviceList[$listed->event_year] = $listed->total_devices;
+                }
+                $devicesByYear[$i] = $deviceList;
+                
+            }
+
+            $this->set('devicesByYear', $devicesByYear);
         }
         
     }
