@@ -73,14 +73,14 @@ $(document).ready(function(){
     $('.delete-control').click(function(e){
         e.preventDefault();
         
-        var deleteTarget = $(this).attr('href');
+        var deleteTarget     =  $(this).attr('href');
         var deleteControlBox =  '<div class="ctrl-box-wrap">' + 
                                     '<div class="ctrl-box">' +
                                         '<div class="ctrl-box-hdr">' +
                                             '<h3>Are You Sure?<h3>' +
                                         '</div>' +
                                         '<div class="ctrl-box-body">' +
-                                        '<p>Please note that this operation is <strong>irreversible</strong>.</p>' +
+                                            '<p>Please note that this operation is <strong>irreversible</strong>.</p>' +
                                         '</div>' +
                                         '<div class="ctrl-box-foot">' +
                                             '<a href="' + deleteTarget + '" class="btn btn-primary"><i class="fa fa-trash"></i> Delete</a>' +
@@ -88,16 +88,12 @@ $(document).ready(function(){
                                         '</div>' + 
                                     '</div>' + 
                                 '</div>';
-        
-        
-        if ($('.ctrl-box-wrap').length > 0) {
-            $('.ctrl-box-wrap').remove();
-        }
+                
+        if ($('.ctrl-box-wrap').length > 0) { $('.ctrl-box-wrap').remove(); }
         
         $('body').append(deleteControlBox);
         $('.ctrl-box-close').click(function(){ $('.ctrl-box-wrap').remove(); });
-        
-        
+                
         return false;
-    });
+    });    
 });

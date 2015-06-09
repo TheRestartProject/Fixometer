@@ -25,7 +25,7 @@
         /** Display Template **/
         function render() {
             extract($this->variables);
-            if(!in_array($this->_action, $this->exclude)){
+            if(!in_array($this->_action, $this->exclude) && $this->_controller !== 'rss'){
                 /* Include Base Head @ view/head.php */
                 include (ROOT . DS . 'app' . DS . 'view' . DS . 'head.php');
                 if (file_exists(ROOT . DS . 'app' . DS . 'view' . DS . $this->_controller . DS . 'header.php')) {
@@ -43,6 +43,10 @@
                 }
                 /* Include Base Foot @ view/foot.php */
                 include (ROOT . DS . 'app' . DS . 'view' . DS . 'foot.php');
+            }
+            elseif($this->_controller == 'rss'){
+                /** Manage RSS Feeds (used for public site widgets/WordPress Implementations) **/
+                include (ROOT . DS . 'app' . DS . 'view' . DS . 'feeds' . DS . $this->_action . '.php');		 
             }
             else {
                 /** requested file should not include header and footer, might be different mime or AJAX content **/
