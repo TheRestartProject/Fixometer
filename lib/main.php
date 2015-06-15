@@ -51,7 +51,7 @@
         
         // manage defaults and routing 
         if(empty($controller)){
-            $controller='dashboard';
+            $controller='home';
             $action='index';
         }
         

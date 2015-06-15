@@ -10,6 +10,11 @@
             
         }
         
+        public function groups() {
+            $Groups = new Group;
+            $this->set('groups', $Groups->findAll());
+            
+        }
         
     }
     

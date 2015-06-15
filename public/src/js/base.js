@@ -95,5 +95,7 @@ $(document).ready(function(){
         $('.ctrl-box-close').click(function(){ $('.ctrl-box-wrap').remove(); });
                 
         return false;
-    });    
+    });
+    
+    
 });

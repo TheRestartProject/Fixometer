@@ -10,6 +10,8 @@
                         `g`.`idgroups` AS `id`,
                         `g`.`name` AS `name`,
                         `g`.`location` AS `location`,
+                        `g`.`latitude` AS `latitude`,
+                        `g`.`longitude` AS `longitude`, 
                         `g`.`area` AS `area`,
                         `g`.`frequency` AS `frequency`, 
                         GROUP_CONCAT(`u`.`name` ORDER BY `u`.`name` ASC SEPARATOR ", "  )  AS `user_list`

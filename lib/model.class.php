@@ -31,19 +31,23 @@
         public function find($params){
             $sql = 'SELECT * FROM ' . $this->table . ' WHERE ';
             $clauses = array();
-            foreach($params as $field => $value) {
-                $clauses[] = $field . ' = :' . $field;
+            if(!empty($params)){ 
+                foreach($params as $field => $value) {
+                    $clauses[] = $field . ' = :' . $field;
+                }
+                $sql .= implode(' AND ', $clauses);
             }
-            $sql .= implode(' AND ', $clauses);
             
             $stmt = $this->database->prepare($sql);
-            foreach($params as $field => &$value){
-                $b = $stmt->bindParam(':'.$field, $value);
-                if(!$b && SYSTEM_STATUS == 'development'){
-                    dbga($stmt->errorInfo());
+            
+            if(!empty($params)){ 
+                foreach($params as $field => &$value){
+                    $b = $stmt->bindParam(':'.$field, $value);
+                    if(!$b && SYSTEM_STATUS == 'development'){
+                        dbga($stmt->errorInfo());
+                    }
                 }
             }
-            
             $q = $stmt->execute();
             
             if(!$q){
@@ -190,6 +194,17 @@
                     }
                 }
             }
+        }
+        
+        public function howMany($params = null){
+            if(empty($params)){
+                return count(self::findAll());
+            }
+            else {
+                return count(self::find($params));
+        
+            }
+
         }
         
     }

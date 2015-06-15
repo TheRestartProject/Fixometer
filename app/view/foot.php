@@ -1,6 +1,5 @@
     
     
-    <script src="/components/jquery/dist/jquery.min.js"></script>
     <script src="/components/moment/min/moment.min.js"></script>
     <script src="/components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="/components/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
@@ -14,9 +13,11 @@
     <?php if($charts){ ?> 
     <script>
         // generate legends for the charts
+        /*
         if (legends) {
             $('#devicesYears').after(legends.devicesYears);
         }
+        */
     </script>
     <?php } ?>
     </body>

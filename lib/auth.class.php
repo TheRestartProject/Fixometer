@@ -11,6 +11,7 @@
         protected $authorized = false;
         protected $openroutes = array(
                                 'user/login',
+                                'home',
                                 
                                 );
         

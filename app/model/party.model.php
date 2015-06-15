@@ -2,7 +2,7 @@
 
     class Party extends Model {
         
-        protected $table = 'events';     
+        protected $table = 'events';
         protected $dates = true;
         
         public function findAll() {
@@ -96,6 +96,25 @@
             
             return $stmt->fetchAll(PDO::FETCH_OBJ);
         }
+    
+        public function findLatest() {
+            $sql = 'SELECT
+                        `e`.`idevents`,
+                        `e`.`location`,
+                        UNIX_TIMESTAMP(`e`.`event_date`) AS `event_date`,
+                        `e`.`start`,
+                        `e`.`end`,
+                        `e`.`latitude`,
+                        `e`.`longitude` 
+                    FROM `' . $this->table . '` AS `e` 
+                    ORDER BY `e`.`event_date` DESC 
+                    LIMIT 10';
+            $stmt = $this->database->prepare($sql);
+            $stmt->execute();
+            
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+        }
+    
         
     }
     
