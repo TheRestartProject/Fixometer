@@ -90,19 +90,27 @@
                     </div>
                     
                     <div class="no-data">
+                        
                         <span class="btn btn-primary btn-lg pull-left add-info-btn">
                             <i class="fa fa-cloud-upload"></i> Add Information
                         </span>
                         
                         
-                        <div class="stat greyed"><i class="fa fa-check"></i></div>
-                        <div class="stat greyed">?</div>
+                        <div class="stat greyed">
+                            <div class="col"><i class="fa fa-check"></i></div>
+                            <div class="col">?</div>
+                        </div>
                         
-                        <div class="stat greyed"><i class="fa fa-wrench"></i></div>
-                        <div class="stat greyed">?</div>
+                        <div class="stat greyed">
+                            <div class="col"><i class="fa fa-wrench"></i></div>
+                            <div class="col">?</div>
+                        </div>
                         
-                        <div class="stat greyed"><i class="fa fa-times"></i></div>
-                        <div class="stat greyed">?</div>
+                        <div class="stat greyed">
+                            <div class="col"><i class="fa fa-times"></i></div>
+                            <div class="col">?</div>
+                        </div>
+                        
                         
                     </div>
                 </div>
