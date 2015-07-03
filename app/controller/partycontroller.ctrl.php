@@ -18,8 +18,9 @@
                 $this->set('user', $user);
                 $this->set('header', true);
                 
+                
                 if(hasRole($this->user, 'Host') && !hasRole($this->user, 'Root')){
-                    $this->hostParties = $this->Party->ofThisUser($this->user);
+                    $this->hostParties = $this->Party->ofThisUser($this->user->idusers);
                 }
             }
         }
@@ -31,7 +32,7 @@
         
         public function create(){
             
-            if( !hasRole($this->user, 'Host') || !hasRole($this->user, 'Administrator')){
+            if( !hasRole($this->user, 'Host') && !hasRole($this->user, 'Administrator')){
                 header('Location: /user/forbidden');
             }
             else {
@@ -46,7 +47,7 @@
                             )));
                 
                 $this->set('group_list', $Groups->findAll());
-                
+                    
                 if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST)) {
                     $error = array();
                     
@@ -71,7 +72,7 @@
                     $group      =       $_POST['group'];
                     
                     // formatting dates for the DB
-                    $event_date = date('Y-m-d', strtotime($event_date));
+                    $event_date = date('Y-m-d', strtotime(engDate($event_date)));
                     
                     /*
                     $start = dbDate($start);

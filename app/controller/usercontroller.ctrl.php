@@ -42,7 +42,13 @@
                         }
                         
                         if($pass == true){
-                            header('Location: /dashboard');
+                            if(hasRole($user, 'Host')){
+                                header('Location: /host');
+                            }
+                            else {
+                                header('Location: /dashboard');    
+                            }
+                            
                         }
                     }
                     else {

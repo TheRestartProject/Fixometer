@@ -22,7 +22,10 @@
                     ORDER BY `g`.`idgroups` ASC';
             $stmt = $this->database->prepare($sql);
             
-            $stmt->execute();
+            $q = $stmt->execute();
+            if(!$q){
+                dbga($stmt->errorInfo());
+            }
             return $stmt->fetchAll(PDO::FETCH_OBJ);
         }
         
@@ -30,11 +33,24 @@
             $sql = 'SELECT * FROM `' . $this->table . '` AS `g` 
                     INNER JOIN `users_groups` AS `ug`
                         ON `ug`.`group` = `g`.`idgroups`
+                        
+                    LEFT JOIN (
+                        SELECT * FROM `images`
+                            INNER JOIN `xref` ON `xref`.`object` = `images`.`idimages`
+                            WHERE `xref`.`object_type` = 5
+                            AND `xref`.`reference_type` = 1
+                            GROUP BY `images`.`path`
+                    ) AS `xi` 
+                    ON `xi`.`reference` = `g`.`idgroups` 
+
                     WHERE `ug`.`user` = :id';
                     
             $stmt = $this->database->prepare($sql);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
+            
+            
+            
             return $stmt->fetchAll(PDO::FETCH_OBJ);
         }
     }

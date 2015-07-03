@@ -5,7 +5,7 @@
         protected $table = 'devices';
         protected $dates = true;
         
-        protected $displacement = 0.5;
+        public $displacement = 0.5;
         
         public function getList(){            
             $sql = 'SELECT * FROM `view_devices_list`
@@ -68,6 +68,17 @@
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_OBJ);
+        }
+        
+        public function ofThisEvent($event){
+            $sql = 'SELECT * FROM `' . $this->table . '` AS `d`
+                    INNER JOIN `categories` AS `c` ON `c`.`idcategories` = `d`.`category` 
+                    WHERE `event` = :event';
+            $stmt = $this->database->prepare($sql);
+            $stmt->bindParam(':event', $event, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+            
         }
         
     }

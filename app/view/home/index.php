@@ -46,7 +46,7 @@
         
         <div class="col-md-3">
             <div class="widget">
-                <h2>Devices Handled: <?php echo array_sum($devices); ?></h2>
+                <h3>Devices Handled: <?php echo array_sum($devices); ?></h3>
                 <div class="chart-wrap">
                     <canvas id="devicesHandled" width="300" height="300"></canvas>
                     
@@ -81,13 +81,17 @@
                 
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-3">
             <div class="widget">
-                
+                <h3>Devices By Category (Top 10)</h3>
             </div>
         </div>
         
-        
+        <div class="col-md-3">
+            <div class="widget">
+                <h3>CO<sub>2</sub> Emission Prevented</h3>
+            </div>
+        </div>
     </div>
     <!-- eof row -->
 </div>

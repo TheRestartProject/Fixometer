@@ -22,7 +22,7 @@
             $devices['dead'] = $Devices->howMany(array('repair_status' => 3));
             
             $groups = $Groups->findAll();
-            $parties = $Parties->findLatest();
+            $parties = $Parties->findLatest(7);
             
             $this->set('devices', $devices);
             $this->set('parties', $parties);

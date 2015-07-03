@@ -140,6 +140,12 @@
     /**
      *DateTime printers
      **/
+    function engDate($date){
+        $date = explode('/', $date);
+        $date = $date[1].'/'.$date[0].'/'.$date[2];
+        return $date;
+    }
+    
     function dateFormat($timestamp){
         return date('D, j M Y, H:i', $timestamp);
     }
@@ -149,7 +155,13 @@
     }
 
     function dbDate($date){
-        return date('Y-m-d H:i:s', strtotime($date));
+        if(is_int($date)){
+            $time = $date;
+        }
+        else {
+            $time = strtotime($date);
+        }
+        return date('Y-m-d H:i:s', $time);
     }
     function dbDateNoTime($string){
         $d = explode('/', $string);

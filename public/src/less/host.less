@@ -1,0 +1,47 @@
+.host-header {
+    margin-bottom: 30px;
+    margin-top: 10px;
+}
+
+.profiles, .parties {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+.profile-pic {
+    .border-radius(40px);
+}
+time {
+    display: block;
+    clear: both;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+a.party {
+    display: block; .clearfix; padding: 10px; 
+    &.no-data-wrap {
+        background: mistyrose;
+    }
+}
+
+.body {float: left;clear: none; width: 80% ;}
+.links { float: left;clear: none; width: 20%; }
+.short-body { float: left;clear: none; width: 25%; }
+.stat { float: left; clear: none; width: 16%; font-size: 36px; text-align: center; border-right: 1px solid #ddd; min-height: 70px; height: 70px; 
+    .col { width: 50%; display: inline-block; float: left; }
+    &.greyed { color: darken(mistyrose, 8%); }
+    
+    &.fixed { color: @fixed;}
+    &.repairable { color: @repairable;}
+    &.dead { color: @dead;}
+    
+    
+    &:last-child { border-right: none; }
+    
+    .subtext { font-size: 10px; text-transform: uppercase;  display: block; clear: both; }
+    
+    .footprint { margin: 5px; background: @blue; color: white; font-size: 24px; padding: 8px; }
+}
+.add-info-btn { margin-right: 60px; }
+.no-data { float: left; clear: none; width: 60%; }
+.data { float: left; clear: none; width: 75%; }

@@ -17,3 +17,9 @@
     -moz-border-radius: @radius;
     -webkit-border-radius: @radius; 
 }
+
+.transition(@prop, @time){
+    transition: @prop @time ease 0s;
+    -moz-transition: @prop @time ease 0s; 
+    -webkit-transition: @prop @time ease 0s;
+}

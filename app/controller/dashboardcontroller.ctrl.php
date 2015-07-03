@@ -12,6 +12,7 @@
             else {
                 
                 $user = $Auth->getProfile();
+                $this->user = $user;
                 $this->set('user', $user);
                 $this->set('header', true);
             }
@@ -22,6 +23,11 @@
             /** js setup **/
             $this->set('gmaps', true);
             
+            if(hasRole($user, 'Host')){
+                self::hostdashboard();
+            }
+            
+            /*
             $this->set('title', 'Dashboard');
             $this->set('charts', true);
             
@@ -43,9 +49,13 @@
                 $devicesByYear[$i] = $deviceList;
                 
             }
-
             $this->set('devicesByYear', $devicesByYear);
+            */
         }
         
+        
+        public function hostdashboard(){
+            
+        }
     }
     
