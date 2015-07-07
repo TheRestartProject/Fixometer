@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" id="host-dashboard">
     <section class="row profiles">
         <div class="col-md-6">
             <strong>My Group</strong> <a href="/groups/edit/<?php echo $group->idgroups; ?>" class="small"><i class="fa fa-edit"></i> Edit Group...</a>
@@ -144,7 +144,7 @@
                         
                         <div class="stat double">
                             <div class="col">
-                                <img class="media-object" alt="The Restart Project: Logo" src="/assets/images/logo_mini.png">
+                                <img class="" alt="The Restart Project: Logo" src="/assets/images/logo_mini.png">
                                 <span class="subtext">restarters</span>
                             </div>
                             <div class="col">
@@ -162,10 +162,20 @@
                         </div>
                         
                         
-                        <div class="stat fixed"><i class="fa fa-check "></i> </div>
-                        <div class="stat repairable"><i class="fa fa-wrench repairable"></i> </div>
+                        <div class="stat fixed">
+                            <div class="col"><i class="fa fa-check"></i></div>
+                            <div class="col"><?php echo $party->fixed_devices; ?></div>    
+                        </div>
                         
-                        <div class="stat dead"><i class="fa fa-times"></i> </div>
+                        <div class="stat repairable">
+                            <div class="col"><i class="fa fa-wrench"></i></div>
+                            <div class="col"><?php echo $party->repairable_devices; ?></div>
+                        </div>
+                        
+                        <div class="stat dead">
+                            <div class="col"><i class="fa fa-times"></i></div>
+                            <div class="col"><?php echo $party->dead_devices; ?></div>
+                        </div>
                         
                     </div>
                 </div>
@@ -174,6 +184,54 @@
             <?php } ?>
         </div>
         <?php } ?>
+    </section>
+    
+    <section class="row">
+        <div class="col-md-12">
+            <h2>Group Achievements</h2>
+        </div>
+        <div class="col-md-12">
+            <h3>Devices Restarted</h3>
+            <div class="row">
+                <div class="col-md-4 count">
+                    <div class="col fixed">
+                        <i class="fa fa-check fa-5x"></i>
+                        <span class="subtext fixed">fixed</span>
+                    </div>
+                    <div class="col">
+                        <span class="largetext">
+                            <?php echo $group_device_count_status[0]->counter; ?>
+                        </span>
+                        <span class="subtext">total: <?php echo $device_count_status[0]->counter; ?></span>
+                    </div>
+                </div>
+                <div class="col-md-4 count">
+                    <div class="col repairable">
+                        <i class="fa fa-wrench fa-5x"></i>
+                        <span class="subtext repairable">repairable</span>
+                    </div>
+                    <div class="col">
+                        <span class="largetext">
+                            <?php echo $group_device_count_status[1]->counter; ?>
+                        </span>
+                        <span class="subtext">total: <?php echo $device_count_status[1]->counter; ?></span>
+                    </div>
+                </div>
+                <div class="col-md-4 count">
+                    <div class="col dead">
+                        <i class="fa fa-times fa-5x"></i>
+                        <span class="subtext dead">dead</span>
+                    </div>
+                    <div class="col">
+                        <span class="largetext">
+                            <?php echo $group_device_count_status[2]->counter; ?>
+                        </span>
+                        <span class="subtext">total: <?php echo $device_count_status[2]->counter; ?></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
     </section>
     
 </div>

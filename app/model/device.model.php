@@ -78,7 +78,41 @@
             $stmt->bindParam(':event', $event, PDO::PARAM_INT);
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_OBJ);
-            
         }
+        
+        public function ofThisGroup($group){
+            $sql = 'SELECT * FROM `' . $this->table . '` AS `d`
+                    INNER JOIN `categories` AS `c` ON `c`.`idcategories` = `d`.`category`
+                    INNER JOIN `events` AS `e` ON `e`.`idevents` = `d`.`event` 
+                    WHERE `group` = :group';
+            $stmt = $this->database->prepare($sql);
+            $stmt->bindParam(':group', $group, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+        }
+        
+        public function statusCount($g = null){
+            $sql = 'SELECT COUNT(*) AS `counter`, `d`.`repair_status` AS `status`, `d`.`event`
+                    FROM `'. $this->table .'` AS `d`';
+            if(!is_null($g) && is_numeric($g)){
+                $sql .= ' INNER JOIN `events` AS `e` ON `e`.`idevents` = `d`.`event` ';
+            }
+            $sql .= ' WHERE `repair_status` > 0 ';
+            if(!is_null($g) && is_numeric($g)){
+                $sql .= ' AND `group` = :g ';
+            }
+            $sql .= ' GROUP BY `status`';
+            
+            
+            echo $sql;
+            
+            $stmt = $this->database->prepare($sql);
+            if(!is_null($g) && is_numeric($g)){
+                $stmt->bindParam(':g', $g, PDO::PARAM_INT);
+            }
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+        }
+        
         
     }

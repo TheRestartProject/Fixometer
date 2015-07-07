@@ -30,6 +30,7 @@
                                                 )
                                             );
                     
+                   
                     if(!empty($user)){
                         $Auth = new Auth;
                         if(!$Auth->isLoggedIn()){
@@ -42,7 +43,8 @@
                         }
                         
                         if($pass == true){
-                            if(hasRole($user, 'Host')){
+                            
+                            if(hasRole($user[0], 'Host')){
                                 header('Location: /host');
                             }
                             else {

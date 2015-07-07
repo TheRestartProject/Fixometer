@@ -3,10 +3,15 @@
     margin-top: 10px;
 }
 
+#host-dashboard {
+    .party { border-bottom: 1px solid lighten(@litegray, 25%); }
+}
+
 .profiles, .parties {
     margin-top: 25px;
     margin-bottom: 25px;
 }
+
 .profile-pic {
     .border-radius(40px);
 }
@@ -24,24 +29,32 @@ a.party {
     }
 }
 
+.count { border-right: 1px solid #ddd;
+    &:last-child { border-right: none; }
+}
+
 .body {float: left;clear: none; width: 80% ;}
 .links { float: left;clear: none; width: 20%; }
 .short-body { float: left;clear: none; width: 25%; }
-.stat { float: left; clear: none; width: 16%; font-size: 36px; text-align: center; border-right: 1px solid #ddd; min-height: 70px; height: 70px; 
-    .col { width: 50%; display: inline-block; float: left; }
-    &.greyed { color: darken(mistyrose, 8%); }
-    
-    &.fixed { color: @fixed;}
-    &.repairable { color: @repairable;}
-    &.dead { color: @dead;}
-    
-    
-    &:last-child { border-right: none; }
-    
-    .subtext { font-size: 10px; text-transform: uppercase;  display: block; clear: both; }
-    
+.stat {
+    float: left;
+    clear: none;
+    width: 16%;
+    font-size: 36px;
+    text-align: center; 
+    min-height: 70px;
+    height: 70px; 
+    .count;
     .footprint { margin: 5px; background: @blue; color: white; font-size: 24px; padding: 8px; }
 }
+.greyed { color: darken(mistyrose, 8%); }
+.fixed { color: @fixed;}
+.repairable { color: @repairable;}
+.dead { color: @dead;}
+    
+.col { width: 50%; display: inline-block; float: left; text-align: center; }
+.subtext { font-size: 10px; text-transform: uppercase;  display: block; clear: both; }
+.largetext { font-size: 36px; text-align: center; display: block; clear: both;  min-height: 70px; height: 70px;  }
 .add-info-btn { margin-right: 60px; }
 .no-data { float: left; clear: none; width: 60%; }
 .data { float: left; clear: none; width: 75%; }
