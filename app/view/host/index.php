@@ -163,17 +163,17 @@
                         
                         
                         <div class="stat fixed">
-                            <div class="col"><i class="fa fa-check"></i></div>
+                            <div class="col"><i class="status mid fixed"></i></div>
                             <div class="col"><?php echo $party->fixed_devices; ?></div>    
                         </div>
                         
                         <div class="stat repairable">
-                            <div class="col"><i class="fa fa-wrench"></i></div>
+                            <div class="col"><i class="status mid repairable"></i></div>
                             <div class="col"><?php echo $party->repairable_devices; ?></div>
                         </div>
                         
                         <div class="stat dead">
-                            <div class="col"><i class="fa fa-times"></i></div>
+                            <div class="col"><i class="status mid dead"></i></div>
                             <div class="col"><?php echo $party->dead_devices; ?></div>
                         </div>
                         
@@ -195,7 +195,7 @@
             <div class="row">
                 <div class="col-md-4 count">
                     <div class="col fixed">
-                        <i class="fa fa-check fa-5x"></i>
+                        <i class="status mid fixed"></i>
                         <span class="subtext fixed">fixed</span>
                     </div>
                     <div class="col">
@@ -207,7 +207,7 @@
                 </div>
                 <div class="col-md-4 count">
                     <div class="col repairable">
-                        <i class="fa fa-wrench fa-5x"></i>
+                        <i class="status mid repairable"></i>
                         <span class="subtext repairable">repairable</span>
                     </div>
                     <div class="col">
@@ -219,7 +219,7 @@
                 </div>
                 <div class="col-md-4 count">
                     <div class="col dead">
-                        <i class="fa fa-times fa-5x"></i>
+                        <i class="status mid dead"></i>
                         <span class="subtext dead">dead</span>
                     </div>
                     <div class="col">
@@ -233,5 +233,128 @@
         </div>
         
     </section>
+    
+    <hr />
+    
+    <section class="row">
+        <div class="col-md-8">
+            <h5 class="text-center">CO<sub>2</sub> de-sequestered to date</h5> 
+            <?php
+                $sum = 0;
+                foreach($year_data as $y){
+                    $sum += $y->co2;
+                }
+            ?>
+            <span class="largetext">
+                <?php echo round($sum, 2); ?> kg of CO<sub>2</sub> 
+            </span>
+            
+            <hr />
+            <h5 class="text-center">CO<sub>2</sub> de-sequestered this year</h5> 
+            <?php
+                
+                foreach($year_data as $y){
+                    if($y->year == date('Y', time())) {
+            ?>
+            <span class="largetext">
+                <?php echo round($y->co2, 2); ?> kg of CO<sub>2</sub> 
+            </span>
+            <?php 
+                    }
+                }
+            ?>
+            
+        </div>
+        <div class="col-md-4">
+            <canvas id="co2ByYear" width="450" height="450"></canvas>
+            
+            <script>
+                
+                var data = {
+                    labels: ["<?php echo implode('", "', array_keys($bar_chart_stats)); ?>"],
+                    datasets: [
+                        {
+                        label: "CO<sub>2</sub> By Year",
+                        fillColor: "rgba(  3,148,166,0.5)",
+                        strokeColor: "rgba(  3,148,166,0.8)",
+                        highlightFill: "rgba(  3,148,166,0.75)",
+                        highlightStroke: "rgba(  3,148,166,1)",
+                        data: [<?php echo implode(', ', $bar_chart_stats); ?>]
+                        }
+                    ]
+                };
+                
+                var ctx = document.getElementById("co2ByYear").getContext("2d");
+                var BarChart = new Chart(ctx).Bar(data);
+
+            </script>
+            
+        </div>
+        
+    </section>
+
+    <section class="row">
+        <div class="col-md-12">
+            <h3>Devices Restarted per Category</h3>            
+        </div>
+       <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-1">
+                    <span class="cluster min cluster-1"></span>
+                </div>
+                <div class="col-md-11">
+                    <div class="barpiece fixed" style="width :<?php echo round((($clusters[1][0]->counter / $clusters[1]['total']) * 100) , 4); ?>%"><?php echo round((($clusters[1][0]->counter / $clusters[1]['total']) * 100) , 2); ?>%</div>
+                    <div class="barpiece repairable" style="width :<?php echo round((($clusters[1][1]->counter / $clusters[1]['total']) * 100) , 4); ?>%"><?php echo round((($clusters[1][1]->counter / $clusters[1]['total']) * 100) , 2); ?>%</div>
+                    <div class="barpiece end-of-life" style="width :<?php echo round((($clusters[1][2]->counter / $clusters[1]['total']) * 100) , 4); ?>%"><?php echo round((($clusters[1][2]->counter / $clusters[1]['total']) * 100) , 2); ?>%</div>
+                </div>
+                
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-md-1">
+                    <span class="cluster min cluster-2"></span>
+                </div>
+                <div class="col-md-11">
+                    <div class="barpiece fixed" style="width :<?php echo round((($clusters[2][0]->counter / $clusters[2]['total']) * 100) , 4); ?>%"><?php echo round((($clusters[2][0]->counter / $clusters[2]['total']) * 100) , 2); ?>%</div>
+                    <div class="barpiece repairable" style="width :<?php echo round((($clusters[2][1]->counter / $clusters[2]['total']) * 100) , 4); ?>%"><?php echo round((($clusters[2][1]->counter / $clusters[2]['total']) * 100) , 2); ?>%</div>
+                    <div class="barpiece end-of-life" style="width :<?php echo round((($clusters[2][2]->counter / $clusters[2]['total']) * 100) , 4); ?>%"><?php echo round((($clusters[2][2]->counter / $clusters[2]['total']) * 100) , 2); ?>%</div>
+                </div>
+                
+            </div>
+            <hr />
+            
+            <div class="row">
+                <div class="col-md-1">
+                    <span class="cluster min cluster-3"></span>
+                </div>
+                <div class="col-md-11">
+                    <div class="barpiece fixed" style="width :<?php echo round((($clusters[3][0]->counter / $clusters[3]['total']) * 100) , 4); ?>%"><?php echo round((($clusters[3][0]->counter / $clusters[3]['total']) * 100) , 2); ?>%</div>
+                    <div class="barpiece repairable" style="width :<?php echo round((($clusters[3][1]->counter / $clusters[3]['total']) * 100) , 4); ?>%"><?php echo round((($clusters[3][1]->counter / $clusters[3]['total']) * 100) , 2); ?>%</div>
+                    <div class="barpiece end-of-life" style="width :<?php echo round((($clusters[3][2]->counter / $clusters[3]['total']) * 100) , 4); ?>%"><?php echo round((($clusters[3][2]->counter / $clusters[3]['total']) * 100) , 2); ?>%</div>
+                </div>
+                
+            </div>
+            <hr />
+            
+            <div class="row">
+                <div class="col-md-1">
+                    <span class="cluster min cluster-4"></span>
+                </div>
+                <div class="col-md-11">
+                    <div class="barpiece fixed" style="width :<?php echo round((($clusters[4][0]->counter / $clusters[4]['total']) * 100) , 4); ?>%"><?php echo round((($clusters[4][0]->counter / $clusters[4]['total']) * 100) , 2); ?>%</div>
+                    <div class="barpiece repairable" style="width :<?php echo round((($clusters[4][1]->counter / $clusters[4]['total']) * 100) , 4); ?>%"><?php echo round((($clusters[4][1]->counter / $clusters[4]['total']) * 100) , 2); ?>%</div>
+                    <div class="barpiece end-of-life" style="width :<?php echo round((($clusters[4][2]->counter / $clusters[4]['total']) * 100) , 4); ?>%"><?php echo round((($clusters[4][2]->counter / $clusters[4]['total']) * 100) , 2); ?>%</div>
+                </div>
+                
+                
+            </div>
+            
+            
+       </div>
+       <div class="col-md-2">
+        tabs
+       </div>
+    </section>
+    
     
 </div>

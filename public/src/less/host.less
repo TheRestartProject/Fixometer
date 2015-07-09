@@ -58,3 +58,28 @@ a.party {
 .add-info-btn { margin-right: 60px; }
 .no-data { float: left; clear: none; width: 60%; }
 .data { float: left; clear: none; width: 75%; }
+
+
+
+.barpiece {
+    display: block;
+    float: left;
+    clear: none;
+    color: white;
+    text-align: center;
+    padding: 6px;
+    min-height: 32px;
+    
+    &.fixed {
+      background-color: @fixed;
+
+    }
+    &.repairable {
+      background-color: @repairable;
+      
+    }
+    &.end-of-life {
+      background-color: @dead;
+      
+    }
+}

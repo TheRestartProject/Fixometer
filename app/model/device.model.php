@@ -102,16 +102,90 @@
                 $sql .= ' AND `group` = :g ';
             }
             $sql .= ' GROUP BY `status`';
-            
-            
-            echo $sql;
-            
+
             $stmt = $this->database->prepare($sql);
             if(!is_null($g) && is_numeric($g)){
                 $stmt->bindParam(':g', $g, PDO::PARAM_INT);
             }
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_OBJ);
+        }
+        
+        public function countByCluster($cluster, $group = null, $year = null){
+            $sql = 'SELECT COUNT(*) AS `counter`, `repair_status` FROM `' . $this->table . '` AS `d` 
+                    INNER JOIN `events` AS `e`
+                        ON `d`.`event` = `e`.`idevents`
+                    INNER JOIN `categories` AS `c`
+                        ON `d`.`category` = `c`.`idcategories`
+                    WHERE `c`.`cluster` = :cluster AND `d`.`repair_status` > 0 ';
+                    
+            if(!is_null($group)){
+                $sql.=' AND `e`.`group` = :group ';
+            }
+            if(!is_null($year)){
+                $sql.=' AND YEAR(`e`.`event_date`) = :year ';
+            }
+            
+            $sql.= ' GROUP BY `repair_status` 
+                    ORDER BY `repair_status` ASC
+                    ';
+            
+                        
+                    
+            $stmt = $this->database->prepare($sql);
+            
+            $stmt->bindParam(':cluster', $cluster, PDO::PARAM_INT);
+            
+            if(!is_null($group) && is_numeric($group)){
+                $stmt->bindParam(':group', $group, PDO::PARAM_INT);
+            }
+            if(!is_null($year) && is_numeric($year)){
+                $stmt->bindParam(':year', $year, PDO::PARAM_INT);
+            }
+            
+            $q = $stmt->execute();
+            if(!$q){
+                dbga($stmt->errorCode()); dbga($stmt->errorInfo() );
+            }
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+            
+        }
+        
+        public function countCO2ByYear($group = null, $year = null) {
+            $sql = 'SELECT
+                        (ROUND(SUM(`c`.`footprint`), 3) * ' . $this->displacement . ') AS `co2`,
+                        YEAR(`e`.`event_date`) AS `year`
+                    FROM `' . $this->table . '` AS `d` 
+                    INNER JOIN `events` AS `e`
+                        ON `d`.`event` = `e`.`idevents`
+                    INNER JOIN `categories` AS `c`
+                        ON `d`.`category` = `c`.`idcategories`
+                    WHERE `d`.`repair_status` = 1 ';
+                    
+            if(!is_null($group)){
+                $sql.=' AND `e`.`group` = :group ';
+            }
+            if(!is_null($year)){
+                $sql.=' AND `year` = :year ';
+            }
+            $sql.= ' GROUP BY `year` 
+                    ORDER BY `year` DESC';
+            $stmt = $this->database->prepare($sql);
+            
+            if(!is_null($group) && is_numeric($group)){
+                $stmt->bindParam(':group', $group, PDO::PARAM_INT);
+            }
+            if(!is_null($year) && is_numeric($year)){
+                $stmt->bindParam(':year', $year, PDO::PARAM_INT);
+            }
+            
+            $q = $stmt->execute();
+            if(!$q){
+                dbga($stmt->errorCode()); dbga($stmt->errorInfo() );
+            }
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+            
+            
         }
         
         

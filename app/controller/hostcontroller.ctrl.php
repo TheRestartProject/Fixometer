@@ -23,7 +23,8 @@
         
         public function index(){
             
-            $this->set('title', 'The Fixometer');
+            $this->set('title', 'Host Dashboard');
+            $this->set('charts', true);
             
             //Object Instances
             $Group = new Group;
@@ -86,6 +87,38 @@
             $this->set('devices', $Device->ofThisGroup($group->idgroups)); 
             $this->set('device_count_status', $Device->statusCount());
             $this->set('group_device_count_status', $Device->statusCount($group->idgroups));
+            
+            
+            // more stats...
+            $co2_years = $Device->countCO2ByYear(1);
+            $this->set('year_data', $co2_years);
+            
+            $stats = array();
+            foreach($co2_years as $year){
+                
+                
+                $stats[$year->year] = $year->co2;
+            }
+            dbga($stats);
+            
+            $this->set('bar_chart_stats', array_reverse($stats, true));
+            
+            $clusters = array();
+            for($i = 1; $i <= 4; $i++) {
+                //$cluster = $Device->countByCluster($i, $group->idgroups);
+                $cluster = $Device->countByCluster($i, 1);
+                
+                $total = 0;
+                foreach($cluster as $state){
+                    $total += $state->counter;
+                }
+                
+                $cluster['total'] = $total;
+                $clusters[$i] = $cluster;
+                
+            }
+            
+            $this->set('clusters', $clusters);
         }
     
     

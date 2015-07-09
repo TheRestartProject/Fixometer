@@ -122,3 +122,112 @@ h3 {
     color: white; 
   }
 }
+
+
+.status {
+  display: block;
+  margin: 0px auto;
+  &:before, &:after { display: block; clear: both; }
+  &.big {
+    background-image: url('/assets/icons/status_sprite_big.png');
+    width: 128px;
+    height: 128px;
+    &.fixed {
+      background-position: 0 0;
+    }
+    &.repairable {
+      background-position: -128px 0;
+    }
+    &.dead {
+      background-position: -256px 0;
+    }
+    
+  }
+  &.mid {
+    background-image: url('/assets/icons/status_sprite_med.png');
+    width: 64px;
+    height: 64px;
+    &.fixed {
+      background-position: 0 0;
+    }
+    &.repairable {
+      background-position: -64px 0;
+    }
+    &.dead {
+      background-position: -128px 0;
+    }
+    
+  }
+  &.min {
+    background-image: url('/assets/icons/status_sprite_min.png');
+    width: 32px;
+    height: 32px;
+    &.fixed {
+      background-position: 0 0;
+    }
+    &.repairable {
+      background-position: -32px 0;
+    }
+    &.dead {
+      background-position: -64px 0;
+    }
+  }
+}
+
+
+.cluster {
+  display: block;
+  &:before, &:after { display: block; clear: both; }
+  &.big {
+    background-image: url('/assets/icons/cluster_sprite_big.png');
+    width: 128px;
+    height: 128px;
+    &.cluster-1 {
+      background-position: 0 0;
+    }
+    &.cluster-2 {
+      background-position: -128px 0;
+    }
+    &.cluster-3 {
+      background-position: -256px 0;
+    }
+    &.cluster-4 {
+      background-position: -384px 0;
+    }
+    
+  }
+  &.mid {
+    background-image: url('/assets/icons/cluster_sprite_med.png');
+    width: 64px;
+    height: 64px;
+    &.cluster-1 {
+      background-position: 0 0;
+    }
+    &.cluster-2 {
+      background-position: -64px 0;
+    }
+    &.cluster-3 {
+      background-position: -128px 0;
+    }
+    &.cluster-4 {
+      background-position: -192px 0;
+    }
+  }
+  &.min {
+    background-image: url('/assets/icons/cluster_sprite_min.png');
+    width: 32px;
+    height: 32px;
+    &.cluster-1 {
+      background-position: 0 0;
+    }
+    &.cluster-2 {
+      background-position: -32px 0;
+    }
+    &.cluster-3 {
+      background-position: -64px 0;
+    }
+    &.cluster-4 {
+      background-position: -96px 0;
+    }
+  }
+}
