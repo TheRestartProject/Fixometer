@@ -90,15 +90,20 @@
             
             
             // more stats...
+            
+            /** co2 counters **/
             $co2_years = $Device->countCO2ByYear(1);
             $this->set('year_data', $co2_years);
-            
             $stats = array();
             foreach($co2_years as $year){
                 $stats[$year->year] = $year->co2;
             }
-            
             $this->set('bar_chart_stats', array_reverse($stats, true));
+            $co2Total = $Device->getWeights();
+            $co2ThisYear = $Device->countCO2ByYear(null, date('Y', time()));
+            
+            $this->set('co2Total', $co2Total[0]->total_footprints);
+            $this->set('co2ThisYear', $co2ThisYear[0]->co2);
             
             $clusters = array();
             for($i = 1; $i <= 4; $i++) {
@@ -109,13 +114,13 @@
                 foreach($cluster as $state){
                     $total += $state->counter;
                 }
-                
                 $cluster['total'] = $total;
                 $clusters[$i] = $cluster;
-                
             }
             
             $this->set('clusters', $clusters);
+            
+            
         }
     
     

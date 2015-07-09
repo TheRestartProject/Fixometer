@@ -166,7 +166,7 @@
                 $sql.=' AND `e`.`group` = :group ';
             }
             if(!is_null($year)){
-                $sql.=' AND `year` = :year ';
+                $sql.=' AND YEAR(`e`.`event_date`) = :year ';
             }
             $sql.= ' GROUP BY `year` 
                     ORDER BY `year` DESC';

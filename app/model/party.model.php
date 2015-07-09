@@ -58,7 +58,7 @@
         }
         
         public function ofThisUser($id, $only_past = false, $devices = false){
-            $sql = 'SELECT *, UNIX_TIMESTAMP(`e`.`event_date`) AS `event_timestamp`  
+            $sql = 'SELECT *, `e`.`location` AS `venue`, UNIX_TIMESTAMP(`e`.`event_date`) AS `event_timestamp`  
                     FROM `' . $this->table . '` AS `e` 
                     INNER JOIN `events_users` AS `eu` ON `eu`.`event` = `e`.`idevents`
                     INNER JOIN `groups` as `g` ON `e`.`group` = `g`.`idgroups`

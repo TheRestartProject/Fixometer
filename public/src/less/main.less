@@ -147,6 +147,9 @@ h3 {
     background-image: url('/assets/icons/status_sprite_med.png');
     width: 64px;
     height: 64px;
+    &.greyed {
+      background-image: url('/assets/icons/status_missing_sprite_med.png');
+    }
     &.fixed {
       background-position: 0 0;
     }
@@ -177,6 +180,7 @@ h3 {
 
 .cluster {
   display: block;
+  margin: 0px auto;
   &:before, &:after { display: block; clear: both; }
   &.big {
     background-image: url('/assets/icons/cluster_sprite_big.png');
