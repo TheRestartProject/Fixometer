@@ -95,11 +95,8 @@
             
             $stats = array();
             foreach($co2_years as $year){
-                
-                
                 $stats[$year->year] = $year->co2;
             }
-            dbga($stats);
             
             $this->set('bar_chart_stats', array_reverse($stats, true));
             
