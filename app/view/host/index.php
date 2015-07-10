@@ -52,8 +52,8 @@
                         <span clasS="location"><?php echo $party->location; ?></span>      
                     </div>
                     <div class="links">
-                        <a class="/party/edit/<?php $party->idevents; ?>"><i class="fa fa-edit"></i> edit...</a><br />
-                        <a class="#"><i class="fa fa-trash"></i> delete...</a><br />
+                        <a href="/party/edit/<?php $party->idevents; ?>"><i class="fa fa-edit"></i> edit...</a><br />
+                        <a href="#"><i class="fa fa-trash"></i> delete...</a><br />
                     </div>
                 </div>
             </div>
