@@ -52,7 +52,7 @@
                         <span clasS="location"><?php echo $party->location; ?></span>      
                     </div>
                     <div class="links">
-                        <a href="/party/edit/<?php $party->idevents; ?>"><i class="fa fa-edit"></i> edit...</a><br />
+                        <a href="/party/edit/<?php echo $party->idevents; ?>"><i class="fa fa-edit"></i> edit...</a><br />
                         <a href="#"><i class="fa fa-trash"></i> delete...</a><br />
                     </div>
                 </div>
@@ -250,9 +250,9 @@
                 }
             ?>
             <span class="largetext">
-                <?php echo round($sum, 2); ?> kg of CO<sub>2</sub> 
+                <?php echo number_format(round($sum), 0, '.', ','); ?> kg of CO<sub>2</sub> 
             </span>
-            <span class="subtext">Total: <?php echo $co2Total; ?></span>
+            <span class="subtext">Total: <?php echo number_format(round($co2Total), 0, '.', ','); ?></span>
             
             <hr />
             
@@ -263,9 +263,9 @@
                     if($y->year == date('Y', time())) {
             ?>
             <span class="largetext">
-                <?php echo round($y->co2, 2); ?> kg of CO<sub>2</sub> 
+                <?php echo number_format(round($y->co2), 0, '.', ','); ?> kg of CO<sub>2</sub> 
             </span>
-            <span class="subtext">Total: <?php echo $co2ThisYear; ?></span>
+            <span class="subtext">Total: <?php echo number_format(round($co2ThisYear), 0, '.', ','); ?></span>
             <?php 
                     }
                 }

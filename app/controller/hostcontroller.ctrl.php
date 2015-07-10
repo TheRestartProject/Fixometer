@@ -67,7 +67,7 @@
                     }
                 }
                 
-                $party->co2 = $party->co2 * $Device->displacement;    
+                $party->co2 = number_format(round($party->co2 * $Device->displacement), 0, '.' , ',');    
             }
             
             $devices = $Device->ofThisGroup($group->idgroups);
