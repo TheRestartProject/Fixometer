@@ -1,7 +1,7 @@
 <div class="container" id="host-dashboard">
     <section class="row profiles">
         <div class="col-md-6">
-            <strong>My Group</strong> <a href="/groups/edit/<?php echo $group->idgroups; ?>" class="small"><i class="fa fa-edit"></i> Edit Group...</a>
+            <strong>My Group</strong> <a href="/group/edit/<?php echo $group->idgroups; ?>" class="small"><i class="fa fa-edit"></i> Edit Group...</a>
             <div class="media">
                 <div class="media-left">
                     <?php if(empty($group->path)){ ?>
@@ -17,13 +17,13 @@
             </div>
         </div>
         <div class="col-md-6">
-            <strong>My Profile</strong> <a href="/users/edit/<?php echo $profile->idusers; ?>" class="small"><i class="fa fa-edit"></i> Edit Profile...</a>
+            <strong>My Profile</strong> <a href="/user/edit/<?php echo $profile->idusers; ?>" class="small"><i class="fa fa-edit"></i> Edit Profile...</a>
             <div class="media">
                 <div class="media-left">
                     <?php if(empty($profile->path)){ ?>
                     <img src="http://www.lorempixum.com/80/80/people" alt="<?php echo $profile->name; ?> Image" class="profile-pic" />
                     <?php } else { ?>
-                    <img src="/uploads/<?php echo $profile->path; ?>" alt="<?php echo $profile->name; ?> Image" class="profile-pic" />
+                    <img src="/uploads/<?php echo $profile->path; ?>" width="80" height="80" alt="<?php echo $profile->name; ?> Image" class="profile-pic" />
                     <?php } ?>
                 </div>
                 <div class="media-body">
@@ -52,7 +52,7 @@
                         <span clasS="location"><?php echo $party->location; ?></span>      
                     </div>
                     <div class="links">
-                        <a class="#"><i class="fa fa-edit"></i> edit...</a><br />
+                        <a class="/party/edit/<?php $party->idevents; ?>"><i class="fa fa-edit"></i> edit...</a><br />
                         <a class="#"><i class="fa fa-trash"></i> delete...</a><br />
                     </div>
                 </div>
@@ -68,14 +68,15 @@
             <div class="col-md-12">
                 <h2>
                     Latest Restart Parties
-                    <a href="#" class="btn btn-default btn-sm"><i class="fa fa-list"></i> View All</a>
+                    <a href="#" data-target="#party-list" class="btn btn-default btn-sm defade"><i class="fa fa-list"></i> View All</a>
                 </h2>
             </div>
         </header>
         
         <?php foreach($allparties as $party){ ?>
         
-        <div class="col-md-12">
+        <div class="col-md-12 fader" id="party-list">
+        
         
             <?php if($party->device_count < 1){ ?>
             <a class="media no-data-wrap party">
@@ -359,10 +360,19 @@
             </div>
             
             
-       </div>
-       <div class="col-md-2">
-        tabs
-       </div>
+        </div>
+        <div class="col-md-2">
+            <div class=" barpiece-tabs">
+                <ul>
+                    <li><button class="btn btn-primary btn-sm">ALL</button></li>
+                    <li><button class="btn btn-primary btn-sm">2015</button></li>
+                    <li><button class="btn btn-primary btn-sm">2014</button></li>
+                    <li><button class="btn btn-primary btn-sm">2013</button></li>
+    
+                </ul>
+            </div>
+        
+        </div>
     </section>
     
     
@@ -380,28 +390,42 @@
             <div class="col-md-4">
                 <div class="col3">
                     <i class="status mid fixed"></i>
-                    34
+                    <?php echo $clusters[1][0]->counter; ?>
                 </div>
                 <div class="col3">
                     <i class="status mid repairable"></i>
-                    34
+                    <?php echo $clusters[1][1]->counter; ?>
                 </div>
                 <div class="col3">
                     <i class="status mid dead"></i>
-                    34
+                    <?php echo $clusters[1][2]->counter; ?>
                 </div>
             </div>
             <div class="col-md-6">
+                
                 <div class="category-detail">
-                    <dl>
-                        <dt>Most seen:</dt>
-                        <dd>Laptop large | <span class="count">25 times</span></dd>
-                        <dt>Most repaired:</dt>
-                        <dd>Desktop computer | <span class="count">16/21</span></dd>
-                        <dt>Least repaired:</dt>
-                        <dd>Kettle | <span class="count">2/14</span></dd>
-                    </dl>
+                    <table cellspacing="0">
+                        <tbody>
+                            <tr>
+                                <td class="table-label">Most seen:</td>
+                                <td class="table-data"><?php echo $mostleast[1]['most_seen'][0]->name; ?></td>
+                                <td class="table-count"><?php echo $mostleast[1]['most_seen'][0]->counter; ?></td>
+                            </tr>
+                            <tr>
+                                <td class="table-label">Most repaired:</td>
+                                <td class="table-data"><?php echo $mostleast[1]['most_repaired'][0]->name; ?></td>
+                                <td class="table-count"><?php echo $mostleast[1]['most_repaired'][0]->counter; ?></td>
+                            </tr>
+                            <tr>
+                                <td class="table-label">Least repaired:</td>
+                                <td class="table-data"><?php echo $mostleast[1]['least_repaired'][0]->name; ?></td>
+                                <td class="table-count"><?php echo $mostleast[1]['least_repaired'][0]->counter; ?></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
+                
+                
             </div>
         </div>
         
@@ -415,18 +439,39 @@
             <div class="col-md-4">
                 <div class="col3">
                     <i class="status mid fixed"></i>
-                    34
+                    <?php echo $clusters[2][0]->counter; ?>
                 </div>
                 <div class="col3">
                     <i class="status mid repairable"></i>
-                    34
+                    <?php echo $clusters[2][1]->counter; ?>
                 </div>
                 <div class="col3">
                     <i class="status mid dead"></i>
-                    34
+                    <?php echo $clusters[2][2]->counter; ?>
                 </div>
             </div>
             <div class="col-md-6">
+                <div class="category-detail">
+                    <table cellspacing="0">
+                        <tbody>
+                            <tr>
+                                <td class="table-label">Most seen:</td>
+                                <td class="table-data"><?php echo $mostleast[2]['most_seen'][0]->name; ?></td>
+                                <td class="table-count"><?php echo $mostleast[2]['most_seen'][0]->counter; ?></td>
+                            </tr>
+                            <tr>
+                                <td class="table-label">Most repaired:</td>
+                                <td class="table-data"><?php echo $mostleast[2]['most_repaired'][0]->name; ?></td>
+                                <td class="table-count"><?php echo $mostleast[2]['most_repaired'][0]->counter; ?></td>
+                            </tr>
+                            <tr>
+                                <td class="table-label">Least repaired:</td>
+                                <td class="table-data"><?php echo $mostleast[2]['least_repaired'][0]->name; ?></td>
+                                <td class="table-count"><?php echo $mostleast[2]['least_repaired'][0]->counter; ?></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 
                 
             </div>
@@ -442,19 +487,39 @@
             <div class="col-md-4">
                 <div class="col3">
                     <i class="status mid fixed"></i>
-                    34
+                    <?php echo $clusters[3][0]->counter; ?>
                 </div>
                 <div class="col3">
                     <i class="status mid repairable"></i>
-                    34
+                    <?php echo $clusters[3][1]->counter; ?>
                 </div>
                 <div class="col3">
                     <i class="status mid dead"></i>
-                    34
+                    <?php echo $clusters[3][2]->counter; ?>
                 </div>
             </div>
             <div class="col-md-6">
-                
+                <div class="category-detail">
+                    <table cellspacing="0">
+                        <tbody>
+                            <tr>
+                                <td class="table-label">Most seen:</td>
+                                <td class="table-data"><?php echo $mostleast[3]['most_seen'][0]->name; ?></td>
+                                <td class="table-count"><?php echo $mostleast[3]['most_seen'][0]->counter; ?></td>
+                            </tr>
+                            <tr>
+                                <td class="table-label">Most repaired:</td>
+                                <td class="table-data"><?php echo $mostleast[3]['most_repaired'][0]->name; ?></td>
+                                <td class="table-count"><?php echo $mostleast[3]['most_repaired'][0]->counter; ?></td>
+                            </tr>
+                            <tr>
+                                <td class="table-label">Least repaired:</td>
+                                <td class="table-data"><?php echo $mostleast[3]['least_repaired'][0]->name; ?></td>
+                                <td class="table-count"><?php echo $mostleast[3]['least_repaired'][0]->counter; ?></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 
             </div>
         </div>
@@ -467,19 +532,39 @@
             <div class="col-md-4">
                 <div class="col3">
                     <i class="status mid fixed"></i>
-                    34
+                    <?php echo $clusters[4][0]->counter; ?>
                 </div>
                 <div class="col3">
                     <i class="status mid repairable"></i>
-                    34
+                    <?php echo $clusters[4][1]->counter; ?>
                 </div>
                 <div class="col3">
                     <i class="status mid dead"></i>
-                    34
+                    <?php echo $clusters[4][2]->counter; ?>
                 </div>
             </div>
             <div class="col-md-6">
-                
+                <div class="category-detail">
+                    <table cellspacing="0">
+                        <tbody>
+                            <tr>
+                                <td class="table-label">Most seen:</td>
+                                <td class="table-data"><?php echo $mostleast[4]['most_seen'][0]->name; ?></td>
+                                <td class="table-count"><?php echo $mostleast[4]['most_seen'][0]->counter; ?></td>
+                            </tr>
+                            <tr>
+                                <td class="table-label">Most repaired:</td>
+                                <td class="table-data"><?php echo $mostleast[4]['most_repaired'][0]->name; ?></td>
+                                <td class="table-count"><?php echo $mostleast[4]['most_repaired'][0]->counter; ?></td>
+                            </tr>
+                            <tr>
+                                <td class="table-label">Least repaired:</td>
+                                <td class="table-data"><?php echo $mostleast[4]['least_repaired'][0]->name; ?></td>
+                                <td class="table-count"><?php echo $mostleast[4]['least_repaired'][0]->counter; ?></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 
             </div>
         </div>

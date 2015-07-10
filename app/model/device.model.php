@@ -188,5 +188,50 @@
             
         }
         
+        public function findMostSeen($status = null, $cluster = null, $group = null){
+            
+            $sql = 'SELECT COUNT(`d`.`category`) AS `counter`, `c`.`name` FROM `' . $this->table . '` AS `d`
+                    INNER JOIN `events` AS `e`
+                        ON `d`.`event` = `e`.`idevents`
+                    INNER JOIN `categories` AS `c`
+                        ON `d`.`category` = `c`.`idcategories`
+                    WHERE 1=1 ';
+                                
+            if(!is_null($status) && is_numeric($status)){                    
+                $sql .= ' AND `d`.`repair_status` = :status ';
+            }                    
+            if(!is_null($cluster) && is_numeric($cluster)){
+                $sql .= ' AND `c`.`cluster` = :cluster ';
+            }
+            if(!is_null($group) && is_numeric($group)){
+                $sql .= ' AND `e`.`group` = :group ';
+            }
+            
+            $sql.= ' GROUP BY `d`.`category`
+                     ORDER BY `counter` DESC
+                     LIMIT 1';
+                     
+            $stmt = $this->database->prepare($sql);
+            
+            if(!is_null($status) && is_numeric($status)){
+                $stmt->bindParam(':status', $status, PDO::PARAM_INT);
+            }
+            if(!is_null($group) && is_numeric($group)){
+                $stmt->bindParam(':group', $group, PDO::PARAM_INT);
+            }
+            if(!is_null($cluster) && is_numeric($cluster)){
+                $stmt->bindParam(':cluster', $cluster, PDO::PARAM_INT);
+            }
+            
+            $q = $stmt->execute();
+            if(!$q){
+                dbga($stmt->errorCode()); dbga($stmt->errorInfo() );
+            }
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+            
+            
+        }
+        
+                
         
     }

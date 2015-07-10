@@ -100,6 +100,52 @@
             }
         }
         
+        
+        public function ofThisGroup($group, $only_past = false, $devices = false){
+            $sql = 'SELECT *, `e`.`location` AS `venue`, UNIX_TIMESTAMP(`e`.`event_date`) AS `event_timestamp`  
+                    FROM `' . $this->table . '` AS `e` 
+                    INNER JOIN `groups` as `g` ON `e`.`group` = `g`.`idgroups`
+                    LEFT JOIN (
+                        SELECT COUNT(`dv`.`iddevices`) AS `device_count`, `dv`.`event` 
+                        FROM `devices` AS `dv` 
+                        GROUP BY  `dv`.`event`
+                    ) AS `d` ON `d`.`event` = `e`.`idevents` 
+                    WHERE `e`.`group` = :id';
+            if($only_past == true){
+                $sql .= ' AND `e`.`event_date` < NOW()';
+            }
+            $sql .= ' ORDER BY `e`.`event_date` DESC';
+            
+            
+            $stmt = $this->database->prepare($sql);
+            
+            $stmt->bindParam(':id', $group, PDO::PARAM_INT);
+            
+            $q = $stmt->execute();
+            if(!$q){
+                if(SYSTEM_STATUS == 'development'){
+                    $err = $stmt->errorInfo();
+                    new Error(601, $err[2]);
+                }
+            }
+            else {
+                $parties = $stmt->fetchAll(PDO::FETCH_OBJ);
+                if($devices){
+                    $devices = new Device;
+                    foreach($parties as $i => $party){
+                        $parties[$i]->devices = $devices->ofThisEvent($party->idevents);
+                    }
+                    
+                }
+                
+                return $parties;
+                
+                
+            }
+        }
+        
+        
+        
         public function findNextParties($group = null) {
             $sql = 'SELECT
                         `e`.`idevents`,

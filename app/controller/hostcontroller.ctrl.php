@@ -35,7 +35,7 @@
             $group = $Group->ofThisUser($this->user->id);
             $group = $group[0];
             
-            $allparties = $Party->ofThisUser($this->user->id, true, true);
+            $allparties = $Party->ofThisGroup($group->idgroups, true, true);
             
             $need_attention = 0;
             foreach($allparties as $i => $party){
@@ -120,6 +120,16 @@
             
             $this->set('clusters', $clusters);
             
+            // most/least stats for clusters
+            $mostleast = array();
+            for($i = 1; $i <= 4; $i++){
+                $mostleast[$i]['most_seen'] = $Device->findMostSeen(null, $i, $group->idgroups);
+                $mostleast[$i]['most_repaired'] = $Device->findMostSeen(1, $i, $group->idgroups);
+                $mostleast[$i]['least_repaired'] = $Device->findMostSeen(3, $i, $group->idgroups);
+                
+            }
+            
+            $this->set('mostleast', $mostleast);
             
         }
     
