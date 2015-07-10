@@ -35,4 +35,25 @@
             echo json_encode($groups);
         }
         
+        public function party_data(){
+            if(isset($_GET['id']) && is_numeric($_GET['id'])){
+                $party = $_GET['id'];
+            }
+            else {
+                echo json_encode(array('code'=>500, 'status'=>'danger', 'message' => 'Missing Parameter.'));
+                return false;    
+            }
+            
+            $Party = new Party;
+            $party = $Party->findOne($party);
+            echo json_encode($party);
+            return true;
+        }
+        
+        public function category_list(){
+            $Category = new Category;
+            echo json_encode($Category->listed()); 
+            
+        }
+        
     }

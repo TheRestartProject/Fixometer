@@ -9,7 +9,9 @@
         /** array to exclude certain routes (like csv exports or AJAX urls) **/
         private $exclude = array(
                             'restarters_in_group',
-                            'group_locations',                        
+                            'group_locations',
+                            'party_data',
+                            'category_list'
                             );
         
         function __construct($controller,$action) {

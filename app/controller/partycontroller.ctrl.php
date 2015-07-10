@@ -74,11 +74,6 @@
                     // formatting dates for the DB
                     $event_date = date('Y-m-d', strtotime(engDate($event_date)));
                     
-                    /*
-                    $start = dbDate($start);
-                    $end = dbDate($end);
-                    */                   
-                    
                     if(!verify($event_date)){
                         $error['event_date'] = 'We must have a starting date and time.';
                     }
@@ -139,6 +134,10 @@
                                 $file->upload('file', 'image', $idParty, TBL_EVENTS);    
                             }
                             
+                            if(hasRole($this->user, 'Host')){
+                                header('Location: /host');
+                            }
+                            
                         }
                         else {
                             $response['danger'] = 'Party could <strong>not</strong> be created. Something went wrong with the database.';
@@ -148,19 +147,11 @@
                     else {
                         $response['danger'] = 'Party could <strong>not</strong> be created. Please look at the reported errors, correct them, and try again.';
                     }
-                    
-                    
                     $this->set('response', $response);
                     $this->set('error', $error);
                     $this->set('udata', $_POST);
-                    
                 }
-                
             }
-            
-            
-            
-            
         }
     
         public function edit($id){
@@ -224,6 +215,28 @@
             }
             else {
                 header('Location: /user/forbidden');
+            }
+        }
+    
+    
+        public function manage($id){
+            if( !hasRole($this->user, 'Host') && !hasRole($this->user, 'Administrator')){
+                header('Location: /user/forbidden');
+            }
+            else {
+                
+                $Device     = new Device;
+                $Category   = new Category;
+                
+                $party      = $this->Party->findThis($id);
+                $devices    = $Device->find(array('event' => $id));
+                $categories = $Category->listed();
+                
+                $this->set('party', $party);
+                $this->set('devices', $devices);
+                $this->set('categories', $categories);
+                
+                
             }
         }
     }

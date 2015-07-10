@@ -85,9 +85,9 @@
             $this->set('allparties', $allparties);
             
             $this->set('devices', $Device->ofThisGroup($group->idgroups)); 
-            $this->set('device_count_status', $Device->statusCount());
-            $this->set('group_device_count_status', $Device->statusCount($group->idgroups));
             
+            $this->set('device_count_status', $Device->statusCount());            
+            $this->set('group_device_count_status', $Device->statusCount($group->idgroups));
             
             // more stats...
             
@@ -106,18 +106,32 @@
             $this->set('co2ThisYear', $co2ThisYear[0]->co2);
             
             $clusters = array();
+            
             for($i = 1; $i <= 4; $i++) {
-                //$cluster = $Device->countByCluster($i, $group->idgroups);
-                $cluster = $Device->countByCluster($i, 1);
-                
+                $cluster = $Device->countByCluster($i, $group->idgroups);
                 $total = 0;
                 foreach($cluster as $state){
                     $total += $state->counter;
                 }
                 $cluster['total'] = $total;
-                $clusters[$i] = $cluster;
+                $clusters['all'][$i] = $cluster;
             }
             
+            
+            for($y = date('Y', time()); $y>=2013; $y--){
+
+                for($i = 1; $i <= 4; $i++) {
+                    //$cluster = $Device->countByCluster($i, $group->idgroups);
+                    $cluster = $Device->countByCluster($i, $group->idgroups, $y);
+                    
+                    $total = 0;
+                    foreach($cluster as $state){
+                        $total += $state->counter;
+                    }
+                    $cluster['total'] = $total;
+                    $clusters[$y][$i] = $cluster;
+                }
+            }
             $this->set('clusters', $clusters);
             
             // most/least stats for clusters

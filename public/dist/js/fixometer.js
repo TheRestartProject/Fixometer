@@ -98,4 +98,70 @@ $(document).ready(function(){
     });
     
     
+    /** switch stat bars / host dashboard **/
+    $('.switch-view').click(function(e){
+        e.preventDefault();
+        var target = $(this).data('target');
+        
+        $('.switch-view').removeClass('active');
+        $(this).addClass('active');
+        
+        $('.bargroup').removeClass('show').addClass('hide');
+        $(target).addClass('show');
+        
+    });
+    
+    
+    
+    /*** Add Devices to Party - Ajax Page for Hosts ***//*
+    $('button.add-info-btn').click(function(e){
+        e.preventDefault();
+        
+        var party = $(this).data('party'),
+            partydata,
+            categories; 
+            
+        
+        // get party info 
+        $.ajax({
+            async: false,
+            url: '/ajax/party_data',
+            data: {id: party},
+            dataType: "json",
+            success: function(r){
+                partydata = r;
+            }
+        });
+        
+        $.ajax({
+            async: false,
+            url: '/ajax/category_list',
+            data: {id: party},
+            dataType: "json",
+            success: function(r){
+                categories = r;
+            }
+        });
+        
+        
+            
+        // build page 
+        var page =  '<div class="wrap-device-input container-fluid">' +
+                        '<div class="device-input container">' +
+                            '<header class="device-input-header row">' +
+                                '<div class="col-md-1"></div>' +
+                                '<div class="col-md-4">' + partydata.event_date + '<br />' + partydata.location + '</div>' +
+                                '<div class="col-md-6"></div>' +
+                                '<div class="col-md-1"><button class="btn btn-default close"><i class="fa fa-times"></i></div>' +
+                            '</header>' +
+                        '</div>' +
+                    '<div>';
+        $('body').append(page);
+        $('.wrap-device-input .close').click(function(e){
+            $('.wrap-device-input').remove();
+        });
+    });
+    */
+    
+    
 });

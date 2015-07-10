@@ -91,23 +91,34 @@
             return $stmt->fetchAll(PDO::FETCH_OBJ);
         }
         
-        public function statusCount($g = null){
+        public function statusCount($g = null, $year = null){
             $sql = 'SELECT COUNT(*) AS `counter`, `d`.`repair_status` AS `status`, `d`.`event`
                     FROM `'. $this->table .'` AS `d`';
-            if(!is_null($g) && is_numeric($g)){
+            if( (!is_null($g) && is_numeric($g)) || (!is_null($year) && is_numeric($year))){
                 $sql .= ' INNER JOIN `events` AS `e` ON `e`.`idevents` = `d`.`event` ';
             }
+            
             $sql .= ' WHERE `repair_status` > 0 ';
+            
             if(!is_null($g) && is_numeric($g)){
                 $sql .= ' AND `group` = :g ';
             }
+            if(!is_null($year) && is_numeric($year)){
+                $sql .= ' AND YEAR(`event_date`) = :year ';
+            }
+            
             $sql .= ' GROUP BY `status`';
 
             $stmt = $this->database->prepare($sql);
             if(!is_null($g) && is_numeric($g)){
                 $stmt->bindParam(':g', $g, PDO::PARAM_INT);
             }
+            if(!is_null($year) && is_numeric($year)){
+                $stmt->bindParam(':year', $year, PDO::PARAM_INT);
+            }
+            
             $stmt->execute();
+            
             return $stmt->fetchAll(PDO::FETCH_OBJ);
         }
         

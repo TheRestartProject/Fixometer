@@ -10,6 +10,7 @@
             <?php if(isset($response)) { printResponse($response); } ?>
             
             <form action="/party/edit/<?php echo $formdata->idevents; ?>" method="post" id="party-edit">
+
                 <div class="row">
                             <div class="col-md-6">
                                 
