@@ -25,7 +25,9 @@
                                     <?php if(isset($error) && isset($error['email']) && !empty($error['email'])) { echo '<span class="help-block text-danger">' . $error['email'] . '</span>'; } ?>
                                 </div>
                         
-                                 <div class="form-group <?php if(isset($error) && isset($error['role']) && !empty($error['role'])) { echo "has-error"; } ?>">
+                                
+                                <?php if(hasRole($user, 'Administrator')){ ?>
+                                <div class="form-group <?php if(isset($error) && isset($error['role']) && !empty($error['role'])) { echo "has-error"; } ?>">
                                     
                                     <label for="role">User Role:</label>
                                     <select id="role" name="role"  class="form-control selectpicker">
@@ -36,7 +38,7 @@
                                     </select>
                                     <?php if(isset($error) && isset($error['role']) && !empty($error['role'])) { echo '<span class="help-block text-danger">' . $error['role'] . '</span>'; } ?>
                                 </div>
-                                
+                                <?php } ?>
                             </div>    
                             <div class="col-md-6">  
                                 
@@ -45,7 +47,9 @@
                                     <input type="file" class="form-control file" name="profile" data-show-upload="false" data-show-caption="true">
                                 </div>
                                 
-                                <div class="form-group <?php if(isset($error) && isset($error['group']) && !empty($error['group'])) { echo "has-error"; } ?>">
+                                
+                                <?php $groupclass = (hasRole($user, 'Administrator') ? 'show' : 'hidden'); ?>
+                                <div class="form-group <?php echo $groupclass; ?> <?php if(isset($error) && isset($error['group']) && !empty($error['group'])) { echo "has-error"; } ?>">
                                     <label for="group">Group(s):</label>
                                     
                                         <?php foreach($groups as $group){ ?>
@@ -64,7 +68,8 @@
                                         <?php } ?>
                                     <?php if(isset($error) && isset($error['group']) && !empty($error['group'])) { echo '<span class="help-block text-danger">' . $error['group'] . '</span>'; } ?>
                                 </div>
-        
+                                
+                                
                                 <div class="form-group">
                                     <button class="btn btn-default" type="reset"><i class="fa fa-refresh"></i> reset</button>
                                     <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> save</button>                                    

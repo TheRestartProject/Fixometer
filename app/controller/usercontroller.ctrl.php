@@ -209,7 +209,7 @@
                 $this->set('header', true);
                 
                 // Administrators can edit users.
-                if(hasRole($user, 'Administrator')){ 
+                if(hasRole($user, 'Administrator') || hasRole($user, 'Host')){ 
                     
                     if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST)){
                         $data = $_POST;
@@ -234,6 +234,11 @@
                         }
                         else {
                             $response['success'] = 'User updated!';
+                            if(hasRole($user, 'Host')){
+                                header('Location: /host?action=ue&code=200');
+                            }
+                            
+                            
                         }
                         
                         $this->set('response', $response);

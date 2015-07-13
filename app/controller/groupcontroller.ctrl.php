@@ -118,7 +118,7 @@
     
         public function edit($id) {
             
-            if(hasRole($this->user, 'Administrator')){ 
+            if(hasRole($this->user, 'Administrator') || hasRole($this->user, 'Host')){ 
                 
                 if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST)){
                     
@@ -133,6 +133,10 @@
                     }
                     else {
                         $response['success'] = 'Group updated!';
+                        
+                        if(hasRole($this->user, 'Host')){
+                            header('Location: /host?action=gu&code=200');
+                        }
                     }
                     
                     $this->set('response', $response);
@@ -144,6 +148,8 @@
             $Group = $this->Group->findOne($id);
             $this->set('title', 'Edit Group ' . $Group->name );
             $this->set('formdata', $Group);
+            
+            
         }
         
         public function delete($id){

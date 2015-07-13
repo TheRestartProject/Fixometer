@@ -26,6 +26,28 @@
             $this->set('title', 'Host Dashboard');
             $this->set('charts', true);
             
+            
+            if(isset($_GET['action']) && isset($_GET['code'])){
+                $actn = $_GET['action'];
+                $code = $_GET['code'];
+                
+                switch($actn){
+                    case 'gu':
+                        $response['success'] = 'Group updated.';
+                        break;
+                    case 'pe':
+                        $response['success'] = 'Party updated.';
+                        break;
+                    case 'pc':
+                        $response['success'] = 'Party created.';
+                        break;
+                    case 'ue':
+                        $response['success'] = 'Profile updated.';
+                }
+                    
+                $this->set('response', $response);    
+            }
+            
             //Object Instances
             $Group = new Group;
             $User = new User;

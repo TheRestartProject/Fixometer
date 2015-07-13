@@ -18,9 +18,14 @@
                 $this->set('user', $user);
                 $this->set('header', true);
                 
-                
-                if(hasRole($this->user, 'Host') && !hasRole($this->user, 'Root')){
-                    $this->hostParties = $this->Party->ofThisUser($this->user->idusers);
+                if(hasRole($this->user, 'Host')){
+                    $Group = new Group;
+                    $group = $Group->ofThisUser($this->user->id);
+                    $parties = $this->Party->ofThisGroup($group[0]->idgroups);
+                    
+                    foreach($parties as $party){
+                        $this->hostParties[] = $party->idevents;
+                    }
                 }
             }
         }
@@ -135,7 +140,7 @@
                             }
                             
                             if(hasRole($this->user, 'Host')){
-                                header('Location: /host');
+                                header('Location: /host?action=pc&code=200');
                             }
                             
                         }
@@ -156,7 +161,7 @@
     
         public function edit($id){
             
-            if(hasRole($this->user, 'Administrator') || (hasRole($this->user, 'Host') && in_array($id, $hostParties))){
+            if( hasRole($this->user, 'Administrator') || (hasRole($this->user, 'Host') && in_array($id, $this->hostParties))){
                 
                 $Groups = new Group;
                 
@@ -200,7 +205,9 @@
                         }
                             
                     }
-                    
+                    if(hasRole($this->user, 'Host')){
+                        header('Location: /host?action=pe&code=200');
+                    }
                     $this->set('response', $response);
                 }
             

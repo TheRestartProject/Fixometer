@@ -69,6 +69,14 @@ $(document).ready(function(){
         }
     });
     
+    /** Show/Hide Repairable details ( /party/manage ) (Host management page) **/
+    $('.repairable').click(function(){
+        var detailsWrap = $(this).data('target-details');
+        if ($(this).is(':checked')) {
+            $(detailsWrap).slideDown('slow');
+        }
+    });
+    
     /** Delete object control **/
     $('.delete-control').click(function(e){
         e.preventDefault();
@@ -112,6 +120,104 @@ $(document).ready(function(){
     });
     
     
+    /** Add Device Row in Party Management **/
+    $('#add-device').click(function(e){
+        e.preventDefault();
+        
+        var rows = $('#device-table > tbody > tr').length,
+            categories = null,
+            n = rows + 1;
+             
+        
+        console.log('ROWS : ' + rows);
+        
+        $.ajax({
+            async: false,
+            url: '/ajax/category_list',
+            data: {},
+            dataType: "html",
+            success: function(r){
+                categories = r;
+            }
+        });
+        
+        var tablerow = '<tr>' + 
+                            '<td>' + n + '.</td>'+
+                            '<td>' +
+                                '<div class="form-group">' +
+                                    '<select id="device-' + n + '[category]" name="device-' + n + '[category]" class="selectpicker form-control" data-live-search="true">' +
+                                    categories + 
+                                    '</select>' +
+                                '</div>' +
+                            '</td>' +            
+                            '<td>' +
+                                '<textarea class="form-control" id="device-' + n + '[problem]" name="device-' + n + '[problem]"></textarea>' +
+                            '</td>' +
+                            '<td>' +
+                                '<textarea class="form-control" id="device-' + n + '[model]" name="device-' + n + '[model]"></textarea>' +
+                            '</td>' +
+                            '<td>' +
+                                
+                                '<div class="form-group">' +
+                                    '<div class="radio">' +                                            
+                                        '<label>' +
+                                            '<input type="radio" name="device-' + n + '[repair_status]" id="device-' + n + '[repair_status_1]" value="1" checked> Fixed' +
+                                        '</label>' +
+                                    '</div>' +
+                                    '<div class="radio">' +
+                                        '<label>' +
+                                            '<input type="radio" class="repairable" data-target-details="#repairable-details-' + n + '" name="device-' + n + '[repair_status]" id="device-' + n + '[repair_status_2]" value="2"> Repairable' +
+                                        '</label>' +
+                                    '</div>' +
+                                    '<div id="repairable-details-' + n + '" class="repairable-details">' +
+                                        '<div class="checkbox">' +
+                                            '<label>' +
+                                                '<input type="checkbox" name="device-' + n + '[more_time_needed]" id="device-' + n + '[more_time_needed]" value="1"> More time needed' +
+                                            '</label>' +
+                                        '</div>' +
+                                        '<div class="checkbox">' +
+                                            '<label>' +
+                                                '<input type="checkbox" name="device-' + n + '[professional_help]" id="device-' + n + '[professional_help]" value="1"> Professional help' +
+                                            '</label>' +
+                                        '</div>' +
+                                        '<div class="checkbox">' +
+                                            '<label>' +
+                                                '<input type="checkbox" name="device-' + n + '[do_it_yourself]" id="device-' + n + '[do_it_yourself]" value="1"> Do it yourself' +
+                                            '</label>' +
+                                        '</div>' +
+                                    '</div>' +
+                                    '<div class="radio">' +
+                                        '<label>' +
+                                            '<input type="radio" name="device-' + n + '[repair_status]" id="device-' + n + '[repair_status_3]" value="3"> End of lifecycle' +
+                                        '</label>' +
+                                    '</div>' +
+                                '</div>' +
+                            '</td>' +
+                            '<td>' +
+                                '<div class="form-group">' +
+                                    '<div class="radio">' +
+                                        '<label>' +
+                                            '<input type="radio" name="device-' + n + '[spare_parts]" id="spare_parts_1" value="1"> Yes' +
+                                        '</label>' +
+                                    '</div>' +
+                                    '<div class="radio">' +
+                                        '<label>' +
+                                            '<input type="radio" name="device-' + n + '[spare_parts]" id="spare_parts_2" value="2" checked> No' +
+                                        '</label>' +
+                                    '</div>' +
+                                '</div>' +
+                            '</td>' +
+                            '<td></td>' +
+                        '</tr>';
+        
+        $('#device-table tbody').append(tablerow);
+        
+        $('.selectpicker').selectpicker();
+        
+        console.log(categories);
+        
+    });
+    
     
     /*** Add Devices to Party - Ajax Page for Hosts ***//*
     $('button.add-info-btn').click(function(e){
@@ -133,15 +239,6 @@ $(document).ready(function(){
             }
         });
         
-        $.ajax({
-            async: false,
-            url: '/ajax/category_list',
-            data: {id: party},
-            dataType: "json",
-            success: function(r){
-                categories = r;
-            }
-        });
         
         
             

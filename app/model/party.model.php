@@ -51,9 +51,10 @@
                     
             $stmt = $this->database->prepare($sql);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-            $stmt->execute();
+            $q = $stmt->execute();
             
-            return $stmt->fetchAll(PDO::FETCH_OBJ);
+            return $stmt->fetch(PDO::FETCH_OBJ);
+        
         }
         
         public function createUserList($party, $users){

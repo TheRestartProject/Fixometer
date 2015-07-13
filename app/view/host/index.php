@@ -1,5 +1,15 @@
 <div class="container" id="host-dashboard">
     
+    
+    <?php if(isset($response)) { ?>
+    <div class="row">
+        <div class="col-md-12">
+            <?php printResponse($response);  ?>
+        </div>
+    </div>
+    <?php } ?>
+            
+    
     <!-- Profiles -->
     <section class="row profiles">
         <div class="col-md-6">

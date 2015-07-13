@@ -52,8 +52,19 @@
         
         public function category_list(){
             $Category = new Category;
-            echo json_encode($Category->listed()); 
+            $categories = $Category->listed();
             
+            $response = '';
+            
+            foreach($categories as $cluster){ 
+                $response .= '<optgroup label="' . $cluster->name . '">';
+                foreach($cluster->categories as $c){ 
+                    $response .= '<option value="' . $c->idcategories . '">' .  $c->name . '</option>';
+                }
+                $response .= '</optgroup>';
+            } 
+            
+            echo $response;
         }
         
     }
