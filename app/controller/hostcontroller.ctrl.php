@@ -24,6 +24,7 @@
         public function index(){
             
             $this->set('title', 'Host Dashboard');
+            $this->set('showbadges', true);
             $this->set('charts', true);
             
             

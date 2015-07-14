@@ -78,6 +78,17 @@
                                     <?php if(isset($error) && isset($error['volunteers']) && !empty($error['volunteers'])) { echo '<span class="help-block text-danger">' . $error['volunteers'] . '</span>'; } ?>
                                 </div>
         
+                                <?php
+                                if(hasRole($user, 'Host')) {
+                                ?>
+                                
+                                <input type="hidden" name="group" id="group" value="<?php echo $usergroup->idgroups; ?>">
+                                
+                                <?php
+                                }
+                                else {
+                                ?>    
+        
                                 <div class="form-group <?php if(isset($error) && isset($error['group']) && !empty($error['group'])) { echo "has-error"; } ?>">
                                     <label for="group">Group:</label>
                                     <select id="group" name="group"  class="form-control selectpicker users_group">
@@ -92,7 +103,9 @@
                                         
                                     </div>    
                                 </div>
-            
+                                <?php
+                                }
+                                ?>
                                
                                 <div class="form-group">
                                     <label for="location">Location:</label>

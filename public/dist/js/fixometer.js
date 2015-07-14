@@ -1,7 +1,6 @@
 $(document).ready(function(){
     
     /** Dashboard Things **/
-    
     /** maps for parties **/
     if ($('#dashboard').length > 0) {
         
@@ -91,8 +90,8 @@ $(document).ready(function(){
                                             '<p>Please note that this operation is <strong>irreversible</strong>.</p>' +
                                         '</div>' +
                                         '<div class="ctrl-box-foot">' +
-                                            '<a href="' + deleteTarget + '" class="btn btn-primary"><i class="fa fa-trash"></i> Delete</a>' +
-                                            '<a href="#" class="btn btn-default ctrl-box-close">Cancel</a>' + 
+                                            '<a href="' + deleteTarget + '" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</a> &nbsp;' +
+                                            '<a href="#" class="btn btn-default ctrl-box-close"><i class="fa fa-undo"></i> Cancel</a>' + 
                                         '</div>' + 
                                     '</div>' + 
                                 '</div>';
@@ -153,9 +152,12 @@ $(document).ready(function(){
                             '<td>' +
                                 '<textarea class="form-control" id="device-' + n + '[problem]" name="device-' + n + '[problem]"></textarea>' +
                             '</td>' +
+                            
+                            
                             '<td>' +
                                 '<textarea class="form-control" id="device-' + n + '[model]" name="device-' + n + '[model]"></textarea>' +
                             '</td>' +
+                            
                             '<td>' +
                                 
                                 '<div class="form-group">' +
@@ -217,48 +219,5 @@ $(document).ready(function(){
         console.log(categories);
         
     });
-    
-    
-    /*** Add Devices to Party - Ajax Page for Hosts ***//*
-    $('button.add-info-btn').click(function(e){
-        e.preventDefault();
-        
-        var party = $(this).data('party'),
-            partydata,
-            categories; 
-            
-        
-        // get party info 
-        $.ajax({
-            async: false,
-            url: '/ajax/party_data',
-            data: {id: party},
-            dataType: "json",
-            success: function(r){
-                partydata = r;
-            }
-        });
-        
-        
-        
-            
-        // build page 
-        var page =  '<div class="wrap-device-input container-fluid">' +
-                        '<div class="device-input container">' +
-                            '<header class="device-input-header row">' +
-                                '<div class="col-md-1"></div>' +
-                                '<div class="col-md-4">' + partydata.event_date + '<br />' + partydata.location + '</div>' +
-                                '<div class="col-md-6"></div>' +
-                                '<div class="col-md-1"><button class="btn btn-default close"><i class="fa fa-times"></i></div>' +
-                            '</header>' +
-                        '</div>' +
-                    '<div>';
-        $('body').append(page);
-        $('.wrap-device-input .close').click(function(e){
-            $('.wrap-device-input').remove();
-        });
-    });
-    */
-    
     
 });

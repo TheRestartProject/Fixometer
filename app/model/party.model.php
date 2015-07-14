@@ -30,7 +30,7 @@
         }
         
         
-        public function findThis($id) {
+        public function findThis($id, $devices = false) {
             
             $sql = 'SELECT
                         `e`.`idevents` AS `id`,
@@ -41,6 +41,7 @@
                         `e`.`latitude`,
                         `e`.`longitude`,
                         `e`.`pax`,
+                        `e`.`volunteers`,
                         `e`.`hours`,
                         `g`.`name` AS `group_name`                        
                     FROM `events` AS `e`
@@ -53,8 +54,14 @@
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $q = $stmt->execute();
             
-            return $stmt->fetch(PDO::FETCH_OBJ);
-        
+            $party =  $stmt->fetch(PDO::FETCH_OBJ);
+            
+            if($devices){
+                $devices = new Device;
+                $party->devices = $devices->ofThisEvent($party->id);
+            }
+            
+            return $party;
         }
         
         public function createUserList($party, $users){

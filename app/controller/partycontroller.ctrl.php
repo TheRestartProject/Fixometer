@@ -21,6 +21,7 @@
                 if(hasRole($this->user, 'Host')){
                     $Group = new Group;
                     $group = $Group->ofThisUser($this->user->id);
+                    $this->set('usergroup', $group[0]);
                     $parties = $this->Party->ofThisGroup($group[0]->idgroups);
                     
                     foreach($parties as $party){
@@ -235,15 +236,74 @@
                 $Device     = new Device;
                 $Category   = new Category;
                 
-                $party      = $this->Party->findThis($id);
-                $devices    = $Device->find(array('event' => $id));
+                
+                if(isset($_POST) && !empty($_POST) && is_numeric($_POST['idparty']) && ($_POST['idparty'] > 0) ) {
+                    $partydata = $_POST['party'];
+                    $idparty = $_POST['idparty'];
+                    $this->Party->update($partydata, $idparty);
+                
+                
+                        
+                }
+                
+                $party      = $this->Party->findThis($id, true);
                 $categories = $Category->listed();
                 
+                $party->co2 = 0;
+                $party->fixed_devices = 0;
+                $party->repairable_devices = 0;
+                $party->dead_devices = 0;
+                
+                
+                if(!empty($party->devices)){ 
+                    foreach($party->devices as $device){
+                        
+                        $party->co2 += $device->footprint;
+                        
+                        switch($device->repair_status){
+                            case 1:
+                                $party->fixed_devices++;
+                                break;
+                            case 2:
+                                $party->repairable_devices++;
+                                break;
+                            case 3:
+                                $party->dead_devices++;
+                                break;
+                        }
+                    }
+                }
+                
+                $party->co2 = number_format(round($party->co2 * $Device->displacement), 0, '.' , ',');    
+                
                 $this->set('party', $party);
-                $this->set('devices', $devices);
+                $this->set('devices', $party->devices);
                 $this->set('categories', $categories);
                 
+            }
+        }
+        
+        
+        public function delete($id){
+            if(hasRole($this->user, 'Administrator') || (hasRole($this->user, 'Host') && in_array($id, $this->hostParties))){
+                $r = $this->Party->delete($id);
+                if(!$r){
+                    $response = 'd:err';
+                }
+                else {
+                    $response = 'd:ok';
+                }
                 
+                if(hasRole($this->user, 'Host')){
+                    header('Location: /host/index/' . $response);
+                }
+                else {
+                    header('Location: /party/index/' . $response);    
+                }
+                
+            }
+            else {
+                header('Location: /user/forbidden');
             }
         }
     }

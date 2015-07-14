@@ -1,4 +1,11 @@
-        <?php if(isset($header) && $header == true) { ?> 
+        <?php
+        if(hasRole($user, 'Host')){
+            
+            include(ROOT . DS . 'app' . DS . 'view' . DS . 'host' . DS .'header.php');
+            
+        } else {
+        
+        if(isset($header) && $header == true) { ?> 
         <nav class="navbar fixed-top">
         
             <div class="container-fluid">
@@ -98,3 +105,5 @@
             
         </nav>
         <?php } ?>
+        
+    <?php } ?>

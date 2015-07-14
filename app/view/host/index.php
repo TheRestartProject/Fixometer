@@ -64,8 +64,8 @@
                         <span clasS="location"><?php echo $party->location; ?></span>      
                     </div>
                     <div class="links">
-                        <a href="/party/edit/<?php echo $party->idevents; ?>"><i class="fa fa-edit"></i> edit...</a><br />
-                        <a href="#"><i class="fa fa-trash"></i> delete...</a><br />
+                        <a href="/party/edit/<?php echo $party->idevents; ?>" class="btn btn-default btn-sm btn-block"><i class="fa fa-edit"></i> edit</a>
+                        <a href="/party/delete/<?php echo $party->idevents; ?>" class="btn btn-danger btn-sm btn-block delete-control"><i class="fa fa-trash"></i> delete</a>
                     </div>
                 </div>
             </div>
@@ -107,9 +107,9 @@
                     
                     <div class="no-data">
                         
-                        <div style="width: 16%; float: left; clear: none; ">&nbsp;</div>
+                        <div style="width: 16.6666%; float: left; clear: none; ">&nbsp;</div>
                         
-                        <button class="btn btn-primary btn-lg pull-left">
+                        <button class="btn btn-primary btn-lg pull-left add-info-btn">
                             <i class="fa fa-cloud-upload"></i> Add Information
                         </button>
                         
@@ -134,8 +134,8 @@
                 </div>
             </a>
             <?php } else {  ?>
-            <a class="media party">
-                
+            
+            <a class="media party"  href="/party/manage/<?php echo $party->idevents; ?>">
                 <div class="media-left">
                     <img class="media-object" alt="The Restart Project: Logo" src="/assets/images/logo_mini.png">        
                 </div>
@@ -171,14 +171,12 @@
                             
                         </div>
                         
-                        <div class="stat">
-                            
+                        <div class="stat">                            
                             <div class="footprint">
                                 <?php echo $party->co2; ?>
                                 <span class="subtext">kg of CO<sub>2</sub></span>
                             </div>
                         </div>
-                        
                         
                         <div class="stat fixed">
                             <div class="col"><i class="status mid fixed"></i></div>
