@@ -235,7 +235,7 @@
                 
                 $Device     = new Device;
                 $Category   = new Category;
-                
+                $User       = new User;
                 
                 if(isset($_POST) && !empty($_POST) && is_numeric($_POST['idparty']) && ($_POST['idparty'] > 0) ) {
                     $partydata = $_POST['party'];
@@ -248,6 +248,8 @@
                 
                 $party      = $this->Party->findThis($id, true);
                 $categories = $Category->listed();
+                $restarters = $User->find(array('idroles' => 4));
+                
                 
                 $party->co2 = 0;
                 $party->fixed_devices = 0;
@@ -279,7 +281,7 @@
                 $this->set('party', $party);
                 $this->set('devices', $party->devices);
                 $this->set('categories', $categories);
-                
+                $this->set('restarters', $restarters);
             }
         }
         

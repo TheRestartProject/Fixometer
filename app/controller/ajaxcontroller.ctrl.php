@@ -28,6 +28,29 @@
             }
         }
         
+        public function restarters(){
+            $Auth = new Auth($url);
+            if(!$Auth->isLoggedIn()){
+                header('Location: /user/login');
+            }
+            else {
+                
+                $user = $Auth->getProfile();
+                $this->user = $user;
+                $this->set('user', $user);
+            
+                $Users = new User;
+                $restarters = $Users->find(array('idroles' => 4));
+                
+                $response = '';    
+                foreach($restarters as $c){ 
+                    $response .= '<option value="' . $c->idusers . '">' .  $c->name . '</option>';
+                }
+             
+                echo $response;
+            }
+        }
+        
         public function group_locations() {
             $Groups = new Group;
             $groups = $Groups->findAll();

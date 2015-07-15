@@ -208,7 +208,18 @@
                                     </div>
                                 </div>
                             </td>
-                            <td></td>
+                            <td>
+                                
+                                <div class="form-group">
+                                    <select name="device-<?php echo $i; ?>[repaired_by]" id="device-<?php echo $i; ?>[repaired_by]"  class="selectpicker form-control" data-live-search="true" title="Choose Restarter...">
+                                        <option></option>
+                                        <?php foreach($restarters as $r){ ?>
+                                        <option value="<?php echo $r->idusers; ?>" <?php echo ($r->idusers == $devices[$i-1]->repaired_by ? ' selected ' : '' ); ?>><?php echo $r->name; ?></option>                                        
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                                
+                            </td>
                         </tr>
                         <?php 
                             }
@@ -226,7 +237,8 @@
                             <td><?php echo $i; ?>.</td>            
                             <td>
                                 <div class="form-group">
-                                    <select id="device-<?php echo $i; ?>[category]" name="device-<?php echo $i; ?>[category]" class="selectpicker form-control" data-live-search="true">
+                                    <select id="device-<?php echo $i; ?>[category]" name="device-<?php echo $i; ?>[category]" class="selectpicker form-control" data-live-search="true" title="Choose category...">
+                                        <option></option>
                                         <?php foreach($categories as $cluster){ ?>
                                         <optgroup label="<?php echo $cluster->name; ?>">
                                             <?php foreach($cluster->categories as $c){ ?>
@@ -241,7 +253,13 @@
                                 <textarea class="form-control" id="device-<?php echo $i; ?>[problem]" name="device-<?php echo $i; ?>[problem]"></textarea>
                             </td>
                             <td>
-                                <textarea class="form-control" id="device-<?php echo $i; ?>[model]" name="device-<?php echo $i; ?>[model]"></textarea>
+                                 <div class="form-group">
+                                    <input type="text" name="device-<?php echo $i; ?>[brand]" id="device-<?php echo $i; ?>[brand]" class="form-control" placeholder="Brand...">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <input type="text" name="device-<?php echo $i; ?>[model]" id="device-<?php echo $i; ?>[model]" class="form-control" placeholder="Model..." >
+                                </div>
                             </td>
                             <td>
                                 <div class="form-group">
@@ -283,17 +301,27 @@
                                 <div class="form-group">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="device-<?php echo $i; ?>[spare_parts]" id="spare_parts_1" value="1"> Yes
+                                            <input type="radio" name="device-<?php echo $i; ?>[spare_parts]" id="device-<?php echo $i; ?>[spare_parts_1]" value="1"> Yes
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="device-<?php echo $i; ?>[spare_parts]" id="spare_parts_2" value="2" checked> No
+                                            <input type="radio" name="device-<?php echo $i; ?>[spare_parts]" id="device-<?php echo $i; ?>[spare_parts_2]" value="2" checked> No
                                         </label>
                                     </div>
                                 </div>
                             </td>
-                            <td></td>
+                            <td>
+                                <div class="form-group">
+                                    <select name="device-<?php echo $i; ?>[restarter]" id="device-<?php echo $i; ?>[restarter]"  class="selectpicker form-control" data-live-search="true" title="Choose Restarter...">
+                                        <option></option>
+                                        <?php foreach($restarters as $r){ ?>
+                                        <option value="<?php echo $r->idusers; ?>"><?php echo $r->name; ?></option>
+                                        
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            </td>
                         </tr>    
                         <?php } ?>
                     </tbody>

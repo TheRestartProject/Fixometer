@@ -45,10 +45,12 @@
             
             $stmt = $this->database->prepare($sql);
 
-            
+            //echo $sql;
             foreach($params as $field => &$value){
                 $stmt->bindParam(':'.$field, $value);
             }
+            
+            
             
             $q = $stmt->execute();
             

@@ -11,7 +11,8 @@
                             'restarters_in_group',
                             'group_locations',
                             'party_data',
-                            'category_list'
+                            'category_list',
+                            'restarters',
                             );
         
         function __construct($controller,$action) {

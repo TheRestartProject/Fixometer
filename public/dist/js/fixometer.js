@@ -125,6 +125,7 @@ $(document).ready(function(){
         
         var rows = $('#device-table > tbody > tr').length,
             categories = null,
+            restarters = null,
             n = rows + 1;
              
         
@@ -139,6 +140,18 @@ $(document).ready(function(){
                 categories = r;
             }
         });
+        
+        
+        $.ajax({
+            async: false,
+            url: '/ajax/restarters',
+            data: {},
+            dataType: "html",
+            success: function(r){
+                restarters = r;
+            }
+        });
+        
         
         var tablerow = '<tr>' + 
                             '<td>' + n + '.</td>'+
@@ -209,7 +222,15 @@ $(document).ready(function(){
                                     '</div>' +
                                 '</div>' +
                             '</td>' +
-                            '<td></td>' +
+                            '<td>' +
+                                '<div class="form-group">' + 
+                                    '<select name="device-' + n + '[restarter]" id="device-' + n + '[restarter]"  class="selectpicker form-control" data-live-search="true" title="Choose Restarter...">' + 
+                                        '<option></option>' + 
+                                        restarters + 
+                                    '</select>' + 
+                                '</div>' + 
+                            
+                            '</td>' +
                         '</tr>';
         
         $('#device-table tbody').append(tablerow);
