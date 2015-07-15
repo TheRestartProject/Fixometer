@@ -153,57 +153,61 @@ $(document).ready(function(){
         });
         
         
-        var tablerow = '<tr>' + 
+        var tablerow =  '<tr>' + 
                             '<td>' + n + '.</td>'+
                             '<td>' +
                                 '<div class="form-group">' +
-                                    '<select id="device-' + n + '[category]" name="device-' + n + '[category]" class="selectpicker form-control" data-live-search="true">' +
+                                    '<select id="device[' + n +'][category]" name="device[' + n + '][category]" class="selectpicker form-control" data-live-search="true" tite="Choose category...">' +
+                                    '<option></option>' +
                                     categories + 
                                     '</select>' +
                                 '</div>' +
                             '</td>' +            
                             '<td>' +
-                                '<textarea class="form-control" id="device-' + n + '[problem]" name="device-' + n + '[problem]"></textarea>' +
+                                '<textarea class="form-control" id="device[' + n +'][problem]" name="device[' + n +'][problem]"></textarea>' +
                             '</td>' +
-                            
-                            
-                            '<td>' +
-                                '<textarea class="form-control" id="device-' + n + '[model]" name="device-' + n + '[model]"></textarea>' +
-                            '</td>' +
-                            
+                            '<td>' +                                
+                                '<div class="form-group">' +
+                                    '<input type="text" name="device[' + n +'][brand]" id="device[' + n +'][brand]" class="form-control" placeholder="Brand...">' +
+                                '</div>' +
+                                
+                                '<div class="form-group">' +
+                                    '<input type="text" name="device[' + n +'][model]" id="device[' + n +'][model]" class="form-control" placeholder="Model...">' +
+                                '</div>' +
+                            '</td>' +                            
                             '<td>' +
                                 
                                 '<div class="form-group">' +
                                     '<div class="radio">' +                                            
                                         '<label>' +
-                                            '<input type="radio" name="device-' + n + '[repair_status]" id="device-' + n + '[repair_status_1]" value="1" checked> Fixed' +
+                                            '<input type="radio" name="device[' + n +'][repair_status]" id="device[' + n +'][repair_status_1]" value="1" checked> Fixed' +
                                         '</label>' +
                                     '</div>' +
                                     '<div class="radio">' +
                                         '<label>' +
-                                            '<input type="radio" class="repairable" data-target-details="#repairable-details-' + n + '" name="device-' + n + '[repair_status]" id="device-' + n + '[repair_status_2]" value="2"> Repairable' +
+                                            '<input type="radio" class="repairable" data-target-details="#repairable-details[' + n +']" name="device[' + n +'][repair_status]" id="device[' + n +'][repair_status_2]" value="2"> Repairable' +
                                         '</label>' +
                                     '</div>' +
-                                    '<div id="repairable-details-' + n + '" class="repairable-details">' +
+                                    '<div id="repairable-details[' + n +']" class="repairable-details">' +
                                         '<div class="checkbox">' +
                                             '<label>' +
-                                                '<input type="checkbox" name="device-' + n + '[more_time_needed]" id="device-' + n + '[more_time_needed]" value="1"> More time needed' +
+                                                '<input type="checkbox" name="device[' + n +'][more_time_needed]" id="device[' + n +'][more_time_needed]" value="1"> More time needed' +
                                             '</label>' +
                                         '</div>' +
                                         '<div class="checkbox">' +
                                             '<label>' +
-                                                '<input type="checkbox" name="device-' + n + '[professional_help]" id="device-' + n + '[professional_help]" value="1"> Professional help' +
+                                                '<input type="checkbox" name="device[' + n +'][professional_help]" id="device[' + n +'][professional_help]" value="1"> Professional help' +
                                             '</label>' +
                                         '</div>' +
                                         '<div class="checkbox">' +
                                             '<label>' +
-                                                '<input type="checkbox" name="device-' + n + '[do_it_yourself]" id="device-' + n + '[do_it_yourself]" value="1"> Do it yourself' +
+                                                '<input type="checkbox" name="device[' + n +'][do_it_yourself]" id="device[' + n +'][do_it_yourself]" value="1"> Do it yourself' +
                                             '</label>' +
                                         '</div>' +
                                     '</div>' +
                                     '<div class="radio">' +
                                         '<label>' +
-                                            '<input type="radio" name="device-' + n + '[repair_status]" id="device-' + n + '[repair_status_3]" value="3"> End of lifecycle' +
+                                            '<input type="radio" name="device[' + n +'][repair_status]" id="device[' + n +'][repair_status_3]" value="3"> End of lifecycle' +
                                         '</label>' +
                                     '</div>' +
                                 '</div>' +
@@ -212,24 +216,23 @@ $(document).ready(function(){
                                 '<div class="form-group">' +
                                     '<div class="radio">' +
                                         '<label>' +
-                                            '<input type="radio" name="device-' + n + '[spare_parts]" id="spare_parts_1" value="1"> Yes' +
+                                            '<input type="radio" name="device[' + n +'][spare_parts]" id="spare_parts_1" value="1"> Yes' +
                                         '</label>' +
                                     '</div>' +
                                     '<div class="radio">' +
                                         '<label>' +
-                                            '<input type="radio" name="device-' + n + '[spare_parts]" id="spare_parts_2" value="2" checked> No' +
+                                            '<input type="radio" name="device[' + n +'][spare_parts]" id="spare_parts_2" value="2" checked> No' +
                                         '</label>' +
                                     '</div>' +
                                 '</div>' +
                             '</td>' +
                             '<td>' +
                                 '<div class="form-group">' + 
-                                    '<select name="device-' + n + '[restarter]" id="device-' + n + '[restarter]"  class="selectpicker form-control" data-live-search="true" title="Choose Restarter...">' + 
+                                    '<select name="device[' + n +'][restarter]" id="device[' + n +'][restarter]"  class="selectpicker form-control" data-live-search="true" title="Choose Restarter...">' + 
                                         '<option></option>' + 
                                         restarters + 
                                     '</select>' + 
-                                '</div>' + 
-                            
+                                '</div>' +                             
                             '</td>' +
                         '</tr>';
         

@@ -238,10 +238,51 @@
                 $User       = new User;
                 
                 if(isset($_POST) && !empty($_POST) && is_numeric($_POST['idparty']) && ($_POST['idparty'] > 0) ) {
+                    $response = null;
+                    
                     $partydata = $_POST['party'];
                     $idparty = $_POST['idparty'];
                     $this->Party->update($partydata, $idparty);
-                
+                    
+                    if(isset($_POST['device'])){
+                        $devices = $_POST['device'];
+                        
+                        foreach ($devices as $i => $device){
+                            
+                            $device['event'] = $id;
+                            
+                            
+                            if(isset($device['id']) && is_numeric($device['id'])){
+                                $method = 'update';
+                                $iddevice = $device['id'];
+                                unset($device['id']);
+                            }
+                            
+                            if(!isset($device['category']) || empty($device['category'])){
+                                $response['danger'] = 'Category needed! (device # ' . $i . ')';
+                            }
+                            
+                            if(!isset($device['repaired_by']) || empty($device['repaired_by'])){
+                                $device['repaired_by'] = 29;
+                            }
+                            
+                            if(is_null($response)){
+                                if($method == 'update'){
+                                    $Device->update($device, $iddevice);
+                                }
+                                
+                                else {
+                                    $device['category_creation'] = $device['category'];
+                                    $Device->create($device);
+                                }
+                                
+                                $response['success'] = 'Party info updated!';
+                            }
+                            else {
+                                $this->set('response', $response);
+                            }
+                        }
+                    }
                 
                         
                 }
