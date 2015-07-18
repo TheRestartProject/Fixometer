@@ -7,6 +7,19 @@
             
             $this->set('title', 'Login');
             
+            // set up stuff for engagin login page
+                    $Device = new Device;
+                    $Party = new Party;
+                    
+                    $weights= $Device->getWeights();
+                    $devices= $Device->statusCount();
+                    
+                    $this->set('weights', $weights);
+                    $this->set('devices', $devices);
+                    
+                    $this->set('nextparties', $Party->findNextParties());
+                    $this->set('allparties', $Party->findAll());
+                    
             if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST)){
                 
                 $response = array();
@@ -43,7 +56,6 @@
                         }
                         
                         if($pass == true){
-                            
                             if(hasRole($user[0], 'Host')){
                                 header('Location: /host');
                             }
@@ -62,6 +74,7 @@
                 else {
                     $this->set('response', $response);
                 }
+                
             }
         }
         

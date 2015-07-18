@@ -93,6 +93,7 @@
                 $party->co2 = number_format(round($party->co2 * $Device->displacement), 0, '.' , ',');    
             }
             
+            $weights = $Device->getWeights($group->idgroups);
             $devices = $Device->ofThisGroup($group->idgroups);
             
             foreach($devices as $i => $device){
@@ -108,6 +109,7 @@
             $this->set('allparties', $allparties);
             
             $this->set('devices', $Device->ofThisGroup($group->idgroups)); 
+            $this->set('weights', $weights);
             
             $this->set('device_count_status', $Device->statusCount());            
             $this->set('group_device_count_status', $Device->statusCount($group->idgroups));

@@ -84,7 +84,6 @@
                 </div>
             </div>
             <div class="col-md-12">
-                
                 <table class="table " id="device-table">
                     <thead>
                         <tr>
@@ -94,7 +93,6 @@
                             <th>Brand/Model</th>
                             <th>Repair Status</th>
                             <th>Spare Parts?</th>
-                            <th>Restarter</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -197,30 +195,15 @@
                             </td>
                             <td>
                                 <div class="form-group">
-                                    <div class="radio">
+                                    <div class="checkbox">
                                         <label>
-                                            <input type="radio" name="device[<?php echo $i; ?>][spare_parts]" id="device[<?php echo $i; ?>][spare_parts_1]" value="1" <?php echo ($devices[$i-1]->spare_parts == 1 ? 'checked' : ''); ?>> Yes
-                                        </label>
-                                    </div>
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="device[<?php echo $i; ?>][spare_parts]" id="device[<?php echo $i; ?>][spare_parts_2]" value="2" <?php echo ($devices[$i-1]->spare_parts == 2 ? 'checked' : ''); ?>> No
+                                            <input type="hidden" name="device[<?php echo $i; ?>][spare_parts]" id="device[<?php echo $i; ?>][spare_parts_2]" value="2">
+                                            <input type="checkbox" name="device[<?php echo $i; ?>][spare_parts]" id="device[<?php echo $i; ?>][spare_parts_1]" value="1" <?php echo ($devices[$i-1]->spare_parts == 1 ? 'checked' : ''); ?>> Yes
                                         </label>
                                     </div>
                                 </div>
                             </td>
-                            <td>
-                                
-                                <div class="form-group">
-                                    <select name="device[<?php echo $i; ?>][repaired_by]" id="device[<?php echo $i; ?>][repaired_by]"  class="selectpicker form-control" data-live-search="true" title="Choose Restarter...">
-                                        <option></option>
-                                        <?php foreach($restarters as $r){ ?>
-                                        <option value="<?php echo $r->idusers; ?>" <?php echo ($r->idusers == $devices[$i-1]->repaired_by ? ' selected ' : '' ); ?>><?php echo $r->name; ?></option>                                        
-                                        <?php } ?>
-                                    </select>
-                                </div>
-                                
-                            </td>
+                            
                         </tr>
                         <?php 
                             }
@@ -300,9 +283,10 @@
                             </td>
                             <td>
                                 <div class="form-group">
-                                    <div class="radio">
+                                    <div class="checkbox">
                                         <label>
-                                            <input type="radio" name="device[<?php echo $i; ?>][spare_parts]" id="device[<?php echo $i; ?>][spare_parts_1]" value="1"> Yes
+                                            <input type="hidden" name="device[<?php echo $i; ?>][spare_parts]" id="device[<?php echo $i; ?>][spare_parts_2]" value="2">
+                                            <input type="checkbox" name="device[<?php echo $i; ?>][spare_parts]" id="device[<?php echo $i; ?>][spare_parts_1]" value="1"> Yes
                                         </label>
                                     </div>
                                     <div class="radio">
@@ -312,16 +296,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td>
-                                <div class="form-group">
-                                    <select name="device[<?php echo $i; ?>][repaired_by]" id="device[<?php echo $i; ?>][repaired_by]"  class="selectpicker form-control" data-live-search="true" title="Choose Restarter...">
-                                        <option></option>
-                                        <?php foreach($restarters as $r){ ?>
-                                        <option value="<?php echo $r->idusers; ?>"><?php echo $r->name; ?></option>                                        
-                                        <?php } ?>
-                                    </select>
-                                </div>
-                            </td>
+                            x
                         </tr>    
                         <?php } ?>
                     </tbody>

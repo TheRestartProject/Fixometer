@@ -36,6 +36,7 @@ $(document).ready(function(){
         toolbar:    [
             ['style', ['bold', 'italic', 'underline', 'clear']],
             ['para', ['ul', 'ol', 'paragraph']],
+            ['insert', ['link', 'hr']],
         ]
     });
     
@@ -129,8 +130,6 @@ $(document).ready(function(){
             n = rows + 1;
              
         
-        console.log('ROWS : ' + rows);
-        
         $.ajax({
             async: false,
             url: '/ajax/category_list',
@@ -141,7 +140,7 @@ $(document).ready(function(){
             }
         });
         
-        
+        /*
         $.ajax({
             async: false,
             url: '/ajax/restarters',
@@ -151,7 +150,7 @@ $(document).ready(function(){
                 restarters = r;
             }
         });
-        
+        */
         
         var tablerow =  '<tr>' + 
                             '<td>' + n + '.</td>'+
@@ -214,34 +213,18 @@ $(document).ready(function(){
                             '</td>' +
                             '<td>' +
                                 '<div class="form-group">' +
-                                    '<div class="radio">' +
+                                    '<div class="checkbox">' +
                                         '<label>' +
-                                            '<input type="radio" name="device[' + n +'][spare_parts]" id="spare_parts_1" value="1"> Yes' +
-                                        '</label>' +
-                                    '</div>' +
-                                    '<div class="radio">' +
-                                        '<label>' +
-                                            '<input type="radio" name="device[' + n +'][spare_parts]" id="spare_parts_2" value="2" checked> No' +
+                                            '<input type="hidden" name="device[' + n +'][spare_parts]" id="device[' + n +'][spare_parts_2]" value="2">' +
+                                            '<input type="checkbox" name="device[' + n +'][spare_parts]" id="device[' + n +'][spare_parts_1]" value="1"> Yes' +
                                         '</label>' +
                                     '</div>' +
                                 '</div>' +
                             '</td>' +
-                            '<td>' +
-                                '<div class="form-group">' + 
-                                    '<select name="device[' + n +'][restarter]" id="device[' + n +'][restarter]"  class="selectpicker form-control" data-live-search="true" title="Choose Restarter...">' + 
-                                        '<option></option>' + 
-                                        restarters + 
-                                    '</select>' + 
-                                '</div>' +                             
-                            '</td>' +
                         '</tr>';
         
         $('#device-table tbody').append(tablerow);
-        
         $('.selectpicker').selectpicker();
-        
-        console.log(categories);
-        
     });
     
 });

@@ -208,7 +208,86 @@
         <div class="col-md-12">
             <h2>Group Achievements</h2>
         </div>
+    </section>
+    
+    <!-- CO2 stats -->
+    <section class="row">
+        <div class="col-md-12">
+            <h3>Impact</h3>
+        </div>
         
+        <div class="col-md-4">
+            <h5 class="text-center">e-Waste Prevented</h5> 
+            
+            <span class="largetext">
+                <?php echo number_format(round($weights[0]->total_weights), 0, '.', ','); ?> kg 
+            </span>
+            
+        </div>
+        
+        <div class="col-md-4">
+            <h5 class="text-center">CO<sub>2</sub> de-sequestered to date</h5> 
+            <?php
+                $sum = 0;
+                foreach($year_data as $y){
+                    $sum += $y->co2;
+                }
+            ?>
+            <span class="largetext">
+                <?php echo number_format(round($sum), 0, '.', ','); ?> kg of CO<sub>2</sub> 
+            </span>
+            <span class="subtext">Total: <?php echo number_format(round($co2Total), 0, '.', ','); ?></span>
+            
+            <hr />
+            
+            <h5 class="text-center">CO<sub>2</sub> de-sequestered this year</h5> 
+            <?php
+                
+                foreach($year_data as $y){
+                    if($y->year == date('Y', time())) {
+            ?>
+            <span class="largetext">
+                <?php echo number_format(round($y->co2), 0, '.', ','); ?> kg of CO<sub>2</sub> 
+            </span>
+            <span class="subtext">Total: <?php echo number_format(round($co2ThisYear), 0, '.', ','); ?></span>
+            <?php 
+                    }
+                }
+            ?>
+            
+        </div>
+        <div class="col-md-4">
+            <h4 class="text-center">CO<sub>2</sub> de-sequestered per year</h4>
+            <canvas id="co2ByYear" width="450" height="250"></canvas>
+            <script>
+                var data = {
+                    labels: ["<?php echo implode('", "', array_keys($bar_chart_stats)); ?>"],
+                    datasets: [
+                        {
+                        label: "CO<sub>2</sub> By Year",
+                        fillColor: "rgba(  3,148,166,0.5)",
+                        strokeColor: "rgba(  3,148,166,0.8)",
+                        highlightFill: "rgba(  3,148,166,0.75)",
+                        highlightStroke: "rgba(  3,148,166,1)",
+                        data: [<?php echo implode(', ', $bar_chart_stats); ?>]
+                        }
+                    ]
+                };
+                var opts = {
+                    barValueSpacing : 20   
+                };
+                var ctx = document.getElementById("co2ByYear").getContext("2d");
+                var theChart = new Chart(ctx).Bar(data, opts);
+           </script>
+            
+        </div>
+        
+    </section>
+
+    <hr />
+    
+    
+    <section class="row">
         <!-- Device count -->
         
         <div class="col-md-12">
@@ -256,67 +335,7 @@
     </section>
     
     <hr />
-    <!-- CO2 stats -->
-    <section class="row">
-        <div class="col-md-7">
-            <h5 class="text-center">CO<sub>2</sub> de-sequestered to date</h5> 
-            <?php
-                $sum = 0;
-                foreach($year_data as $y){
-                    $sum += $y->co2;
-                }
-            ?>
-            <span class="largetext">
-                <?php echo number_format(round($sum), 0, '.', ','); ?> kg of CO<sub>2</sub> 
-            </span>
-            <span class="subtext">Total: <?php echo number_format(round($co2Total), 0, '.', ','); ?></span>
-            
-            <hr />
-            
-            <h5 class="text-center">CO<sub>2</sub> de-sequestered this year</h5> 
-            <?php
-                
-                foreach($year_data as $y){
-                    if($y->year == date('Y', time())) {
-            ?>
-            <span class="largetext">
-                <?php echo number_format(round($y->co2), 0, '.', ','); ?> kg of CO<sub>2</sub> 
-            </span>
-            <span class="subtext">Total: <?php echo number_format(round($co2ThisYear), 0, '.', ','); ?></span>
-            <?php 
-                    }
-                }
-            ?>
-            
-        </div>
-        <div class="col-md-5">
-            <h4 class="text-center">CO<sub>2</sub> de-sequestered per year</h4>
-            <canvas id="co2ByYear" width="450" height="250"></canvas>
-            <script>
-                var data = {
-                    labels: ["<?php echo implode('", "', array_keys($bar_chart_stats)); ?>"],
-                    datasets: [
-                        {
-                        label: "CO<sub>2</sub> By Year",
-                        fillColor: "rgba(  3,148,166,0.5)",
-                        strokeColor: "rgba(  3,148,166,0.8)",
-                        highlightFill: "rgba(  3,148,166,0.75)",
-                        highlightStroke: "rgba(  3,148,166,1)",
-                        data: [<?php echo implode(', ', $bar_chart_stats); ?>]
-                        }
-                    ]
-                };
-                var opts = {
-                    barValueSpacing : 20   
-                };
-                var ctx = document.getElementById("co2ByYear").getContext("2d");
-                var theChart = new Chart(ctx).Bar(data, opts);
-           </script>
-            
-        </div>
-        
-    </section>
-
+    
     
     <!--categories-->
     <section class="row">
