@@ -28,28 +28,17 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <strong>My Profile</strong> <a href="/user/edit/<?php echo $profile->idusers; ?>" class="small"><i class="fa fa-edit"></i> Edit Profile...</a>
-            <div class="media">
-                <div class="media-left">
-                    <?php if(empty($profile->path)){ ?>
-                    <img src="http://www.lorempixum.com/80/80/people" alt="<?php echo $profile->name; ?> Image" class="profile-pic" />
-                    <?php } else { ?>
-                    <img src="/uploads/<?php echo $profile->path; ?>" width="80" height="80" alt="<?php echo $profile->name; ?> Image" class="profile-pic" />
-                    <?php } ?>
-                </div>
-                <div class="media-body">
-                    <h3 class="media-heading"><?php echo $profile->name; ?></h3>
-                </div>
-            </div>
-        </div>
+       
+       
+       
     </section>
     
     <!-- Upcoming Parties -->
     <section class="row parties">
         <header>
-        <div class="col-md-12">
-            <h2>Upcoming Restart Parties <a class="btn btn-primary btn-sm" href="/party/create"><i class="fa fa-plus"></i> New Party</a></h2>
+        <div class="col-md-12" id="upcomingparties">
+            <h2>Upcoming Restart Parties
+                <a class="btn btn-primary btn-sm" href="/party/create"><i class="fa fa-plus"></i> New Party</a></h2>
         </div>
         </header>
         <?php foreach($upcomingparties as $party){ ?>
@@ -72,28 +61,34 @@
             
         </div>
         <?php } ?>
-        
+        <div class="col-md-3 col-md-offset-9">
+            <a href="http://www.therestartproject.org/events">view all upcoming events</a>
+        </div>
     </section>
     
     
     <!-- Latest Parties -->
     <section class="row parties">
         <header>
-            <div class="col-md-12">
+            <div class="col-md-12"  id="allparties">
                 <h2>
-                    Latest Restart Parties
-                    <a href="#" data-target="#party-list" class="btn btn-default btn-sm defade"><i class="fa fa-list"></i> View All</a>
+                    All <?php echo $group->name; ?> Restart Parties
+                    
                 </h2>
             </div>
         </header>
         
-        <?php foreach($allparties as $party){ ?>
-        
         <div class="col-md-12 fader" id="party-list">
         
+        <?php
+            $nodata = 0;
+            foreach($allparties as $party){
+        ?>
         
-            <?php if($party->device_count < 1){ ?>
-            <a class="media no-data-wrap party"  href="/party/manage/<?php echo $party->idevents; ?>">
+        
+        
+            <?php if($party->device_count < 1){ $nodata++; ?>
+            <a class="media no-data-wrap party"  href="/party/manage/<?php echo $party->idevents; ?>" <?php echo ($nodata == 1 ? 'id="attention"' : ''); ?>>
                 
                 <div class="media-left">
                     <img class="media-object" alt="The Restart Project: Logo" src="/assets/images/logo_mini.png">        
@@ -107,7 +102,7 @@
                     
                     <div class="no-data">
                         
-                        <div style="width: 16.6666%; float: left; clear: none; ">&nbsp;</div>
+                        <div style="width: 16.2%; float: left; clear: none; ">&nbsp;</div>
                         
                         <button class="btn btn-primary btn-lg pull-left add-info-btn">
                             <i class="fa fa-cloud-upload"></i> Add Information
@@ -198,8 +193,9 @@
                 
             </a>
             <?php } ?>
-        </div>
         <?php } ?>
+        </div>
+        
     </section>
     
     
