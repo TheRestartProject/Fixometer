@@ -207,6 +207,41 @@
             
         }
         
+        public function countWasteByYear($group = null, $year = null) {
+            $sql = 'SELECT
+                        (ROUND(SUM(`c`.`weight`), 3)) AS `waste`,
+                        YEAR(`e`.`event_date`) AS `year`
+                    FROM `' . $this->table . '` AS `d` 
+                    INNER JOIN `events` AS `e`
+                        ON `d`.`event` = `e`.`idevents`
+                    INNER JOIN `categories` AS `c`
+                        ON `d`.`category` = `c`.`idcategories`
+                    WHERE `d`.`repair_status` = 1 ';
+                    
+            if(!is_null($group)){
+                $sql.=' AND `e`.`group` = :group ';
+            }
+            if(!is_null($year)){
+                $sql.=' AND YEAR(`e`.`event_date`) = :year ';
+            }
+            $sql.= ' GROUP BY `year` 
+                    ORDER BY `year` DESC';
+            $stmt = $this->database->prepare($sql);
+            
+            if(!is_null($group) && is_numeric($group)){
+                $stmt->bindParam(':group', $group, PDO::PARAM_INT);
+            }
+            if(!is_null($year) && is_numeric($year)){
+                $stmt->bindParam(':year', $year, PDO::PARAM_INT);
+            }
+            
+            $q = $stmt->execute();
+            if(!$q){
+                dbga($stmt->errorCode()); dbga($stmt->errorInfo() );
+            }
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+        }
+        
         public function findMostSeen($status = null, $cluster = null, $group = null){
             
             $sql = 'SELECT COUNT(`d`.`category`) AS `counter`, `c`.`name` FROM `' . $this->table . '` AS `d`

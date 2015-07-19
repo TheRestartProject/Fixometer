@@ -117,18 +117,34 @@
             // more stats...
             
             /** co2 counters **/
-            $co2_years = $Device->countCO2ByYear(1);
+            $co2_years = $Device->countCO2ByYear($group->idgroups);
             $this->set('year_data', $co2_years);
             $stats = array();
             foreach($co2_years as $year){
                 $stats[$year->year] = $year->co2;
             }
             $this->set('bar_chart_stats', array_reverse($stats, true));
+            
+            $waste_years = $Device->countWasteByYear($group->idgroups);
+            $this->set('waste_year_data', $waste_years);
+            $wstats = array();
+            foreach($waste_years as $year){
+                $wstats[$year->year] = $year->waste;
+            }
+            $this->set('waste_bar_chart_stats', array_reverse($wstats, true));
+            
+            
             $co2Total = $Device->getWeights();
             $co2ThisYear = $Device->countCO2ByYear(null, date('Y', time()));
             
             $this->set('co2Total', $co2Total[0]->total_footprints);
             $this->set('co2ThisYear', $co2ThisYear[0]->co2);
+            
+            $wasteThisYear = $Device->countWasteByYear(null, date('Y', time()));
+            
+            $this->set('wasteTotal', $co2Total[0]->total_weights);
+            $this->set('wasteThisYear', $wasteThisYear[0]->waste);
+            
             
             $clusters = array();
             

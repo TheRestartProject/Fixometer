@@ -217,11 +217,28 @@
         </div>
         
         <div class="col-md-4">
-            <h5 class="text-center">e-Waste Prevented</h5> 
+            <h5 class="text-center">e-Waste Prevented to date</h5> 
             
             <span class="largetext">
-                <?php echo number_format(round($weights[0]->total_weights), 0, '.', ','); ?> kg 
+                <?php echo number_format(round($wasteTotal), 0, '.', ','); ?> kg 
             </span>
+            <span class="subtext">Total: <?php echo number_format(round($wasteTotal), 0, '.', ','); ?></span>
+            <hr />
+            
+            <h5 class="text-center">e-Waste prevented this year</h5> 
+            <?php
+                
+                foreach($waste_year_data as $y){
+                    if($y->year == date('Y', time())) {
+            ?>
+            <span class="largetext">
+                <?php echo number_format(round($y->waste), 0, '.', ','); ?> kg 
+            </span>
+            <span class="subtext">Total: <?php echo number_format(round($wasteThisYear), 0, '.', ','); ?></span>
+            <?php 
+                    }
+                }
+            ?>
             
         </div>
         
@@ -257,7 +274,7 @@
             
         </div>
         <div class="col-md-4">
-            <h4 class="text-center">CO<sub>2</sub> de-sequestered per year</h4>
+            <h4 class="text-center">CO<sub>2</sub> and Waste de-sequestered per year</h4>
             <canvas id="co2ByYear" width="450" height="250"></canvas>
             <script>
                 var data = {
@@ -270,7 +287,15 @@
                         highlightFill: "rgba(  3,148,166,0.75)",
                         highlightStroke: "rgba(  3,148,166,1)",
                         data: [<?php echo implode(', ', $bar_chart_stats); ?>]
-                        }
+                        },
+                        {
+                        label: "Waste By Year",
+                        fillColor: "rgba(249,163, 63,0.5)",
+                        strokeColor: "rgba(249,163, 63,0.8)",
+                        highlightFill: "rgba(249,163, 63,0.75)",
+                        highlightStroke: "rgba(249,163, 63,1)",
+                        data: [<?php echo implode(', ', $waste_bar_chart_stats); ?>]
+                        },
                     ]
                 };
                 var opts = {
