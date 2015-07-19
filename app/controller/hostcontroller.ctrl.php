@@ -60,6 +60,9 @@
             
             $allparties = $Party->ofThisGroup($group->idgroups, true, true);
             
+            $participants = 0;
+            $hours_volunteered = 0;
+            
             $need_attention = 0;
             foreach($allparties as $i => $party){
                 if($party->device_count == 0){
@@ -71,7 +74,8 @@
                 $party->repairable_devices = 0;
                 $party->dead_devices = 0;
                 
-                
+                $participants += $party->pax;
+                $hours_volunteered += (($party->volunteers > 0 ? $party->volunteers * 3 : 12 ) + 9);
                 
                 foreach($party->devices as $device){
                     
@@ -92,6 +96,8 @@
                 
                 $party->co2 = number_format(round($party->co2 * $Device->displacement), 0, '.' , ',');    
             }
+            $this->set('pax', $participants);
+            $this->set('hours', $hours_volunteered);
             
             $weights = $Device->getWeights($group->idgroups);
             $devices = $Device->ofThisGroup($group->idgroups);

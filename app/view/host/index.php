@@ -12,7 +12,7 @@
     
     <!-- Profiles -->
     <section class="row profiles">
-        <div class="col-md-6">
+        <div class="col-md-3">
             <strong>My Group</strong> <a href="/group/edit/<?php echo $group->idgroups; ?>" class="small"><i class="fa fa-edit"></i> Edit Group...</a>
             <div class="media">
                 <div class="media-left">
@@ -28,8 +28,51 @@
                 </div>
             </div>
         </div>
-       
-       
+        
+        
+        <div class="col-md-9">
+            <div class="row" id="group-main-stats">
+                <div class="col">
+                    <h5>participants</h5>
+                    <span class="largetext"><?php echo $pax; ?></span>
+                </div>
+                
+                <div class="col">
+                    <h5>hours volunteered</h5>
+                    <span class="largetext"><?php echo $hours; ?></span>
+                </div>
+                
+                <div class="col">
+                    <h5>parties thrown</h5>
+                    <span class="largetext"><?php echo count($allparties); ?></span>
+                </div>
+                
+                <div class="col">
+                    <h5>waste prevented</h5>
+                    <?php
+                        $sum = 0;
+                        foreach($waste_year_data as $y){
+                            $sum += $y->waste;
+                        }
+                    ?>
+                    <span class="largetext">
+                        <?php echo number_format(round($sum), 0, '.', ','); ?> kg 
+                    </span>
+                </div>
+                
+                <div class="col">
+                    <h5>CO<sub>2</sub> emission prevented</h5>
+                    <?php
+                        $sum = 0;
+                        foreach($year_data as $y){
+                            $sum += $y->co2;
+                        }
+                    ?>
+                    <span class="largetext"><?php echo number_format(round($sum), 0, '.', ','); ?> kg</span>
+                </div>
+                
+            </div>
+        </div>
        
     </section>
     
@@ -214,9 +257,14 @@
         
         <div class="col-md-4">
             <h5 class="text-center">e-Waste Prevented to date</h5> 
-            
+            <?php
+                $sum = 0;
+                foreach($waste_year_data as $y){
+                    $sum += $y->waste;
+                }
+            ?>
             <span class="largetext">
-                <?php echo number_format(round($wasteTotal), 0, '.', ','); ?> kg 
+                <?php echo number_format(round($sum), 0, '.', ','); ?> kg 
             </span>
             <span class="subtext">Total: <?php echo number_format(round($wasteTotal), 0, '.', ','); ?></span>
             <hr />
@@ -351,13 +399,9 @@
                     </div>
                 </div>
             </div>
-        </div>
-        
-    </section>
-    
-    <hr />
-    
-    
+        </div>        
+    </section>    
+    <hr />    
     <!--categories-->
     <section class="row">
         <div class="col-md-12">
