@@ -17,10 +17,7 @@
                             <input type="text" name="name" id="name" class="form-control" <?php if(isset($error) && !empty($error) && !empty($udata)) echo 'value="'.$udata['name'].'"' ; ?>>
                             <?php if(isset($error) && isset($error['name']) && !empty($error['name'])) { echo '<span class="help-block text-danger">' . $error['name'] . '</span>'; } ?>
                         </div>
-                        <div class="form-group">
-                            <label for="frequency">Frequency:</label>
-                            <input type="text" name="frequency" id="frequency" class="form-control" <?php if(isset($error) && !empty($error) && !empty($udata)) echo 'value="'.$udata['frequency'].'"' ; ?>>
-                        </div>
+                        
                         <div class="form-group">
                             <label for="free_text">Description:</label>
                             <textarea class="form-control rte" rows="6" name="free_text" id="free_text"></textarea>
@@ -29,15 +26,8 @@
                     </div>
                     
                     <div class="col-md-6">
-                        
                         <div class="form-group">
-                            <label for="area">Area:</label>
-                            <input type="text" name="area" id="area" class="form-control" <?php if(isset($error) && !empty($error) && !empty($udata)) echo 'value="'.$udata['area'].'"' ; ?>>
-                        </div>
-                        
-                        
-                        <div class="form-group">
-                            <label for="location">Location:</label>
+                            <label for="location">Location: where do you keep your fixing tools and supplies?</label>
                             
                             <div class="input-group">
                                 <input type="text" name="location" id="location" class="form-control" <?php if(isset($error) && !empty($error) && !empty($udata)) echo 'value="'.$udata['location'].'"' ; ?>>
@@ -67,8 +57,9 @@
                             
                         </div>
                         <div class="form-group">
-                            <label for="images">Images:</label>
-                            <input type="file" class="form-control file" name="images[]" multiple="true" data-show-upload="false" data-show-caption="true">
+                            <label for="images">Image: </label>
+                            <input type="file" class="form-control file" name="image" multiple="true" data-show-upload="false" data-show-caption="true">
+                            <small>Icon, Avatar or Logo of the Group</small>
                         </div>
                     </div>
                     

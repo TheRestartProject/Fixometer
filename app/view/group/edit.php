@@ -17,10 +17,7 @@
                             <input type="text" name="name" id="name" class="form-control" value="<?php echo $formdata->name; ?>">
                             <?php if(isset($error) && isset($error['name']) && !empty($error['name'])) { echo '<span class="help-block text-danger">' . $error['name'] . '</span>'; } ?>
                         </div>
-                        <div class="form-group">
-                            <label for="frequency">Frequency:</label>
-                            <input type="text" name="frequency" id="frequency" class="form-control" value="<?php echo $formdata->frequency; ?>">
-                        </div>
+                        
                         
                         <div class="form-group">
                             <label for="free_text">Description:</label>
@@ -30,13 +27,10 @@
                     </div>
                     
                     <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="area">Area:</label>
-                            <input type="text" name="area" id="area" class="form-control" value="<?php echo $formdata->area; ?>">
-                        </div>
+                        
                         <div class="form-group">
                             
-                            <label for="location">Location:</label>
+                            <label for="location">Location: where do you keep your fixing tools and supplies?</label>
                             
                             <div class="input-group">
                                 <input type="text" name="location" id="location" class="form-control"  value="<?php echo $formdata->location; ?>">

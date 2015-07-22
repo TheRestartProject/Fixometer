@@ -317,10 +317,25 @@
             
         </div>
         <div class="col-md-4">
-            <h4 class="text-center">CO<sub>2</sub> and Waste de-sequestered per year</h4>
-            <canvas id="co2ByYear" width="450" height="250"></canvas>
+            <div id="chart-co2" class="charts">
+                <h4 class="text-center">CO<sub>2</sub> de-sequestered per year (kg)</h4>
+                <canvas id="co2ByYear" width="450" height="250"></canvas>                
+            </div>
+            <div id="chart-waste" class="charts">
+                <h4 class="text-center">eWaste prevented per year (kg)</h4>
+                <canvas id="wasteByYear" width="450" height="250"></canvas>
+            </div>
+            
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default btn-primary btn-sm switch-view active" data-family=".charts" data-target="#chart-co2">CO<sub>2</sub> de-sequestered</button>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default btn-primary btn-sm switch-view" data-family=".charts" data-target="#chart-waste">eWaste prevented</button>            
+                </div>
+            </div>
             <script>
-                var data = {
+                var data_co2 = {
                     labels: ["<?php echo implode('", "', array_keys($bar_chart_stats)); ?>"],
                     datasets: [
                         {
@@ -330,7 +345,13 @@
                         highlightFill: "rgba(  3,148,166,0.75)",
                         highlightStroke: "rgba(  3,148,166,1)",
                         data: [<?php echo implode(', ', $bar_chart_stats); ?>]
-                        },
+                        }
+                    ]
+                };
+                
+                var data_waste = {
+                    labels: ["<?php echo implode('", "', array_keys($waste_bar_chart_stats)); ?>"],
+                    datasets: [
                         {
                         label: "Waste By Year",
                         fillColor: "rgba(249,163, 63,0.5)",
@@ -338,14 +359,17 @@
                         highlightFill: "rgba(249,163, 63,0.75)",
                         highlightStroke: "rgba(249,163, 63,1)",
                         data: [<?php echo implode(', ', $waste_bar_chart_stats); ?>]
-                        },
+                        }
                     ]
-                };
+                        
+                }
                 var opts = {
                     barValueSpacing : 20   
                 };
-                var ctx = document.getElementById("co2ByYear").getContext("2d");
-                var theChart = new Chart(ctx).Bar(data, opts);
+                var ctx1 = document.getElementById("co2ByYear").getContext("2d");
+                var ctx2 = document.getElementById("wasteByYear").getContext("2d");
+                var theChart1 = new Chart(ctx1).Bar(data_co2, opts);
+                var theChart2 = new Chart(ctx2).Bar(data_waste, opts);
            </script>
             
         </div>
@@ -475,7 +499,7 @@
                 $c = 1;
                 foreach($clusters as $key => $cluster){
                 ?>
-                    <li><button class="btn btn-primary btn-sm <?php echo($c == 1 ? 'active' : ''); ?> switch-view" data-target="#<?php echo $key; ?>"><?php echo strtoupper($key); ?></button></li>
+                    <li><button class="btn btn-primary btn-sm <?php echo($c == 1 ? 'active' : ''); ?> switch-view" data-family=".bargroup" data-target="#<?php echo $key; ?>"><?php echo strtoupper($key); ?></button></li>
                 <?php
                 $c++;
                 }

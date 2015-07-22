@@ -10,7 +10,9 @@
                 <div class="col-md-12">
                     
                     <?php if(isset($response)) { printResponse($response); } ?>
-                    
+                    <div class="alert alert-info">
+                        <?php echo WDG_PUBLIC_INFO; ?>
+                    </div>
                     <form action="/party/create" method="post" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-md-6">
@@ -26,12 +28,25 @@
                                     <?php if(isset($error) && isset($error['start']) && !empty($error['start'])) { echo '<span class="help-block text-danger">' . $error['start'] . '</span>'; } ?>
                                 </div>
                                 
+                                
+                                
+                                
+                        
+                                <div class="form-group">
+                                    <label for="free_text">Description:</label>
+                                    <textarea class="form-control rte" rows="6" name="free_text" id="free_text"></textarea>
+                                </div>
+                                                        
+                            </div>
+                            
+                            <div class="col-md-6">
+                                
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group <?php if(isset($error) && isset($error['start']) && !empty($error['start'])) { echo "has-error"; } ?>">
                                             <label for="start">Start:</label>
                                             <div class="input-group time">
-                                                <input type="text" name="start" id="start" class="form-control datepicker">
+                                                <input type="text" name="start" id="start-pc" class="form-control time">
                                                 <span class="input-group-addon">
                                                     <i class="fa fa-clock-o"></i>
                                                 </span>
@@ -44,7 +59,7 @@
                                         <div class="form-group <?php if(isset($error) && isset($error['end']) && !empty($error['end'])) { echo "has-error"; } ?>">
                                             <label for="end">End:</label>
                                             <div class="input-group time">
-                                                <input type="text" name="end" id="end" class="form-control datepicker">
+                                                <input type="text" name="end" id="end-pc" class="form-control time">
                                                 <span class="input-group-addon">
                                                     <i class="fa fa-clock-o"></i>
                                                 </span>
@@ -56,27 +71,8 @@
                                     
                                 </div>
                                 
-                                
-                        
-                                <div class="form-group">
-                                    <label for="free_text">Description:</label>
-                                    <textarea class="form-control rte" rows="6" name="free_text" id="free_text"></textarea>
-                                </div>
-                                                        
-                            </div>
-                            
-                            <div class="col-md-6">
-                                <div class="form-group <?php if(isset($error) && isset($error['pax']) && !empty($error['pax'])) { echo "has-error"; } ?>">
-                                    <label for="pax">Participants (#):</label>
-                                    <input type="text" name="pax" id="pax" class="form-control">
-                                    <?php if(isset($error) && isset($error['pax']) && !empty($error['pax'])) { echo '<span class="help-block text-danger">' . $error['pax'] . '</span>'; } ?>
-                                </div>
-                                
-                                <div class="form-group <?php if(isset($error) && isset($error['volunteers']) && !empty($error['volunteers'])) { echo "has-error"; } ?>">
-                                    <label for="volunteers">Volunteers (#):</label>
-                                    <input type="text" name="volunteers" id="volunteers" class="form-control">
-                                    <?php if(isset($error) && isset($error['volunteers']) && !empty($error['volunteers'])) { echo '<span class="help-block text-danger">' . $error['volunteers'] . '</span>'; } ?>
-                                </div>
+                                    <input type="hidden" name="pax" id="pax" value="0">
+                                    <input type="hidden" name="volunteers" id="volunteers" value="0">
         
                                 <?php
                                 if(hasRole($user, 'Host')) {

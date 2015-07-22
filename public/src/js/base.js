@@ -8,33 +8,55 @@ $(document).ready(function(){
     
     
     /** startup datepickers **/
-    $('.date').datetimepicker({
+    $('input.date').datetimepicker({
                 icons: {
                     time: "fa fa-clock-o",
                     date: "fa fa-calendar",
                     up: "fa fa-arrow-up",
-                    down: "fa fa-arrow-down"
+                    down: "fa fa-arrow-down",
+                    previous: 'fa fa-chevron-left',
+                    next: 'fa fa-chevron-right',
+                    today: 'fa fa-screenshot',
+                    clear: 'fa fa-trash'
                 },
                 format: 'DD/MM/YYYY',
                 defaultDate: $(this).val()
             });
-    $('.time').datetimepicker({
+    $('input.time').datetimepicker({
             icons: {
                 time: "fa fa-clock-o",
                 date: "fa fa-calendar",
                 up: "fa fa-arrow-up",
-                down: "fa fa-arrow-down"
+                down: "fa fa-arrow-down",
+                previous: 'fa fa-chevron-left',
+                next: 'fa fa-chevron-right',
+                today: 'fa fa-screenshot',
+                clear: 'fa fa-trash'
             },
             format: 'HH:mm',
             defaultDate: $(this).val()
         
         });    
     
+    /** linking two times in party creation **/
+    
+    $("#start-pc").on("dp.change", function (e) {
+        //alert(e);
+        
+        var curtime = $(this).val(),
+            arrtime = curtime.split(':');
+        console.log(arrtime[0] + ' | ' + arrtime[1]);
+        
+        $('#end-pc').data("DateTimePicker").date(e.date.add(3, 'h'));
+    });
+    
+    $('#')
+    
     /** Rich Text Editors **/
     $('.rte').summernote({
         height:     300,
         toolbar:    [
-            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['style', ['style','bold', 'italic', 'underline', 'clear']],
             ['para', ['ul', 'ol', 'paragraph']],
             ['insert', ['link', 'hr']],
         ]
@@ -110,11 +132,12 @@ $(document).ready(function(){
     $('.switch-view').click(function(e){
         e.preventDefault();
         var target = $(this).data('target');
+        var family = $(this).data('family');
         
         $('.switch-view').removeClass('active');
         $(this).addClass('active');
         
-        $('.bargroup').removeClass('show').addClass('hide');
+        $(family).removeClass('show').addClass('hide');
         $(target).addClass('show');
         
     });
@@ -226,5 +249,9 @@ $(document).ready(function(){
         $('#device-table tbody').append(tablerow);
         $('.selectpicker').selectpicker();
     });
+    
+    /* manage needed visibility to load correctly charts (host dahsboard) */ 
+    $('.charts:first-child').addClass('show');
+    $('.charts:not(:first-child)').addClass('hide');
     
 });

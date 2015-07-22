@@ -3,7 +3,7 @@
         <div class="login-form">
             <h1 class="text-center">FIX-O-METER</h1>
             <h3 class="text-center">login</h3>
-            
+            <p class="text-center">Welcome to our community space, where you can share upcoming Restart Parties and track their social and environmental impact. By doing so, we can empower and motivate at a local level, but also build global momentum for a change.</p>
             <?php if(isset($response)) { printResponse($response); } ?>
             
             <form class="" method="post" action="/user/login">
