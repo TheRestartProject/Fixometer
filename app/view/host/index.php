@@ -115,78 +115,81 @@
         <header>
             <div class="col-md-12"  id="allparties">
                 <h2>
-                    All <?php echo $group->name; ?> Restart Parties
-                    
+                    All <span class="orange"><?php echo $group->name; ?></span> Restart Parties                    
                 </h2>
             </div>
         </header>
         
         <div class="col-md-12 fader" id="party-list">
         
-        <?php
+            <?php
             $nodata = 0;
+            $currentYear = date('Y', time());
             foreach($allparties as $party){
-        ?>
-        
-        
-        
+                $partyYear = date('Y', $party->event_timestamp);
+                if( $partyYear < $currentYear){
+            ?>           
+            <div class="year-break">
+                <?php echo $partyYear; ?>
+            </div>
+            <?php            
+                    $currentYear = $partyYear;
+                }                
+            ?>
             <?php if($party->device_count < 1){ $nodata++; ?>
-            <a class="media no-data-wrap party"  href="/party/manage/<?php echo $party->idevents; ?>" <?php echo ($nodata == 1 ? 'id="attention"' : ''); ?>>
+            <a class="media no-data-wrap party" href="/party/manage/<?php echo $party->idevents; ?>" <?php echo ($nodata == 1 ? 'id="attention"' : ''); ?>>
                 
                 <div class="media-left">
-                    <img class="media-object" alt="The Restart Project: Logo" src="/assets/images/logo_mini.png">        
+                    <div class="date">
+                        <span class="month"><?php echo date('M', $party->event_timestamp); ?></span>
+                        <span class="day">  <?php echo date('d', $party->event_timestamp); ?></span>
+                        <span class="year"> <?php echo date('Y', $party->event_timestamp); ?></span>
+                    </div>
                 </div>
                 
                 <div class="media-body">
-                    <div class="short-body">
-                        <time datetime="<?php echo dbDate($party->event_date); ?>"><?php echo dateFormatNoTime($party->event_timestamp) . ' ' . $party->start; ?></time>
-                        <span class="location"><?php echo $party->venue; ?></span>      
-                    </div>
-                    
-                    <div class="no-data">
-                        
-                        <div style="width: 16.2%; float: left; clear: none; ">&nbsp;</div>
-                        
+                    <div class="short-body">                        
+                        <span class="location"><?php echo $party->venue; ?></span>
+                        <time datetime="<?php echo dbDate($party->event_date); ?>"><?php echo substr($party->start, 0, -3); ?></time>
+                    </div>                    
+                    <div class="no-data">                        
+                        <div style="width: 16%; float: left; clear: none; ">&nbsp;</div>                        
                         <button class="btn btn-primary btn-lg pull-left add-info-btn">
                             <i class="fa fa-cloud-upload"></i> Add Information
                         </button>
-                        
-                        
                         <div class="stat greyed">
                             <div class="col"><i class="status mid fixed greyed"></i></div>
                             <div class="col">?</div>
                         </div>
-                        
                         <div class="stat greyed">
                             <div class="col"><i class="status mid repairable greyed"></i></div>
                             <div class="col">?</div>
                         </div>
-                        
                         <div class="stat greyed">
                             <div class="col"><i class="status mid dead greyed"></i></div>
                             <div class="col">?</div>
                         </div>
-                        
-                        
                     </div>
                 </div>
+                
             </a>
             <?php } else {  ?>
-            
             <a class="media party"  href="/party/manage/<?php echo $party->idevents; ?>">
                 <div class="media-left">
-                    <img class="media-object" alt="The Restart Project: Logo" src="/assets/images/logo_mini.png">        
+                    <div class="date">
+                        <span class="month"><?php echo date('M', $party->event_timestamp); ?></span>
+                        <span class="day">  <?php echo date('d', $party->event_timestamp); ?></span>
+                        <span class="year"> <?php echo date('Y', $party->event_timestamp); ?></span>
+                    </div>      
                 </div>
                 
                 <div class="media-body">
                     <div class="short-body">
-                        <time datetime="<?php echo dbDate($party->event_date); ?>"><?php echo dateFormatNoTime($party->event_timestamp) . ' ' . $party->start; ?></time>
-                        <span class="location"><?php echo $party->venue; ?></span>      
+                        <span class="location"><?php echo $party->venue; ?></span>
+                        <time datetime="<?php echo dbDate($party->event_date); ?>"><?php echo  substr($party->start, 0, -3); ?></time>
                     </div>
                     
                     <div class="data">
-                       
-                        
                         <div class="stat double">
                             <div class="col">
                                 <i class="fa fa-group"></i>
@@ -195,7 +198,6 @@
                             <div class="col">
                                 <?php echo $party->pax; ?>    
                             </div>
-                            
                         </div>
                         
                         <div class="stat double">
@@ -203,10 +205,7 @@
                                 <img class="" alt="The Restart Project: Logo" src="/assets/images/logo_mini.png">
                                 <span class="subtext">restarters</span>
                             </div>
-                            <div class="col">
-                                <?php echo $party->volunteers; ?>    
-                            </div>
-                            
+                            <div class="col"><?php echo $party->volunteers; ?></div>                            
                         </div>
                         
                         <div class="stat">                            

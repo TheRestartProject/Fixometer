@@ -19,7 +19,7 @@ time {
     display: block;
     clear: both;
     text-transform: uppercase;
-    font-weight: bold;
+    
 }
 
 a.party {
@@ -27,6 +27,8 @@ a.party {
     &.no-data-wrap {
         background: mistyrose;
     }
+    
+    &:hover { text-decoration: none; }
 }
 
 .count { border-right: 1px solid #ddd;
@@ -52,7 +54,7 @@ a.party {
         h5 { font-size: 11px; text-transform: uppercase; }
     }
 }
-
+.location { font-size: 18px; font-weight: bold; }
 .media.party { margin-top: 0px !important; }
 
 .body {float: left;clear: none; width: 80% ;}
@@ -78,9 +80,14 @@ a.party {
 .col3 { width: 33.333%; display: inline-block; float: left; text-align: center;  }
 .subtext { font-size: 10px; text-transform: uppercase;  display: block; clear: both; }
 .largetext { font-size: 36px; text-align: center; display: block; clear: both;  min-height: 70px; height: 70px;  }
-.add-info-btn { margin-right: 72px; }
+.add-info-btn { margin: 15px 32px; }
 .no-data { float: left; clear: none; width: 75%; }
 .data { float: left; clear: none; width: 75%; }
+
+.year-break {
+    font-size: 24px; text-align: center; padding: 15px; color: white; background: lighten(@litegray, 25%);
+}
+
 
 .party-input { width: 51px; height: 51px; }
 
@@ -143,3 +150,4 @@ a.party {
         border: 1px solid @litegray; 
     }
 }
+
