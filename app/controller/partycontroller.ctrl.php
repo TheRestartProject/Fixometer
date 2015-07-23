@@ -244,13 +244,17 @@
                     $idparty = $_POST['idparty'];
                     $this->Party->update($partydata, $idparty);
                     
-                    if(isset($_POST['device'])){
+                    if(isset($_POST['device'])){ 
                         $devices = $_POST['device'];
+                        
+                        
                         
                         foreach ($devices as $i => $device){
                             
+                            //dbga($device);
+                            $error = false;
                             $device['event'] = $id;
-                            
+                            $method = null;    
                             
                             if(isset($device['id']) && is_numeric($device['id'])){
                                 $method = 'update';
@@ -260,18 +264,24 @@
                             
                             if(!isset($device['category']) || empty($device['category'])){
                                 $response['danger'] = 'Category needed! (device # ' . $i . ')';
+                                $error = true;
                             }
                             
                             if(!isset($device['repaired_by']) || empty($device['repaired_by'])){
                                 $device['repaired_by'] = 29;
                             }
                             
-                            if(is_null($response)){
+                            if($error == false){
+                                
+                                
+                                
                                 if($method == 'update'){
+                                    echo "updating---";
                                     $Device->update($device, $iddevice);
                                 }
                                 
                                 else {
+                                    echo "creating---";
                                     $device['category_creation'] = $device['category'];
                                     $Device->create($device);
                                 }
@@ -279,6 +289,7 @@
                                 $response['success'] = 'Party info updated!';
                             }
                             else {
+                                //echo "No.";
                                 $this->set('response', $response);
                             }
                         }

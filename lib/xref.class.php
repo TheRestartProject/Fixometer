@@ -29,10 +29,7 @@
             $this->index    = ($index === 'object' || $index === 'reference') ? $index : false;
             if($this->index === 'object'){
                 $this->search_id = $this->obj;
-                $this->search_type = $this->objType;
-                
-                
-                
+                $this->search_type = $this->objType;    
             }
             elseif($this->index === 'reference'){
                 $this->search_id = $this->ref;

@@ -25,7 +25,7 @@
                     <?php if(empty($profile->path)){ ?>
                     <img src="http://www.lorempixum.com/40/40/people" alt="<?php echo $profile->name; ?> Image" class="profile-pic" />
                     <?php } else { ?>
-                    <img src="/uploads/<?php echo $profile->path; ?>" width="40" height="40" alt="<?php echo $profile->name; ?> Image" class="profile-pic" />
+                    <img src="/uploads/thumbnail_<?php echo $profile->path; ?>" width="40" height="40" alt="<?php echo $profile->name; ?> Image" class="profile-pic" />
                     <?php } ?>
                     <i class="fa fa-caret-down"></i>
                 </button>

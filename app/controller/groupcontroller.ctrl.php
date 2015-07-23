@@ -53,14 +53,7 @@
                     $longitude  =       $_POST['longitude'];
                     $text       =       $_POST['free_text'];
                     
-                    
-                    /*
-                    $images = $_FILES['images'];
-                    
-                    dbga(rearrange($images));
-                    
-                    die();
-                    */
+                   
                     
                     
                     if(empty($name)){
@@ -90,7 +83,12 @@
                                         );
                         $idGroup = $this->Group->create($data);
                         if($idGroup){
-                            $response['success'] = 'Group created correctly.';   
+                            $response['success'] = 'Group created correctly.';
+                            
+                            if(isset($_FILES) && !empty($_FILES)){
+                                $file = new File;
+                                $file->upload('image', 'image', $idGroup, TBL_GROUPS, false, true);    
+                            }
                         }
                         else {
                             $response['danger'] = 'Group could <strong>not</strong> be created. Something went wrong with the database.';
@@ -125,7 +123,7 @@
                     $data = $_POST;
                     // remove the extra "files" field that Summernote generates -
                     unset($data['files']);
-                    
+                    unset($data['image']);
                     $u = $this->Group->update($data, $id);
                     
                     if(!$u) {
@@ -134,6 +132,14 @@
                     else {
                         $response['success'] = 'Group updated!';
                         
+                        if(isset($_FILES) && !empty($_FILES)){
+                            $existing_image = $this->Group->hasImage($id, true);
+                            if(count($existing_image) > 0){
+                                $this->Group->removeImage($id, $existing_image[0]);
+                            }
+                            $file = new File;
+                            $file->upload('image', 'image', $id, TBL_GROUPS, false, true);
+                        }
                         if(hasRole($this->user, 'Host')){
                             header('Location: /host?action=gu&code=200');
                         }

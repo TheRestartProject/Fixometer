@@ -17,9 +17,9 @@
             <div class="media">
                 <div class="media-left">
                     <?php if(empty($group->path)){ ?>
-                    <img src="http://www.lorempixum.com/80/80/abstract" alt="<?php echo $group->name; ?> Image" class="profile-pic" />
+                    <img src="http://www.lorempixum.com/60/60/abstract" alt="<?php echo $group->name; ?> Image" class="profile-pic" />
                     <?php } else { ?>
-                    <img src="/uploads/<?php echo $group->path; ?>" width="80" height="80" alt="<?php echo $group->name; ?> Image" class="profile-pic" />
+                    <img src="/uploads/thumbnail_<?php echo $group->path; ?>" width="60" height="60" alt="<?php echo $group->name; ?> Image" class="profile-pic" />
                     <?php } ?>
                 </div>
                 <div class="media-body">
@@ -115,7 +115,7 @@
         <header>
             <div class="col-md-12"  id="allparties">
                 <h2>
-                    All <span class="orange"><?php echo $group->name; ?></span> Restart Parties                    
+                    All <span class="orange"><?php echo $group->name; ?></span> Parties                    
                 </h2>
             </div>
         </header>

@@ -29,6 +29,32 @@
             return $stmt->fetchAll(PDO::FETCH_OBJ);
         }
         
+        public function findOne($id){
+            
+            $sql = 'SELECT * FROM `' . $this->table . '` AS `g` 
+                    LEFT JOIN (
+                        SELECT * FROM `images`
+                            INNER JOIN `xref` ON `xref`.`object` = `images`.`idimages`
+                            WHERE `xref`.`object_type` = 5
+                            AND `xref`.`reference_type` = ' . TBL_GROUPS . '
+                            GROUP BY `images`.`path`
+                    ) AS `xi` 
+                    ON `xi`.`reference` = `g`.`idgroups`
+                    WHERE `id' . $this->table . '` = :id';
+            $stmt = $this->database->prepare($sql);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $q = $stmt->execute();
+            
+            if(!$q){
+                new Error(601, 'Could not execute query. (model.class.php, 61)');
+                return false;
+            }
+            else {
+                return $stmt->fetch(PDO::FETCH_OBJ);
+            }
+            
+        }
+        
         public function ofThisUser($id){
             $sql = 'SELECT * FROM `' . $this->table . '` AS `g` 
                     INNER JOIN `users_groups` AS `ug`
@@ -38,7 +64,7 @@
                         SELECT * FROM `images`
                             INNER JOIN `xref` ON `xref`.`object` = `images`.`idimages`
                             WHERE `xref`.`object_type` = 5
-                            AND `xref`.`reference_type` = 1
+                            AND `xref`.`reference_type` = ' . TBL_GROUPS . '
                             GROUP BY `images`.`path`
                     ) AS `xi` 
                     ON `xi`.`reference` = `g`.`idgroups` 

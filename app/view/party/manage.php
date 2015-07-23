@@ -289,14 +289,10 @@
                                             <input type="checkbox" name="device[<?php echo $i; ?>][spare_parts]" id="device[<?php echo $i; ?>][spare_parts_1]" value="1"> Yes
                                         </label>
                                     </div>
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="device[<?php echo $i; ?>][spare_parts]" id="device[<?php echo $i; ?>][spare_parts_2]" value="2" checked> No
-                                        </label>
-                                    </div>
+                                   
                                 </div>
                             </td>
-                            x
+                            
                         </tr>    
                         <?php } ?>
                     </tbody>

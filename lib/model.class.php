@@ -207,6 +207,110 @@
 
         }
         
+        
+        /**
+         * check for existence of images associated with
+         * this particular object of $type and $id
+         * return boolean, or full results if requested
+         * */
+        public function hasImage($id, $return_rows = false){
+            switch($this->table){
+                case 'users':
+                    $object = TBL_USERS;
+                    break;
+                case 'groups':
+                    $object = TBL_GROUPS;
+                    break;
+                case 'events':
+                    $object = TBL_EVENTS;
+                    break;
+                case 'devices':
+                    $object = TBL_DEVICES;
+                    break;
+                default:
+                    $object = false;
+                    break;
+            }
+            if($object){
+                $sql = '
+                            SELECT * FROM `images`
+                                INNER JOIN `xref` ON `xref`.`object` = `images`.`idimages`
+                                WHERE `xref`.`object_type` = 5
+                                AND `xref`.`reference_type` = :object
+                                AND `xref`.`reference` = :id
+                                GROUP BY `images`.`path`'
+                        ;
+                $stmt = $this->database->prepare($sql);
+                $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+                $stmt->bindParam(':object', $object, PDO::PARAM_INT);
+                $q = $stmt->execute();
+                
+                if(!$q && SYSTEM_STATUS == 'development'){
+                    $err = $stmt->errorInfo();
+                        
+                    new Error(601, 'Could not execute query. ' . $err[2] . ' (model.class.php, 183)');
+                    return false;
+                }
+                else {
+                    $rows = $stmt->fetchAll(PDO::FETCH_OBJ);
+                    if($return_rows){
+                        return $rows;
+                    }
+                    else { 
+                        return (count($rows) > 0 ? true : false);
+                    }
+                }
+            }
+        }
+        
+        /**
+         * check for existence of images associated with
+         * this particular object of $type and $id
+         * return boolean, or full results if requested
+         * */
+        public function removeImage($id, $image){
+            switch($this->table){
+                case 'users':
+                    $object = TBL_USERS;
+                    break;
+                case 'groups':
+                    $object = TBL_GROUPS;
+                    break;
+                case 'events':
+                    $object = TBL_EVENTS;
+                    break;
+                case 'devices':
+                    $object = TBL_DEVICES;
+                    break;
+                default:
+                    $object = false;
+                    break;
+            }
+            if($object){
+                /** delete cross references **/
+                $sql = "DELETE FROM `xref` AS `x` WHERE
+                        `x`.`object_type` = 5 AND
+                        `x`.`reference_type` = :object AND
+                        `x`.`reference` = :id";
+                
+                $stmt = $this->database->prepare($sql);
+                $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+                $stmt->bindParam(':object', $object, PDO::PARAM_INT);
+                $stmt->execute();
+                
+                /** delete image from db **/
+                $sql = "DELETE FROM `images` AS `i` WHERE `i`.`idimages` = :image";
+                $stmt = $this->database->prepare($sql);
+                $stmt->bindParam(':image', $image->idimages, PDO::PARAM_INT);
+                $stmt->execute();
+                
+                /** delete image from disk **/
+                unlink(ROOT . DS . 'public' . DS . 'uploads' . DS . $image->path);
+                
+                
+            }
+        }
+        
     }
     
     

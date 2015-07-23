@@ -257,9 +257,25 @@ h3 {
   p { margin: 25px 100px; }
 }
 .login-deets { width: 50%; float: left; clear: none; text-align: center; background: url('/assets/images/login.jpg') no-repeat center center; min-height: 100%; padding-top: 30px;
-  .detail { background: rgba(255,255,255,0.8); padding: 12px; margin: 20px 20px; width: 35%; display: inline-block;
-    h4 { font-size: 12px; text-transform: uppercase; color: @blue; font-weight: bold; }
-    .big-number { color: @orange; .Font-PatuaOne; font-size: 32px; }
+  .detail {
+    background: rgba(255,255,255,0.8);
+    padding: 12px; margin: 20px 20px;
+    width: 35%;
+    display: inline-block;
+    &.detail-chart {
+      width: 75%; 
+    }
+    h4 {
+      font-size: 12px;
+      text-transform: uppercase;
+      color: @blue;
+      font-weight: bold;
+    }
+    .big-number {
+      color: @orange;
+      .Font-PatuaOne;
+      font-size: 32px;
+    }
   } 
 }
 

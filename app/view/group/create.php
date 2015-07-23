@@ -57,8 +57,8 @@
                             
                         </div>
                         <div class="form-group">
-                            <label for="images">Image: </label>
-                            <input type="file" class="form-control file" name="image" multiple="true" data-show-upload="false" data-show-caption="true">
+                            <label for="image">Image: </label>
+                            <input type="file" class="form-control file" name="image" data-show-upload="false" data-show-caption="true">
                             <small>Icon, Avatar or Logo of the Group</small>
                         </div>
                     </div>

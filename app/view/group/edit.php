@@ -9,7 +9,7 @@
         <div class="col-md-12">
             <?php if(isset($response)) { printResponse($response); } ?>
             
-            <form action="/group/edit/<?php echo $formdata->idgroups; ?>" method="post">
+            <form action="/group/edit/<?php echo $formdata->idgroups; ?>" method="post" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group <?php if(isset($error) && isset($error['name']) && !empty($error['name'])) { echo "has-error"; } ?>">
@@ -57,6 +57,25 @@
                                 </div>
                             </div>
                             
+                        </div>
+                        
+                        <div class="form-group image-wrap">
+                            <small>Current Group Avatar:</small>
+                            <?php
+                            if(!empty($formdata->path)){
+                                echo '<img src="/uploads/mid_' . $formdata->path . '" class="img-responsive" style="width: 25%; height: 25%; ">'; 
+                                
+                            }
+                            else {
+                                echo '<div class="alert alert-info">No Image</div>'; 
+                            }
+                            ?>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="image">Image: </label>
+                            <input type="file" class="form-control file" name="image" data-show-upload="false" data-show-caption="true">
+                            <small>Icon, Avatar or Logo of the Group</small>
                         </div>
                     </div>
                     
