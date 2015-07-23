@@ -13,14 +13,17 @@
             <input type="hidden" name="idparty" id="idparty" value="<?php echo $party->id; ?>">
             
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 party">
                     <div class="media-left">
-                        <img class="media-object" alt="The Restart Project: Logo" src="/assets/images/logo_mini.png">        
+                        <div class="date">
+                            <span class="month"><?php echo date('M', $party->event_timestamp); ?></span>
+                            <span class="day">  <?php echo date('d', $party->event_timestamp); ?></span>
+                            <span class="year"> <?php echo date('Y', $party->event_timestamp); ?></span>
+                        </div> 
                     </div>
                     
                     <div class="media-body">
                         <div class="short-body">
-                            <time datetime="<?php echo dbDate($party->event_date); ?>"><?php echo dateFormatNoTime($party->event_date) . ' ' . $party->start; ?></time>
                             <span class="location"><?php echo $party->location; ?></span><br />
                             <span class="groupname"><?php echo $party->group_name; ?></span>
                         </div>

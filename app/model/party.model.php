@@ -35,6 +35,7 @@
             $sql = 'SELECT
                         `e`.`idevents` AS `id`,
                         UNIX_TIMESTAMP(`e`.`event_date`) AS `event_date`,
+                        UNIX_TIMESTAMP(`e`.`event_date`) AS `event_timestamp`,
                         `e`.`start` AS `start`,
                         `e`.`end` AS `end`,
                         `e`.`location`,
