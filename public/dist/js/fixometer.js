@@ -1,12 +1,5 @@
 $(document).ready(function(){
     
-    /** Dashboard Things **/
-    /** maps for parties **/
-    if ($('#dashboard').length > 0) {
-        
-    }
-    
-    
     /** startup datepickers **/
     $('input.date').datetimepicker({
                 icons: {
@@ -50,7 +43,7 @@ $(document).ready(function(){
         $('#end-pc').data("DateTimePicker").date(e.date.add(3, 'h'));
     });
     
-    $('#')
+    
     
     /** Rich Text Editors **/
     $('.rte').summernote({
@@ -143,6 +136,15 @@ $(document).ready(function(){
     });
     
     
+    $('.category-select').change(function(){
+        if($(this).val() === '46') {
+            $(this).parent().next('.estimate-box').removeClass('hide').addClass('show');
+        }
+        else {
+            $(this).parent().next('.estimate-box').removeClass('show').addClass('hide');
+        }
+    });
+    
     /** Add Device Row in Party Management **/
     $('#add-device').click(function(e){
         e.preventDefault();
@@ -179,11 +181,16 @@ $(document).ready(function(){
                             '<td>' + n + '.</td>'+
                             '<td>' +
                                 '<div class="form-group">' +
-                                    '<select id="device[' + n +'][category]" name="device[' + n + '][category]" class="selectpicker form-control" data-live-search="true" tite="Choose category...">' +
+                                    '<select id="device[' + n +'][category]" name="device[' + n + '][category]" class="category-select selectpicker form-control" data-live-search="true" tite="Choose category...">' +
                                     '<option></option>' +
-                                    categories + 
+                                    categories +
+                                    '<option value="none">None of the above...</option>' +
                                     '</select>' +
                                 '</div>' +
+                                '<div class="form-group hide estimate-box">' + 
+                                    '<small>Please input an estimate weight (in kg)</small>' + 
+                                    '<input type="text" name="device[' + n +'][estimate]" id="device[' + n +'][estimate]" class="form-control" placeholder="Estimate...">' + 
+                                '</div>' + 
                             '</td>' +            
                             '<td>' +
                                 '<textarea class="form-control" id="device[' + n +'][problem]" name="device[' + n +'][problem]"></textarea>' +
@@ -248,7 +255,20 @@ $(document).ready(function(){
         
         $('#device-table tbody').append(tablerow);
         $('.selectpicker').selectpicker();
+        
+        $('.category-select').change(function(){
+            if($(this).val() === '46') {
+                $(this).parent().next('.estimate-box').removeClass('hide').addClass('show');
+            }
+            else {
+                $(this).parent().next('.estimate-box').removeClass('show').addClass('hide');
+                $(this).parent().next('.estimate-box').children('input').val('');
+            }
+        });
     });
+    
+    /** sticky table headers **/
+    $('#device-table').floatThead();
     
     /* manage needed visibility to load correctly charts (host dahsboard) */ 
     $('.charts:first-child').addClass('show');

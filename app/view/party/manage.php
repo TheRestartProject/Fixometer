@@ -84,7 +84,7 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <table class="table " id="device-table">
+                <table class="table sticky-header" id="device-table">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -112,7 +112,7 @@
                             </td>            
                             <td>
                                 <div class="form-group">
-                                    <select id="device[<?php echo $i; ?>][category]" name="device[<?php echo $i; ?>][category]" class="selectpicker form-control" data-live-search="true">
+                                    <select id="device[<?php echo $i; ?>][category]" name="device[<?php echo $i; ?>][category]" class="category-select selectpicker form-control" data-live-search="true">
                                         <?php foreach($categories as $cluster){ ?>
                                         <optgroup label="<?php echo $cluster->name; ?>">
                                             <?php foreach($cluster->categories as $c){ ?>
@@ -120,7 +120,14 @@
                                             <?php } ?>
                                         </optgroup>
                                         <?php } ?>
+                                        <option value="46" <?php echo ($devices[$i-1]->category == 46 ? ' selected':''); ?>>None of the above...</option>
                                     </select>
+                                </div>
+                                <div class="form-group
+                                    <?php echo ($devices[$i-1]->category == 46 ? 'show' : 'hide'); ?>
+                                     estimate-box">
+                                    <small>Please input an estimate weight (in kg)</small>
+                                    <input type="text" name="device[<?php echo $i; ?>][estimate]" id="device[<?php echo $i; ?>][estimate]" class="form-control" placeholder="Estimate..." value="<?php echo $devices[$i-1]->estimate; ?>">
                                 </div>
                             </td>            
                             <td>
@@ -215,13 +222,13 @@
                         $start = (!empty($devices) ? count($devices) + 1 : 1);
                         
                         
-                        for ($i = $start; $i < $start + 3 ; $i++) {
+                        for ($i = $start; $i < $start  ; $i++) {
                         ?>
                         <tr>
                             <td><?php echo $i; ?>.</td>            
                             <td>
                                 <div class="form-group">
-                                    <select id="device[<?php echo $i; ?>][category]" name="device[<?php echo $i; ?>][category]" class="selectpicker form-control" data-live-search="true" title="Choose category...">
+                                    <select id="device[<?php echo $i; ?>][category]" name="device[<?php echo $i; ?>][category]" class="selectpicker form-control category-select" data-live-search="true" title="Choose category...">
                                         <option></option>
                                         <?php foreach($categories as $cluster){ ?>
                                         <optgroup label="<?php echo $cluster->name; ?>">
@@ -230,7 +237,12 @@
                                             <?php } ?>
                                         </optgroup>
                                         <?php } ?>
+                                        <option value="46">None of the above...</option>
                                     </select>
+                                </div>
+                                <div class="form-group hide estimate-box">
+                                    <small>Please input an estimate weight (in kg)</small>
+                                    <input type="text" name="device[<?php echo $i; ?>][estimate]" id="device[<?php echo $i; ?>][estimate]" class="form-control" placeholder="Estimate...">
                                 </div>
                             </td>            
                             <td>
@@ -295,10 +307,20 @@
                             
                         </tr>    
                         <?php } ?>
+                        
+                       
                     </tbody>
+                    <tfoot>
+                         <tr>
+                            <td colspan="3"><button class="btn btn-primary text-center" type="button" id="add-device"><i class="fa fa-plus"></i> Add Device</button></td>
+                            <td colspan="3"></td>
+                        </tr>
+                    </tfoot>
                 </table>
                 <div class="text-center">
-                    <button class="btn btn-primary btn-lg text-center" type="button" id="add-device"><i class="fa fa-plus"></i> Add Device</button>
+                    <br /><br />
+                    <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-floppy-o"></i> Save &amp; Exit</button>
+                    <br /><br /><br />
                 </div>
             </div>
         </div>

@@ -233,6 +233,11 @@
             }
             else {
                 
+                $this->set('js', 
+                            array('foot' => array(
+                                            '/components/jquery.floatThead/dist/jquery.floatThead.min.js'
+                            )));
+                
                 $Device     = new Device;
                 $Category   = new Category;
                 $User       = new User;
@@ -267,6 +272,7 @@
                                 $error = true;
                             }
                             
+                            
                             if(!isset($device['repaired_by']) || empty($device['repaired_by'])){
                                 $device['repaired_by'] = 29;
                             }
@@ -276,12 +282,12 @@
                                 
                                 
                                 if($method == 'update'){
-                                    echo "updating---";
+                                    //echo "updating---";
                                     $Device->update($device, $iddevice);
                                 }
                                 
                                 else {
-                                    echo "creating---";
+                                    //echo "creating---";
                                     $device['category_creation'] = $device['category'];
                                     $Device->create($device);
                                 }
