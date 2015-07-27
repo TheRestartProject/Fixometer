@@ -293,6 +293,7 @@
                                 }
                                 
                                 $response['success'] = 'Party info updated!';
+                                header('Location: /host');
                             }
                             else {
                                 //echo "No.";
