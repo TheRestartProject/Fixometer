@@ -20,7 +20,7 @@
                                 <div class="form-group <?php if(isset($error) && isset($error['event_date']) && !empty($error['event_date'])) { echo "has-error"; } ?>">
                                     <label for="event_date">Date:</label>
                                     <div class="input-group date">
-                                        <input type="text" name="event_date" id="event_date" class="form-control datepicker">
+                                        <input type="text" name="event_date" id="event_date" class="form-control date">
                                         <span class="input-group-addon">
                                             <i class="fa fa-calendar"></i>
                                         </span>
