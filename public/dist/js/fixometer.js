@@ -177,14 +177,14 @@ $(document).ready(function(){
         });
         */
         
-        var tablerow =  '<tr>' + 
+        var tablerow =  '<tr class="newdevice">' + 
                             '<td>' + n + '.</td>'+
                             '<td>' +
                                 '<div class="form-group">' +
                                     '<select id="device[' + n +'][category]" name="device[' + n + '][category]" class="category-select selectpicker form-control" data-live-search="true" tite="Choose category...">' +
                                     '<option></option>' +
                                     categories +
-                                    '<option value="none">None of the above...</option>' +
+                                    '<option value="46">None of the above...</option>' +
                                     '</select>' +
                                 '</div>' +
                                 '<div class="form-group hide estimate-box">' + 
@@ -205,7 +205,6 @@ $(document).ready(function(){
                                 '</div>' +
                             '</td>' +                            
                             '<td>' +
-                                
                                 '<div class="form-group">' +
                                     '<div class="radio">' +                                            
                                         '<label>' +
@@ -254,9 +253,14 @@ $(document).ready(function(){
                         '</tr>';
         
         $('#device-table tbody').append(tablerow);
+        
+        
         $('.selectpicker').selectpicker();
         
-        $('.category-select').change(function(){
+        $('tr.newdevice .category-select').change(function(){
+            
+            console.log($(this).val());
+            
             if($(this).val() === '46') {
                 $(this).parent().next('.estimate-box').removeClass('hide').addClass('show');
             }
@@ -264,14 +268,24 @@ $(document).ready(function(){
                 $(this).parent().next('.estimate-box').removeClass('show').addClass('hide');
                 $(this).parent().next('.estimate-box').children('input').val('');
             }
+        });        
+        
+        /** Show/Hide Repairable details ( /party/manage ) (Host management page) **/
+        $('tr.newdevice .repairable').click(function(){
+            $(this).parent().parent().next('.repairable-details').addClass('show');
+            detailswrap.css({'display': 'block'});
         });
+        
+        
     });
-    
-    /** sticky table headers **/
-    $('#device-table').floatThead();
     
     /* manage needed visibility to load correctly charts (host dahsboard) */ 
     $('.charts:first-child').addClass('show');
     $('.charts:not(:first-child)').addClass('hide');
+    
+    /** sticky table headers **/
+    if( $('#device-table').length > 0 ) {
+        $('#device-table').floatThead();
+    } 
     
 });
