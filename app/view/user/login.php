@@ -1,37 +1,27 @@
-
-    
         <div class="login-form">
             <h1 class="text-center">FIX-O-METER</h1>
             <h3 class="text-center">login</h3>
             <p class="text-center">Welcome to our community space, where you can share upcoming Restart Parties and track their social and environmental impact. By doing so, we can empower and motivate at a local level, but also build global momentum for a change.</p>
             <?php if(isset($response)) { printResponse($response); } ?>
-            
             <form class="" method="post" action="/user/login">
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" class="form-control" name="email" id="email">
                 </div>
-                
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" class="form-control" name="password" id="password">
                 </div>
-                
                 <div class="form-group">
                     <button type="submit" class="form-control btn btn-primary" name="submit" id="submit"><i class="fa fa-sign-in"></i> Login</button>
                 </div>
-                
-                
             </form>
         </div>
         
         <div class="login-deets">
-                
-                
-                
                 <div class="detail detail-chart">
                     <div id="chart-co2" class="charts">
-                        <h4 class="text-center">CO<sub>2</sub> de-sequestered per year (kg)</h4>
+                        <h4 class="text-center">CO<sub>2</sub> emission prevented per year (kg)</h4>
                         <canvas id="co2ByYear" width="520" height="200"></canvas>                
                     </div>
                     <div id="chart-waste" class="charts">
@@ -39,9 +29,9 @@
                         <canvas id="wasteByYear" width="520" height="200"></canvas>
                     </div>
                     
-                    <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                    <div class="btn-group btn-group-justified" role="group" aria-label="toggle charts">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-default btn-primary btn-sm switch-view active" data-family=".charts" data-target="#chart-co2">CO<sub>2</sub> de-sequestered</button>
+                            <button type="button" class="btn btn-default btn-primary btn-sm switch-view active" data-family=".charts" data-target="#chart-co2">CO<sub>2</sub> emission prevented</button>
                         </div>
                         <div class="btn-group">
                             <button type="button" class="btn btn-default btn-primary btn-sm switch-view" data-family=".charts" data-target="#chart-waste">eWaste prevented</button>            
@@ -96,7 +86,7 @@
                 </div>
                 
                 <div class="detail">
-                    <h4>CO<sub>2</sub> de-sequestered</h4>
+                    <h4>CO<sub>2</sub> emission prevented</h4>
                     <span class="big-number"><?php echo number_format($weights[0]->total_footprints, 0, '-', ','); ?> kg</span>
                 </div>
                 <div class="detail">
@@ -114,31 +104,14 @@
                     <span class="big-number"><?php echo count($nextparties); ?></span>
                 </div>
                 
-            
-            
         </div>
 
-
-
+        <div class="container">
             
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="container">
-    
-    <div class="row">
-        <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
-            
+            <div class="row">
+                <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
+                    
+                </div>
+                
+            </div>
         </div>
-        
-    </div>
-</div>
