@@ -6,6 +6,8 @@
                 <p>
                     is an open source project by <a href="http://therestartproject.org">the Restart Project.</a><br />
                     Check it out on <a href="https://github.com/TheRestartProject/Fixometer">GitHub</a>.
+                    <br /><br />
+                    Image on the login page &copy; <em>Heather Agyepong</em>
                 </p>
             </div>
             <div class="col-md-5">&nbsp;</div>
