@@ -46,17 +46,21 @@
                         </div>
                         
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <input type="text" name="latitude" id="latitude" class="form-control" placeholder="latitude..." value="<?php echo $formdata->latitude; ?>">
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <input type="text" name="longitude" id="longitude" class="form-control" placeholder="longitude..." value="<?php echo $formdata->longitude; ?>">
                                 </div>
                             </div>
-                            
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <input type="text" name="area" id="area" class="form-control" placeholder="city..." value="<?php echo $formdata->area; ?>">
+                                </div>
+                            </div>
                         </div>
                         
                         <div class="form-group image-wrap">

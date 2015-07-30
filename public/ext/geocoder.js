@@ -35,8 +35,19 @@
                           map: map,
                           position: results[0].geometry.location
                       });
-                      document.getElementById('latitude').value = results[0].geometry.location.A;
-                      document.getElementById('longitude').value = results[0].geometry.location.F;
+                      
+                      console.log(results[0]);
+                      
+                      document.getElementById('latitude').value = results[0].geometry.location.lat();
+                      document.getElementById('longitude').value = results[0].geometry.location.lng();
+                      
+                      /** get city lvl info **/
+                      $.each(results[0].address_components, function (i, address_component) {
+                        if (address_component.types[0] == "locality"){
+                          document.getElementById('area').value = address_component.long_name;
+                        }
+                      });
+                      
                       
                     } else {
                       alert('Geocode was not successful for the following reason: ' + status);

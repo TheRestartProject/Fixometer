@@ -55,6 +55,38 @@
             
         }
         
+        public function findHost($id){
+            $sql = 'SELECT *,
+                        `g`.`name` AS `groupname`,
+                        `u`.`name` AS `hostname`
+                    FROM `' . $this->table . '` AS `g` 
+                    INNER JOIN `users_groups` AS `ug`
+                        ON `ug`.`group` = `g`.`idgroups`
+                    INNER JOIN `users` AS `u`
+                        ON `u`.`idusers` = `ug`.`user`
+                    LEFT JOIN (
+                        SELECT * FROM `images`
+                            INNER JOIN `xref` ON `xref`.`object` = `images`.`idimages`
+                            WHERE `xref`.`object_type` = 5
+                            AND `xref`.`reference_type` = ' . TBL_USERS . '
+                            GROUP BY `images`.`path`
+                    ) AS `xi` 
+                    ON `xi`.`reference` = `u`.`idusers` 
+
+                    WHERE `g`.`idgroups` = :id
+                    AND `u`.`role` = 3'; // force Role
+            
+            
+            $stmt = $this->database->prepare($sql);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            
+            
+            
+            return $stmt->fetch(PDO::FETCH_OBJ);
+        }
+        
+        
         public function ofThisUser($id){
             $sql = 'SELECT * FROM `' . $this->table . '` AS `g` 
                     INNER JOIN `users_groups` AS `ug`
@@ -79,4 +111,5 @@
             
             return $stmt->fetchAll(PDO::FETCH_OBJ);
         }
+        
     }

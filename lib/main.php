@@ -73,6 +73,8 @@
     /** autoload functions **/
     function autoloader($className){
         
+        require_once(ROOT . DS . 'lib' . DS . 'vendor' . DS . 'wordpress-xml-rpc' . DS . 'WordpressClient.php');
+            
         if(file_exists(ROOT . DS . 'lib' . DS . strtolower($className).'.class.php')){
             require_once(ROOT . DS . 'lib' . DS . strtolower($className).'.class.php');
         }
@@ -88,7 +90,6 @@
            new Error(501, 'Class <strong>'.ucfirst($className).'</strong> Not Found. Program Shutdown. (main.php, 88)');
            die();
         }
-        
     }
     
     /** register autoloads **/
@@ -97,6 +98,3 @@
     /** Execute functions **/
     errorReporting();
     init();
-    
-    
-   

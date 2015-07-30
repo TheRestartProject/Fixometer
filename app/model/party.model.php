@@ -137,7 +137,7 @@
         }
         
         
-        public function ofThisGroup($group, $only_past = false, $devices = false){
+        public function ofThisGroup($group = 'admin', $only_past = false, $devices = false){
             $sql = 'SELECT *, `e`.`location` AS `venue`, UNIX_TIMESTAMP(`e`.`event_date`) AS `event_timestamp`  
                     FROM `' . $this->table . '` AS `e` 
                     
@@ -156,18 +156,24 @@
                             AND `xref`.`reference_type` = 3
                             GROUP BY `images`.`path`
                     ) AS `xi` 
-                    ON `xi`.`reference` = `e`.`idevents` 
-                    
-                    WHERE `e`.`group` = :id';
+                    ON `xi`.`reference` = `e`.`idevents` ';
+            
+            if(is_numeric($group) && $group != 'admin' ){                
+                $sql .= ' WHERE `e`.`group` = :id ';
+            }
+            
             if($only_past == true){
                 $sql .= ' AND `e`.`event_date` < NOW()';
             }
+            
             $sql .= ' ORDER BY `e`.`event_date` DESC';
             
             
             $stmt = $this->database->prepare($sql);
             
-            $stmt->bindParam(':id', $group, PDO::PARAM_INT);
+            if(is_numeric($group) && $group != 'admin' ){
+                $stmt->bindParam(':id', $group, PDO::PARAM_INT);
+            }
             
             $q = $stmt->execute();
             if(!$q){

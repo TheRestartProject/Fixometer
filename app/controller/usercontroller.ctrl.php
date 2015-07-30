@@ -73,7 +73,10 @@
                         }
                         
                         if($pass == true){
-                            if(hasRole($user[0], 'Host')){
+                            if(hasRole($user[0], 'Administrator')){
+                                header('Location: /admin');
+                            }
+                            elseif(hasRole($user[0], 'Host')){
                                 header('Location: /host');
                             }
                             else {
@@ -243,10 +246,13 @@
                     
                     if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST)){
                         $data = $_POST;
+                        $id = $_POST['id'];
                         
                         $sent_groups = $data['groups'];
                         unset($data['groups']);
                         unset($data['profile']);
+                        unset($data['id']);
+                        
                         $u = $this->User->update($data, $id);
                         
                         $ug = new Usersgroups;
@@ -290,6 +296,7 @@
                     foreach($ugroups as $g){
                         $usergroups[] = $g->group;
                     }
+                    
                     $userdata->groups = $usergroups;
                     $this->set('data', $userdata);
                     

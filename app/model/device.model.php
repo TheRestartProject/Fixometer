@@ -99,6 +99,15 @@
             return $stmt->fetchAll(PDO::FETCH_OBJ);
         }
         
+        public function ofAllGroups() {
+            $sql = 'SELECT * FROM `' . $this->table . '` AS `d`
+                    INNER JOIN `categories` AS `c` ON `c`.`idcategories` = `d`.`category`
+                    INNER JOIN `events` AS `e` ON `e`.`idevents` = `d`.`event`';
+            $stmt = $this->database->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+        }
+        
         public function statusCount($g = null, $year = null){
             $sql = 'SELECT COUNT(*) AS `counter`, `d`.`repair_status` AS `status`, `d`.`event`
                     FROM `'. $this->table .'` AS `d`';
@@ -286,6 +295,13 @@
             
         }
         
-                
+        
+        public function guesstimates() {
+            $sql .= 'SELECT COUNT(*) AS guesstimates FROM `' . $this->table . '` WHERE `category` = 46';
+            $stmt = $this->database->prepare($sql);
+            $q = $stmt->execute();
+            $r = $stmt->fetch(PDO::FETCH_OBJ);
+            return $r->guesstimates;
+        }
         
     }

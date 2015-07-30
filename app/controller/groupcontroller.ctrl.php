@@ -87,8 +87,34 @@
                             
                             if(isset($_FILES) && !empty($_FILES)){
                                 $file = new File;
-                                $file->upload('image', 'image', $idGroup, TBL_GROUPS, false, true);    
+                                $group_avatar = $file->upload('image', 'image', $idGroup, TBL_GROUPS, false, true);    
                             }
+                            
+                            /** Prepare Custom Fields for WP XML-RPC - get all needed data **/
+                            $Host = $Groups->findHost($idGroup);
+                            
+                            $custom_fields = array(
+                                            array('key' => 'group_city',           'value' => $area),
+                                            array('key' => 'group_host',            'value' => $Host->hostname),       
+                                            array('key' => 'group_hostavatarurl',   'value' => UPLOADS_URL . 'mid_' .$Host->path),
+                                            array('key' => 'group_hash',            'value' => $idGroup),
+                                            array('key' => 'group_avatar_url',      'value' => UPLOADS_URL . 'mid_' . $group_avatar ),
+                                            );
+                            
+                            
+                            /** Start WP XML-RPC **/
+                            $wpClient = new \HieuLe\WordpressXmlrpcClient\WordpressClient();
+                            $wpClient->setCredentials(WP_XMLRPC_ENDPOINT, WP_XMLRPC_USER, WP_XMLRPC_PSWD);
+                            
+                            $content = array(
+                                            'post_type' => 'group',
+                                            'custom_fields' => $custom_fields
+                                            );
+                            
+                            $wpid = $wpClient->newPost($data['name'], $text, $content);
+                            $this->Group->update(array('wordpress_post_id' => $wpid), $idGroup);
+                            
+                            
                         }
                         else {
                             $response['danger'] = 'Group could <strong>not</strong> be created. Something went wrong with the database.';
@@ -121,9 +147,11 @@
                 if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST)){
                     
                     $data = $_POST;
+                    
                     // remove the extra "files" field that Summernote generates -
                     unset($data['files']);
                     unset($data['image']);
+                    
                     $u = $this->Group->update($data, $id);
                     
                     if(!$u) {
@@ -132,14 +160,68 @@
                     else {
                         $response['success'] = 'Group updated!';
                         
-                        if(isset($_FILES) && !empty($_FILES)){
+                        if(isset($_FILES['image']) && !empty($_FILES['image']) && $_FILES['image']['error'] != 4){
+                            
                             $existing_image = $this->Group->hasImage($id, true);
                             if(count($existing_image) > 0){
                                 $this->Group->removeImage($id, $existing_image[0]);
                             }
                             $file = new File;
-                            $file->upload('image', 'image', $id, TBL_GROUPS, false, true);
+                            $group_avatar = $file->upload('image', 'image', $id, TBL_GROUPS, false, true);
+                            
                         }
+                        else {
+                            $group_avatar = 'boh';
+                        }
+                        
+                         /** Prepare Custom Fields for WP XML-RPC - get all needed data **/
+                        $Host = $this->Group->findHost($id);
+                        
+                        $custom_fields = array(
+                                        array('key' => 'group_city',           'value' => $data['area']),       
+                                        array('key' => 'group_host',            'value' => $Host->hostname),       
+                                        array('key' => 'group_hostavatarurl',   'value' => UPLOADS_URL . 'mid_' .$Host->path),
+                                        array('key' => 'group_hash',            'value' => $id),
+                                        array('key' => 'group_avatar_url',      'value' => UPLOADS_URL . 'mid_' . $group_avatar ),
+                                        );
+                        
+                        
+                        /** Start WP XML-RPC **/
+                        $wpClient = new \HieuLe\WordpressXmlrpcClient\WordpressClient();
+                        $wpClient->setCredentials(WP_XMLRPC_ENDPOINT, WP_XMLRPC_USER, WP_XMLRPC_PSWD);
+                        
+                        $content = array(
+                                        'post_type' => 'group',
+                                        'post_title' => $Host->groupname,
+                                        'post_content' => $data['free_text'],
+                                        'custom_fields' => $custom_fields
+                                        );
+                        
+                        
+                        // Check for WP existence in DB
+                        $theGroup = $this->Group->findOne($id);
+                        if(!empty($theGroup->wordpress_post_id)){
+                            
+                            // we need to remap all custom fields because they all get unique IDs across all posts, so they don't get mixed up.
+                            $thePost = $wpClient->getPost($theGroup->wordpress_post_id);
+                            
+                            foreach( $thePost['custom_fields'] as $i => $field ){
+                                foreach( $custom_fields as $k => $set_field){
+                                    if($field['key'] == $set_field['key']){
+                                        $custom_fields[$k]['id'] = $field['id'];
+                                    }
+                                }
+                            }
+                            
+                            $content['custom_fields'] = $custom_fields;
+                            $wpClient->editPost($theGroup->wordpress_post_id, $content);
+                        }
+                        else {
+                            $wpid = $wpClient->newPost($Host->groupname, $data['free_text'], $content);
+                            $this->Group->update(array('wordpress_post_id' => $wpid), $id);
+                        }
+                        
+                        
                         if(hasRole($this->user, 'Host')){
                             header('Location: /host?action=gu&code=200');
                         }

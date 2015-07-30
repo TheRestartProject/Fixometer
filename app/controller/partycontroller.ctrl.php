@@ -44,6 +44,7 @@
             else {
                 
                 $Groups = new Group;
+                 
                 
                 $this->set('title', 'New Party');
                 $this->set('gmaps', true);
@@ -76,6 +77,10 @@
                     $latitude   =       $_POST['latitude'];
                     $longitude  =       $_POST['longitude'];
                     $group      =       $_POST['group'];
+                    
+                    
+                    // saving this for wordpress
+                    $wp_date = $event_date;
                     
                     // formatting dates for the DB
                     $event_date = date('Y-m-d', strtotime(engDate($event_date)));
@@ -124,6 +129,8 @@
                                         );
                         $idParty = $this->Party->create($data);
                         
+                        
+                        
                         if($idParty){
                             $response['success'] = 'Party created correctly.';
                             /** check and create User List **/
@@ -139,6 +146,32 @@
                                 $file = new File;
                                 $file->upload('file', 'image', $idParty, TBL_EVENTS);    
                             }
+                            
+                            
+                            /** Prepare Custom Fields for WP XML-RPC - get all needed data **/
+                            $Host = $Groups->findHost($group);
+                            $custom_fields = array(
+                                            array('key' => 'party_host',            'value' => $Host->hostname),       
+                                            array('key' => 'party_hostavatarurl',   'value' => UPLOADS_URL . 'mid_' .$Host->path),
+                                            array('key' => 'party_grouphash',       'value' => $group),
+                                            array('key' => 'party_location',        'value' => $location),
+                                            array('key' => 'party_time',            'value' => $start . ' - ' . $end),
+                                            array('key' => 'party_date',            'value' => $wp_date)
+                                            );
+                            
+                            
+                            /** Start WP XML-RPC **/
+                            $wpClient = new \HieuLe\WordpressXmlrpcClient\WordpressClient();
+                            $wpClient->setCredentials(WP_XMLRPC_ENDPOINT, WP_XMLRPC_USER, WP_XMLRPC_PSWD);
+                            
+                            $content = array(
+                                            'post_type' => 'party',
+                                            'custom_fields' => $custom_fields
+                                            );
+                            
+                            $wpid = $wpClient->newPost($Host->groupname, $free_text, $content);
+                            $this->Party->update(array('wordpress_post_id' => $wpid), $idParty);
+                            
                             
                             if(hasRole($this->user, 'Host')){
                                 header('Location: /host?action=pc&code=200');
@@ -180,6 +213,9 @@
                         $data['volunteers'] = count($_POST['users']);
                     }
                     
+                    // saving this for WP 
+                    $wp_date = $data['event_date'];
+                    
                     // formatting dates for the DB
                     $data['event_date'] = dbDateNoTime($data['event_date']);
                     
@@ -191,6 +227,56 @@
                     }
                     else {
                         $response['success'] = 'Party updated!';
+                        
+                        
+                        /** Prepare Custom Fields for WP XML-RPC - get all needed data **/
+                        $Host = $Groups->findHost($data['group']);
+            
+                        
+                        $custom_fields = array(
+                                        array('key' => 'party_host',            'value' => $Host->hostname),       
+                                        array('key' => 'party_hostavatarurl',   'value' => UPLOADS_URL . 'mid_' . $Host->path),
+                                        array('key' => 'party_grouphash',       'value' => $data['group']),
+                                        array('key' => 'party_location',        'value' => $data['location']),
+                                        array('key' => 'party_time',            'value' => $data['start'] . ' - ' . $data['end']),
+                                        array('key' => 'party_date',            'value' => $wp_date)
+                                        );
+                        
+                        
+                        /** Start WP XML-RPC **/
+                        $wpClient = new \HieuLe\WordpressXmlrpcClient\WordpressClient();
+                        $wpClient->setCredentials(WP_XMLRPC_ENDPOINT, WP_XMLRPC_USER, WP_XMLRPC_PSWD);
+                        
+                        $content = array(
+                                        'post_type' => 'party',
+                                        'post_title' => $Host->groupname,
+                                        'post_content' => $data['free_text'],
+                                        'custom_fields' => $custom_fields
+                                        );
+                        
+                        
+                        // Check for WP existence in DB
+                        $theParty = $this->Party->findOne($id);
+                        if(!empty($theParty->wordpress_post_id)){
+                            
+                            // we need to remap all custom fields because they all get unique IDs across all posts, so they don't get mixed up.
+                            $thePost = $wpClient->getPost($theParty->wordpress_post_id);
+                            
+                            foreach( $thePost['custom_fields'] as $i => $field ){
+                                foreach( $custom_fields as $k => $set_field){
+                                    if($field['key'] == $set_field['key']){
+                                        $custom_fields[$k]['id'] = $field['id'];
+                                    }
+                                }
+                            }
+                            
+                            $content['custom_fields'] = $custom_fields;
+                            $wpClient->editPost($theParty->wordpress_post_id, $content);
+                        }
+                        else {
+                            $wpid = $wpClient->newPost($Host->groupname, $free_text, $content);
+                            $this->Party->update(array('wordpress_post_id' => $wpid), $idParty);
+                        }
                         
                         
                         if(isset($_POST['users']) && !empty($_POST['users'])){
@@ -293,6 +379,7 @@
                                 }
                                 
                                 $response['success'] = 'Party info updated!';
+                                
                                 header('Location: /host');
                             }
                             else {

@@ -12,6 +12,8 @@
                     <?php if(isset($response)) { printResponse($response); } ?>
                     
                     <form action="/user/edit/<?php echo $data->idusers; ?>" method="post" enctype="multipart/form-data">
+                        
+                        <input type="hidden" name="id" id="id" value="<?php echo $data->idusers; ?>">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group <?php if(isset($error) && isset($error['name']) && !empty($error['name'])) { echo "has-error"; } ?>">
