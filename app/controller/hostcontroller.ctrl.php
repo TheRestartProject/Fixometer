@@ -15,7 +15,7 @@
                 $this->set('user', $user);
                 $this->set('header', true);
                 
-                if(!hasRole($this->user, 'Host')) {
+                if(!hasRole($this->user, 'Host') && !hasRole($this->user, 'Administrator')) {
                     header('Location: /user/forbidden');
                 }
             }
@@ -56,8 +56,9 @@
             $Device = new Device;
             
             
-            if(isset($groupid) && is_numeric($groupid) && hasRole($user, 'Administrator')) {
-                $group = (object) array_fill_keys( array('idgroups') , $groupid); 
+            if(isset($groupid) && is_numeric($groupid) && hasRole($this->user, 'Administrator')) {
+                //$group = (object) array_fill_keys( array('idgroups') , $groupid);
+                $group = $Group->findOne($groupid);
             }
             else { 
                 $group = $Group->ofThisUser($this->user->id);

@@ -132,7 +132,7 @@
         <header>
             <div class="col-md-12"  id="allparties">
                 <h2>
-                    All <span class="orange"><?php echo $group->name; ?></span> Parties <a href="/party" class="btn btn-primary btn-sm">View/edit all parties</a>
+                    All Parties <a href="/party" class="btn btn-primary btn-sm">View/edit all parties</a>
                 </h2>
             </div>
         </header>
