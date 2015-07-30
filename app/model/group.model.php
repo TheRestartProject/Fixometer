@@ -29,6 +29,41 @@
             return $stmt->fetchAll(PDO::FETCH_OBJ);
         }
         
+        
+        public function findList() {
+        
+                $sql =  'SELECT
+                        `g`.`idgroups` AS `id`,
+                        `g`.`name` AS `name`,
+                        `g`.`location` AS `location`,
+                        `g`.`area` AS `area`,
+                        `xi`.`path` AS `path`
+                        
+                    FROM `' . $this->table . '` AS `g`
+                    
+                    LEFT JOIN (
+                        SELECT * FROM `images`
+                            INNER JOIN `xref` ON `xref`.`object` = `images`.`idimages`
+                            WHERE `xref`.`object_type` = 5
+                            AND `xref`.`reference_type` = ' . TBL_GROUPS . '
+                            GROUP BY `images`.`path`
+                    ) AS `xi` 
+                    ON `xi`.`reference` = `g`.`idgroups` 
+                    
+                    GROUP BY `g`.`idgroups` 
+                    
+                    ORDER BY `g`.`idgroups` ASC';
+            $stmt = $this->database->prepare($sql);
+            
+            $q = $stmt->execute();
+            if(!$q){
+                dbga($stmt->errorInfo());
+            }
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+            
+        } 
+                
+        
         public function findOne($id){
             
             $sql = 'SELECT * FROM `' . $this->table . '` AS `g` 

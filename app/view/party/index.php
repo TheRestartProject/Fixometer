@@ -24,10 +24,11 @@
                     <tr>
                         <td><?php echo $p->id; ?></td>
                         <td>
+                            
                             <?php
                             if(hasRole($user, 'Administrator') || hasRole($user, 'Host') || $user->group == $g->id) {
                             ?>
-                            <a href="/party/edit/<?php echo $p->id; ?>" title="edit group"><?php echo $p->group_name; ?></a>
+                            <a href="/party/edit/<?php echo $p->id; ?>" title="edit party"><?php echo $p->group_name; ?></a>
                             <?php
                             } else {
                             ?>

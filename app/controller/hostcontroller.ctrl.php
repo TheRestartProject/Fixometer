@@ -21,7 +21,7 @@
             }
         }
         
-        public function index(){
+        public function index($groupid = null){
             
             $this->set('title', 'Host Dashboard');
             $this->set('showbadges', true);
@@ -55,9 +55,14 @@
             $Party = new Party;
             $Device = new Device;
             
-            $group = $Group->ofThisUser($this->user->id);
-            $group = $group[0];
             
+            if(isset($groupid) && is_numeric($groupid) && hasRole($user, 'Administrator')) {
+                $group = (object) array_fill_keys( array('idgroups') , $groupid); 
+            }
+            else { 
+                $group = $Group->ofThisUser($this->user->id);
+                $group = $group[0];
+            }
             $allparties = $Party->ofThisGroup($group->idgroups, true, true);
             
             $participants = 0;

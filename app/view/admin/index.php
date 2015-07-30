@@ -26,10 +26,21 @@
                       <span class="fa fa-chevron-down"></span>
                     </button>
                     <ul class="dropdown-menu">
-                        <?php foreach($grouplist as $group) { ?> <?php } ?>
+                        <?php foreach($grouplist as $group) { ?>
+                        <li class="group-list clearfix">
+                            <div class="pull-left">
+                                <?php if(!empty($group->path)) { ?> 
+                                <img src="/uploads/thumbnail_<?php echo $group->path; ?>" width="40" height="40" alt="<?php echo $group->name; ?> Image" class="profile-pic" />
+                                <?php } else { ?>
+                                <div class="profile-pic clearfix" style="background: #ddd; width: 40px; height: 40px; ">&nbsp;</div>    
+                                <?php } ?>                                
+                            </div>
+                            <div class="pull-left">
+                                <a  href="/host/index/<?php echo $group->id; ?>" ><?php echo $group->name; ?></a>
+                            </div>
+                        </li>
                         
-                      <li><a href="#">Dropdown link</a></li>
-                      <li><a href="#">Dropdown link</a></li>
+                        <?php } ?>
                     </ul>
                 </div>
                 
@@ -39,7 +50,6 @@
         <div class="col-md-6">
             <div class="btn-group btn-group-justified">
                 <a class="btn btn-default" href="/user/all">Users</a>
-                <a class="btn btn-default" href="/user/all">Edit Users</a>
                 <a class="btn btn-default" href="/user/create">Add User</a>
             </div>
         </div>

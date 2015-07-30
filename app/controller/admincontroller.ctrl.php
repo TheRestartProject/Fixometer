@@ -16,7 +16,7 @@
                 $this->set('user', $user);
                 $this->set('header', true);
                 
-                if(!hasRole($this->user, 'Admin')) {
+                if(!hasRole($this->user, 'Administrator')) {
                     header('Location: /user/forbidden');
                 }
             }
@@ -54,6 +54,8 @@
             $Party = new Party;
             $Device = new Device;
             
+            
+            $this->set('grouplist', $Group->findList());
             
             $allparties = $Party->ofThisGroup('admin', true, true);
             
