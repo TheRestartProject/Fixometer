@@ -164,12 +164,14 @@
                             $wpClient = new \HieuLe\WordpressXmlrpcClient\WordpressClient();
                             $wpClient->setCredentials(WP_XMLRPC_ENDPOINT, WP_XMLRPC_USER, WP_XMLRPC_PSWD);
                             
+                            
                             $content = array(
                                             'post_type' => 'party',
                                             'custom_fields' => $custom_fields
                                             );
                             
-                            $wpid = $wpClient->newPost($Host->groupname, $free_text, $content);
+                            $wpid = $wpClient->newPost($location, $free_text, $content);
+                            
                             $this->Party->update(array('wordpress_post_id' => $wpid), $idParty);
                             
                             
@@ -200,12 +202,13 @@
                 $Groups = new Group;
                 
                 if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST)){
-                    
+                    $id = $_POST['id'];
                     $data = $_POST;
                     // remove the extra "files" field that Summernote generates -
                     unset($data['files']);
                     unset($data['file']);
                     unset($data['users']);
+                    unset($data['id']);
                     
                     // Add SuperHero Restarter!
                     $_POST['users'][] = 29;
@@ -249,7 +252,7 @@
                         
                         $content = array(
                                         'post_type' => 'party',
-                                        'post_title' => $Host->groupname,
+                                        'post_title' => $data['location'],
                                         'post_content' => $data['free_text'],
                                         'custom_fields' => $custom_fields
                                         );
@@ -258,7 +261,7 @@
                         // Check for WP existence in DB
                         $theParty = $this->Party->findOne($id);
                         if(!empty($theParty->wordpress_post_id)){
-                            
+                        
                             // we need to remap all custom fields because they all get unique IDs across all posts, so they don't get mixed up.
                             $thePost = $wpClient->getPost($theParty->wordpress_post_id);
                             
@@ -274,6 +277,9 @@
                             $wpClient->editPost($theParty->wordpress_post_id, $content);
                         }
                         else {
+                            
+                            
+                            
                             $wpid = $wpClient->newPost($Host->groupname, $free_text, $content);
                             $this->Party->update(array('wordpress_post_id' => $wpid), $idParty);
                         }

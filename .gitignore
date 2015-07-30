@@ -1,6 +1,7 @@
 /vendor
 /node_modules
 /config/database.php
+/config/config.php
 /assets
 /public/uploads
 .env

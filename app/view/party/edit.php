@@ -13,7 +13,7 @@
 
                 <div class="row">
                             <div class="col-md-6">
-                                
+                                <input type="hidden" name="id" value="<?php echo $formdata->idevents; ?>" >
                                 <div class="form-group <?php if(isset($error) && isset($error['event_date']) && !empty($error['event_date'])) { echo "has-error"; } ?>">
                                     <label for="event_date">Date:</label>
                                     <div class="input-group date">
@@ -79,7 +79,7 @@
                                 </div>
                                 
                                 <?php
-                                if(hasRole($user, 'Host')) {
+                                if( hasRole($user, 'Host') ) {
                                 ?>
                                 
                                 <input type="hidden" name="group" id="group" value="<?php echo $usergroup->idgroups; ?>">
