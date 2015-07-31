@@ -497,10 +497,6 @@
                                                 'custom_fields' => $custom_fields
                                                 );
                                 
-                                
-                                
-                                
-                                
                                 // Check for WP existence in DB
                                 $theParty = $this->Party->findOne($id);
                                 if(!empty($theParty->wordpress_post_id)){
@@ -527,7 +523,7 @@
                                 unset($party);
                                 
                                 /** Update Group Stats **/
-                                
+/*                                
                                 $allparties = $this->Party->ofThisGroup($partygroup, true, true);
             
                                 $participants = 0;
@@ -658,6 +654,7 @@
                                     $wpClient->editPost($theGroup->wordpress_post_id, $content);
                                 
                                 }
+                                */
                                 /** EOF WP Sync **/        
                                 
                                 $response['success'] = 'Party info updated!';
