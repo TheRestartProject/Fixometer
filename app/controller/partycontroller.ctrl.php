@@ -422,7 +422,7 @@
                                 
                                 $party->co2 = number_format(round($party->co2 * $Device->displacement), 0, '.' , ',');    
                                 
-                                
+                                /*
                                 $stats = '
                                 <div class="data">
                                     <div class="stat double">
@@ -462,7 +462,7 @@
                                         <div class="col">'. $party->dead_devices .'</div>
                                     </div>
                                 </div>';
-                                
+                                */
                                 
                                 $custom_fields = array(
                                                 array('key' => 'party_host',            'value' => $Host->hostname),       
@@ -472,11 +472,11 @@
                                                 array('key' => 'party_time',            'value' => substr($party->start, 0, -3) . ' - ' . substr($party->end, 0, -3)),
                                                 array('key' => 'party_date',            'value' => $wp_date),
                                 //                array('key' => 'party_timestamp',       'value' => $party->event_timestamp),
-                                                array('key' => 'party_stats',           'value' => $stats)
+                                //                array('key' => 'party_stats',           'value' => $stats)
                                                 );                    
                                 
                                 
-                                /** Start WP XML-RPC **/
+                                /** Start WP XML-RPC **//*
                                 $wpClient = new \HieuLe\WordpressXmlrpcClient\WordpressClient();
                                 $wpClient->setCredentials(WP_XMLRPC_ENDPOINT, WP_XMLRPC_USER, WP_XMLRPC_PSWD);
                                 
@@ -513,7 +513,7 @@
                                 }
                                 
                                 unset($party);
-                                
+                                */
                                 /** Update Group Stats **/
 /*                                
                                 $allparties = $this->Party->ofThisGroup($partygroup, true, true);
