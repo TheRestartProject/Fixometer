@@ -41,10 +41,12 @@
                         `e`.`location`,
                         `e`.`latitude`,
                         `e`.`longitude`,
+                        `e`.`group`,
                         `e`.`pax`,
                         `e`.`volunteers`,
                         `e`.`hours`,
-                        `g`.`name` AS `group_name`                        
+                        `g`.`name` AS `group_name`
+                        
                     FROM `events` AS `e`
                     INNER JOIN `groups` AS `g`
                         ON `g`.`idgroups` = `e`.`group`

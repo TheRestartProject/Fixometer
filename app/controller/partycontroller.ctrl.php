@@ -384,6 +384,147 @@
                                     $Device->create($device);
                                 }
                                 
+                                
+                                /** WP Sync **/
+                                $party = $this->Party->findThis($idparty, true);
+                                
+                                $Groups = new Group;
+                                $Host = $Groups->findHost($party->group);
+            
+                                /** prepare party stats **/
+                                
+                                $wp_date = strftime('%d/%m/%Y', $party->event_date);
+                                $party->co2 = 0;
+                                $party->fixed_devices = 0;
+                                $party->repairable_devices = 0;
+                                $party->dead_devices = 0;
+                                
+                                
+                                if(!empty($party->devices)){ 
+                                    foreach($party->devices as $device){
+                                        
+                                        $party->co2 += $device->footprint;
+                                        
+                                        switch($device->repair_status){
+                                            case 1:
+                                                $party->fixed_devices++;
+                                                break;
+                                            case 2:
+                                                $party->repairable_devices++;
+                                                break;
+                                            case 3:
+                                                $party->dead_devices++;
+                                                break;
+                                        }
+                                    }
+                                }
+                                
+                                $party->co2 = number_format(round($party->co2 * $Device->displacement), 0, '.' , ',');    
+                                
+                                
+                                $stats = '
+                                <div class="data">
+                                    <div class="stat double">
+                                        <div class="col">
+                                            <i class="fa fa-group"></i>
+                                            <span class="subtext">participants</span>
+                                        </div>
+                                        <div class="col">
+                                            '. $party->pax .'"
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                    <div class="stat double">
+                                        <div class="col">
+                                            
+                                            
+                                            <span class="subtext">restarters</span>
+                                        </div>
+                                        <div class="col">
+                                            '.$party->volunteers.'
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                    <div class="stat">
+                                        
+                                        <div class="footprint">
+                                            '.$party->co2.'
+                                            <span class="subtext">kg of CO<sub>2</sub></span>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    <div class="stat fixed">
+                                        <div class="col"><i class="status mid fixed"></i></div>
+                                        <div class="col">' . $party->fixed_devices .'</div>    
+                                    </div>
+                                    
+                                    <div class="stat repairable">
+                                        <div class="col"><i class="status mid repairable"></i></div>
+                                        <div class="col">'. $party->repairable_devices .'</div>
+                                    </div>
+                                    
+                                    <div class="stat dead">
+                                        <div class="col"><i class="status mid dead"></i></div>
+                                        <div class="col">'. $party->dead_devices .'</div>
+                                    </div>
+                                </div>';
+                                
+                                
+                                $custom_fields = array(
+                                                array('key' => 'party_host',            'value' => $Host->hostname),       
+                                                array('key' => 'party_hostavatarurl',   'value' => UPLOADS_URL . 'mid_' . $Host->path),
+                                                array('key' => 'party_grouphash',       'value' => $party->group),
+                                                array('key' => 'party_location',        'value' => $party->location),
+                                                array('key' => 'party_time',            'value' => substr($party->start, 0, -3) . ' - ' . substr($party->end, 0, -3)),
+                                                array('key' => 'party_date',            'value' => $wp_date),
+                                                array('key' => 'party_stats',           'value' => $stats)
+                                                );                    
+                                
+                                
+                                /** Start WP XML-RPC **/
+                                $wpClient = new \HieuLe\WordpressXmlrpcClient\WordpressClient();
+                                $wpClient->setCredentials(WP_XMLRPC_ENDPOINT, WP_XMLRPC_USER, WP_XMLRPC_PSWD);
+                                
+                                $content = array(
+                                                'post_type' => 'party',
+                                                'post_title' => $Host->groupname,
+                                                'post_content' => $party->free_text,
+                                                'custom_fields' => $custom_fields
+                                                );
+                                
+                                
+                                
+                                
+                                
+                                // Check for WP existence in DB
+                                $theParty = $this->Party->findOne($id);
+                                if(!empty($theParty->wordpress_post_id)){
+                                
+                                    // we need to remap all custom fields because they all get unique IDs across all posts, so they don't get mixed up.
+                                    $thePost = $wpClient->getPost($theParty->wordpress_post_id);
+                                    
+                                    foreach( $thePost['custom_fields'] as $i => $field ){
+                                        foreach( $custom_fields as $k => $set_field){
+                                            if($field['key'] == $set_field['key']){
+                                                $custom_fields[$k]['id'] = $field['id'];
+                                            }
+                                        }
+                                    }
+                                    
+                                    $content['custom_fields'] = $custom_fields;
+                                    $wpClient->editPost($theParty->wordpress_post_id, $content);
+                                }
+                                else {
+                                    
+                                    $wpid = $wpClient->newPost($Host->groupname, $party->free_text, $content);
+                                    $this->Party->update(array('wordpress_post_id' => $wpid), $idparty);
+                                }
+                                unset($party);
+                                /** EOF WP Sync **/        
+                                
                                 $response['success'] = 'Party info updated!';
                                 
                                 header('Location: /host');

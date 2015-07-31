@@ -4,12 +4,17 @@
     <div class="row">
         <div class="col-md-12">
             <h1>Edit Party <small><button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-floppy-o"></i> save</button></small></h1>
+            
+            <div class="alert alert-info">
+                <?php echo WDG_PUBLIC_INFO; ?>
+            </div>
+
         </div>
     </div>
     
     <div class="row">
         <div class="col-md-12">
-            
+                
             <input type="hidden" name="idparty" id="idparty" value="<?php echo $party->id; ?>">
             
             <div class="row">

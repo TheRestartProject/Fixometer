@@ -72,9 +72,13 @@
     
     /** autoload functions **/
     function autoloader($className){
+    
+        if(strtolower($className) == 'party' || strtolower($className) == 'group') { 
+            require_once(ROOT . DS . 'lib' . DS . 'vendor' . DS . 'wordpress-xml-rpc' . DS . 'WordpressClient.php');
+            require_once(ROOT . DS . 'lib' . DS . 'vendor' . DS . 'wordpress-xml-rpc' . DS . 'Exception' . DS . 'NetworkException.php');
+            require_once(ROOT . DS . 'lib' . DS . 'vendor' . DS . 'wordpress-xml-rpc' . DS . 'Exception' . DS . 'XmlrpcException.php');
+        }
         
-        require_once(ROOT . DS . 'lib' . DS . 'vendor' . DS . 'wordpress-xml-rpc' . DS . 'WordpressClient.php');
-            
         if(file_exists(ROOT . DS . 'lib' . DS . strtolower($className).'.class.php')){
             require_once(ROOT . DS . 'lib' . DS . strtolower($className).'.class.php');
         }
