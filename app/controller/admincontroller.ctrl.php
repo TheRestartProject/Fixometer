@@ -72,6 +72,7 @@
                 $party->fixed_devices = 0;
                 $party->repairable_devices = 0;
                 $party->dead_devices = 0;
+                $party->guesstimates = false;
                 
                 $participants += $party->pax;
                 $hours_volunteered += (($party->volunteers > 0 ? $party->volunteers * 3 : 12 ) + 9);
@@ -90,6 +91,9 @@
                         case 3:
                             $party->dead_devices++;
                             break;
+                    }
+                    if($device->category == 46){
+                        $party->guesstimates = true;
                     }
                 }
                 

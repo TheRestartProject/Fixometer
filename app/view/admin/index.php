@@ -137,6 +137,17 @@
             </div>
         </header>
         
+        
+        <div class="col-md-12">
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary btn-sm party-switch active" data-target="all">All Parties</button>
+                <button type="button" class="btn btn-primary btn-sm party-switch" data-target=".no-data-wrap">Needing Attention</button>
+                <button type="button" class="btn btn-primary btn-sm party-switch" data-target=".guesstimates">Guesstimated Devices</button>
+            </div>
+        </div>
+        
+        <br />
+        
         <div class="col-md-12 fader" id="party-list">
         
             <?php
@@ -192,7 +203,7 @@
                 
             </a>
             <?php } else {  ?>
-            <a class="media party"  href="/party/manage/<?php echo $party->idevents; ?>">
+            <a class="media party <?php echo ($party->guesstimates == true ? ' guesstimates' : ''); ?>"  href="/party/manage/<?php echo $party->idevents; ?>">
                 <div class="media-left">
                     <div class="date">
                         <span class="month"><?php echo date('M', $party->event_timestamp); ?></span>

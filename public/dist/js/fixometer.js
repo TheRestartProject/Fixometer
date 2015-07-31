@@ -135,6 +135,23 @@ $(document).ready(function(){
         
     });
     
+    /** toggle party views in admin console **/
+    $('.party-switch').click(function(e){
+        e.preventDefault();
+        var target = $(this).data('target');
+        var family = $(this).data('family');
+        
+        $('.party-switch').removeClass('active');
+        $(this).addClass('active');
+        
+        if (target == 'all') {
+            $('.party').addClass('show').removeClass('hide');
+        }
+        else {
+            $('.party').removeClass('show').addClass('hide');
+            $(target).addClass('show');
+        }
+    });
     
     $('.category-select').change(function(){
         if($(this).val() === '46') {
