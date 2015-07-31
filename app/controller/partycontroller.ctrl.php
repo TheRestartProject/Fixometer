@@ -481,6 +481,7 @@
                                                 array('key' => 'party_location',        'value' => $party->location),
                                                 array('key' => 'party_time',            'value' => substr($party->start, 0, -3) . ' - ' . substr($party->end, 0, -3)),
                                                 array('key' => 'party_date',            'value' => $wp_date),
+                                                array('key' => 'party_timestamp',       'value' => $party->event_timestamp),
                                                 array('key' => 'party_stats',           'value' => $stats)
                                                 );                    
                                 
