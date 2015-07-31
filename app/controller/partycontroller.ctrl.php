@@ -480,7 +480,6 @@
                                 $wpClient = new \HieuLe\WordpressXmlrpcClient\WordpressClient();
                                 $wpClient->setCredentials(WP_XMLRPC_ENDPOINT, WP_XMLRPC_USER, WP_XMLRPC_PSWD);
                                 
-                                var_dump($wpClient); die();
                                 
                                 $content = array(
                                                 'post_type' => 'party',
@@ -495,7 +494,7 @@
                                 
                                     // we need to remap all custom fields because they all get unique IDs across all posts, so they don't get mixed up.
                                     $thePost = $wpClient->getPost($theParty->wordpress_post_id);
-                                    
+                                        
                                     foreach( $thePost['custom_fields'] as $i => $field ){
                                         foreach( $custom_fields as $k => $set_field){
                                             if($field['key'] == $set_field['key']){
