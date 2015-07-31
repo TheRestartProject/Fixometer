@@ -435,38 +435,28 @@
                                         </div>
                                         
                                     </div>
-                                    
                                     <div class="stat double">
                                         <div class="col">
-                                            
-                                            
                                             <span class="subtext">restarters</span>
                                         </div>
                                         <div class="col">
                                             '.$party->volunteers.'
                                         </div>
-                                        
                                     </div>
-                                    
                                     <div class="stat">
-                                        
                                         <div class="footprint">
                                             '.$party->co2.'
                                             <span class="subtext">kg of CO<sub>2</sub></span>
                                         </div>
                                     </div>
-                                    
-                                    
                                     <div class="stat fixed">
                                         <div class="col"><i class="status mid fixed"></i></div>
                                         <div class="col">' . $party->fixed_devices .'</div>    
                                     </div>
-                                    
                                     <div class="stat repairable">
                                         <div class="col"><i class="status mid repairable"></i></div>
                                         <div class="col">'. $party->repairable_devices .'</div>
                                     </div>
-                                    
                                     <div class="stat dead">
                                         <div class="col"><i class="status mid dead"></i></div>
                                         <div class="col">'. $party->dead_devices .'</div>
@@ -488,6 +478,8 @@
                                 
                                 /** Start WP XML-RPC **/
                                 $wpClient = new \HieuLe\WordpressXmlrpcClient\WordpressClient();
+                                var_dump($wpClient); die();
+                                
                                 $wpClient->setCredentials(WP_XMLRPC_ENDPOINT, WP_XMLRPC_USER, WP_XMLRPC_PSWD);
                                 
                                 $content = array(
@@ -520,6 +512,7 @@
                                     $wpid = $wpClient->newPost($Host->groupname, $party->free_text, $content);
                                     $this->Party->update(array('wordpress_post_id' => $wpid), $idparty);
                                 }
+                                
                                 unset($party);
                                 
                                 /** Update Group Stats **/
