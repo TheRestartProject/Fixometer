@@ -478,9 +478,9 @@
                                 
                                 /** Start WP XML-RPC **/
                                 $wpClient = new \HieuLe\WordpressXmlrpcClient\WordpressClient();
-                                var_dump($wpClient); die();
-                                
                                 $wpClient->setCredentials(WP_XMLRPC_ENDPOINT, WP_XMLRPC_USER, WP_XMLRPC_PSWD);
+                                
+                                var_dump($wpClient); die();
                                 
                                 $content = array(
                                                 'post_type' => 'party',
