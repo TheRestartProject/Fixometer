@@ -64,6 +64,7 @@
                 $group = $Group->ofThisUser($this->user->id);
                 $group = $group[0];
             }
+            
             $allparties = $Party->ofThisGroup($group->idgroups, true, true);
             
             $participants = 0;
