@@ -244,7 +244,8 @@
                                         array('key' => 'party_location',        'value' => $data['location']),
                                         array('key' => 'party_time',            'value' => $data['start'] . ' - ' . $data['end']),
                                         array('key' => 'party_date',            'value' => $wp_date),
-                                        array('key' => 'party_stats',           'value' => $id),
+                                        //array('key' => 'party_timestamp',       'value' => $party->event_timestamp),
+                                        array('key' => 'party_stats',           'value' => $id)
                                         );
                         
                         
@@ -279,11 +280,9 @@
                             $wpClient->editPost($theParty->wordpress_post_id, $content);
                         }
                         else {
-                            
-                            
-                            
+                            // Brand new post -> we send it up and update the Fixometer
                             $wpid = $wpClient->newPost($Host->groupname, $free_text, $content);
-                            $this->Party->update(array('wordpress_post_id' => $wpid), $idParty);
+                            $this->Party->update(array('wordpress_post_id' => $wpid), $id);
                         }
                         
                         
