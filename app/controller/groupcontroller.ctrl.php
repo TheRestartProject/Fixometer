@@ -6,7 +6,7 @@
             parent::__construct($model, $controller, $action);
             
             $Auth = new Auth($url);
-            if(!$Auth->isLoggedIn()){
+            if(!$Auth->isLoggedIn() && $action != 'stats'){
                 header('Location: /user/login');
             }
             else {
@@ -254,6 +254,60 @@
             else {
                 header('Location: /user/forbidden');
             }
+        }
+        
+        public function stats($id){
+            
+            $Party = new Party;
+            $Device = new Device;
+            
+            $allparties = $Party->ofThisGroup($id, true, true);
+            
+            $participants = 0;
+            $hours_volunteered = 0;
+            
+            $need_attention = 0;
+            foreach($allparties as $i => $party){
+                if($party->device_count == 0){
+                    $need_attention++;    
+                }
+                
+                $party->co2 = 0;
+                $party->fixed_devices = 0;
+                $party->repairable_devices = 0;
+                $party->dead_devices = 0;
+                
+                $participants += $party->pax;
+                $hours_volunteered += (($party->volunteers > 0 ? $party->volunteers * 3 : 12 ) + 9);
+                
+                foreach($party->devices as $device){
+                    if($device->repair_status == DEVICE_FIXED){ 
+                        $party->co2 += $device->footprint;
+                    }
+                    
+                    switch($device->repair_status){
+                        case 1:
+                            $party->fixed_devices++;
+                            break;
+                        case 2:
+                            $party->repairable_devices++;
+                            break;
+                        case 3:
+                            $party->dead_devices++;
+                            break;
+                    }
+                }
+                
+                $party->co2 = number_format(round($party->co2 * $Device->displacement), 0, '.' , ',');    
+            }
+            
+            $this->set('pax', $participants);
+            $this->set('hours', $hours_volunteered);
+            
+            $weights = $Device->getWeights($id);
+            $devices = $Device->ofThisGroup($id);
+            
+            
         }
     }
     

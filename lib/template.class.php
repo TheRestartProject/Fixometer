@@ -13,6 +13,7 @@
                             'party_data',
                             'category_list',
                             'restarters',
+                            'stats',
                             );
         
         function __construct($controller,$action) {
@@ -47,12 +48,21 @@
                 } else {
                     include (ROOT . DS . 'app' . DS . 'view' . DS . 'footer.php');
                 }
+                
                 /* Include Base Foot @ view/foot.php */
                 include (ROOT . DS . 'app' . DS . 'view' . DS . 'foot.php');
             }
+            
             elseif($this->_controller == 'rss'){
                 /** Manage RSS Feeds (used for public site widgets/WordPress Implementations) **/
                 include (ROOT . DS . 'app' . DS . 'view' . DS . 'feeds' . DS . $this->_action . '.php');		 
+            }
+            
+            elseif($this->_action == 'stats'){
+                /** Manage Stat Pages for iframe embedding in third party sites **/
+                include (ROOT . DS . 'app' . DS . 'view' . DS . 'head.php');
+                include (ROOT . DS . 'app' . DS . 'view' . DS . $this->_controller . DS . $this->_action . '.php');		 
+                include (ROOT . DS . 'app' . DS . 'view' . DS . 'foot.php');
             }
             else {
                 /** requested file should not include header and footer, might be different mime or AJAX content **/

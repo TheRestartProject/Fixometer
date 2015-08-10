@@ -8,7 +8,7 @@
             parent::__construct($model, $controller, $action);
             
             $Auth = new Auth($url);
-            if(!$Auth->isLoggedIn()){
+            if(!$Auth->isLoggedIn() && $action != 'stats'){
                 header('Location: /user/login');
             }
             else {
@@ -156,7 +156,8 @@
                                             array('key' => 'party_grouphash',       'value' => $group),
                                             array('key' => 'party_location',        'value' => $location),
                                             array('key' => 'party_time',            'value' => $start . ' - ' . $end),
-                                            array('key' => 'party_date',            'value' => $wp_date)
+                                            array('key' => 'party_date',            'value' => $wp_date),
+                                            array('key' => 'party_stats',           'value' => $idParty),
                                             );
                             
                             
@@ -242,7 +243,8 @@
                                         array('key' => 'party_grouphash',       'value' => $data['group']),
                                         array('key' => 'party_location',        'value' => $data['location']),
                                         array('key' => 'party_time',            'value' => $data['start'] . ' - ' . $data['end']),
-                                        array('key' => 'party_date',            'value' => $wp_date)
+                                        array('key' => 'party_date',            'value' => $wp_date),
+                                        array('key' => 'party_stats',           'value' => $id),
                                         );
                         
                         
@@ -392,78 +394,6 @@
                                 $partygroup = $party->group;
                                 $Host = $Groups->findHost($party->group);
             
-                                /** prepare party stats **/
-                                
-                                $wp_date = strftime('%d/%m/%Y', $party->event_date);
-                                $party->co2 = 0;
-                                $party->fixed_devices = 0;
-                                $party->repairable_devices = 0;
-                                $party->dead_devices = 0;
-                                
-                                
-                                if(!empty($party->devices)){ 
-                                    foreach($party->devices as $device){
-                                        
-                                        $party->co2 += $device->footprint;
-                                        
-                                        switch($device->repair_status){
-                                            case 1:
-                                                $party->fixed_devices++;
-                                                break;
-                                            case 2:
-                                                $party->repairable_devices++;
-                                                break;
-                                            case 3:
-                                                $party->dead_devices++;
-                                                break;
-                                        }
-                                    }
-                                }
-                                
-                                $party->co2 = number_format(round($party->co2 * $Device->displacement), 0, '.' , ',');    
-                                
-                                /*
-                                $stats = '
-                                <div class="data">
-                                    <div class="stat double">
-                                        <div class="col">
-                                            <i class="fa fa-group"></i>
-                                            <span class="subtext">participants</span>
-                                        </div>
-                                        <div class="col">
-                                            '. $party->pax .'"
-                                        </div>
-                                        
-                                    </div>
-                                    <div class="stat double">
-                                        <div class="col">
-                                            <span class="subtext">restarters</span>
-                                        </div>
-                                        <div class="col">
-                                            '.$party->volunteers.'
-                                        </div>
-                                    </div>
-                                    <div class="stat">
-                                        <div class="footprint">
-                                            '.$party->co2.'
-                                            <span class="subtext">kg of CO<sub>2</sub></span>
-                                        </div>
-                                    </div>
-                                    <div class="stat fixed">
-                                        <div class="col"><i class="status mid fixed"></i></div>
-                                        <div class="col">' . $party->fixed_devices .'</div>    
-                                    </div>
-                                    <div class="stat repairable">
-                                        <div class="col"><i class="status mid repairable"></i></div>
-                                        <div class="col">'. $party->repairable_devices .'</div>
-                                    </div>
-                                    <div class="stat dead">
-                                        <div class="col"><i class="status mid dead"></i></div>
-                                        <div class="col">'. $party->dead_devices .'</div>
-                                    </div>
-                                </div>';
-                                */
-                                
                                 $custom_fields = array(
                                                 array('key' => 'party_host',            'value' => $Host->hostname),       
                                                 array('key' => 'party_hostavatarurl',   'value' => UPLOADS_URL . 'mid_' . $Host->path),
@@ -471,12 +401,12 @@
                                                 array('key' => 'party_location',        'value' => $party->location),
                                                 array('key' => 'party_time',            'value' => substr($party->start, 0, -3) . ' - ' . substr($party->end, 0, -3)),
                                                 array('key' => 'party_date',            'value' => $wp_date),
-                                //                array('key' => 'party_timestamp',       'value' => $party->event_timestamp),
-                                //                array('key' => 'party_stats',           'value' => $stats)
+                                                array('key' => 'party_timestamp',       'value' => $party->event_timestamp),
+                                                array('key' => 'party_stats',           'value' => $idparty)
                                                 );                    
                                 
                                 
-                                /** Start WP XML-RPC **//*
+                                /** Start WP XML-RPC **/
                                 $wpClient = new \HieuLe\WordpressXmlrpcClient\WordpressClient();
                                 $wpClient->setCredentials(WP_XMLRPC_ENDPOINT, WP_XMLRPC_USER, WP_XMLRPC_PSWD);
                                 
@@ -513,140 +443,6 @@
                                 }
                                 
                                 unset($party);
-                                */
-                                /** Update Group Stats **/
-/*                                
-                                $allparties = $this->Party->ofThisGroup($partygroup, true, true);
-            
-                                $participants = 0;
-                                $hours_volunteered = 0;
-                                
-                                $need_attention = 0;
-                                foreach($allparties as $i => $party){
-                                    if($party->device_count == 0){
-                                        $need_attention++;    
-                                    }
-                                    
-                                    $party->co2 = 0;
-                                    $party->fixed_devices = 0;
-                                    $party->repairable_devices = 0;
-                                    $party->dead_devices = 0;
-                                    
-                                    $participants += $party->pax;
-                                    $hours_volunteered += (($party->volunteers > 0 ? $party->volunteers * 3 : 12 ) + 9);
-                                    
-                                    foreach($party->devices as $device){
-                                        
-                                        $party->co2 += $device->footprint;
-                                        
-                                        switch($device->repair_status){
-                                            case 1:
-                                                $party->fixed_devices++;
-                                                break;
-                                            case 2:
-                                                $party->repairable_devices++;
-                                                break;
-                                            case 3:
-                                                $party->dead_devices++;
-                                                break;
-                                        }
-                                    }
-                                    
-                                    $party->co2 = number_format(round($party->co2 * $Device->displacement), 0, '.' , ',');    
-                                }
-                                $weights = $Device->getWeights($partygroup);
-                                $devices = $Device->ofThisGroup($partygroup);
-                                $parties_thrown = count($allparties);
-                                
-                                $co2_years = $Device->countCO2ByYear($partygroup);
-                                $co2sum = 0;
-                                foreach($co2_years as $y){
-                                    $co2sum += $y->co2;
-                                }
-                                
-                                
-                                $waste_years = $Device->countWasteByYear($partygroup);
-                                $wastesum = 0;
-                                foreach($waste_years as $y){
-                                    $wastesum += $y->waste;
-                                }
-                                        
-                                        
-                                $groupstats =
-                                '<div class="stat">
-                                    <div class="col">
-                                        <h5>participants</h5>
-                                    </div>
-                                    <div class="col">
-                                        <span class="largetext">' .  $participants . '</span>
-                                    </div>
-                                </div>
-                                <div class="stat">
-                                    <div class="col">
-                                        <h5>hours volunteered</h5>
-                                    </div>
-                                    <div class="col">
-                                        <span class="largetext">' . $hours_volunteered . '</span>
-                                    </div>
-                                </div>
-                                <div class="stat">    
-                                    <div class="col">
-                                        <h5>parties thrown</h5>
-                                    </div>
-                                    <div class="col">
-                                        <span class="largetext">' . count($allparties) . '</span>
-                                    </div>
-                                </div>
-                                <div class="stat">    
-                                    <div class="col">
-                                        <h5>waste prevented</h5>
-                                    </div>
-                                    <div class="col">
-                                        <span class="largetext">' . number_format(round($wastesum), 0, '.', ',') . ' kg</span>
-                                    </div>
-                                </div>
-                                <div class="stat">    
-                                    <div class="col">
-                                        <h5>CO<sub>2</sub> emission prevented</h5>
-                                    </div>
-                                    <div class="col">
-                                        <span class="largetext">' . number_format(round($co2sum), 0, '.', ',') . ' kg</span>
-                                    </div>
-                                </div>';
-                                
-                                $custom_fields = array(
-                                                    array('key' => 'group_stats', 'value' => $groupstats)   
-                                                    );
-                                
-                                $theGroup = $Groups->findOne($partygroup);
-                                $content = array(
-                                        'post_type' => 'group',
-                                        'post_title' => $Host->groupname,
-                                        'post_content' => $theGroup->free_text,
-                                        'custom_fields' => $custom_fields
-                                        );
-                        
-                        
-                                // Check for WP existence in DB
-                                
-                                if(!empty($theGroup->wordpress_post_id)){
-                                    
-                                    // we need to remap all custom fields because they all get unique IDs across all posts, so they don't get mixed up.
-                                    $thePost = $wpClient->getPost($theGroup->wordpress_post_id);
-                                    
-                                    foreach( $thePost['custom_fields'] as $i => $field ){
-                                        foreach( $custom_fields as $k => $set_field){
-                                            if($field['key'] == $set_field['key']){
-                                                $custom_fields[$k]['id'] = $field['id'];
-                                            }
-                                        }
-                                    }
-                                    
-                                    $content['custom_fields'] = $custom_fields;
-                                    $wpClient->editPost($theGroup->wordpress_post_id, $content);
-                                
-                                }
-                                */
                                 /** EOF WP Sync **/        
                                 
                                 $response['success'] = 'Party info updated!';
@@ -677,7 +473,9 @@
                 if(!empty($party->devices)){ 
                     foreach($party->devices as $device){
                         
-                        $party->co2 += $device->footprint;
+                        if($device->repair_status == DEVICE_FIXED){
+                            $party->co2 += $device->footprint;
+                        }
                         
                         switch($device->repair_status){
                             case 1:
@@ -725,5 +523,46 @@
                 header('Location: /user/forbidden');
             }
         }
+        
+        
+        public function stats($id){
+            $Device = new Device;
+            
+            $this->set('framed', true);
+            $party = $this->Party->findThis($id, true);
+            
+            if($party->device_count == 0){
+                $need_attention++;    
+            }
+                
+            $party->co2 = 0;
+            $party->fixed_devices = 0;
+            $party->repairable_devices = 0;
+            $party->dead_devices = 0;
+                
+            foreach($party->devices as $device){
+                
+                if($device->repair_status == DEVICE_FIXED){
+                    $party->co2 += $device->footprint;
+                }
+                
+                switch($device->repair_status){
+                    case 1:
+                        $party->fixed_devices++;
+                        break;
+                    case 2:
+                        $party->repairable_devices++;
+                        break;
+                    case 3:
+                        $party->dead_devices++;
+                        break;
+                }
+            }
+            
+            $party->co2 = number_format(round($party->co2 * $Device->displacement), 0, '.' , ',');    
+            $this->set('party', $party);
+
+        }
+        
     }
     

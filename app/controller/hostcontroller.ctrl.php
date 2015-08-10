@@ -85,8 +85,9 @@
                 $hours_volunteered += (($party->volunteers > 0 ? $party->volunteers * 3 : 12 ) + 9);
                 
                 foreach($party->devices as $device){
-                    
-                    $party->co2 += $device->footprint;
+                    if($device->repair_status == DEVICE_FIXED){ 
+                        $party->co2 += $device->footprint;
+                    }
                     
                     switch($device->repair_status){
                         case 1:
