@@ -178,7 +178,7 @@
                         $Host = $this->Group->findHost($id);
                         
                         $custom_fields = array(
-                                        array('key' => 'group_city',           'value' => $data['area']),       
+                                        array('key' => 'group_city',            'value' => $data['area']),       
                                         array('key' => 'group_host',            'value' => $Host->hostname),       
                                         array('key' => 'group_hostavatarurl',   'value' => UPLOADS_URL . 'mid_' .$Host->path),
                                         array('key' => 'group_hash',            'value' => $id),
@@ -265,48 +265,29 @@
             
             $participants = 0;
             $hours_volunteered = 0;
+            $co2 = 0;
+            $waste = 0;
             
-            $need_attention = 0;
             foreach($allparties as $i => $party){
-                if($party->device_count == 0){
-                    $need_attention++;    
-                }
-                
-                $party->co2 = 0;
-                $party->fixed_devices = 0;
-                $party->repairable_devices = 0;
-                $party->dead_devices = 0;
-                
                 $participants += $party->pax;
                 $hours_volunteered += (($party->volunteers > 0 ? $party->volunteers * 3 : 12 ) + 9);
                 
                 foreach($party->devices as $device){
                     if($device->repair_status == DEVICE_FIXED){ 
-                        $party->co2 += $device->footprint;
-                    }
-                    
-                    switch($device->repair_status){
-                        case 1:
-                            $party->fixed_devices++;
-                            break;
-                        case 2:
-                            $party->repairable_devices++;
-                            break;
-                        case 3:
-                            $party->dead_devices++;
-                            break;
+                        $co2 += $device->footprint;
+                        $waste += $device->weight;
                     }
                 }
-                
-                $party->co2 = number_format(round($party->co2 * $Device->displacement), 0, '.' , ',');    
             }
+            
+            $co2 = number_format(round($co2 * $Device->displacement), 0, '.' , ',');
+            $waste = number_format(round($waste), 0, '.', ',');
             
             $this->set('pax', $participants);
             $this->set('hours', $hours_volunteered);
-            
-            $weights = $Device->getWeights($id);
-            $devices = $Device->ofThisGroup($id);
-            
+            $this->set('parties', count($allparties));
+            $this->set('co2', $co2);
+            $this->set('waste', $waste);
             
         }
     }

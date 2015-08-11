@@ -157,7 +157,8 @@
                             WHERE `xref`.`object_type` = 5
                             AND `xref`.`reference_type` = 3
                             GROUP BY `images`.`path`
-                    ) AS `xi` 
+                    ) AS `xi`
+                    
                     ON `xi`.`reference` = `e`.`idevents` ';
             
             if(is_numeric($group) && $group != 'admin' ){                

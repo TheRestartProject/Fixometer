@@ -11,31 +11,20 @@
                 
                 <div class="col">
                     <h5>parties thrown</h5>
-                    <span class="largetext"><?php echo count($allparties); ?></span>
+                    <span class="largetext"><?php echo $parties; ?></span>
                 </div>
                 
                 <div class="col">
                     <h5>waste prevented</h5>
-                    <?php
-                        $sum = 0;
-                        foreach($waste_year_data as $y){
-                            $sum += $y->waste;
-                        }
-                    ?>
                     <span class="largetext">
-                        <?php echo number_format(round($sum), 0, '.', ','); ?> kg 
+                        <?php echo $waste; ?> kg 
                     </span>
                 </div>
                 
                 <div class="col">
                     <h5>CO<sub>2</sub> emission prevented</h5>
-                    <?php
-                        $sum = 0;
-                        foreach($year_data as $y){
-                            $sum += $y->co2;
-                        }
-                    ?>
-                    <span class="largetext"><?php echo number_format(round($sum), 0, '.', ','); ?> kg</span>
+                    
+                    <span class="largetext"><?php echo $co2; ?> kg</span>
                 </div>
                 
             </div>
