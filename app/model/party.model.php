@@ -166,7 +166,7 @@
             }
             
             if($only_past == true){
-                $sql .= ' AND `e`.`event_date` < NOW()';
+                $sql .= ' AND TIMESTAMP(`e`.`event_date`, `e`.`start`) < NOW()';
             }
             
             $sql .= ' ORDER BY `e`.`event_date` DESC';
