@@ -98,7 +98,7 @@
                             <th>#</th>
                             <th>Category</th>
                             <th>Problem</th>
-                            <th>Brand/Model</th>
+                            <th>Brand/Model (if known)</th>
                             <th>Repair Status</th>
                             <th>Spare Parts?</th>
                         </tr>

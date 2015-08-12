@@ -27,6 +27,7 @@
                                 </div>
                                 
                                 <div class="row">
+                                    
                                     <div class="col-md-6">
                                         <div class="form-group <?php if(isset($error) && isset($error['start']) && !empty($error['start'])) { echo "has-error"; } ?>">
                                             <label for="start">Start:</label>
@@ -38,8 +39,8 @@
                                             </div>
                                             <?php if(isset($error) && isset($error['start']) && !empty($error['start'])) { echo '<span class="help-block text-danger">' . $error['start'] . '</span>'; } ?>
                                         </div>
-                                        
                                     </div>
+                                    
                                     <div class="col-md-6">
                                         <div class="form-group <?php if(isset($error) && isset($error['end']) && !empty($error['end'])) { echo "has-error"; } ?>">
                                             <label for="end">End:</label>

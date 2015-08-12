@@ -23,7 +23,7 @@
             <div class="dropdown">
                 <button class="btn btn-default dropdown-toggle" type="button" id="profileDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                     <?php if(empty($profile->path)){ ?>
-                    <img src="http://www.lorempixum.com/40/40/people" alt="<?php echo $profile->name; ?> Image" class="profile-pic" />
+                    <img src="http://www.placehold.it/40?text=you" alt="<?php echo $profile->name; ?> Image" class="profile-pic" />
                     <?php } else { ?>
                     <img src="/uploads/thumbnail_<?php echo $profile->path; ?>" width="40" height="40" alt="<?php echo $profile->name; ?> Image" class="profile-pic" />
                     <?php } ?>

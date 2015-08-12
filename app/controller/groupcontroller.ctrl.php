@@ -15,6 +15,12 @@
                 $this->user = $user;
                 $this->set('user', $user);
                 $this->set('header', true);
+                
+                
+                if(hasRole($this->user, 'Host')){
+                    $User = new User;
+                    $this->set('profile', $User->profilePage($this->user->id));
+                }
             }
         }
         

@@ -27,6 +27,8 @@
                     foreach($parties as $party){
                         $this->hostParties[] = $party->idevents;
                     }
+                    $User = new User;
+                    $this->set('profile', $User->profilePage($this->user->id));
                 }
             }
         }
@@ -42,6 +44,8 @@
                 header('Location: /user/forbidden');
             }
             else {
+                
+                
                 
                 $Groups = new Group;
                  
