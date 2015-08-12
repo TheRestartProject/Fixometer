@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-4">
+        <div class="col-xs-12 col-sm-12 col-md-12">
             <h1><?php echo $title. ' <span class="orange">' . $data->name . '</span>'; ?></h1>
         </div>
     </div>
@@ -11,6 +11,10 @@
                     
                     <?php if(isset($response)) { printResponse($response); } ?>
                     
+                    <div class="alert alert-info">
+                        <i class="fa fa-exclamation-circle fa-lg"></i> Please be advised that your name and avatar will be shared on your group's public page on our website. (You can use a nickname or another image if you prefer.)
+                    </div>
+
                     <form action="/user/edit/<?php echo $data->idusers; ?>" method="post" enctype="multipart/form-data">
                         
                         <input type="hidden" name="id" id="id" value="<?php echo $data->idusers; ?>">

@@ -29,7 +29,7 @@ define('UPLOADS_URL', BASE_URL . '/' . 'uploads' . '/' );
  * w/out this PHP throws warnings all over the place.
  * Should be set to same timezone as MySQL server for consistency.
  * */
-date_default_timezone_set('Europe/Rome');
+date_default_timezone_set('Europe/London');
 
 /** Wordpress Remote Publishing endpoint **/
 define('WP_XMLRPC_ENDPOINT', 'http://restart.dev/xmlrpc.php');
