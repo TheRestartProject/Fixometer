@@ -84,6 +84,7 @@
                 <a class="btn btn-primary btn-sm" href="/party/create"><i class="fa fa-plus"></i> New Party</a></h2>
         </div>
         </header>
+        
         <?php foreach($upcomingparties as $party){ ?>
         <div class="col-md-6">
             <div class="media">

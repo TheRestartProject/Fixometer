@@ -208,6 +208,8 @@
                         `e`.`idevents`,
                         `e`.`location`,
                         UNIX_TIMESTAMP(`e`.`event_date`) AS `event_date`,
+                        `e`.`event_date` AS `plain_date`,
+                        NOW() AS `this_moment`,
                         `e`.`start`,
                         `e`.`end`,
                         `e`.`latitude`,
@@ -222,7 +224,7 @@
                             GROUP BY `images`.`path`
                     ) AS `xi` 
                     ON `xi`.`reference` = `e`.`idevents` 
-                    WHERE `e`.`event_date` >= NOW()';
+                    WHERE TIMESTAMP(`e`.`event_date`, `e`.`start`) >= NOW()'; // added one day to make sure it only gets moved to the past the next day
                     
                     
             if(!is_null($group)){
