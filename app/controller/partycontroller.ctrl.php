@@ -403,7 +403,7 @@
                                                 array('key' => 'party_grouphash',       'value' => $party->group),
                                                 array('key' => 'party_location',        'value' => $party->location),
                                                 array('key' => 'party_time',            'value' => substr($party->start, 0, -3) . ' - ' . substr($party->end, 0, -3)),
-                                                array('key' => 'party_date',            'value' => $wp_date),
+                                                array('key' => 'party_date',            'value' => $party->event_date),
                                                 array('key' => 'party_timestamp',       'value' => $party->event_timestamp),
                                                 array('key' => 'party_stats',           'value' => $idparty)
                                                 );                    
@@ -418,10 +418,11 @@
                                 var_dump($wpClient);
                                 
                                 
+                                $text = (empty($party->free_text) ? '...' : $party->free_text);
                                 $content = array(
                                                 'post_type' => 'party',
                                                 'post_title' => $Host->groupname,
-                                                'post_content' => $party->free_text,
+                                                'post_content' => $text,
                                                 'custom_fields' => $custom_fields
                                                 );
                                 dbga($content);
