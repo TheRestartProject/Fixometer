@@ -453,7 +453,7 @@
                                     
                                     echo "New Party <br />";
                                     
-                                    $wpid = $wpClient->newPost($Host->groupname, $party->free_text, $content);
+                                    $wpid = $wpClient->newPost($Host->groupname, $text, $content);
                                     $this->Party->update(array('wordpress_post_id' => $wpid), $idparty);
                                 }
                                 
