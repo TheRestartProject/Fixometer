@@ -408,10 +408,14 @@
                                                 array('key' => 'party_stats',           'value' => $idparty)
                                                 );                    
                                 
+                                dbga($custom_fields);
+                                
                                 
                                 /** Start WP XML-RPC **/
                                 $wpClient = new \HieuLe\WordpressXmlrpcClient\WordpressClient();
                                 $wpClient->setCredentials(WP_XMLRPC_ENDPOINT, WP_XMLRPC_USER, WP_XMLRPC_PSWD);
+                                
+                                var_dump($wpClient);
                                 
                                 
                                 $content = array(
@@ -420,13 +424,18 @@
                                                 'post_content' => $party->free_text,
                                                 'custom_fields' => $custom_fields
                                                 );
+                                dbga($content);
                                 
                                 // Check for WP existence in DB
-                               // $theParty = $this->Party->findOne($idparty);
+                                // $theParty = $this->Party->findOne($idparty);
                                 if(!empty($party->wordpress_post_id)){
-                                
+                                    
+                                    echo "have party id: " . $party->wordpress_post_id . "<br />";
+                                    
                                     // we need to remap all custom fields because they all get unique IDs across all posts, so they don't get mixed up.
-                                    $thePost = $wpClient->getPost($theParty->wordpress_post_id);
+                                    $thePost = $wpClient->getPost($party->wordpress_post_id);
+                                    
+                                    dbga($thePost);
                                         
                                     foreach( $thePost['custom_fields'] as $i => $field ){
                                         foreach( $custom_fields as $k => $set_field){
@@ -437,9 +446,11 @@
                                     }
                                     
                                     $content['custom_fields'] = $custom_fields;
-                                    $wpClient->editPost($theParty->wordpress_post_id, $content);
+                                    $wpClient->editPost($party->wordpress_post_id, $content);
                                 }
                                 else {
+                                    
+                                    echo "New Party <br />";
                                     
                                     $wpid = $wpClient->newPost($Host->groupname, $party->free_text, $content);
                                     $this->Party->update(array('wordpress_post_id' => $wpid), $idparty);
