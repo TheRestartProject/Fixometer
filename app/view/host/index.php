@@ -81,7 +81,8 @@
         <header>
         <div class="col-md-12" id="upcomingparties">
             <h2>Upcoming Restart Parties
-                <a class="btn btn-primary btn-sm" href="/party/create"><i class="fa fa-plus"></i> New Party</a></h2>
+            <a class="btn btn-primary btn-sm" href="/party/create"><i class="fa fa-plus"></i> New Party</a>
+            </h2>
         </div>
         </header>
         
@@ -106,7 +107,7 @@
         </div>
         <?php } ?>
         <div class="col-md-3 col-md-offset-9">
-            <a href="http://www.therestartproject.org/events">view all upcoming events</a>
+            <a href="http://www.therestartproject.org/party">view all upcoming events</a>
         </div>
     </section>
     

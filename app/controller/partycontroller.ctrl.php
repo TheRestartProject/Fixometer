@@ -416,14 +416,14 @@
                                 
                                 $content = array(
                                                 'post_type' => 'party',
-                                                'post_title' => $Host->groupname . ' - ' . $party->location,
+                                                'post_title' => $Host->groupname,
                                                 'post_content' => $party->free_text,
                                                 'custom_fields' => $custom_fields
                                                 );
                                 
                                 // Check for WP existence in DB
-                                $theParty = $this->Party->findOne($id);
-                                if(!empty($theParty->wordpress_post_id)){
+                               // $theParty = $this->Party->findOne($idparty);
+                                if(!empty($party->wordpress_post_id)){
                                 
                                     // we need to remap all custom fields because they all get unique IDs across all posts, so they don't get mixed up.
                                     $thePost = $wpClient->getPost($theParty->wordpress_post_id);
