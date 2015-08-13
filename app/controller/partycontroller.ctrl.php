@@ -398,24 +398,21 @@
                                 $Host = $Groups->findHost($party->group);
             
                                 $custom_fields = array(
-                                                array('key' => 'party_host',            'value' => $Host->hostname),       
-                                                array('key' => 'party_hostavatarurl',   'value' => UPLOADS_URL . 'mid_' . $Host->path),
-                                                array('key' => 'party_grouphash',       'value' => $party->group),
-                                                array('key' => 'party_location',        'value' => $party->location),
-                                                array('key' => 'party_time',            'value' => substr($party->start, 0, -3) . ' - ' . substr($party->end, 0, -3)),
-                                                array('key' => 'party_date',            'value' => $party->event_date),
-                                                array('key' => 'party_timestamp',       'value' => $party->event_timestamp),
-                                                array('key' => 'party_stats',           'value' => $idparty)
+                                                    array('key' => 'party_host',            'value' => $Host->hostname),       
+                                                    array('key' => 'party_hostavatarurl',   'value' => UPLOADS_URL . 'mid_' . $Host->path),
+                                                    array('key' => 'party_grouphash',       'value' => $party->group),
+                                                    array('key' => 'party_location',        'value' => $party->location),
+                                                    array('key' => 'party_time',            'value' => substr($party->start, 0, -3) . ' - ' . substr($party->end, 0, -3)),
+                                                    array('key' => 'party_date',            'value' => date('d/m/Y', $party->event_date)),
+                                                    array('key' => 'party_timestamp',       'value' => $party->event_timestamp),
+                                                    array('key' => 'party_stats',           'value' => $idparty)
                                                 );                    
-                                
-                                dbga($custom_fields);
                                 
                                 
                                 /** Start WP XML-RPC **/
                                 $wpClient = new \HieuLe\WordpressXmlrpcClient\WordpressClient();
                                 $wpClient->setCredentials(WP_XMLRPC_ENDPOINT, WP_XMLRPC_USER, WP_XMLRPC_PSWD);
                                 
-                                var_dump($wpClient);
                                 
                                 
                                 $text = (empty($party->free_text) ? '...' : $party->free_text);
@@ -425,18 +422,16 @@
                                                 'post_content' => $text,
                                                 'custom_fields' => $custom_fields
                                                 );
-                                dbga($content);
+                                
                                 
                                 // Check for WP existence in DB
                                 // $theParty = $this->Party->findOne($idparty);
                                 if(!empty($party->wordpress_post_id)){
                                     
-                                    echo "have party id: " . $party->wordpress_post_id . "<br />";
-                                    
                                     // we need to remap all custom fields because they all get unique IDs across all posts, so they don't get mixed up.
                                     $thePost = $wpClient->getPost($party->wordpress_post_id);
                                     
-                                    dbga($thePost);
+                                    
                                         
                                     foreach( $thePost['custom_fields'] as $i => $field ){
                                         foreach( $custom_fields as $k => $set_field){
@@ -451,7 +446,7 @@
                                 }
                                 else {
                                     
-                                    echo "New Party <br />";
+                                    
                                     
                                     $wpid = $wpClient->newPost($Host->groupname, $text, $content);
                                     $this->Party->update(array('wordpress_post_id' => $wpid), $idparty);
