@@ -837,6 +837,9 @@ class WordpressClient
 
     private function _sendRequest($method, $params)
     {
+        
+        ini_set('user_agent','Mozilla/4.0 (compatible; MSIE 6.0)');
+        
         if (!$this->_endPoint)
         {
             $this->_error = "Invalid endpoint " . json_encode(array('endpoint' => $this->_endPoint, 'username' => $this->_username, 'password' => $this->_password));
