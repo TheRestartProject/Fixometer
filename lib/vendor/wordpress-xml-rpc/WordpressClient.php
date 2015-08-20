@@ -838,7 +838,7 @@ class WordpressClient
     private function _sendRequest($method, $params)
     {
         
-        ini_set('user_agent','Mozilla/4.0 (compatible; MSIE 6.0)');
+        //ini_set('user_agent','Mozilla/4.0 (compatible; MSIE 6.0)');
         
         if (!$this->_endPoint)
         {
