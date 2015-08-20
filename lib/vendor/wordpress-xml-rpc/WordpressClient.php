@@ -914,7 +914,8 @@ class WordpressClient
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $this->_request);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-        curl_setopt($ch, CURLOPT_USERAGENT, $this->_userAgent);
+        //curl_setopt($ch, CURLOPT_USERAGENT, $this->_userAgent);
+        curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13');
         if ($this->_proxyConfig != false)
         {
             if (isset($this->_proxyConfig['proxy_ip']))
