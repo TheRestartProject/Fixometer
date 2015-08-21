@@ -303,6 +303,9 @@ $(document).ready(function(){
     /** sticky table headers **/
     if( $('#device-table').length > 0 ) {
         $('#device-table').floatThead();
-    } 
+    }
+    
+    /* scrollbar for party list */
+    $('#party-list').perfectScrollbar(); 
     
 });

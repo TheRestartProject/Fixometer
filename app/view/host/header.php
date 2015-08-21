@@ -1,14 +1,16 @@
 <div class="container">
     <div class="row host-header">
-        
+        <!--
         <div class="col-md-1">
             <a href="/host">
                 <img class="img-responsive" alt="The Restart Project: Logo" src="/assets/images/logo_mini.png">
             </a>
         </div>
-        
-        <div class="col-md-8">
-            <span class="">Welcome to the Fixometer, <strong><?php echo $user->name; ?></strong></span><br />
+        -->
+        <div class="col-md-12 text-center">
+            
+            <span class="header-text">
+            Welcome to the Fixometer, <strong><?php echo $user->name; ?></strong>. 
             
             <?php if ($showbadges) { ?> 
                 <span class="">You have <a class="label label-success" href="#upcomingparties"><?php echo count($upcomingparties); ?></a> upcoming <?php echo (count($upcomingparties) == 1 ? 'party' : 'parties'); ?>.
@@ -16,11 +18,9 @@
                     <a class="label label-danger" href="#attention"><?php echo $need_attention; ?></a> <?php echo ($need_attention == 1 ? 'party needs' : 'parties need'); ?> your attention.</span>
                 <?php } ?>
             <?php  } ?>
-        </div>
-        
-        <div class="col-md-1 col-md-offset-2">
+            </span>
             
-            <div class="dropdown">
+            <div class="dropdown pull-right profile-button">
                 <button class="btn btn-default dropdown-toggle" type="button" id="profileDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                     <?php if(empty($profile->path)){ ?>
                     <img src="http://www.placehold.it/40?text=you" alt="<?php echo $profile->name; ?> Image" class="profile-pic" />
@@ -36,9 +36,15 @@
                   </ul>
                 
             </div>
+        </div>
+        <!-- 
+        <div class="col-md-1 col-md-offset-2">
+            
+            
             
             
         </div>
+        -->
     </div>
     
 </div>

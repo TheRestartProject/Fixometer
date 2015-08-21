@@ -11,10 +11,11 @@
             
     
     <!-- Profiles -->
-    <section class="row profiles">
+    <section class="row profiles" id="group-profile">
         <div class="col-md-3">
-            <strong>My Group</strong> <a href="/group/edit/<?php echo $group->idgroups; ?>" class="small"><i class="fa fa-edit"></i> Edit Group...</a>
             <div class="media">
+                <h3 class="media-heading"><?php echo $group->name; ?></h3>
+                
                 <div class="media-left">
                     <?php if(empty($group->path)){ ?>
                     <img src="http://www.placehold.it/60?text=group+avatar" alt="<?php echo $group->name; ?> Image" class="profile-pic" />
@@ -23,8 +24,10 @@
                     <?php } ?>
                 </div>
                 <div class="media-body">
-                    <h3 class="media-heading"><?php echo $group->name; ?></h3>
-                    <span><?php echo $group->location . (!empty($group->area) ? ', ' . $group->area : ''); ?></span>
+                    
+                    <span><?php echo $group->location . (!empty($group->area) ? ', ' . $group->area : ''); ?></span><br />
+                    <a href="/group/edit/<?php echo $group->idgroups; ?>" class="small"><i class="fa fa-edit"></i> Edit Group...</a>
+            
                 </div>
             </div>
         </div>
@@ -80,8 +83,9 @@
     <section class="row parties">
         <header>
         <div class="col-md-12" id="upcomingparties">
-            <h2>Upcoming Restart Parties
-            <a class="btn btn-primary btn-sm" href="/party/create"><i class="fa fa-plus"></i> New Party</a>
+            <h2>
+                <span class="title-text">Upcoming Restart Parties <a href="/party/create" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> New Party</a></span>
+            
             </h2>
         </div>
         </header>
@@ -117,7 +121,7 @@
         <header>
             <div class="col-md-12"  id="allparties">
                 <h2>
-                    All <span class="orange"><?php echo $group->name; ?></span> Parties                    
+                   <span class="title-text">All <span class="grey"><?php echo $group->name; ?></span> Parties</span>                     
                 </h2>
             </div>
         </header>

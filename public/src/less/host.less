@@ -1,15 +1,82 @@
 .host-header {
     margin-bottom: 30px;
     margin-top: 10px;
+    border-bottom: 1px solid #ddd;
+    padding: 40px 0px;
+    .header-text {
+        line-height: 52px; 
+    }
 }
 
 #host-dashboard {
     .party { border-bottom: 1px solid lighten(@litegray, 25%); }
+    #group-profile {
+        background: url('/assets/images/low_brow.png') no-repeat center bottom;
+        padding-bottom: 75px;
+        
+        #group-main-stats {
+            margin-top: 0px;
+            h5 {
+                line-height: 50px;
+                margin-top: 0px;
+                margin-bottom: 0px;
+            }
+            .col { border: none !important;
+                span.largetext {
+                    border-right: 1px solid @blue;
+                    line-height: 70px; 
+                }
+                
+                &:last-child > span.largetext {
+                    border-right: none; 
+                }
+            }
+        }
+    }
 }
 
-.profiles, .parties {
-    margin-top: 25px;
-    margin-bottom: 25px;
+#host-dashboard .row, .profiles, .parties {
+    margin-top: 35px;
+    margin-bottom: 35px;
+    
+    
+    h2 {
+        text-align: center;
+        
+        line-height: 120%;
+        margin-bottom: 40px;
+        
+        
+        position: relative;
+        overflow: hidden;
+        
+        span.title-text {
+            display: inline-block;
+            vertical-align: baseline;
+            zoom: 1;
+            *display: inline;
+            *vertical-align: auto;
+            position: relative;
+            padding: 0 20px;
+            line-height: 90%; 
+            &:before, &:after {
+                content: '';
+                display: block;
+                width: 1000px;
+                position: absolute;
+                top: 0.73em;
+                border-top: 1px solid #ddd;
+            }
+    
+            &:before { right: 100%; }
+            &:after { left: 100%; }
+            
+            .grey { color: #9a9a9a; }
+        }
+        
+        
+       
+    }
 }
 
 .profile-pic {
@@ -37,7 +104,7 @@ time {
     }
 }
 
-.count { border-right: 1px solid #ddd;
+.count { border-right: 1px solid @blue;
     &:last-child { border-right: none; }
 }
 
@@ -51,7 +118,7 @@ time {
     .col {
         width: 20%;
         padding: 6px;
-        border-right: 1px solid #ddd;
+        border-right: 1px solid @blue;
         text-align: center;
         &:last-child {
             border-right: none !important;
