@@ -9,7 +9,7 @@
 }
 
 #host-dashboard {
-    .party { border-bottom: 1px solid lighten(@litegray, 25%); }
+   
     #group-profile {
         background: url('/assets/images/low_brow.png') no-repeat center bottom;
         padding-bottom: 75px;
@@ -90,17 +90,26 @@ time {
 }
 
 .party {
-    display: block; .clearfix; padding: 10px; 
+    display: block; .clearfix; padding: 10px 0px; 
     &.no-data-wrap {
         background: mistyrose;
     }
     
     &:hover { text-decoration: none; }
     
-    .date { display: block; background: @blue; padding: 5px; text-align: center; width: 70px;
+    .date { display: block; float: left; background: @blue; padding: 5px; text-align: center; width: 30%; 
         .day, .month, .year { display: block; line-height: 120%; clear: both; color: white; }
         .month, .year { font-size: 10px; text-transform: uppercase; color: white; letter-spacing: 1.3px; }
         .day { font-size: 32px; .Font-PatuaOne; color: white; }
+    }
+    
+    .short-body {
+        display: block;
+        float: left;
+        clear: none;
+        width: 70%;
+        padding-left: 8px; 
+        text-align: left; 
     }
 }
 
@@ -127,6 +136,46 @@ time {
         h5 { font-size: 11px; text-transform: uppercase; }
     }
 }
+
+.header-col {
+    display: block;
+    float: left; 
+    clear: none;
+    width: 12.5%;
+    text-align: center;
+    
+    
+    &-2 {
+        width: 25%; border-right: none; 
+    }
+    &-3 {
+        width: 37.5%; border-right: none;  
+    }
+     > .largetext {
+        line-height: 72px;
+        border-right: 1px solid @blue;
+    }
+    &:last-child > .largetext { border-right: none;  }
+    > .icon-label {
+        display: block;
+        clear: both;
+        margin: 15px 0px; 
+        font-size: 10px;
+        text-transform: uppercase;
+    }
+    
+    &#header-link-box  {
+        position: relative;
+        padding-top: 106px; 
+        a {
+            position: absolute;
+            bottom: 0;
+            left: 0; 
+        }
+    }
+   
+}
+
 .location { font-size: 18px; font-weight: bold; }
 .media.party { margin-top: 0px !important; }
 
