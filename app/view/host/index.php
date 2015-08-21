@@ -163,7 +163,7 @@
             
         </div>
         
-        <div class="col-md-12 fader" id="party-list">
+        <div class="col-md-12 well" id="party-list">
         
             <?php
             $nodata = 0;

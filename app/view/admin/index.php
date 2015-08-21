@@ -138,16 +138,50 @@
         </header>
         
         
-        <div class="col-md-12">
-            <div class="btn-group">
-                <button type="button" class="btn btn-primary btn-sm party-switch active" data-target="all">All Parties</button>
-                <button type="button" class="btn btn-primary btn-sm party-switch" data-target=".no-data-wrap">Needing Attention</button>
-                <button type="button" class="btn btn-primary btn-sm party-switch" data-target=".guesstimates">Guesstimated Devices</button>
-            </div>
-        </div>
+        
         
         <br />
-        
+        <div class="col-md-12" id="party-list-header">
+            <div class="header-col header-col-2">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-sm party-switch active" data-target="all">All Parties</button>
+                        <button type="button" class="btn btn-primary btn-sm party-switch" data-target=".no-data-wrap">Need Attention</button>
+                        <button type="button" class="btn btn-primary btn-sm party-switch" data-target=".guesstimates">Guesstimated</button>
+                    </div>
+                
+            </div>
+            
+            <div class="header-col">
+                <img src="/assets/icons/icon_pax.png" alt="Participants" class="header-icon">
+                <span class="icon-label">Participants</span>
+            </div>
+            
+            <div class="header-col">
+                <img src="/assets/icons/icon_volunters.png" alt="Restarters" class="header-icon">
+                <span class="icon-label">Restarters</span>
+            </div>
+            
+            <div class="header-col">
+                <img src="/assets/icons/icon_emissions.png" alt="CO2 Emissions Prevented" class="header-icon">
+                <span class="icon-label">CO<sub>2</sub> Emissions prevented</span>
+            </div>
+            
+            <div class="header-col">
+                <img src="/assets/icons/icon_fixed.png" alt="Fixed" class="header-icon">
+                <span class="icon-label">Fixed</span>
+            </div>
+            
+            <div class="header-col">
+                <img src="/assets/icons/icon_repairable.png" alt="Repairable" class="header-icon">
+                <span class="icon-label">Repairable</span>
+            </div>
+            
+            <div class="header-col">
+                <img src="/assets/icons/icon_dead.png" alt="Dead" class="header-icon">
+                <span class="icon-label">Dead</span>
+            </div>
+            
+        </div>
         <div class="col-md-12 fader" id="party-list">
         
             <?php
@@ -165,102 +199,89 @@
                 }                
             ?>
             <?php if($party->device_count < 1){ $nodata++; ?>
-            <a class="media no-data-wrap party" href="/party/manage/<?php echo $party->idevents; ?>" <?php echo ($nodata == 1 ? 'id="attention"' : ''); ?>>
+            <a class="no-data-wrap party" href="/party/manage/<?php echo $party->idevents; ?>" <?php echo ($nodata == 1 ? 'id="attention"' : ''); ?>>
                         
-                <div class="media-left">
+                <div class="header-col-2 header-col">
                     <div class="date">
                         <span class="month"><?php echo date('M', $party->event_timestamp); ?></span>
                         <span class="day">  <?php echo date('d', $party->event_timestamp); ?></span>
                         <span class="year"> <?php echo date('Y', $party->event_timestamp); ?></span>
                     </div>
-                </div>
                 
-                <div class="media-body">
                     <div class="short-body">                        
                         <span class="location"><?php echo $party->venue; ?></span>
                         <time datetime="<?php echo dbDate($party->event_date); ?>"><?php echo substr($party->start, 0, -3); ?></time>
                         
                     </div>                    
-                    <div class="no-data">                        
-                        <div style="width: 16%; float: left; clear: none; ">&nbsp;</div>                        
-                        <button class="btn btn-primary btn-lg pull-left add-info-btn">
-                            <i class="fa fa-cloud-upload"></i> Add Information
-                        </button>
-                        <div class="stat greyed">
-                            <div class="col"><i class="status mid fixed greyed"></i></div>
-                            <div class="col">?</div>
-                        </div>
-                        <div class="stat greyed">
-                            <div class="col"><i class="status mid repairable greyed"></i></div>
-                            <div class="col">?</div>
-                        </div>
-                        <div class="stat greyed">
-                            <div class="col"><i class="status mid dead greyed"></i></div>
-                            <div class="col">?</div>
-                        </div>
-                    </div>
+                </div>
+                <div class="header-col header-col-3">
+                    <button class="btn btn-primary btn-lg add-info-btn">
+                        <i class="fa fa-cloud-upload"></i> Add Information
+                    </button>
+                </div>
+                <div class="header-col">
+                    <span class="largetext greyed">?</span>
+                </div>
+                
+                <div class="header-col">
+                    <span class="largetext greyed">?</span>
+                </div>
+                
+                <div class="header-col">
+                    <span class="largetext greyed">?</span>
                 </div>
                 
             </a>
             <?php } else {  ?>
-            <a class="media party <?php echo ($party->guesstimates == true ? ' guesstimates' : ''); ?>"  href="/party/manage/<?php echo $party->idevents; ?>">
-                <div class="media-left">
+            <a class=" party <?php echo ($party->guesstimates == true ? ' guesstimates' : ''); ?>"  href="/party/manage/<?php echo $party->idevents; ?>">
+                <div class="header-col header-col-2">
                     <div class="date">
                         <span class="month"><?php echo date('M', $party->event_timestamp); ?></span>
                         <span class="day">  <?php echo date('d', $party->event_timestamp); ?></span>
                         <span class="year"> <?php echo date('Y', $party->event_timestamp); ?></span>
                     </div>      
-                </div>
                 
-                <div class="media-body">
                     <div class="short-body">
                         <span class="location"><?php echo $party->venue; ?></span>
                         <time datetime="<?php echo dbDate($party->event_date); ?>"><?php echo  substr($party->start, 0, -3); ?></time>
                         
                     </div>
-                    
-                    <div class="data">
-                        <div class="stat double">
-                            <div class="col">
-                                <i class="fa fa-group"></i>
-                                <span class="subtext">participants</span>
-                            </div>
-                            <div class="col">
-                                <?php echo $party->pax; ?>    
-                            </div>
-                        </div>
-                        
-                        <div class="stat double">
-                            <div class="col">
-                                <img class="" alt="The Restart Project: Logo" src="/assets/images/logo_mini.png">
-                                <span class="subtext">restarters</span>
-                            </div>
-                            <div class="col"><?php echo $party->volunteers; ?></div>                            
-                        </div>
-                        
-                        <div class="stat">                            
-                            <div class="footprint">
-                                <?php echo $party->co2; ?>
-                                <span class="subtext">kg of CO<sub>2</sub></span>
-                            </div>
-                        </div>
-                        
-                        <div class="stat fixed">
-                            <div class="col"><i class="status mid fixed"></i></div>
-                            <div class="col"><?php echo $party->fixed_devices; ?></div>    
-                        </div>
-                        
-                        <div class="stat repairable">
-                            <div class="col"><i class="status mid repairable"></i></div>
-                            <div class="col"><?php echo $party->repairable_devices; ?></div>
-                        </div>
-                        
-                        <div class="stat dead">
-                            <div class="col"><i class="status mid dead"></i></div>
-                            <div class="col"><?php echo $party->dead_devices; ?></div>
-                        </div>
-                        
-                    </div>
+                </div>
+                
+                <div class="header-col">
+                    <span class="largetext">
+                        <?php echo $party->pax; ?> 
+                    </span>
+                </div>
+                
+                <div class="header-col">
+                    <span class="largetext">
+                        <?php echo $party->volunteers; ?>
+                    </span>
+                </div>
+                
+                <div class="header-col">
+                    <span class="largetext">
+                         <?php echo $party->co2; ?> kg
+                    </span>
+                </div>
+                
+                <div class="header-col">
+                    <span class="largetext fixed">
+                        <?php echo $party->fixed_devices; ?>
+                    </span>
+                </div>
+                
+                <div class="header-col">
+                    <span class="largetext repairable">
+                        <?php echo $party->repairable_devices; ?> 
+                    </span>
+                </div>
+                
+                <div class="header-col">
+                    <span class="largetext dead">
+                        <?php echo $party->dead_devices; ?> 
+                    </span>
                 </div>
                 
             </a>

@@ -27,6 +27,9 @@
             $this->set('title', 'Administrator Dashboard');
             $this->set('charts', true);
             
+            $this->set('css', array('/components/perfect-scrollbar/css/perfect-scrollbar.min.css'));
+            $this->set('js', array('foot' => array('/components/perfect-scrollbar/js/min/perfect-scrollbar.jquery.min.js')));
+            
             if(isset($_GET['action']) && isset($_GET['code'])){
                 $actn = $_GET['action'];
                 $code = $_GET['code'];
