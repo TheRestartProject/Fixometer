@@ -19,20 +19,18 @@
             
             <div class="row">
                 <div class="col-md-12 party">
-                    <div class="media-left">
+                    <div class="header-col header-col-2">
                         <div class="date">
                             <span class="month"><?php echo date('M', $party->event_timestamp); ?></span>
                             <span class="day">  <?php echo date('d', $party->event_timestamp); ?></span>
                             <span class="year"> <?php echo date('Y', $party->event_timestamp); ?></span>
                         </div> 
-                    </div>
                     
-                    <div class="media-body">
                         <div class="short-body">
                             <span class="location"><?php echo $party->location; ?></span><br />
                             <span class="groupname"><?php echo $party->group_name; ?></span>
                         </div>
-                        
+                    </div>    
                         <div class="data">
                             <div class="stat double">
                                 <div class="col">
