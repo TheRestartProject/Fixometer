@@ -1,22 +1,25 @@
 #main-footer {
-    background-color: #333;
-    color: #fff;
+    background-color: #F3F3F5;
+    color: darken(#F3F3F5, 40%);
     position: relative;
     bottom: 0;
     width: 100%;
     /* Set the fixed height of the footer here */
-    height: 140px; 
+    height: 190px; 
     font-size: 0.8em;
+    padding-top: 25px;
+    padding-bottom: 25px; 
     
-    h5 {
+    h3 {
         color: @blue;
         .Font-PatuaOne;
         font-weight: 400;
     }
     a {
-        color: @orange;
+        color: @blue;
         &:hover {
-            color: darken(@orange, 10%);
+            color: darken(@blue, 10%);
         }
     }
+    .blue { color: @blue; }
 }
