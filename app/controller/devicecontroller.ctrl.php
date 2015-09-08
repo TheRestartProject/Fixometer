@@ -15,6 +15,20 @@
                 $this->user = $user;
                 $this->set('user', $user);
                 $this->set('header', true);
+                
+                if(hasRole($this->user, 'Host')){
+                    $Group = new Group;
+                    $Party = new Party;
+                    $group = $Group->ofThisUser($this->user->id);
+                    $this->set('usergroup', $group[0]);
+                    $parties = $Party->ofThisGroup($group[0]->idgroups);
+                    
+                    foreach($parties as $party){
+                        $this->hostParties[] = $party->idevents;
+                    }
+                    $User = new User;
+                    $this->set('profile', $User->profilePage($this->user->id));
+                }
             }
         }
         
@@ -141,6 +155,31 @@
             }
             
             
+        }
+        
+        
+        
+        public function delete($id){
+            if(hasRole($this->user, 'Administrator') || (hasRole($this->user, 'Host')) ){
+                // get device party
+                $curr = $this->Device->findOne($id);
+                $party = $curr->event;
+                echo $party; //die();
+                
+                $r = $this->Device->delete($id);
+                if(!$r){
+                    $response = 'd:err';
+                }
+                else {
+                    $response = 'd:ok';
+                }
+                
+                header('Location: /party/manage/' . $party . '/' . $response);
+                
+            }
+            else {
+                header('Location: /user/forbidden');
+            }
         }
     }
     

@@ -267,6 +267,7 @@ $(document).ready(function(){
                                     '</div>' +
                                 '</div>' +
                             '</td>' +
+                            '<td></td>' +
                         '</tr>';
         
         $('#device-table tbody').append(tablerow);
@@ -306,6 +307,9 @@ $(document).ready(function(){
     }
     
     /* scrollbar for party list */
-    $('#party-list').perfectScrollbar(); 
+    if ($('#party-list').length > 0 ) {
+        $('#party-list').perfectScrollbar(); 
+    }
+    
     
 });

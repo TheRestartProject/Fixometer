@@ -99,6 +99,7 @@
                             <th>Brand/Model (if known)</th>
                             <th>Repair Status</th>
                             <th>Spare Parts?</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -215,6 +216,9 @@
                                         </label>
                                     </div>
                                 </div>
+                            </td>
+                            <td> 
+                                <a class="btn delete-control" href="/device/delete/<?php echo $devices[$i-1]->iddevices; ?>"><i class="fa fa-trash"></i></a>
                             </td>
                             
                         </tr>

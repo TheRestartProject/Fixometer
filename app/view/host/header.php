@@ -31,7 +31,8 @@
                 </button>
                 
                  <ul class="dropdown-menu" aria-labelledby="profileDropDown">
-                    <li><a href="/user/edit/<?php echo $profile->idusers; ?>" class="small"><i class="fa fa-edit"></i> Edit Profile</a></li>
+                    <li><a href="/host"><i class="fa fa-dashboard"></i> Host Dashboard</a></li>
+                    <li><a href="/user/edit/<?php echo $profile->idusers; ?>"><i class="fa fa-edit"></i> Edit Profile</a></li>
                     <li><a class="" href="/user/logout"><i class="fa fa-sign-out"></i> Logout</a></li>
                   </ul>
                 
