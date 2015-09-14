@@ -318,7 +318,7 @@
         </div>
         
         <div class="col-md-4">
-            <h5 class="text-center">CO<sub>2</sub> de-sequestered to date</h5> 
+            <h5 class="text-center">CO<sub>2</sub> emission prevented to date</h5> 
             <?php
                 $sum = 0;
                 foreach($year_data as $y){
@@ -332,7 +332,7 @@
             
             <hr />
             
-            <h5 class="text-center">CO<sub>2</sub> de-sequestered this year</h5> 
+            <h5 class="text-center">CO<sub>2</sub> emission prevented this year</h5> 
             <?php
                 
                 foreach($year_data as $y){
