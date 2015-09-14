@@ -350,7 +350,7 @@
         </div>
         <div class="col-md-4">
             <div id="chart-co2" class="charts">
-                <h4 class="text-center">CO<sub>2</sub> de-sequestered per year (kg)</h4>
+                <h4 class="text-center">CO<sub>2</sub> emission prevented per year (kg)</h4>
                 <canvas id="co2ByYear" width="450" height="250"></canvas>                
             </div>
             <div id="chart-waste" class="charts">
@@ -360,7 +360,7 @@
             
             <div class="btn-group btn-group-justified" role="group" aria-label="...">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-default btn-primary btn-sm switch-view active" data-family=".charts" data-target="#chart-co2">CO<sub>2</sub> de-sequestered</button>
+                    <button type="button" class="btn btn-default btn-primary btn-sm switch-view active" data-family=".charts" data-target="#chart-co2">CO<sub>2</sub> emission prevented</button>
                 </div>
                 <div class="btn-group">
                     <button type="button" class="btn btn-default btn-primary btn-sm switch-view" data-family=".charts" data-target="#chart-waste">eWaste prevented</button>            
