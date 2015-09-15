@@ -58,7 +58,7 @@
                             }
                              
                             
-                            $cropPercent = .5;
+                            $cropPercent = 1;
                             $cropWidth   = $biggestSide*$cropPercent;
                             $cropHeight  = $biggestSide*$cropPercent;
                             

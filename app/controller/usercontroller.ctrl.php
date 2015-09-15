@@ -5,96 +5,116 @@
         
         public function login(){
             
-            $this->set('title', 'Login');
-            $this->set('charts', true);
-            
-            // set up stuff for engagin login page
-            $Device = new Device;
-            $Party = new Party;
-            
-            $weights= $Device->getWeights();
-            $devices= $Device->statusCount();
-            
-            $this->set('weights', $weights);
-            $this->set('devices', $devices);
-            
-            $this->set('nextparties', $Party->findNextParties());
-            $this->set('allparties', $Party->findAll());
-            
-            $co2_years = $Device->countCO2ByYear();
-            $this->set('year_data', $co2_years);
-            $stats = array();
-            foreach($co2_years as $year){
-                $stats[$year->year] = $year->co2;
-            }
-            $this->set('bar_chart_stats', array_reverse($stats, true));
-            
-            $waste_years = $Device->countWasteByYear();
-            $this->set('waste_year_data', $waste_years);
-            $wstats = array();
-            foreach($waste_years as $year){
-                $wstats[$year->year] = $year->waste;
-            }
-            $this->set('waste_bar_chart_stats', array_reverse($wstats, true));
-                    
-            if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST)){
+            $Auth = new Auth($url);
+            if($Auth->isLoggedIn()){
                 
-                $response = array();
+                $user = $Auth->getProfile();    
                 
-                $uput_email = $_POST['email'];
-                $uput_password = $_POST['password'];
-                
-                if(empty($uput_email) || !filter_var($uput_email, FILTER_VALIDATE_EMAIL)){
-                    $response['danger'] = '<strong>Invalid/Empty email</strong>. Please input a valid email address.';
+                if(hasRole($user, 'Administrator')){
+                    header('Location: /admin');
                 }
-                if(empty($uput_password)){
-                    $response['danger'] = '<strong>Empty Password</strong>. Please input a password.';
+                elseif(hasRole($user, 'Host')){
+                    header('Location: /host');
                 }
+                else {
+                    header('Location: /dashboard');    
+                }
+        
+            }
+            else {
+            
+            
+                $this->set('title', 'Login');
+                $this->set('charts', true);
                 
-                if(!isset($response['danger'])){
-                    // No errors, we can proceed and see if we can auth this guy here.
-                    
-                    $user = $this->User->find(array(
-                                                    'email' => $uput_email,
-                                                    'password' => crypt($uput_password, '$1$' . SECRET)
-                                                )
-                                            );
-                    
-                   
-                    if(!empty($user)){
-                        $Auth = new Auth;
-                        if(!$Auth->isLoggedIn()){
-                            
-                            $pass = $Auth->authorize($user[0]->idusers);
-                            
-                        }
-                        else {
-                            $pass = true;
-                        }
+                // set up stuff for engagin login page
+                $Device = new Device;
+                $Party = new Party;
+                
+                $weights= $Device->getWeights();
+                $devices= $Device->statusCount();
+                
+                $this->set('weights', $weights);
+                $this->set('devices', $devices);
+                
+                $this->set('nextparties', $Party->findNextParties());
+                $this->set('allparties', $Party->findAll());
+                
+                $co2_years = $Device->countCO2ByYear();
+                $this->set('year_data', $co2_years);
+                $stats = array();
+                foreach($co2_years as $year){
+                    $stats[$year->year] = $year->co2;
+                }
+                $this->set('bar_chart_stats', array_reverse($stats, true));
+                
+                $waste_years = $Device->countWasteByYear();
+                $this->set('waste_year_data', $waste_years);
+                $wstats = array();
+                foreach($waste_years as $year){
+                    $wstats[$year->year] = $year->waste;
+                }
+                $this->set('waste_bar_chart_stats', array_reverse($wstats, true));
                         
-                        if($pass == true){
-                            if(hasRole($user[0], 'Administrator')){
-                                header('Location: /admin');
-                            }
-                            elseif(hasRole($user[0], 'Host')){
-                                header('Location: /host');
+                if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST)){
+                    
+                    $response = array();
+                    
+                    $uput_email = $_POST['email'];
+                    $uput_password = $_POST['password'];
+                    
+                    if(empty($uput_email) || !filter_var($uput_email, FILTER_VALIDATE_EMAIL)){
+                        $response['danger'] = '<strong>Invalid/Empty email</strong>. Please input a valid email address.';
+                    }
+                    if(empty($uput_password)){
+                        $response['danger'] = '<strong>Empty Password</strong>. Please input a password.';
+                    }
+                    
+                    if(!isset($response['danger'])){
+                        // No errors, we can proceed and see if we can auth this guy here.
+                        
+                        $user = $this->User->find(array(
+                                                        'email' => $uput_email,
+                                                        'password' => crypt($uput_password, '$1$' . SECRET)
+                                                    )
+                                                );
+                        
+                       
+                        if(!empty($user)){
+                            $Auth = new Auth;
+                            if(!$Auth->isLoggedIn()){
+                                
+                                $pass = $Auth->authorize($user[0]->idusers);
+                                
                             }
                             else {
-                                header('Location: /dashboard');    
+                                $pass = true;
                             }
                             
+                            if($pass == true){
+                                if(hasRole($user[0], 'Administrator')){
+                                    header('Location: /admin');
+                                }
+                                elseif(hasRole($user[0], 'Host')){
+                                    header('Location: /host');
+                                }
+                                else {
+                                    header('Location: /dashboard');    
+                                }
+                                
+                            }
+                        }
+                        else {
+                            $response['danger'] = 'No correspondance found. Please check your credentials and try again.';
+                            $this->set('response', $response);
+                            //header('Location: /user/login');
                         }
                     }
                     else {
-                        $response['danger'] = 'No correspondance found. Please check your credentials and try again.';
                         $this->set('response', $response);
-                        //header('Location: /user/login');
                     }
+                    
                 }
-                else {
-                    $this->set('response', $response);
-                }
-                
             }
         }
         

@@ -120,8 +120,8 @@ class WordpressClient
     function getDefaultUserAgent()
     {
         $phpVersion = phpversion();
-        $curlVersion = curl_version(); 
-        return "XML-RPC client (hieu-le/wordpress-xmlrpc-client 2.4.0) PHP {$phpVersion}  cUrl {$curlVersion['version']}";
+       // $curlVersion = curl_version(); 
+        return "XML-RPC client (hieu-le/wordpress-xmlrpc-client 2.4.0) PHP {$phpVersion} "; // cUrl {$curlVersion['version']}";
     }
 
     /**
