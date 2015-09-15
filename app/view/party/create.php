@@ -133,8 +133,8 @@
                                 
                                 
                                 <div class="from-group">
-                                    <label for="file">Image:</label>
-                                    <input type="file" name="file" id="file" class="form-control file">
+                                    <label for="file" class="sr-only">Image:</label>
+                                    <input type="file" name="file" id="file" class="form-control fileinput">
                                 </div>        
                                         
                             </div>
