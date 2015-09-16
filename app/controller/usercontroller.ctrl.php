@@ -218,6 +218,7 @@
                                 
                                 if(isset($_FILES) && !empty($_FILES)){
                                     $file = new File;
+                                    
                                     $file->upload('profile', 'image', $idUser, TBL_USERS, false, true);    
                                 }
                                 

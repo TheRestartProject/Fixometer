@@ -17,8 +17,16 @@
          * */
         
         public function upload($file, $type, $reference = null, $referenceType = null, $multiple = false, $profile = false){
-            $user_file = $_FILES[$file];
             
+            $clear = true; // purge pre-existing images from db - this is the default behaviour
+            
+            if(is_string($file)){ 
+                $user_file = $_FILES[$file];
+            }
+            elseif(is_array($file)){ // multiple file uploads means we do not purge pre-existing images
+                $user_file = $file;
+                $clear = false;
+            }
             
             /** if we have no error, proceed to elaborate and upload **/
             if($user_file['error'] == UPLOAD_ERR_OK){
@@ -88,14 +96,13 @@
                         $this->table = 'images';
                         
                         $image = $this->create($data);
-                       // echo "REF: " . $reference. " - REF TYPE: ".$referenceType." - IMAGE: ".$image;
+                        echo "REF: " . $reference. " - REF TYPE: ".$referenceType." - IMAGE: ".$image;
                         if(is_numeric($image) && !is_null($reference) && !is_null($referenceType)){
                             $xref = new Xref('object', $image, TBL_IMAGES, $reference, $referenceType);
                             
-                        //    var_dump($xref);
                             
                             
-                            $xref->createXref();                            
+                            $xref->createXref($clear);                            
                         }
                     }
                     
@@ -140,5 +147,30 @@
             
         
         }
+    
+        public function findImages($of_ref_type, $ref_id){
+            
+            $sql = 'SELECT * FROM `images` AS `i`
+                        INNER JOIN `xref` AS `x` ON `x`.`object` = `i`.`idimages`
+                        WHERE `x`.`object_type` = ' . TBL_IMAGES . ' AND
+                        `x`.`reference_type` = :refType AND
+                        `x`.`reference` = :refId';
+            
+            
+            $stmt = $this->database->prepare($sql);
+                
+            $stmt->bindParam(':refType', $of_ref_type, PDO::PARAM_INT);
+            $stmt->bindParam(':refId', $ref_id, PDO::PARAM_INT);
+            
+            $q = $stmt->execute();
+            
+            if(!$q && SYSTEM_STATUS == 'development'){
+                dbga($stmt->errorInfo());
+            }
+            
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+       
+        }
+    
     }
     

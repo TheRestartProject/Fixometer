@@ -9,7 +9,7 @@
         <div class="col-md-12">
             <?php if(isset($response)) { printResponse($response); } ?>
             
-            <form action="/party/edit/<?php echo $formdata->idevents; ?>" method="post" id="party-edit">
+            <form action="/party/edit/<?php echo $formdata->idevents; ?>" method="post" id="party-edit" enctype="multipart/form-data">
 
                 <div class="row">
                             <div class="col-md-6">
@@ -138,8 +138,21 @@
                                 
                                 
                                 <div class="from-group">
+                                    <div class="party-images clearfix">
+                                        <?php
+                                        foreach($images as $image) {
+                                        ?>
+                                        <div class="image">
+                                            <img src="/uploads/<?php echo $image->path; ?>" class="img-responsive">
+                                        </div>
+                                        <?php
+                                        }
+                                        ?>
+                                        
+                                    </div>
+                                    
                                     <label for="file" class="sr-only">Image:</label>
-                                    <input type="file" name="file" id="file" class="form-control fileinput">
+                                    <input type="file" name="file[]" id="file" class="form-control fileinput" multiple>
                                 </div>        
                                         
                             </div>

@@ -71,13 +71,21 @@
             }
         }
         
-        public function createXref(){
+        public function findFullXref() {
+            //switch ($table
+            
+        
+        }
+        
+        public function createXref($clear = true){
             if($this->index){
-                
-                self::deleteXref();
-                
+                if($clear == true){ 
+                    self::deleteXref();
+                }
                 $sql = 'INSERT INTO `' . $this->table . '`(`object`, `object_type`, `reference`, `reference_type`) VALUES (:obj, :objType, :ref, :refType)';
+                //echo $sql."<br />";
                 
+                $stmt = null;
                 $stmt = $this->database->prepare($sql);
                 
                 $stmt->bindParam(':obj', $this->obj, PDO::PARAM_INT);

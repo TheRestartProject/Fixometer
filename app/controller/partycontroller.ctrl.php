@@ -205,6 +205,7 @@
             if( hasRole($this->user, 'Administrator') || (hasRole($this->user, 'Host') && in_array($id, $this->hostParties))){
                 
                 $Groups = new Group;
+                $File = new File;
                 
                 if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST)){
                     $id = $_POST['id'];
@@ -298,8 +299,26 @@
                             
                         /** let's create the image attachment! **/
                         if(isset($_FILES) && !empty($_FILES)){
-                            $file = new File;
-                            $file->upload('file', 'image', $id, TBL_EVENTS);    
+                           
+                            
+                            if(is_array($_FILES['file']['name'])) {
+                                $files = rearrange($_FILES['file']);
+                                
+                                //dbga($files);
+                                
+                                foreach($files as $upload){
+                                    //echo "uploading -> " .$upload['name']. " ... <br />";
+                                    $File->upload($upload, 'image', $id, TBL_EVENTS);    
+                                }
+                                
+                               
+                            }
+                            else {
+                                
+                            }
+                            
+                            
+                            
                         }
                             
                     }
@@ -308,11 +327,14 @@
                     }
                     $this->set('response', $response);
                 }
-            
+                
+                $images = $File->findImages(TBL_EVENTS, $id);
+                
                 $this->set('gmaps', true);
                 $this->set('js', array( 'head' => array( '/ext/geocoder.js')));
                 
                 $Party = $this->Party->findOne($id);
+                $this->set('images', $images);
                 $this->set('title', 'Edit Party');
                 $this->set('group_list', $Groups->findAll());
                 $this->set('formdata', $Party);
