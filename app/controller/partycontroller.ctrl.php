@@ -596,5 +596,25 @@
 
         }
         
+        public function deleteimage(){
+            if(is_null($_GET['id']) || empty($_GET['id']) || !is_numeric($_GET['id'])){
+                return false;
+            }
+            
+            else {
+                $id = $_GET['id'];
+                $path = $_GET['path'];
+                $Image = new File;
+                
+                $Image->deleteImage($id, $path);
+                
+                
+                
+                echo json_encode(array('hey' => 'Deleting stuff here!'));
+                
+                
+            }
+        }
+        
     }
     

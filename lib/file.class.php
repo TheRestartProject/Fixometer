@@ -171,6 +171,26 @@
             return $stmt->fetchAll(PDO::FETCH_OBJ);
        
         }
+        
+        public function deleteImage($id, $path){
+            $del = unlink( ROOT . DS . 'public' . DS . 'uploads' . DS . $path);
+            
+            $sql = 'DELETE FROM `images` WHERE `idimages` = :id';
+            $stmt = $this->database->prepare($sql);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $q = $stmt->execute();
+            
+            $sql = 'DELETE FROM `xref` WHERE `object` = :id AND `object_type` = '.TBL_IMAGES;
+            $stmt = $this->database->prepare($sql);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            
+            $q = $stmt->execute();
+            
+            if(!$q && SYSTEM_STATUS == 'development'){
+                dbga($stmt->errorInfo());
+            }
+            return true;
+        }
     
     }
     

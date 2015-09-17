@@ -137,12 +137,17 @@
                                 </div>
                                 
                                 
-                                <div class="from-group">
+                                <div class="form-group">
+                                    <h3>Uploaded images</h3>
                                     <div class="party-images clearfix">
+                                        <?php //dbga($images); ?>
                                         <?php
                                         foreach($images as $image) {
                                         ?>
                                         <div class="image">
+                                            <a class="remove-image" href="/party/deleteimage" data-remove-image="<?php echo $image->idimages; ?>"  data-image-path="<?php echo $image->path; ?>">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
                                             <img src="/uploads/<?php echo $image->path; ?>" class="img-responsive">
                                         </div>
                                         <?php
@@ -150,7 +155,7 @@
                                         ?>
                                         
                                     </div>
-                                    
+                                    <small class="clearfix">Images are displayed in this ratio for ease of management</small>
                                     <label for="file" class="sr-only">Image:</label>
                                     <input type="file" name="file[]" id="file" class="form-control fileinput" multiple>
                                 </div>        

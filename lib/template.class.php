@@ -14,6 +14,7 @@
                             'category_list',
                             'restarters',
                             'stats',
+                            'deleteimage'
                             );
         
         function __construct($controller,$action) {

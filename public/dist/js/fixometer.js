@@ -120,6 +120,22 @@ $(document).ready(function(){
         return false;
     });
     
+    // file deletion
+    $('.remove-image').click(function(e){
+        e.preventDefault();
+        
+        var Holder = $(this).parent();
+        var image = $(this).data('remove-image');
+        var path = $(this).data('image-path');
+        
+        $.getJSON( $(this).attr('href'), {id: image, path: path}, function(){            
+            Holder.remove();                
+        });
+        
+        return false;    
+    });
+    
+    
     
     /** switch stat bars / host dashboard **/
     $('.switch-view').click(function(e){
