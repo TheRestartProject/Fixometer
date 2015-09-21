@@ -198,10 +198,22 @@ time {
 .repairable { color: @repairable;}
 .dead { color: @dead;}
     
-.col { width: 50%; display: inline-block; float: left; text-align: center; }
-.col3 { width: 33.333%; display: inline-block; float: left; text-align: center;  }
 .subtext { font-size: 10px; text-transform: uppercase;  display: block; clear: both; }
 .largetext { font-size: 36px; text-align: center; display: block; clear: both;  min-height: 70px; height: 70px;  }
+    
+.col { width: 50%; display: inline-block; float: left; text-align: center; }
+.col3 { width: 33.333%; display: inline-block; float: left; text-align: center;
+    .largetext { height: 128px; line-height: 128px; }
+    &:nth-child(2) {
+        border-left: 1px solid @blue;
+        border-right: 1px solid @blue; 
+    }
+    &.no-brd {
+        border-right: none;
+        border-left: none;
+    }
+}
+
 .add-info-btn { margin: 15px 32px; }
 .no-data { float: left; clear: none; width: 75%; }
 .data { float: left; clear: none; width: 75%; }
@@ -216,11 +228,24 @@ time {
 .barpiece {
     display: block;
     float: left;
-    clear: none;
+    clear: left;
     color: white;
     text-align: center;
-    padding: 6px;
-    min-height: 32px;
+     
+    padding: 4px;
+    min-height: 18px;
+    line-height: 18px;
+    margin: 7px auto; 
+    
+    &:first-child {
+        margin: 12px 0px 4px;  
+    }
+    &:nth-child(2){
+        margin: 4px 0px 4px;  
+    }
+    &:last-child {
+        margin: 4px 0px 12px;  
+    }
     
     &.fixed {
       background-color: @fixed;
@@ -235,6 +260,23 @@ time {
       
     }
 }
+.barpiece-label {
+    float: left; clear: right;
+    padding: 4px;
+    min-height: 18px;
+    line-height: 18px;
+    margin: 7px auto; 
+    
+    &.fixed {
+        margin: 12px 0px 4px;  
+    }
+    &.reparairable{
+        margin: 4px 0px 4px;  
+    }
+    &.dead {
+        margin: 4px 0px 12px;  
+    }
+}
 
 
 .rs-1{ background: lighten(@fixed, 40%); }
@@ -243,9 +285,18 @@ time {
 
 
 .category-detail {
-    margin-left: 25px; padding-left: 25px; border-left: 1px solid @litegray;
+    margin-left: 25px; padding-left: 25px;
+    table { width: 75%; }
+    th {
+        font-weight: normal;
+        color: @textblue;
+        font-size: 16px;
+        padding: 10px 0px;
+        border-bottom: 1px solid @textblue;
+        margin-bottom: 10px;
+    }
     table tr td {
-        padding: 3px 8px; 
+        padding: 8px 0px 6px; 
     }
 }
 
