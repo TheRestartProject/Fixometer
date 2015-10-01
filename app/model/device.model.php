@@ -271,8 +271,10 @@
             }
             
             $sql.= ' GROUP BY `d`.`category`
-                     ORDER BY `counter` DESC
-                     LIMIT 1';
+                     ORDER BY `counter` DESC';
+                     
+            $sql .= (!is_null($cluster) ? '  LIMIT 1' : '');    
+                    
                      
             $stmt = $this->database->prepare($sql);
             

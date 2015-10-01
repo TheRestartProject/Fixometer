@@ -10,7 +10,7 @@
 
 #host-dashboard {
    
-    #group-profile {
+    #group-profile, #impact-header {
         background: url('/assets/images/low_brow.png') no-repeat center bottom;
         padding-bottom: 75px;
         
@@ -32,6 +32,31 @@
                 }
             }
         }
+    }
+}
+
+#impact-devices {
+    .impact-devices-1 {
+        span.title { font-size: 48px; .Font-PatuaOne; color: @blue; display: block; }
+        span.legend { color: @litegray; font-size: 36px; font-weight: 300;  display: block;}
+    }
+    .impact-devices-2 {
+        span.title { font-size: 36px; .Font-PatuaOne; color: @blue; display: block; }
+        span.legend { color: @litegray; font-size: 24px; font-weight: 300;  display: block;}
+    }
+    .impact-devices-3 {
+        span.title { font-size: 32px; .Font-PatuaOne; color: @blue;  display: block;}
+        span.legend { color: @litegray; font-size: 22px; font-weight: 300;  display: block;}
+        
+        margin-bottom: 35px;
+    }
+    .title-text { color: @blue; font-size: 32px; }
+    .topper {
+        .Font-PatuaOne;
+        background: @blue;
+        color: white;
+        font-size: 16px;
+        padding: 6px 12px; 
     }
 }
 
@@ -329,4 +354,6 @@ time {
         border: 1px solid @litegray; 
     }
 }
+
+
 

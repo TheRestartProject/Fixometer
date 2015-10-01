@@ -8,7 +8,7 @@
         <title><?php echo $title; ?> | Fix-O-Meter</title>
     
         <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400|Patua+One">
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400|Patua+One">
         <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
         <link rel="stylesheet" href="/dist/css/main.css">
         <link rel="stylesheet" href="/components/fontawesome/css/font-awesome.min.css">
