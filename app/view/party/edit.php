@@ -10,7 +10,58 @@
             </h1>
         </div>
     </div>
+    <!-- Profiles -->
+    <?php if(hasRole( $user, 'Administrator' )) { ?>
     
+    
+    <section class="row profiles">
+        <div class="col-md-12">
+            <h5>Admin Console</h5>
+            
+        </div>
+        <div class="col-md-6">
+            <div class="btn-group btn-group-justified">
+                
+                
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Groups
+                      <span class="fa fa-chevron-down"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <?php foreach($grouplist as $group) { ?>
+                        <li class="group-list clearfix">
+                            <div class="pull-left">
+                                <?php if(!empty($group->path)) { ?> 
+                                <img src="/uploads/thumbnail_<?php echo $group->path; ?>" width="40" height="40" alt="<?php echo $group->name; ?> Image" class="profile-pic" />
+                                <?php } else { ?>
+                                <div class="profile-pic clearfix" style="background: #ddd; width: 40px; height: 40px; ">&nbsp;</div>    
+                                <?php } ?>                                
+                            </div>
+                            <div class="pull-left">
+                                <a  href="/host/index/<?php echo $group->id; ?>" ><?php echo $group->name; ?></a>
+                            </div>
+                        </li>
+                        
+                        <?php } ?>
+                    </ul>
+                </div>
+                
+                <a class="btn btn-default" href="/group/create">Add Group</a>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="btn-group btn-group-justified">
+                <a class="btn btn-default" href="/user/all">Users</a>
+                <a class="btn btn-default" href="/user/create">Add User</a>
+            </div>
+        </div>
+        
+    </section>  
+    
+    
+    
+    <?php } ?>
     <div class="row">
         <div class="col-md-12">
             <?php if(isset($response)) { printResponse($response); } ?>

@@ -49,6 +49,8 @@
                 
                 $Groups = new Group;
                  
+                $this->set('grouplist', $Groups->findList());
+                
                 
                 $this->set('title', 'New Party');
                 $this->set('gmaps', true);
@@ -338,6 +340,8 @@
                 $this->set('title', 'Edit Party');
                 $this->set('group_list', $Groups->findAll());
                 $this->set('formdata', $Party);
+                
+                $this->set('grouplist', $Groups->findList());
             
             }
             else {
@@ -360,6 +364,9 @@
                 $Device     = new Device;
                 $Category   = new Category;
                 $User       = new User;
+                $Group      = new Group;
+                
+                $this->set('grouplist', $Group->findList());
                 
                 if(isset($_POST) && !empty($_POST) && is_numeric($_POST['idparty']) && ($_POST['idparty'] > 0) ) {
                     $response = null;
