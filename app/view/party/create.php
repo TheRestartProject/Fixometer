@@ -1,7 +1,12 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-4">
-            <h1><?php echo $title; ?></h1>
+            <h1><?php echo $title; ?>
+            <small>
+                    <?php $home_url = (hasRole($user, 'Administrator') ? '/admin' : '/host'); ?>
+                    <a href="<?php echo $home_url; ?>" class="btn btn-primary btn-sm"><i class="fa fa-home"></i> back to dashboard</a>
+            </small>
+            </h1>
         </div>
     </div>
     <div class="row">
