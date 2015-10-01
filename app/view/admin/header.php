@@ -2,7 +2,7 @@
     <div class="row host-header">
         
         <div class="col-md-1">
-            <a href="/host">
+            <a href="/admin">
                 <img class="img-responsive" alt="The Restart Project: Logo" src="/assets/images/logo_mini.png">
             </a>
         </div>

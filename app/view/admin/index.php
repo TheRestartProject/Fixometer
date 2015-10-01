@@ -55,7 +55,7 @@
         </div>
         
     </section>    
-    <section>
+    <section class="row profiles">
         <div class="col-md-12">
             <div class="row" id="group-main-stats">
                 <div class="col">

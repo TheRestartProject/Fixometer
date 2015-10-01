@@ -1,7 +1,12 @@
     <footer id="main-footer">
         <div class="container">
             <div class="row">
-            <div class="col-md-6">
+                <div class="col-md-1 text-center">
+                    <br />
+                    <br />
+                    <img src="/assets/images/foot-logo.jpg" alt="The Restart Project">
+                </div>
+            <div class="col-md-5">
                 
                 <h3>The Fixometer</h3>
                 <p>

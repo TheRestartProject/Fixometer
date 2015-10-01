@@ -1,13 +1,14 @@
 <div class="container">
     <div class="row host-header">
-        <!--
+        
         <div class="col-md-1">
-            <a href="/host">
+            <?php $home_url = (hasRole($user, 'Administrator') ? '/admin' : '/host'); ?>
+            <a href="<?php echo $home_url; ?>">
                 <img class="img-responsive" alt="The Restart Project: Logo" src="/assets/images/logo_mini.png">
             </a>
         </div>
-        -->
-        <div class="col-md-12 text-center">
+        
+        <div class="col-md-11 text-center">
             
             <span class="header-text">
             Welcome to the Fixometer, <strong><?php echo $user->name; ?></strong>. 
