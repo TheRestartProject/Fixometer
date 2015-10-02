@@ -604,12 +604,27 @@
                             
                     }
                     var opts = {
-                        barValueSpacing : 20   
+                        barValueSpacing : 20,
+                        responsive: true,
+                        
                     };
-                    var ctx1 = document.getElementById("co2ByYear").getContext("2d");
-                    var ctx2 = document.getElementById("wasteByYear").getContext("2d");
-                    var theChart1 = new Chart(ctx1).Bar(data_co2, opts);
-                    var theChart2 = new Chart(ctx2).Bar(data_waste, opts);
+                    
+                    $('.charts canvas').show();
+                    
+                    
+                    $('a[data-toggle="pill"]').on('shown.bs.tab', function (e) {
+                        
+                        
+                        var ctx1 = document.getElementById("co2ByYear").getContext("2d");
+                        var ctx2 = document.getElementById("wasteByYear").getContext("2d");
+                        var theChart1 = new Chart(ctx1).Bar(data_co2, opts);
+                        var theChart2 = new Chart(ctx2).Bar(data_waste, opts);
+                        
+                        $('#chart-waste').hide();
+                        console.log('dispatch');
+                        //window.dispatchEvent(new Event('resize'));   
+                    });
+                    
                </script>
                 
             </div>

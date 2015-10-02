@@ -314,9 +314,9 @@ $(document).ready(function(){
     });
     
     /* manage needed visibility to load correctly charts (host dahsboard) */ 
-    $('.charts:first-child').addClass('show');
+   /* $('.charts:first-child').addClass('show');
     $('.charts:not(:first-child)').addClass('hide');
-    
+    */
     /** sticky table headers **/
     if( $('#device-table').length > 0 ) {
         $('#device-table').floatThead();
