@@ -9,7 +9,7 @@
             
             $sql = 'SELECT
                         `e`.`idevents` AS `id`,
-                        UNIX_TIMESTAMP(`e`.`event_date`) AS `event_date`,
+                        UNIX_TIMESTAMP( CONCAT(`e`.`event_date`, " ", `e`.`start`) ) AS `event_timestamp`,  
                         `e`.`start` AS `start`,
                         `e`.`end` AS `end`,
                         `e`.`location`,
@@ -34,8 +34,8 @@
             
             $sql = 'SELECT
                         `e`.`idevents` AS `id`,
-                        UNIX_TIMESTAMP(`e`.`event_date`) AS `event_date`,
-                        UNIX_TIMESTAMP(`e`.`event_date`) AS `event_timestamp`,
+                        UNIX_TIMESTAMP( CONCAT(`e`.`event_date`, " ", `e`.`start`) ) AS `event_date` ,
+                        UNIX_TIMESTAMP( CONCAT(`e`.`event_date`, " ", `e`.`start`) ) AS `event_timestamp`,  
                         `e`.`start` AS `start`,
                         `e`.`end` AS `end`,
                         `e`.`location`,
@@ -96,7 +96,7 @@
         }
         
         public function ofThisUser($id, $only_past = false, $devices = false){
-            $sql = 'SELECT *, `e`.`location` AS `venue`, UNIX_TIMESTAMP(`e`.`event_date`) AS `event_timestamp`  
+            $sql = 'SELECT *, `e`.`location` AS `venue`, UNIX_TIMESTAMP( CONCAT(`e`.`event_date`, " ", `e`.`start`) ) AS `event_timestamp`   
                     FROM `' . $this->table . '` AS `e` 
                     INNER JOIN `events_users` AS `eu` ON `eu`.`event` = `e`.`idevents`
                     INNER JOIN `groups` as `g` ON `e`.`group` = `g`.`idgroups`
@@ -140,26 +140,23 @@
         
         
         public function ofThisGroup($group = 'admin', $only_past = false, $devices = false){
-            $sql = 'SELECT *, `e`.`location` AS `venue`, UNIX_TIMESTAMP(`e`.`event_date`) AS `event_timestamp`  
+            $sql = 'SELECT
+                        *,
+                        `e`.`location` AS `venue`,
+                        
+                        
+                        UNIX_TIMESTAMP( CONCAT(`e`.`event_date`, " ", `e`.`start`) ) AS `event_timestamp`  
+                    
                     FROM `' . $this->table . '` AS `e` 
+                        
+                        INNER JOIN `groups` as `g` ON `e`.`group` = `g`.`idgroups`
                     
-                    INNER JOIN `groups` as `g` ON `e`.`group` = `g`.`idgroups`
-                    
-                    LEFT JOIN (
-                        SELECT COUNT(`dv`.`iddevices`) AS `device_count`, `dv`.`event` 
-                        FROM `devices` AS `dv` 
-                        GROUP BY  `dv`.`event`
-                    ) AS `d` ON `d`.`event` = `e`.`idevents` 
-                    
-                    ';
-            /* LEFT JOIN (
-                        SELECT * FROM `images`
-                            INNER JOIN `xref` ON `xref`.`object` = `images`.`idimages`
-                            WHERE `xref`.`object_type` = 5
-                            AND `xref`.`reference_type` = 3
-                            GROUP BY `images`.`path`
-                    ) AS `xi`
-                    */
+                        LEFT JOIN (
+                            SELECT COUNT(`dv`.`iddevices`) AS `device_count`, `dv`.`event` 
+                            FROM `devices` AS `dv` 
+                            GROUP BY  `dv`.`event`
+                        ) AS `d` ON `d`.`event` = `e`.`idevents` ';
+            //UNIX_TIMESTAMP( CONCAT(`e`.`event_date`, " ", `e`.`start`) )
             if(is_numeric($group) && $group != 'admin' ){                
                 $sql .= ' WHERE `e`.`group` = :id ';
             }
@@ -206,7 +203,7 @@
             $sql = 'SELECT
                         `e`.`idevents`,
                         `e`.`location`,
-                        UNIX_TIMESTAMP(`e`.`event_date`) AS `event_date`,
+                        UNIX_TIMESTAMP( CONCAT(`e`.`event_date`, " ", `e`.`start`) ) AS `event_timestamp`, 
                         `e`.`event_date` AS `plain_date`,
                         NOW() AS `this_moment`,
                         `e`.`start`,
@@ -214,18 +211,21 @@
                         `e`.`latitude`,
                         `e`.`longitude`,
                         `xi`.`path` 
-                    FROM `' . $this->table . '` AS `e` 
-                    LEFT JOIN (
+                    FROM `' . $this->table . '` AS `e`
+                    
+                    WHERE TIMESTAMP(`e`.`event_date`, `e`.`start`) >= NOW()'; // added one day to make sure it only gets moved to the past the next day
+                    
+                    /*
+                     * LEFT JOIN (
                         SELECT * FROM `images`
                             INNER JOIN `xref` ON `xref`.`object` = `images`.`idimages`
                             WHERE `xref`.`object_type` = 5
                             AND `xref`.`reference_type` = 3
                             GROUP BY `images`.`path`
-                    ) AS `xi` 
-                    ON `xi`.`reference` = `e`.`idevents` 
-                    WHERE TIMESTAMP(`e`.`event_date`, `e`.`start`) >= NOW()'; // added one day to make sure it only gets moved to the past the next day
+                    ) AS `xi`
                     
-                    
+                    ON `xi`.`reference` = `e`.`idevents`
+                    */
             if(!is_null($group)){
                 $sql .= ' AND `e`.`group` = :group ';    
             }
@@ -245,7 +245,7 @@
             $sql = 'SELECT
                         `e`.`idevents`,
                         `e`.`location`,
-                        UNIX_TIMESTAMP(`e`.`event_date`) AS `event_date`,
+                        UNIX_TIMESTAMP( CONCAT(`e`.`event_date`, " ", `e`.`start`) ) AS `event_date`, 
                         `e`.`start`,
                         `e`.`end`,
                         `e`.`latitude`,

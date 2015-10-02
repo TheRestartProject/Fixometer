@@ -260,9 +260,9 @@
                         
                         <div class="header-col header-col-2">
                             <div class="date">
-                                <span class="month"><?php echo date('M', $party->event_timestamp); ?></span>
-                                <span class="day">  <?php echo date('d', $party->event_timestamp); ?></span>
-                                <span class="year"> <?php echo date('Y', $party->event_timestamp); ?></span>
+                                <span class="month"><?php echo strftime('%b', $party->event_timestamp); ?></span>
+                                <span class="day">  <?php echo strftime('%d', $party->event_timestamp); ?></span>
+                                <span class="year"> <?php echo strftime('%Y', $party->event_timestamp); ?></span>
                             </div>
                        
                             <div class="short-body">                        
