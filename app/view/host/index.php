@@ -136,10 +136,10 @@
     
     <!-- Tabs -->
     <!-- Nav tabs -->
-    <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active"><a href="#parties-tab" aria-controls="Parties" role="tab" data-toggle="tab">Parties</a></li>
-        <li role="presentation"><a href="#impact-tab" aria-controls="Impact" role="tab" data-toggle="tab">Impact</a></li>
-        <li role="presentation"><a href="#details-tab" aria-controls="Details" role="tab" data-toggle="tab">Details</a></li>        
+    <ul class="nav nav-pills nav-justified" role="tablist">
+        <li role="presentation" class="active"><a href="#parties-tab" aria-controls="Parties" role="tab" data-toggle="pill">Parties</a></li>
+        <li role="presentation"><a href="#impact-tab" aria-controls="Impact" role="tab" data-toggle="pill">Impact</a></li>
+        <li role="presentation"><a href="#details-tab" aria-controls="Details" role="tab" data-toggle="pill">Details</a></li>        
     </ul>
 
     
@@ -480,13 +480,13 @@
         
         <div role="tabpanel" class="tab-pane" id="details-tab">
             <!-- Group Achievements -->
-            <section class="row">
+            <!--<section class="row">
             <div class="col-md-12">
                 <h2>
                        <span class="title-text">Group Achievements</span>                     
                     </h2>
             </div>
-            </section>
+            </section>-->
             
             <!-- CO2 stats -->
             <section class="row">
