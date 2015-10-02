@@ -57,6 +57,7 @@
             $Party = new Party;
             $Device = new Device;
             
+            $this->set('grouplist', $Group->findList());
             
             if(isset($groupid) && is_numeric($groupid) && hasRole($this->user, 'Administrator')) {
                 //$group = (object) array_fill_keys( array('idgroups') , $groupid);
