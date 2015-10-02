@@ -29,17 +29,17 @@
                       <span class="fa fa-chevron-down"></span>
                     </button>
                     <ul class="dropdown-menu">
-                        <?php foreach($grouplist as $group) { ?>
+                        <?php foreach($grouplist as $g) { ?>
                         <li class="group-list clearfix">
                             <div class="pull-left">
-                                <?php if(!empty($group->path)) { ?> 
-                                <img src="/uploads/thumbnail_<?php echo $group->path; ?>" width="40" height="40" alt="<?php echo $group->name; ?> Image" class="profile-pic" />
+                                <?php if(!empty($g->path)) { ?> 
+                                <img src="/uploads/thumbnail_<?php echo $g->path; ?>" width="40" height="40" alt="<?php echo $g->name; ?> Image" class="profile-pic" />
                                 <?php } else { ?>
                                 <div class="profile-pic clearfix" style="background: #ddd; width: 40px; height: 40px; ">&nbsp;</div>    
                                 <?php } ?>                                
                             </div>
                             <div class="pull-left">
-                                <a  href="/host/index/<?php echo $group->id; ?>" ><?php echo $group->name; ?></a>
+                                <a  href="/host/index/<?php echo $g->id; ?>" ><?php echo $g->name; ?></a>
                             </div>
                         </li>
                         

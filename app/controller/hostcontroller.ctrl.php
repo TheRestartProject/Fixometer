@@ -57,11 +57,12 @@
             $Party = new Party;
             $Device = new Device;
             
-            $this->set('grouplist', $Group->findList());
+            
             
             if(isset($groupid) && is_numeric($groupid) && hasRole($this->user, 'Administrator')) {
                 //$group = (object) array_fill_keys( array('idgroups') , $groupid);
                 $group = $Group->findOne($groupid);
+                $this->set('grouplist', $Group->findList());
             }
             else { 
                 $group = $Group->ofThisUser($this->user->id);
