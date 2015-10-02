@@ -398,7 +398,80 @@
                 
             </section>
         
-            <section class="row" id="impact-dataviz">
+            <section class="row" id="impact-dataviz">                    
+                <div class="col-md-12 text-center texter">
+                    <?php
+                        $sum = 0;
+                        foreach($waste_year_data as $y){
+                            $sum += $y->waste;
+                        }
+                    ?>
+                    <span class="datalabel">Total waste prevented: </span><span class="blue">  <?php echo number_format(round($sum), 0, '.', ','); ?> kg </span>
+                    
+                </div>
+                <div class="col-md-12 text-center texter">
+                    <?php
+                        $sum = 0;
+                        foreach($year_data as $y){
+                            $sum += $y->co2;
+                        }
+                        //$di_co2 = number_format(round($sum), 0, '.', ',');
+                    ?>
+                    <span class="datalabel">Total CO<sub>2</sub> emission prevented: </span><span class="blue"><?php echo number_format(round($sum), 0, '.', ','); ?> kg</span>
+                    
+                </div>
+                <div class="col-md-12">
+                    <?php
+                    /** find size of needed SVGs **/
+                    if($sum > 6000) { 
+                        $consume_class = 'car';
+                        $consume_image = 'Counters_C2_Driving.svg';
+                        $consume_label = 'Equal to driving';
+                        $consume_eql_to = 0.12 * $sum;
+                        $consume_eql_to = number_format(round($consume_eql_to), 0, '.', ',') . '<small>km</small>';
+                        
+                        $manufacture_eql_to = round($sum / 6000);
+                        $manufacture_img = 'Icons_04_Assembly_Line.svg';
+                        $manufacture_label = 'or like the manufacture of <span class="dark">' . $manufacture_eql_to . '</span> cars';
+                        $manufacture_legend = ' 6000kg of CO<sub>2</sub>';
+                    }
+                    else {
+                        $consume_class = 'tv';
+                        $consume_image = 'Counters_C1_TV.svg';
+                        $consume_label = 'Like watching TV for';
+                        $consume_eql_to = 0.024 * $sum;
+                        $consume_eql_to = number_format(round($consume_eql_to), 0, '.', ',') . '<small>hours</small>';
+                        
+                        $manufacture_eql_to = round($sum / 100);
+                        $manufacture_img = 'Icons_03_Sofa.svg';
+                        $manufacture_label = 'or like the manufacture of <span class="dark">' . $manufacture_eql_to . '</span> sofas';
+                        $manufacture_legend = ' 100kg of CO<sub>2</sub>';
+                    }
+                    ?>
+                    
+                    <div class="di_consume <?php echo $consume_class; ?>">
+                        <img src="/assets/icons/<?php echo $consume_image; ?>" class="img-responsive">
+                        <div class="text">
+                            <div class="blue"><?php echo $consume_label; ?></div>
+                            <div class="consume"><?php echo $consume_eql_to; ?></div>
+                        </div>
+                    </div>
+                
+                    <div class="di_manufacture">
+                        <div class="col-md-12 text-center"><div class="lightblue"><?php echo $manufacture_label; ?></div></div>
+                        <?php for($i = 1; $i<= $manufacture_eql_to; $i++){ ?>
+                            <div class="col-md-3 text-center">
+                                <img src="/assets/icons/<?php echo $manufacture_img; ?>" class="img-responsive">
+                            </div>
+                        <?php } ?>
+                        <div class="col-md-12 text-center">
+                            <div class="legend">1 <img src="/assets/icons/<?php echo $manufacture_img; ?>"> = <?php echo $manufacture_legend; ?> (approximately)</div>
+                            
+                        </div>
+                    </div>
+                    
+                    
+                </div>
                 
             </section>
         

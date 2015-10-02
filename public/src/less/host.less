@@ -59,7 +59,44 @@
         padding: 6px 12px; 
     }
 }
-
+#impact-dataviz {
+    .texter {padding-bottom: 35px;  }
+    span.datalabel {color: @litegray; font-size: 36px; font-weight: 300;line-height: 180%;  }
+    span.blue { .Font-PatuaOne; color: @blue; font-size: 36px;line-height: 180%;  }
+    
+    .di_consume {
+        position: relative;
+        .text {
+            position: absolute;
+            width: 50%;
+            top: 0;
+            padding: 12% 0%;
+            height: 60%;
+            .blue { text-align: center; font-size: 42px; color: @blue; font-weight: 300; }
+            .consume { text-align: center;  color: white; font-weight: 400; font-size: 120px; font-weight: bold; 
+                small { font-size: 48px; }
+            }
+        }
+        &.car .text {
+            right: 0;
+        }
+        
+        &.tv .text {
+            left: 0;
+        }
+    }
+    
+    .di_manufacture {
+        
+        .lightblue { font-size: 36px; font-weight: 300; color: @blue; margin: 45px auto; padding: 20px 0px; 
+            .dark { color: @darkgray; }
+        }
+        
+        .legend { color: @blue; padding: 30px 0px;
+            img { height: 36px; }
+        }
+    }
+}
 #host-dashboard .row, #admin-dashboard .row , .profiles, .parties {
     margin-top: 35px;
     margin-bottom: 35px;
