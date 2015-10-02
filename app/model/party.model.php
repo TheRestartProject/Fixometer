@@ -151,16 +151,15 @@
                         GROUP BY  `dv`.`event`
                     ) AS `d` ON `d`.`event` = `e`.`idevents` 
                     
-                    LEFT JOIN (
+                    ';
+            /* LEFT JOIN (
                         SELECT * FROM `images`
                             INNER JOIN `xref` ON `xref`.`object` = `images`.`idimages`
                             WHERE `xref`.`object_type` = 5
                             AND `xref`.`reference_type` = 3
                             GROUP BY `images`.`path`
                     ) AS `xi`
-                    
-                    ON `xi`.`reference` = `e`.`idevents` ';
-            
+                    */
             if(is_numeric($group) && $group != 'admin' ){                
                 $sql .= ' WHERE `e`.`group` = :id ';
             }
