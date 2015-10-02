@@ -269,6 +269,8 @@
          * return boolean, or full results if requested
          * */
         public function removeImage($id, $image){
+            
+            var_dump($this->table);
             switch($this->table){
                 case 'users':
                     $object = TBL_USERS;
@@ -286,20 +288,30 @@
                     $object = false;
                     break;
             }
+            
+            var_dump($object);
+            echo $id;
+            
+            
             if($object){
                 /** delete cross references **/
-                $sql = "DELETE FROM `xref` AS `x` WHERE
-                        `x`.`object_type` = 5 AND
-                        `x`.`reference_type` = :object AND
-                        `x`.`reference` = :id";
                 
+                $sql = "DELETE FROM `xref`
+                        WHERE
+                        `xref`.`object_type` = 5 AND
+                        `xref`.`reference_type` = :object AND
+                        `xref`.`reference` = :id ";
+                
+              
                 $stmt = $this->database->prepare($sql);
+                
+                
                 $stmt->bindParam(':id', $id, PDO::PARAM_INT);
                 $stmt->bindParam(':object', $object, PDO::PARAM_INT);
                 $stmt->execute();
                 
                 /** delete image from db **/
-                $sql = "DELETE FROM `images` AS `i` WHERE `i`.`idimages` = :image";
+                $sql = "DELETE FROM `images` WHERE `images`.`idimages` = :image";
                 $stmt = $this->database->prepare($sql);
                 $stmt->bindParam(':image', $image->idimages, PDO::PARAM_INT);
                 $stmt->execute();
