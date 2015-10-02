@@ -209,11 +209,10 @@
                         `e`.`start`,
                         `e`.`end`,
                         `e`.`latitude`,
-                        `e`.`longitude`,
-                        `xi`.`path` 
+                        `e`.`longitude`
                     FROM `' . $this->table . '` AS `e`
                     
-                    WHERE TIMESTAMP(`e`.`event_date`, `e`.`start`) >= NOW()'; // added one day to make sure it only gets moved to the past the next day
+                    WHERE TIMESTAMP(`e`.`event_date`, `e`.`start`) >= NOW() '; // added one day to make sure it only gets moved to the past the next day
                     
                     /*
                      * LEFT JOIN (
@@ -232,6 +231,8 @@
             
             $sql .= ' ORDER BY `e`.`event_date` ASC
                     LIMIT 10';
+                    
+            
             $stmt = $this->database->prepare($sql);
             if(!is_null($group)){
                 $stmt->bindParam(':group', $group, PDO::PARAM_INT);
