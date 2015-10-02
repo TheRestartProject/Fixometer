@@ -51,8 +51,8 @@
         
         // manage defaults and routing 
         if(empty($controller)){
-            $controller='home';
-            $action='index';
+            $controller='user';
+            $action='login';
         }
         
         $controllerName=$controller;

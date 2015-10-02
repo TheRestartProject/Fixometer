@@ -257,29 +257,98 @@ h3 {
   font-weight: bold;
   text-transform: uppercase;
   }
-  
-.login-form { width: 50%; float: left; clear: none; padding-top: 30px;
-  form { width: 50%; margin: 20px auto; }
-  p { margin: 25px 100px; }
+.shader {
+  background: url('/assets/images/low_brow.png') no-repeat center bottom;
+  padding-bottom: 75px;
+        
 }
-.login-deets { width: 50%; float: left; clear: none; text-align: center; background: url('/assets/images/login.jpg') no-repeat center center; min-height: 100%; padding-top: 30px;
+.login-form { width: 50%; float: left; clear: none; padding-top: 30px;
+
+      h2 {
+        text-align: center;
+        line-height: 120%;
+        margin-bottom: 40px;
+        margin-left: 50px;
+        margin-right: 50px; 
+        position: relative;
+        overflow: hidden;
+        
+        span.title-text {
+            display: inline-block;
+            vertical-align: baseline;
+            zoom: 1;
+            color: @blue; 
+            *display: inline;
+            *vertical-align: auto;
+            position: relative;
+            padding: 0 20px;
+            line-height: 90%; 
+            &:before, &:after {
+                content: '';
+                display: block;
+                width: 1000px;
+                position: absolute;
+                top: 0.73em;
+                border-top: 1px solid #ddd;
+            }
+    
+            &:before { right: 100%; }
+            &:after { left: 100%; }
+            
+            .grey { color: #9a9a9a; }
+        }
+      }
+
+
+  form { width: 50%; margin: 20px auto; }
+  p { margin: 25px 100px; .Font-PatuaOne; color: lighten( @litegray, 25%); font-size: 18px;
+    &:first-letter { color: @blue; }
+  }
+  label { width: 100%; .Font-PatuaOne; }
+  button.btn.btn-primary.login-button {
+    width: 120px;
+    height: 120px;
+    .border-radius(60px);
+    i.fa { font-size: 60px; }
+      
+    
+  }
+}
+.login-deets { width: 50%; float: left; clear: none; text-align: center;  min-height: 100%; padding-top: 30px; position: relative;
+
+  &.bg_1 { background: url('/assets/images/login_1.jpg') no-repeat center center;  }
+  &.bg_2 { background: url('/assets/images/login_2.jpg') no-repeat center center;  }
+  &.bg_3 { background: url('/assets/images/login_3.jpg') no-repeat center center;  }
+  &.bg_4 { background: url('/assets/images/login_4.jpg') no-repeat center center;  }
+
+  .detail-wrap {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 35px 0px;
+    background: rgba(0,0,0, 0.6);
+    
+  }
+  
   .detail {
-    background: rgba(255,255,255,0.8);
-    padding: 12px; margin: 20px 20px;
-    width: 35%;
-    display: inline-block;
-    &.detail-chart {
-      width: 75%; 
+    //background: rgba(255,255,255,0.8);
+    padding: 0px; 
+    
+    width: 25%;
+    display: block;
+    float: left;
+    &:not(:last-child) {
+      border-right: 1px solid white; 
     }
     h4 {
-      font-size: 12px;
+      
+      font-size: 14px;
       text-transform: uppercase;
-      color: @blue;
-      font-weight: bold;
+      color: white;
+      font-weight: 300;
     }
     .big-number {
-      color: @orange;
-      .Font-PatuaOne;
+      color: white;      
       font-size: 32px;
     }
   } 
