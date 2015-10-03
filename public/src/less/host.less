@@ -396,4 +396,23 @@ time {
 }
 
 
-
+/** vertical bar chart **/
+.v-bars {
+    
+    width: 100%;
+    height: 200px;
+    display: block;
+    clear: both;
+    position: relative;
+    
+    .v-bar {
+        width: 50px;
+        color: white; 
+        margin: 15px;
+        background: fade(@blue, 85%);
+        border: 1px solid @blue;
+        display: block;
+        position:absolute;
+        bottom: 0;
+    }
+}

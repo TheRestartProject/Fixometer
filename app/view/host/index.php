@@ -494,7 +494,7 @@
                 <h3>Impact</h3>
             </div>
             
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <h5 class="text-center">e-Waste Prevented to date</h5> 
                 <?php
                     $sum = 0;
@@ -525,7 +525,7 @@
                 
             </div>
             
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <h5 class="text-center">CO<sub>2</sub> emission prevented to date</h5> 
                 <?php
                     $sum = 0;
@@ -556,78 +556,7 @@
                 ?>
                 
             </div>
-            <div class="col-md-4">
-                <div id="chart-co2" class="charts">
-                    <h4 class="text-center">CO<sub>2</sub> emission prevented per year (kg)</h4>
-                    <canvas id="co2ByYear" width="450" height="250"></canvas>                
-                </div>
-                <div id="chart-waste" class="charts">
-                    <h4 class="text-center">eWaste prevented per year (kg)</h4>
-                    <canvas id="wasteByYear" width="450" height="250"></canvas>
-                </div>
-                
-                <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default btn-primary btn-sm switch-view active" data-family=".charts" data-target="#chart-co2">CO<sub>2</sub> emission prevented</button>
-                    </div>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default btn-primary btn-sm switch-view" data-family=".charts" data-target="#chart-waste">eWaste prevented</button>            
-                    </div>
-                </div>
-                <script>
-                    var data_co2 = {
-                        labels: ["<?php echo implode('", "', array_keys($bar_chart_stats)); ?>"],
-                        datasets: [
-                            {
-                            label: "CO<sub>2</sub> By Year",
-                            fillColor: "rgba(  3,148,166,0.5)",
-                            strokeColor: "rgba(  3,148,166,0.8)",
-                            highlightFill: "rgba(  3,148,166,0.75)",
-                            highlightStroke: "rgba(  3,148,166,1)",
-                            data: [<?php echo implode(', ', $bar_chart_stats); ?>]
-                            }
-                        ]
-                    };
-                    
-                    var data_waste = {
-                        labels: ["<?php echo implode('", "', array_keys($waste_bar_chart_stats)); ?>"],
-                        datasets: [
-                            {
-                            label: "Waste By Year",
-                            fillColor: "rgba(249,163, 63,0.5)",
-                            strokeColor: "rgba(249,163, 63,0.8)",
-                            highlightFill: "rgba(249,163, 63,0.75)",
-                            highlightStroke: "rgba(249,163, 63,1)",
-                            data: [<?php echo implode(', ', $waste_bar_chart_stats); ?>]
-                            }
-                        ]
-                            
-                    }
-                    var opts = {
-                        barValueSpacing : 20,
-                        responsive: true,
-                        
-                    };
-                    
-                    $('.charts canvas').show();
-                    
-                    
-                    $('a[data-toggle="pill"]').on('shown.bs.tab', function (e) {
-                        
-                        
-                        var ctx1 = document.getElementById("co2ByYear").getContext("2d");
-                        var ctx2 = document.getElementById("wasteByYear").getContext("2d");
-                        var theChart1 = new Chart(ctx1).Bar(data_co2, opts);
-                        var theChart2 = new Chart(ctx2).Bar(data_waste, opts);
-                        
-                        $('#chart-waste').hide();
-                        console.log('dispatch');
-                        //window.dispatchEvent(new Event('resize'));   
-                    });
-                    
-               </script>
-                
-            </div>
+           
             
             </section>
             

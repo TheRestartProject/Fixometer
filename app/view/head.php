@@ -53,7 +53,7 @@
         ?>
         
         
-        <?php
+    <?php
     if($charts) {
     ?>
     <script src="/components/Chart.js/Chart.min.js"></script>
