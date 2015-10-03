@@ -1,5 +1,5 @@
         <div class="login-form">
-            <p class="text-center login-text">Welcome to our community space, where you can share upcoming Restart Parties and track their social and environmental impact. By doing so, we can empower and motivate at a local level, but also build global momentum for a change.</p>
+            <p class="login-text"><span class="patua-blue">Welcome to our community space,</span> where you can share upcoming Restart Parties and track their social and environmental impact. By doing so, we can empower and motivate at a local level, but also build global momentum for a change.</p>
             <?php if(isset($response)) { printResponse($response); } ?>
             <div class="shader"></div>
             <h2><span class="title-text">login</span></h2>
