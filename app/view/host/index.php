@@ -576,7 +576,7 @@
                         <div class="col">
                             <span class="status_title">Fixed</span>
                             <span class="largetext fixed">
-                                <?php echo $group_device_count_status[0]->counter; ?>
+                                <?php echo (int)$group_device_count_status[0]->counter; ?>
                             </span>
                             <span class="subtext textblue">total: <?php echo $device_count_status[0]->counter; ?></span>
                         </div>
@@ -589,7 +589,7 @@
                         <div class="col">
                             <span class="status_title">Repairable</span>
                             <span class="largetext repairable">
-                                <?php echo $group_device_count_status[1]->counter; ?>
+                                <?php echo (int)$group_device_count_status[1]->counter; ?>
                             </span>
                             <span class="subtext textblue">total: <?php echo $device_count_status[1]->counter; ?></span>
                         </div>
@@ -603,7 +603,7 @@
                         <div class="col">
                             <span class="status_title">Dead</span>
                             <span class="largetext dead">
-                                <?php echo $group_device_count_status[2]->counter; ?>
+                                <?php echo (int)$group_device_count_status[2]->counter; ?>
                             </span>
                             <span class="subtext textblue">total: <?php echo $device_count_status[2]->counter; ?></span>
                         </div>
@@ -646,15 +646,15 @@
                 </div>
                 <div class="col-md-4">
                     <div class="col3">
-                        <span class="largetext fixed"><?php echo $clusters['all'][1][0]->counter; ?></span>
+                        <span class="largetext fixed"><?php echo (int)$clusters['all'][1][0]->counter; ?></span>
                     </div>
                     <div class="col3">
                         
-                        <span class="largetext repairable"><?php echo $clusters['all'][1][1]->counter; ?></span>
+                        <span class="largetext repairable"><?php echo (int)$clusters['all'][1][1]->counter; ?></span>
                     </div>
                     <div class="col3">
                         
-                        <span class="largetext dead"><?php echo $clusters['all'][1][2]->counter; ?></span>
+                        <span class="largetext dead"><?php echo (int)$clusters['all'][1][2]->counter; ?></span>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -701,15 +701,15 @@
                 <div class="col-md-4">
                     <div class="col3">
                         
-                        <span class="largetext fixed"><?php echo $clusters['all'][2][0]->counter; ?></span>
+                        <span class="largetext fixed"><?php echo (int)$clusters['all'][2][0]->counter; ?></span>
                     </div>
                     <div class="col3">
                         
-                        <span class="largetext repairable"><?php echo $clusters['all'][2][1]->counter; ?></span>
+                        <span class="largetext repairable"><?php echo (int)$clusters['all'][2][1]->counter; ?></span>
                     </div>
                     <div class="col3">
                         
-                        <span class="largetext dead"><?php echo $clusters['all'][2][2]->counter; ?></span>
+                        <span class="largetext dead"><?php echo (int)$clusters['all'][2][2]->counter; ?></span>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -754,15 +754,15 @@
                 <div class="col-md-4">
                     <div class="col3">
                         
-                        <span class="largetext fixed"><?php echo $clusters['all'][3][0]->counter; ?></span>
+                        <span class="largetext fixed"><?php echo (int)$clusters['all'][3][0]->counter; ?></span>
                     </div>
                     <div class="col3">
                         
-                        <span class="largetext repairable"><?php echo $clusters['all'][3][1]->counter; ?></span>
+                        <span class="largetext repairable"><?php echo (int)$clusters['all'][3][1]->counter; ?></span>
                     </div>
                     <div class="col3">
                         
-                        <span class="largetext dead"><?php echo $clusters['all'][3][2]->counter; ?></span>
+                        <span class="largetext dead"><?php echo (int)$clusters['all'][3][2]->counter; ?></span>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -805,15 +805,15 @@
                 <div class="col-md-4">
                     <div class="col3">
                         
-                        <span class="largetext fixed"><?php echo $clusters['all'][4][0]->counter; ?></span>
+                        <span class="largetext fixed"><?php echo (int)$clusters['all'][4][0]->counter; ?></span>
                     </div>
                     <div class="col3">
                         
-                        <span class="largetext repairable"><?php echo $clusters['all'][4][1]->counter; ?></span>
+                        <span class="largetext repairable"><?php echo (int)$clusters['all'][4][1]->counter; ?></span>
                     </div>
                     <div class="col3">
                         
-                        <span class="largetext dead"><?php echo $clusters['all'][4][2]->counter; ?></span>
+                        <span class="largetext dead"><?php echo (int)$clusters['all'][4][2]->counter; ?></span>
                     </div>
                 </div>
                 <div class="col-md-6">
