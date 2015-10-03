@@ -872,9 +872,9 @@
                         <span class="cluster big cluster-1"></span>
                     </div>
                     <div class="col-md-4">
-                        <div class="barpiece fixed" style="width :<?php echo barChartValue($cluster[1][0]->counter, $cluster[1]['total']); ?>%">&nbsp;</div><div class="barpiece-label fixed"><?php echo barChartValue($cluster[1][0]->counter, $cluster[1]['total']); ?>%</div>
-                        <div class="barpiece repairable" style="width :<?php echo barChartValue($cluster[1][1]->counter, $cluster[1]['total']); ?>%">&nbsp;</div><div class="barpiece-label repairable"><?php echo barChartValue($cluster[1][1]->counter, $cluster[1]['total']); ?>%</div>
-                        <div class="barpiece end-of-life" style="width :<?php echo barChartValue($cluster[1][2]->counter, $cluster[1]['total']); ?>%">&nbsp;</div><div class="barpiece-label dead"><?php echo barChartValue($cluster[1][2]->counter, $cluster[1]['total']); ?>%</div>
+                        <div class="barpiece fixed" style="width :<?php echo barChartValue($cluster[1][0]->counter, $cluster[1]['total']); ?>%">&nbsp;</div><div class="barpiece-label fixed"><?php echo barChartValue($cluster[1][0]->counter, $cluster[1]['total']) + 15; ?>%</div>
+                        <div class="barpiece repairable" style="width :<?php echo barChartValue($cluster[1][1]->counter, $cluster[1]['total']); ?>%">&nbsp;</div><div class="barpiece-label repairable"><?php echo barChartValue($cluster[1][1]->counter, $cluster[1]['total']) + 15; ?>%</div>
+                        <div class="barpiece end-of-life" style="width :<?php echo barChartValue($cluster[1][2]->counter, $cluster[1]['total']); ?>%">&nbsp;</div><div class="barpiece-label dead"><?php echo barChartValue($cluster[1][2]->counter, $cluster[1]['total']) + 15; ?>%</div>
                     </div>
                     
                 
@@ -882,9 +882,9 @@
                         <span class="cluster big cluster-2"></span>
                     </div>
                     <div class="col-md-4">
-                        <div class="barpiece fixed" style="width: <?php echo barChartValue($cluster[2][0]->counter, $cluster[2]['total']); ?>%">&nbsp;</div><div class="barpiece-label fixed"><?php echo barChartValue($cluster[2][0]->counter, $cluster[2]['total']); ?>%</div>
-                        <div class="barpiece repairable" style="width: <?php echo barChartValue($cluster[2][1]->counter, $cluster[2]['total']); ?>%">&nbsp;</div><div class="barpiece-label repairable"><?php echo barChartValue($cluster[2][1]->counter, $cluster[2]['total']); ?>%</div>
-                        <div class="barpiece end-of-life" style="width: <?php echo barChartValue($cluster[2][2]->counter, $cluster[2]['total']); ?>%">&nbsp;</div><div class="barpiece-label dead"><?php echo barChartValue($cluster[2][2]->counter, $cluster[2]['total']); ?>%</div>
+                        <div class="barpiece fixed" style="width: <?php echo barChartValue($cluster[2][0]->counter, $cluster[2]['total']); ?>%">&nbsp;</div><div class="barpiece-label fixed"><?php echo barChartValue($cluster[2][0]->counter, $cluster[2]['total']) + 15; ?>%</div>
+                        <div class="barpiece repairable" style="width: <?php echo barChartValue($cluster[2][1]->counter, $cluster[2]['total']); ?>%">&nbsp;</div><div class="barpiece-label repairable"><?php echo barChartValue($cluster[2][1]->counter, $cluster[2]['total']) + 15; ?>%</div>
+                        <div class="barpiece end-of-life" style="width: <?php echo barChartValue($cluster[2][2]->counter, $cluster[2]['total']); ?>%">&nbsp;</div><div class="barpiece-label dead"><?php echo barChartValue($cluster[2][2]->counter, $cluster[2]['total']) + 15; ?>%</div>
                     </div>
                     
                 </div>
@@ -894,9 +894,9 @@
                         <span class="cluster big cluster-3"></span>
                     </div>
                     <div class="col-md-4">
-                        <div class="barpiece fixed" style="width :<?php echo barChartValue($cluster[3][0]->counter, $cluster[3]['total']); ?>%">&nbsp;</div><div class="barpiece-label fixed"><?php echo barChartValue($cluster[3][0]->counter, $cluster[3]['total']); ?>%</div>
-                        <div class="barpiece repairable" style="width :<?php echo barChartValue($cluster[3][1]->counter, $cluster[3]['total']); ?>%">&nbsp;</div><div class="barpiece-label repairable"><?php echo barChartValue($cluster[3][1]->counter, $cluster[3]['total']); ?>%</div>
-                        <div class="barpiece end-of-life" style="width :<?php echo barChartValue($cluster[3][2]->counter, $cluster[3]['total']); ?>%">&nbsp;</div><div class="barpiece-label dead"><?php echo barChartValue($cluster[3][2]->counter, $cluster[3]['total']); ?>%</div>
+                        <div class="barpiece fixed" style="width :<?php echo barChartValue($cluster[3][0]->counter, $cluster[3]['total']); ?>%">&nbsp;</div><div class="barpiece-label fixed"><?php echo barChartValue($cluster[3][0]->counter, $cluster[3]['total']) + 15; ?>%</div>
+                        <div class="barpiece repairable" style="width :<?php echo barChartValue($cluster[3][1]->counter, $cluster[3]['total']); ?>%">&nbsp;</div><div class="barpiece-label repairable"><?php echo barChartValue($cluster[3][1]->counter, $cluster[3]['total']) + 15; ?>%</div>
+                        <div class="barpiece end-of-life" style="width :<?php echo barChartValue($cluster[3][2]->counter, $cluster[3]['total']); ?>%">&nbsp;</div><div class="barpiece-label dead"><?php echo barChartValue($cluster[3][2]->counter, $cluster[3]['total']) + 15; ?>%</div>
                     </div>
                     
                
@@ -904,9 +904,9 @@
                         <span class="cluster big cluster-4"></span>
                     </div>
                     <div class="col-md-4">
-                        <div class="barpiece fixed" style="width : <?php echo barChartValue($cluster[4][0]->counter, $cluster[4]['total']); ?>%">&nbsp;</div><div class="barpiece-label fixed"><?php echo barChartValue($cluster[4][0]->counter, $cluster[4]['total']); ?>%</div>
-                        <div class="barpiece repairable" style="width :<?php echo barChartValue($cluster[4][1]->counter, $cluster[4]['total']); ?>%">&nbsp;</div><div class="barpiece-label repairable"><?php echo barChartValue($cluster[4][1]->counter, $cluster[4]['total']); ?>%</div>
-                        <div class="barpiece end-of-life" style="width :<?php echo barChartValue($cluster[4][2]->counter, $cluster[4]['total']); ?>%">&nbsp;</div><div class="barpiece-label dead"><?php echo barChartValue($cluster[4][2]->counter, $cluster[4]['total']); ?>%</div>
+                        <div class="barpiece fixed" style="width : <?php echo barChartValue($cluster[4][0]->counter, $cluster[4]['total']); ?>%">&nbsp;</div><div class="barpiece-label fixed"><?php echo barChartValue($cluster[4][0]->counter, $cluster[4]['total']) + 15; ?>%</div>
+                        <div class="barpiece repairable" style="width :<?php echo barChartValue($cluster[4][1]->counter, $cluster[4]['total']); ?>%">&nbsp;</div><div class="barpiece-label repairable"><?php echo barChartValue($cluster[4][1]->counter, $cluster[4]['total']) + 15; ?>%</div>
+                        <div class="barpiece end-of-life" style="width :<?php echo barChartValue($cluster[4][2]->counter, $cluster[4]['total']); ?>%">&nbsp;</div><div class="barpiece-label dead"><?php echo barChartValue($cluster[4][2]->counter, $cluster[4]['total']) + 15; ?>%</div>
                     </div>
                     
                     
