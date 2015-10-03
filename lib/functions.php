@@ -195,3 +195,14 @@
         echo '<div class="'.$repClass.'">' . $text . '</div>';
     }
     
+    /**
+     * Avoid warnings if bars are not set at all
+     * */
+    function barChartValue($portion, $total){
+        if((int)$portion > 0){
+            return round((($portion / $total) * 100) , 2);
+        }else {
+            return 0;
+        }
+    }
+    
