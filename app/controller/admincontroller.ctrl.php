@@ -194,7 +194,7 @@
             }
             
             $this->set('mostleast', $mostleast);
-            
+            $this->set('top', $Device->findMostSeen(1, null, null)); 
         }
     
         
