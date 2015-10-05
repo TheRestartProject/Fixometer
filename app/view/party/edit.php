@@ -173,6 +173,7 @@
                                             <button type="button" class="btn btn-primary" onclick="codeAddress()"><i class="fa fa-map-marker"></i> geocode</button>
                                         </span>
                                     </div>
+                                    <p class="help-block">To share an exact location, please use a street address here and press "geocode". Afterwards, please change this line to a recognisable place name, as this will be used in the event title.</p>
                                 </div>
                                 
                                 
