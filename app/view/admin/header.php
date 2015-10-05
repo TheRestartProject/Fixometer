@@ -8,7 +8,7 @@
         </div>
         
         <div class="col-md-8">
-            <span class="">Welcome to the Fixometer, <strong><?php echo $user->name; ?></strong></span><br />
+            <span class="">Welcome, <strong><?php echo $user->name; ?></strong></span><br />
             
             <?php if ($showbadges) { ?> 
                 <span class="">There are <a class="label label-warning" href=""><?php echo $showbadges; ?></a> guesstimated devices.</span>

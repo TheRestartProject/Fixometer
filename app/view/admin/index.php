@@ -109,7 +109,7 @@
                 </div>
                 <div class="media-body">
                     <div class="body">
-                        <time datetime="<?php echo dbDate($party->event_date); ?>"><?php echo dateFormatNoTime($party->event_date) . ' ' . $party->start; ?></time>
+                        <time datetime="<?php echo dbDate($party->event_date); ?>"><?php echo strftime('%a, %d %b %Y %H:%M',  $party->event_timestamp); ?></time>
                         <span clasS="location"><?php echo $party->location; ?></span>      
                     </div>
                     <div class="links">
