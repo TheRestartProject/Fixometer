@@ -429,7 +429,7 @@
                         $consume_class = 'car';
                         $consume_image = 'Counters_C2_Driving.svg';
                         $consume_label = 'Equal to driving';
-                        $consume_eql_to = 0.12 * $sum;
+                        $consume_eql_to = (1 / 0.12) * $sum;
                         $consume_eql_to = number_format(round($consume_eql_to), 0, '.', ',') . '<small>km</small>';
                         
                         $manufacture_eql_to = round($sum / 6000);
@@ -441,7 +441,7 @@
                         $consume_class = 'tv';
                         $consume_image = 'Counters_C1_TV.svg';
                         $consume_label = 'Like watching TV for';
-                        $consume_eql_to = 0.024 * $sum;
+                        $consume_eql_to = (1 / 0.024) * $sum;
                         $consume_eql_to = number_format(round($consume_eql_to), 0, '.', ',') . '<small>hours</small>';
                         
                         $manufacture_eql_to = round($sum / 100);

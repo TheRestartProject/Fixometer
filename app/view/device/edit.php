@@ -21,7 +21,7 @@
                                     <select id="event" name="event"  class="form-control selectpicker" data-live-search="true">
                                         <option></option>
                                         <?php foreach($events as $event){ ?>
-                                        <option value="<?php echo $event->id; ?>"<?php echo ($event->id == $formdata->event ? ' selected' : ''); ?>><?php echo $event->location . ' [' . date('d/m/Y', $event->event_date) . ']'; ?></option>
+                                        <option value="<?php echo $event->id; ?>"<?php echo ($event->id == $formdata->event ? ' selected' : ''); ?>><?php echo $event->location . ' [' . date('d/m/Y', $event->event_timestamp) . ']'; ?></option>
                                         <?php } ?>
                                     </select>
                                     <?php if(isset($error) && isset($error['event']) && !empty($error['event'])) { echo '<span class="help-block text-danger">' . $error['event'] . '</span>'; } ?>
