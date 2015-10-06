@@ -378,7 +378,7 @@
                         $consume_class = 'car';
                         $consume_image = 'Counters_C2_Driving.svg';
                         $consume_label = 'Equal to driving';
-                        $consume_eql_to = 0.12 * $co2Total;
+                        $consume_eql_to = (1 / 0.12) * $co2Total;
                         $consume_eql_to = number_format(round($consume_eql_to), 0, '.', ',') . '<small>km</small>';
                         
                         $manufacture_eql_to = round($co2Total / 6000);
@@ -390,7 +390,7 @@
                         $consume_class = 'tv';
                         $consume_image = 'Counters_C1_TV.svg';
                         $consume_label = 'Like watching TV for';
-                        $consume_eql_to = 0.024 * $co2Total;
+                        $consume_eql_to = (1 / 0.024) * $co2Total;
                         $consume_eql_to = number_format(round($consume_eql_to), 0, '.', ',') . '<small>hours</small>';
                         
                         $manufacture_eql_to = round($co2Total / 100);
