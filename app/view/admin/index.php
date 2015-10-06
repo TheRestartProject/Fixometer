@@ -390,8 +390,8 @@
                         $consume_class = 'tv';
                         $consume_image = 'Counters_C1_TV.svg';
                         $consume_label = 'Like watching TV for';
-                        $consume_eql_to = (1 / 0.024) * $co2Total;
-                        $consume_eql_to = number_format(round($consume_eql_to), 0, '.', ',') . '<small>hours</small>';
+                        $consume_eql_to = ((1 / 0.024) * $co2Total) / 24;
+                        $consume_eql_to = number_format(round($consume_eql_to), 0, '.', ',') . '<small>days</small>';
                         
                         $manufacture_eql_to = round($co2Total / 100);
                         $manufacture_img = 'Icons_03_Sofa.svg';
