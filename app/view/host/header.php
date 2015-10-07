@@ -11,7 +11,7 @@
         <div class="col-md-11 text-center">
             
             <span class="header-text">
-            Welcome to the Fixometer, <strong><?php echo $user->name; ?></strong>. 
+            Welcome, <strong><?php echo $user->name; ?></strong>. 
             
             <?php if ($showbadges) { ?> 
                 <span class="">You have <a class="label label-success" href="#upcomingparties"><?php echo count($upcomingparties); ?></a> upcoming <?php echo (count($upcomingparties) == 1 ? 'party' : 'parties'); ?>.
