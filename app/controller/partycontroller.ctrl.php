@@ -422,6 +422,9 @@
                                 /** WP Sync **/
                                 $party = $this->Party->findThis($idparty, true);
                                 
+                                
+                                // dbga($party); die();
+                                
                                 $Groups = new Group;
                                 $partygroup = $party->group;
                                 $Host = $Groups->findHost($party->group);
@@ -486,7 +489,16 @@
                                 
                                 $response['success'] = 'Party info updated!';
                                 
-                                header('Location: /host');
+                                /** If is Admin, redir to host + group id **/
+                                if(hasRole($this->user, 'Administrator')){
+                                    
+                                                                       
+                                    header('Location: /host/index/' . $partygroup);
+                                                                        
+                                }
+                                else { 
+                                    header('Location: /host');
+                                }
                             }
                             else {
                                 //echo "No.";
