@@ -18,13 +18,19 @@
             </div>
             
             <div class="col-md-2">
+                <div class="footer-logo">
                 <img src="/assets/images/wrap-logo.png" class="img-responsive" alt="WRAP (Logo)">
+                </div>
             </div>      
             <div class="col-md-2">
+                <div class="footer-logo">
                 <img src="/assets/images/engineroom.png" class="img-responsive" alt="the engine room (Logo)">
+                </div>
             </div>
             <div class="col-md-2">
+                <div class="footer-logo">
                 <img src="/assets/images/circular_ecology.png" class="img-responsive" alt="Circular Ecology (Logo)">
+                </div>
             </div>
             
         </div>

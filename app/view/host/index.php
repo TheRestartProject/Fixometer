@@ -355,7 +355,7 @@
         
             <section class="row" id="impact-header">
                 <div class="col-sm-12 text-center">
-                    <img src="/uploads/mid_<?php echo $group->path; ?>" class="img-circle impact-avatar" width="180" />
+                    <img src="/uploads/mid_<?php echo $group->path; ?>" class="img-circle impact-avatar" width="120" />
                     <h2><?php echo $group->name; ?></h2>
                     
                     <p class="big">                        
@@ -491,9 +491,9 @@
             </section>-->
             
             <!-- CO2 stats -->
-            <section class="row">
+            <section class="row parties">
             <div class="col-md-12">
-                <h3>Impact</h3>
+                 <h2><span class="title-text">Impact</span></h2>
             </div>
             
             <div class="col-md-6">
@@ -562,14 +562,13 @@
             
             </section>
             
-            <hr />
             
             
             <section class="row">
             <!-- Device count -->
             
             <div class="col-md-12">
-                <h3>Devices Restarted</h3>
+                <h2><span class="title-text">Devices Restarted</span></h2>
                 <div class="row">
                     <div class="col-md-4 count">
                         <div class="col">
@@ -613,7 +612,6 @@
                 </div>
             </div>        
             </section>    
-            <hr />    
             
             
             
@@ -621,12 +619,12 @@
             <!-- category details -->
             <section class="row">
             <div class="col-md-12">
-                <h3>Category Details</h3>
+                <h2><span class="title-text">Category Details</span></h2>
             </div>
             
             <div class="row">
                 <div class="col-md-2">&nbsp;</div>
-                <div class="col-md-4">
+                <div class="col-md-4 category-table">
                     <div class="col3">
                         <img src="/assets/icons/icon_fixed.png" title="fixed items" alt="Fixed Items icon">
                         <span class="subtext">fixed</span>
@@ -859,7 +857,7 @@
             <!--categories-->
             <section class="row">
             <div class="col-md-12">
-                <h3>Devices Restarted per Category</h3>            
+                <h2><span class="title-text">Devices Restarted per Category</span></h2>       
             </div>
             <?php
             //dbga($clusters);
