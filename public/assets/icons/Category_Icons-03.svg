@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="273px" height="273px" viewBox="0 0 273 273" enable-background="new 0 0 273 273" xml:space="preserve">
+<pattern  y="-293" width="183.277" height="183.277" patternUnits="userSpaceOnUse" id="New_Pattern_Swatch_2" viewBox="0 -183.277 183.277 183.277" overflow="visible">
+	<g>
+		<polygon fill="none" points="0,0 183.277,0 183.277,-183.277 0,-183.277 		"/>
+		<polygon fill="#0394A6" points="183.277,0 0,0 0,-183.277 183.277,-183.277 		"/>
+	</g>
+</pattern>
+<pattern  y="-293" width="183.277" height="183.277" patternUnits="userSpaceOnUse" id="New_Pattern_Swatch_3" viewBox="0 -183.277 183.277 183.277" overflow="visible">
+	<g>
+		<polygon fill="none" points="0,0 183.277,0 183.277,-183.277 0,-183.277 		"/>
+		<polygon fill="#F9A33F" points="183.277,0 0,0 0,-183.277 183.277,-183.277 		"/>
+	</g>
+</pattern>
+<g>
+	<path fill="url(#New_Pattern_Swatch_2)" d="M266.783,6.218v260.564H6.217V6.218H266.783 M273,0H0v273h273V0L273,0z"/>
+</g>
+<g>
+	<g>
+		<rect x="59.934" y="60.5" fill="#058FA1" width="152.566" height="86.743"/>
+		<rect x="69.628" y="64.582" fill="#FFFFFF" width="133.178" height="78.579"/>
+	</g>
+	<g>
+		<rect x="59.934" y="180.919" fill="#058FA1" width="152.566" height="32.147"/>
+		<g>
+			<rect x="66.057" y="186.022" fill="#FFFFFF" width="65.823" height="21.94"/>
+			<rect x="141.065" y="186.022" fill="#FFFFFF" width="66.333" height="21.94"/>
+		</g>
+		<g>
+			<rect x="70.649" y="195.718" fill="url(#New_Pattern_Swatch_3)" width="57.148" height="9.185"/>
+			<ellipse fill="#FFFFFF" cx="117.16" cy="200.711" rx="1.938" ry="1.977"/>
+			<ellipse fill="#FFFFFF" cx="124.285" cy="200.711" rx="1.188" ry="1.212"/>
+		</g>
+		<g>
+			<rect x="143.105" y="191.636" fill="url(#New_Pattern_Swatch_3)" width="62.252" height="13.267"/>
+			<rect x="160.964" y="193.677" fill="#FFFFFF" width="25.514" height="4.592"/>
+			
+				<line fill="none" stroke="#FFFFFF" stroke-width="1.0205" stroke-miterlimit="10" x1="147.188" y1="201.33" x2="202.295" y2="201.33"/>
+			<ellipse fill="#FFFFFF" cx="201.184" cy="195.973" rx="1.188" ry="1.211"/>
+		</g>
+	</g>
+	<rect x="19.624" y="91.114" fill="#058FA1" width="34.697" height="121.952"/>
+	<g>
+		<circle fill="none" stroke="#FFFFFF" stroke-width="0.6245" stroke-miterlimit="10" cx="36.802" cy="126.334" r="13.181"/>
+		<circle fill="#FFFFFF" cx="36.801" cy="126.334" r="9.897"/>
+		<path fill="url(#New_Pattern_Swatch_3)" d="M40.621,126.334c0,2.109-1.71,3.819-3.819,3.819s-3.819-1.71-3.819-3.819
+			c0-2.106,1.71-3.818,3.819-3.818S40.621,124.228,40.621,126.334z"/>
+	</g>
+	<g>
+		<circle fill="none" stroke="#FFFFFF" stroke-width="0.6245" stroke-miterlimit="10" cx="36.802" cy="160.617" r="13.181"/>
+		<circle fill="#FFFFFF" cx="36.801" cy="160.617" r="9.897"/>
+		<circle fill="url(#New_Pattern_Swatch_3)" cx="36.802" cy="160.617" r="3.819"/>
+	</g>
+	<rect x="218.113" y="91.114" fill="#058FA1" width="34.698" height="121.952"/>
+	<g>
+		<circle fill="none" stroke="#FFFFFF" stroke-width="0.6245" stroke-miterlimit="10" cx="235.229" cy="126.334" r="13.181"/>
+		<circle fill="#FFFFFF" cx="235.229" cy="126.334" r="9.896"/>
+		<path fill="url(#New_Pattern_Swatch_3)" d="M239.048,126.334c0,2.109-1.708,3.819-3.817,3.819c-2.11,0-3.818-1.71-3.818-3.819
+			c0-2.106,1.708-3.818,3.818-3.818C237.339,122.516,239.048,124.228,239.048,126.334z"/>
+	</g>
+	<g>
+		<circle fill="none" stroke="#FFFFFF" stroke-width="0.6245" stroke-miterlimit="10" cx="235.229" cy="160.617" r="13.181"/>
+		<circle fill="#FFFFFF" cx="235.229" cy="160.617" r="9.896"/>
+		<circle fill="url(#New_Pattern_Swatch_3)" cx="235.23" cy="160.617" r="3.818"/>
+	</g>
+</g>
+</svg>

@@ -642,7 +642,8 @@
             </div>
             <div class="row">
                 <div class="col-md-2  text-center">
-                    <i class="cluster big cluster-1"></i>                
+                    <img class="cluster img-responsive" src="/assets/icons/Category_Icons-01.svg">
+                    <!-- <i class="cluster big cluster-1"></i>                -->
                 </div>
                 <div class="col-md-4">
                     <div class="col3">
@@ -695,7 +696,8 @@
             
             <div class="row">
                 <div class="col-md-2  text-center">
-                    <i class="cluster big cluster-2"></i>
+                    <img class="cluster img-responsive" src="/assets/icons/Category_Icons-02.svg">
+                    <!-- <i class="cluster big cluster-2"></i>                -->
                     
                 </div>
                 <div class="col-md-4">
@@ -748,8 +750,8 @@
             
             <div class="row">
                 <div class="col-md-2  text-center">
-                    <i class="cluster big cluster-3"></i>
-                    
+                    <img class="cluster img-responsive" src="/assets/icons/Category_Icons-03.svg">
+                    <!-- <i class="cluster big cluster-3"></i>                -->
                 </div>
                 <div class="col-md-4">
                     <div class="col3">
@@ -799,8 +801,8 @@
             </div>
             <div class="row">
                 <div class="col-md-2 text-center">
-                    <i class="cluster big cluster-4"></i>
-                    
+                    <img class="cluster img-responsive" src="/assets/icons/Category_Icons-04.svg">
+                    <!-- <i class="cluster big cluster-4"></i>                -->
                 </div>
                 <div class="col-md-4">
                     <div class="col3">
@@ -867,7 +869,8 @@
             
                 <div class="row">
                     <div class="col-md-2">
-                        <span class="cluster big cluster-1"></span>
+                        <!-- <span class="cluster big cluster-1"></span> -->
+                        <img class="cluster img-responsive" src="/assets/icons/Category_Icons-01.svg">
                     </div>
                     <div class="col-md-4">
                         <div class="barpiece fixed" style="width :<?php echo barChartValue($cluster[1][0]->counter, $cluster[1]['total']); ?>%">&nbsp;</div><div class="barpiece-label fixed"><?php echo barChartValue($cluster[1][0]->counter, $cluster[1]['total']) + 15; ?>%</div>
@@ -877,7 +880,8 @@
                     
                 
                     <div class="col-md-2">
-                        <span class="cluster big cluster-2"></span>
+                        <!-- <span class="cluster big cluster-2"></span> -->
+                        <img class="cluster img-responsive" src="/assets/icons/Category_Icons-02.svg">
                     </div>
                     <div class="col-md-4">
                         <div class="barpiece fixed" style="width: <?php echo barChartValue($cluster[2][0]->counter, $cluster[2]['total']); ?>%">&nbsp;</div><div class="barpiece-label fixed"><?php echo barChartValue($cluster[2][0]->counter, $cluster[2]['total']) + 15; ?>%</div>
@@ -889,7 +893,8 @@
                           
                 <div class="row">
                     <div class="col-md-2">
-                        <span class="cluster big cluster-3"></span>
+                        <!-- <span class="cluster big cluster-3"></span> -->
+                        <img class="cluster img-responsive" src="/assets/icons/Category_Icons-03.svg">
                     </div>
                     <div class="col-md-4">
                         <div class="barpiece fixed" style="width :<?php echo barChartValue($cluster[3][0]->counter, $cluster[3]['total']); ?>%">&nbsp;</div><div class="barpiece-label fixed"><?php echo barChartValue($cluster[3][0]->counter, $cluster[3]['total']) + 15; ?>%</div>
@@ -899,7 +904,8 @@
                     
                
                     <div class="col-md-2">
-                        <span class="cluster big cluster-4"></span>
+                        <!-- <span class="cluster big cluster-4"></span> -->
+                        <img class="cluster img-responsive" src="/assets/icons/Category_Icons-04.svg">
                     </div>
                     <div class="col-md-4">
                         <div class="barpiece fixed" style="width : <?php echo barChartValue($cluster[4][0]->counter, $cluster[4]['total']); ?>%">&nbsp;</div><div class="barpiece-label fixed"><?php echo barChartValue($cluster[4][0]->counter, $cluster[4]['total']) + 15; ?>%</div>
