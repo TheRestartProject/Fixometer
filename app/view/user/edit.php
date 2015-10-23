@@ -30,7 +30,23 @@
                                     <input type="email" name="email" id="email" class="form-control" value="<?php echo $data->email; ?>">
                                     <?php if(isset($error) && isset($error['email']) && !empty($error['email'])) { echo '<span class="help-block text-danger">' . $error['email'] . '</span>'; } ?>
                                 </div>
-                        
+                                
+                                
+                                <div class="form-group <?php if(isset($error) && isset($error['password']) && !empty($error['password'])) { echo "has-error"; } ?>">
+                                    <label for="new-password">New Password:</label>
+                                    <input type="password" name="new-password" id="new-password" class="form-control">
+                                    
+                                    <label for="password-confirm">Confirm New Password:</label>
+                                    <input type="password" name="password-confirm" id="password-confirm" class="form-control"">
+                                    
+                                    
+                                    <?php if(isset($error) && isset($error['password']) && !empty($error['password'])) { echo '<span class="help-block text-danger">' . $error['password'] . '</span>'; } ?>
+                                </div>
+                
+                                <div class="form-group <?php if(isset($error) && isset($error['email']) && !empty($error['email'])) { echo "has-error"; } ?>">
+                                    
+                                    <?php if(isset($error) && isset($error['email']) && !empty($error['email'])) { echo '<span class="help-block text-danger">' . $error['email'] . '</span>'; } ?>
+                                </div>
                                 
                                 <?php if(hasRole($user, 'Administrator')){ ?>
                                 <div class="form-group <?php if(isset($error) && isset($error['role']) && !empty($error['role'])) { echo "has-error"; } ?>">

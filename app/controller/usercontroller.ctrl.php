@@ -270,35 +270,56 @@
                         $id = $_POST['id'];
                         
                         $sent_groups = $data['groups'];
+                        
+                        
+                        $error = false;
+                        if(!empty($data['new-password'])){
+                            if($data['new-password'] !== $data['password-confirm']){
+                                $error['password'] = 'The passwords are not identical!';   
+                            }
+                            else {
+                                $data['password'] = crypt($data['new-password'], '$1$'.SECRET);
+                                unset($data['new-password']);
+                                unset($data['password-confirm']);
+                            }
+                        }
+                        
                         unset($data['groups']);
                         unset($data['profile']);
                         unset($data['id']);
                         
-                        $u = $this->User->update($data, $id);
                         
-                        $ug = new Usersgroups;
-                        $ug->createUsersGroups($id, $sent_groups);
-                        
-                        
-                        
-                        if(isset($_FILES) && !empty($_FILES)){
-                            $file = new File;
-                            $file->upload('profile', 'image', $id, TBL_USERS, false, true);    
-                        }
+                        if(!is_array($error)){ 
+                            $u = $this->User->update($data, $id);
+                            
+                            $ug = new Usersgroups;
+                            $ug->createUsersGroups($id, $sent_groups);
+                            
+                            
+                            
+                            if(isset($_FILES) && !empty($_FILES)){
+                                $file = new File;
+                                $file->upload('profile', 'image', $id, TBL_USERS, false, true);    
+                            }
+                                    
+                            if(!$u) {
+                                $response['danger'] = 'Something went wrong. Please check the data and try again.';
+                            }
+                            else {
+                                $response['success'] = 'User updated!';
+                                if(hasRole($user, 'Host')){
+                                    header('Location: /host?action=ue&code=200');
+                                }
                                 
-                        if(!$u) {
-                            $response['danger'] = 'Something went wrong. Please check the data and try again.';
+                                
+                            }
+                            $this->set('response', $response);    
                         }
                         else {
-                            $response['success'] = 'User updated!';
-                            if(hasRole($user, 'Host')){
-                                header('Location: /host?action=ue&code=200');
-                            }
-                            
-                            
+                            $this->set('error', $error);
                         }
                         
-                        $this->set('response', $response);
+                        
                     }
                     
                     $Roles = new Role;
