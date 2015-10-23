@@ -120,6 +120,9 @@
                                 <div class="footprint">
                                     <?php echo $party->co2; ?>
                                     <span class="subtext">kg of CO<sub>2</sub></span>
+                                    <br />
+                                    <?php echo $party->ewaste; ?>
+                                    <span class="subtext">kg of waste<span>
                                 </div>
                             </div>
                             

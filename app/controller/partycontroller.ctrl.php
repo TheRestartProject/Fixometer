@@ -516,6 +516,7 @@
                 
                 
                 $party->co2 = 0;
+                $party->ewaste = 0; 
                 $party->fixed_devices = 0;
                 $party->repairable_devices = 0;
                 $party->dead_devices = 0;
@@ -526,6 +527,7 @@
                         
                         if($device->repair_status == DEVICE_FIXED){
                             $party->co2 += $device->footprint;
+                            $party->ewaste += $device->weight;
                         }
                         
                         switch($device->repair_status){
