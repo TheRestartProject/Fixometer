@@ -15,7 +15,7 @@
             <?php  } ?>
         </div>
         
-        <div class="col-md-1 col-md-offset-2">
+        <div class="col-md-1 col-md-offset-1">
             
             <div class="dropdown">
                 <button class="btn btn-default dropdown-toggle" type="button" id="profileDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -35,6 +35,11 @@
             </div>
             
             
+        </div>
+        <div class="col-md-1">
+            <a class="btn btn-link pull-right" href="http://therestartproject.org/welcome-to-our-community-space/" target="_blank">
+                <i class="fa fa-question-circle fa-2x fa-fw"></i>
+            </a>
         </div>
     </div>
     

@@ -8,7 +8,7 @@
             </a>
         </div>
         
-        <div class="col-md-11 text-center">
+        <div class="col-md-9 text-center">
             
             <span class="header-text">
             Welcome, <strong><?php echo $user->name; ?></strong>. 
@@ -20,7 +20,8 @@
                 <?php } ?>
             <?php  } ?>
             </span>
-            
+        </div>
+        <div class="col-md-1">
             <div class="dropdown pull-right profile-button">
                 <button class="btn btn-default dropdown-toggle" type="button" id="profileDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                     <?php if(empty($profile->path)){ ?>
@@ -39,33 +40,12 @@
                 
             </div>
         </div>
-        <!-- 
-        <div class="col-md-1 col-md-offset-2">
-            
-            
-            
-            
+        <div class="col-md-1">
+            <a class="btn btn-link pull-right" href="http://therestartproject.org/welcome-to-our-community-space/" target="_blank">
+                <i class="fa fa-question-circle fa-2x fa-fw"></i>
+            </a>
         </div>
-        -->
+        
     </div>
     
 </div>
-
-<?php /*
-       *  <div class="col-md-6">
-            <strong>My Profile</strong> <a href="/user/edit/<?php echo $profile->idusers; ?>" class="small"><i class="fa fa-edit"></i> Edit Profile...</a>
-            <div class="media">
-                <div class="media-left">
-                    <?php if(empty($profile->path)){ ?>
-                    <img src="http://www.lorempixum.com/80/80/people" alt="<?php echo $profile->name; ?> Image" class="profile-pic" />
-                    <?php } else { ?>
-                    <img src="/uploads/<?php echo $profile->path; ?>" width="80" height="80" alt="<?php echo $profile->name; ?> Image" class="profile-pic" />
-                    <?php } ?>
-                </div>
-                <div class="media-body">
-                    <h3 class="media-heading"><?php echo $profile->name; ?></h3>
-                </div>
-            </div>
-        </div>
-        */
-?>

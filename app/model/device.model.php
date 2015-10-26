@@ -305,5 +305,26 @@
             $r = $stmt->fetch(PDO::FETCH_OBJ);
             return $r->guesstimates;
         }
-        
+     
+        public function export() {
+            $sql = 'SELECT 
+                        `c`.`name` AS `category`, 
+                        `problem`, 
+                        `repair_status`, 
+                        `spare_parts`, 
+                        `e`.`location`, 
+                        UNIX_TIMESTAMP( CONCAT(`e`.`event_date`, " ", `e`.`start`) ) AS `event_timestamp`, 
+                        `g`.`name` AS `group_name`
+                    
+                    FROM `devices` AS `d` 
+                    INNER JOIN `categories` AS `c` ON `c`.`idcategories` = `d`.`category`  
+                    INNER JOIN `events` AS `e` ON `e`.`idevents` = `d`.`event`
+                    INNER JOIN `groups` AS `g` ON `g`.`idgroups` = `e`.`group`';
+                    
+            $stmt = $this->database->prepare($sql);
+            $q = $stmt->execute();
+            $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            
+            return $r;
+        }   
     }

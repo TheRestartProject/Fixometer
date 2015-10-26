@@ -30,7 +30,7 @@
         /** Display Template **/
         function render() {
             extract($this->variables);
-            if(!in_array($this->_action, $this->exclude) && $this->_controller !== 'rss'){
+            if(!in_array($this->_action, $this->exclude) && !in_array($this->_controller, array('rss', 'export'))){
                 /* Include Base Head @ view/head.php */
                 include (ROOT . DS . 'app' . DS . 'view' . DS . 'head.php');
                 
@@ -58,7 +58,15 @@
                 /** Manage RSS Feeds (used for public site widgets/WordPress Implementations) **/
                 include (ROOT . DS . 'app' . DS . 'view' . DS . 'feeds' . DS . $this->_action . '.php');		 
             }
-            
+            elseif($this->_controller == 'export'){
+                /** set headers for data exports **/
+                $filename = 'restartproject_devices_' . date('d-m-Y', time()) . '.csv';
+                header('Content-Type: application/csv;charset=UTF-8');
+                header('Content-Disposition: attachment; filename="'.$filename.'";');
+                
+                include (ROOT . DS . 'app' . DS . 'view' . DS . 'export' . DS . $this->_action . '.php');	
+                
+            }
             elseif($this->_action == 'stats'){
                 /** Manage Stat Pages for iframe embedding in third party sites **/
                 include (ROOT . DS . 'app' . DS . 'view' . DS . 'head.php');
