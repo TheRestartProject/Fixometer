@@ -24,6 +24,9 @@
                     case 3:
                         $data[$i]['repair_status'] = 'End of life';
                         break;
+                    default:
+                        $data[$i]['repair_status'] = 'Unknown';
+                        break;
                 }
                 
                 /** Spare parts parser **/
@@ -32,6 +35,9 @@
                 /** clean up linebreaks and commas **/
                 $data[$i]['problem'] = '"' . preg_replace( "/\r|\n/", "", $d['problem']) . '"' ;
                 $data[$i]['location'] = '"' . preg_replace( "/\r|\n/", "", $d['location']) . '"' ;
+                
+                /** empty group ? **/
+                $data[$i]['group_name'] = (empty($d['group_name']) ? 'Uknown' : $d['group_name']);
                 
             }
             $header = array(
