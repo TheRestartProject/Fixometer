@@ -33,9 +33,9 @@
                 $data[$i]['spare_parts'] = ($d['spare_parts'] == 1 ? 'Yes' : 'No');
                 
                 /** clean up linebreaks and commas **/
-                $data[$i]['problem'] = '"' . preg_replace( "/\r|\n/", "", $d['problem']) . '"' ;
-                $data[$i]['location'] = '"' . preg_replace( "/\r|\n/", "", $d['location']) . '"' ;
-                
+                $data[$i]['problem'] = '"' . preg_replace( "/\r|\n/", "", str_replace('"', " ",  utf8_encode($d['problem']))) . '"' ;
+                $data[$i]['location'] = '"' . preg_replace( "/\r|\n/", "", utf8_encode($d['location'])) . '"' ;
+                $data[$i]['category'] = utf8_encode($d['category']);
                 /** empty group ? **/
                 $data[$i]['group_name'] = (empty($d['group_name']) ? 'Uknown' : $d['group_name']);
                 
