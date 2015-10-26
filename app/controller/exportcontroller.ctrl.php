@@ -31,6 +31,7 @@
                 
                 /** clean up linebreaks and commas **/
                 $data[$i]['problem'] = '"' . preg_replace( "/\r|\n/", "", $d['problem']) . '"' ;
+                $data[$i]['location'] = '"' . preg_replace( "/\r|\n/", "", $d['problem']) . '"' ;
                 
             }
             $header = array(
