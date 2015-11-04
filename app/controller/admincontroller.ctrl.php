@@ -23,13 +23,14 @@
         }
         
         
-        public function stats(){
+        public function stats($section = 1){
             //Object Instances
             $Group = new Group;
             $User = new User;
             $Party = new Party;
             $Device = new Device;
             
+            $this->set('section', $section);
             
             $this->set('grouplist', $Group->findList());
             
