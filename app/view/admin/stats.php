@@ -1,4 +1,4 @@
-            <div class="container-fluid">
+            <div class="container-fluid" id="public-dataviz-stats">
                 <?php if($section == 1){ ?> 
                 <section class="row" id="impact-header">
                     <div class="col-sm-12 text-center">
@@ -93,16 +93,23 @@
                         </div>
                     
                         <div class="di_manufacture">
+                            <div class="row">
                             <div class="col-md-12 text-center"><div class="lightblue"><?php echo $manufacture_label; ?></div></div>
+                            </div>
+                            <div class="row">
                             <?php for($i = 1; $i<= $manufacture_eql_to; $i++){ ?>
-                                <div class="col-md-3 text-center">
+                                <div class="col-xs-4 col-sm-4 col-md-3 text-center">
                                     <img src="/assets/icons/<?php echo $manufacture_img; ?>" class="img-responsive">
                                 </div>
                             <?php } ?>
-                            <div class="col-md-12 text-center">
-                                <div class="legend">1 <img src="/assets/icons/<?php echo $manufacture_img; ?>"> = <?php echo $manufacture_legend; ?> (approximately)</div>
-                                
-                            </div>
+                           </div>
+                            <div class="row">
+                                <div class="col-md-12 text-center clearfix">
+                                    <br /><br /><br />
+                                    <div class="legend">1 <img src="/assets/icons/<?php echo $manufacture_img; ?>"> = <?php echo $manufacture_legend; ?> (approximately)</div>
+                                    
+                                </div>
+                            </div>    
                         </div>
                         
                         
