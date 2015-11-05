@@ -38,9 +38,9 @@
                         <h2><span class="title-text">Most Repaired Devices</span></h2>
                         
                         <div class="row">
-                            <div class="divi3 col-sm-4 col-md-4"><div class="topper  text-center"><?php echo $top[0]->name . ' [' . $top[0]->counter . ']'; ?></div></div>
-                            <div class="divi3 col-sm-4 col-md-4"><div class="topper  text-center"><?php echo $top[1]->name . ' [' . $top[1]->counter . ']'; ?></div></div>
-                            <div class="divi3 col-sm-4 col-md-4"><div class="topper  text-center"><?php echo $top[2]->name . ' [' . $top[2]->counter . ']'; ?></div></div>
+                            <div class="col-xs-4 col-sm-4 col-md-4"><div class="topper  text-center"><?php echo $top[0]->name . ' [' . $top[0]->counter . ']'; ?></div></div>
+                            <div class="col-xs-4 col-sm-4 col-md-4"><div class="topper  text-center"><?php echo $top[1]->name . ' [' . $top[1]->counter . ']'; ?></div></div>
+                            <div class="col-xs-4 col-sm-4 col-md-4"><div class="topper  text-center"><?php echo $top[2]->name . ' [' . $top[2]->counter . ']'; ?></div></div>
                         </div>
                     </div>
                     
