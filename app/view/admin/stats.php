@@ -1,4 +1,4 @@
-            <div class="container-fluid" id="public-dataviz-stats">
+            <div class="container" id="public-dataviz-stats">
                 <?php if($section == 1){ ?> 
                 <section class="row" id="impact-header">
                     <div class="col-sm-12 text-center">
