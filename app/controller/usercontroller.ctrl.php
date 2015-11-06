@@ -17,7 +17,7 @@
                     header('Location: /host');
                 }
                 else {
-                    header('Location: /dashboard');    
+                    header('Location: /user/forbidden');    
                 }
         
             }
@@ -99,7 +99,7 @@
                                     header('Location: /host');
                                 }
                                 else {
-                                    header('Location: /dashboard');    
+                                    header('Location: /user/forbidden');    
                                 }
                                 
                             }
