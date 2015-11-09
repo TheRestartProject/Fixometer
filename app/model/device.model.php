@@ -17,13 +17,23 @@
         }
         
         public function getWeights($group = null){            
+            /*
             $sql = 'SELECT
-                        ROUND(SUM(`weight`), 3) + 393 AS `total_weights`,
-                        (ROUND((SUM(`footprint`) + 16000.15), 3) * ' . $this->displacement . ')  AS `total_footprints`
+                        ROUND(SUM(`weight`), 0) AS `total_weights`,
+                        ROUND(SUM(`footprint`) * ' . $this->displacement . ', 0)  AS `total_footprints`,
+                        ROUND(SUM(`estimate`) * (SELECT * FROM view_weight_emission_ratio), 0) AS `estimate_emissions`
                     FROM `'.$this->table.'` AS `d` 
                     INNER JOIN `categories` AS `c` ON  `d`.`category` = `c`.`idcategories`
                     INNER JOIN `events` AS `e` ON  `d`.`event` = `e`.`idevents` 
                     WHERE `d`.`repair_status` = 1';
+            */
+            $sql = 'SELECT
+                    ROUND(SUM(`weight`), 0) AS `total_weights`,
+                    ROUND(SUM(`footprint`) * ' . $this->displacement . ', 0) + (ROUND(SUM(`estimate`) * (SELECT * FROM `view_waste_emission_ratio`), 0))  AS `total_footprints`
+                FROM `'.$this->table.'` AS `d` 
+                INNER JOIN `categories` AS `c` ON  `d`.`category` = `c`.`idcategories`
+                INNER JOIN `events` AS `e` ON  `d`.`event` = `e`.`idevents` 
+                WHERE `d`.`repair_status` = 1';
                     
             if(!is_null($group) && is_numeric($group)){
                 $sql .= ' AND `e`.`group` = :group';     
@@ -32,6 +42,8 @@
             if(!is_null($group) && is_numeric($group)){
                 $stmt->bindParam(':group', $group, PDO::PARAM_INT);
             }
+            
+            
             
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_OBJ);

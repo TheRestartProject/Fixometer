@@ -2,6 +2,9 @@
 
     class AdminController extends Controller {
         
+        public $TotalWeight;
+        public $TotalEmission;
+        public $EmissionRatio;
         
         public function __construct($model, $controller, $action){
             parent::__construct($model, $controller, $action);
@@ -18,6 +21,16 @@
                 
                 if(!hasRole($this->user, 'Administrator') &&  $action != 'stats') {
                     header('Location: /user/forbidden');
+                }
+                
+                else {
+                    $Device = new Device;
+                    $weights = $Device->getWeights();
+                    
+                    $this->TotalWeight = $weights[0]->total_weights;
+                    $this->TotalEmission = $weights[0]->total_footprints;
+                    $this->EmissionRatio = $this->TotalEmission / $this->TotalWeight;
+                    
                 }
             }
         }
@@ -79,8 +92,9 @@
             $this->set('pax', $participants);
             $this->set('hours', $hours_volunteered);
             
-            $weights = $Device->getWeights();
             $devices = $Device->ofAllGroups();
+            
+            
             
             $this->set('showbadges', $Device->guesstimates());
             
@@ -92,7 +106,7 @@
             $this->set('allparties', $allparties);
             
             $this->set('devices', $devices); 
-            $this->set('weights', $weights);
+            $this->set('weights', array(0 => array('total_footprints' => $this->TotalEmission, 'total_weights' => $this->TotalWeight)));
             
             $this->set('device_count_status', $Device->statusCount());            
             
