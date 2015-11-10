@@ -245,7 +245,7 @@
                 
                 foreach($party->devices as $device){
                     
-                    $party->co2 += $device->footprint;
+                    $party->co2 += (!empty($device->estimate) ? ($device->estimate * $this->EmissionRatio) : $device->footprint);
                     
                     switch($device->repair_status){
                         case 1:

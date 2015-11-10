@@ -3,6 +3,9 @@
     class PartyController extends Controller {
         
         protected $hostParties = array();
+        public $TotalWeight;
+        public $TotalEmission;
+        public $EmissionRatio;
         
         public function __construct($model, $controller, $action){
             parent::__construct($model, $controller, $action);
@@ -29,6 +32,13 @@
                     }
                     $User = new User;
                     $this->set('profile', $User->profilePage($this->user->id));
+                    
+                    $Device = new Device;
+                    $weights = $Device->getWeights();
+                    
+                    $this->TotalWeight = $weights[0]->total_weights;
+                    $this->TotalEmission = $weights[0]->total_footprints;
+                    $this->EmissionRatio = $this->TotalEmission / $this->TotalWeight;
                 }
             }
         }
@@ -527,8 +537,8 @@
                     foreach($party->devices as $device){
                         
                         if($device->repair_status == DEVICE_FIXED){
-                            $party->co2 += $device->footprint;
-                            $party->ewaste += $device->weight;
+                            $party->co2 += (!empty($device->estimate) ? ($device->estimate * $this->EmissionRatio) : $device->footprint);
+                            $party->ewaste += (!empty($device->estimate) ? $device->estimate : $device->weight);
                         }
                         
                         switch($device->repair_status){
