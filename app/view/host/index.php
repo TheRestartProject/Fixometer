@@ -104,26 +104,16 @@
                 
                 <div class="col">
                     <h5>waste prevented</h5>
-                    <?php
-                        $sum = 0;
-                        foreach($waste_year_data as $y){
-                            $sum += $y->waste;
-                        }
-                    ?>
+                    
                     <span class="largetext">
-                        <?php echo number_format(round($sum), 0, '.', ','); ?> kg 
+                        <?php echo $weights[0]->total_weights; ?> kg 
                     </span>
                 </div>
                 
                 <div class="col">
                     <h5>CO<sub>2</sub> emission prevented</h5>
-                    <?php
-                        $sum = 0;
-                        foreach($year_data as $y){
-                            $sum += $y->co2;
-                        }
-                    ?>
-                    <span class="largetext"><?php echo number_format(round($sum), 0, '.', ','); ?> kg</span>
+                    
+                    <span class="largetext"><?php echo $weights[0]->total_footprints; ?> kg</span>
                 </div>
                 
             </div>
@@ -408,7 +398,7 @@
                             $sum += $y->waste;
                         }
                     ?>
-                    <span class="datalabel">Total waste prevented: </span><span class="blue">  <?php echo number_format(round($sum), 0, '.', ','); ?> kg </span>
+                    <span class="datalabel">Total waste prevented: </span><span class="blue">  <?php echo $weights[0]->total_weights; ?> kg </span>
                     
                 </div>
                 <div class="col-md-12 text-center texter">
@@ -419,7 +409,7 @@
                         }
                         //$di_co2 = number_format(round($sum), 0, '.', ',');
                     ?>
-                    <span class="datalabel">Total CO<sub>2</sub> emission prevented: </span><span class="blue"><?php echo number_format(round($sum), 0, '.', ','); ?> kg</span>
+                    <span class="datalabel">Total CO<sub>2</sub> emission prevented: </span><span class="blue"><?php echo $weights[0]->total_footprints; ?> kg</span>
                     
                 </div>
                 <div class="col-md-12">
@@ -429,10 +419,10 @@
                         $consume_class = 'car';
                         $consume_image = 'Counters_C2_Driving.svg';
                         $consume_label = 'Equal to driving';
-                        $consume_eql_to = (1 / 0.12) * $sum;
+                        $consume_eql_to = (1 / 0.12) * $weights[0]->total_footprints;
                         $consume_eql_to = number_format(round($consume_eql_to), 0, '.', ',') . '<small>km</small>';
                         
-                        $manufacture_eql_to = round($sum / 6000);
+                        $manufacture_eql_to = round($weights[0]->total_footprints / 6000);
                         $manufacture_img = 'Icons_04_Assembly_Line.svg';
                         $manufacture_label = 'or like the manufacture of <span class="dark">' . $manufacture_eql_to . '</span> cars';
                         $manufacture_legend = ' 6000kg of CO<sub>2</sub>';
@@ -441,10 +431,10 @@
                         $consume_class = 'tv';
                         $consume_image = 'Counters_C1_TV.svg';
                         $consume_label = 'Like watching TV for';
-                        $consume_eql_to = ((1 / 0.024) * $sum ) / 24;
+                        $consume_eql_to = ((1 / 0.024) * $weights[0]->total_footprints ) / 24;
                         $consume_eql_to = number_format(round($consume_eql_to), 0, '.', ',') . '<small>days</small>';
                         
-                        $manufacture_eql_to = round($sum / 100);
+                        $manufacture_eql_to = round($weights[0]->total_footprints / 100);
                         $manufacture_img = 'Icons_03_Sofa.svg';
                         $manufacture_label = 'or like the manufacture of <span class="dark">' . $manufacture_eql_to . '</span> sofas';
                         $manufacture_legend = ' 100kg of CO<sub>2</sub>';

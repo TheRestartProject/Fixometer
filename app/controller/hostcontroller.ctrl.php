@@ -125,8 +125,9 @@
             }
             $this->set('pax', $participants);
             $this->set('hours', $hours_volunteered);
-            
             $weights = $Device->getWeights($group->idgroups);
+            $this->set('weights', $weights);
+            
             $devices = $Device->ofThisGroup($group->idgroups);
             
             foreach($devices as $i => $device){
@@ -142,7 +143,7 @@
             $this->set('allparties', $allparties);
             
             $this->set('devices', $Device->ofThisGroup($group->idgroups)); 
-            $this->set('weights', $weights);
+            
             
             $this->set('device_count_status', $Device->statusCount());            
             $this->set('group_device_count_status', $Device->statusCount($group->idgroups));
