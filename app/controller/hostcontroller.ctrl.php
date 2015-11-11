@@ -160,6 +160,9 @@
             $this->set('bar_chart_stats', array_reverse($stats, true));
             
             $waste_years = $Device->countWasteByYear($group->idgroups);
+            
+            //dbga($waste_years);
+            
             $this->set('waste_year_data', $waste_years);
             $wstats = array();
             foreach($waste_years as $year){
@@ -168,15 +171,15 @@
             $this->set('waste_bar_chart_stats', array_reverse($wstats, true));
             
             
-            $co2Total = $Device->getWeights();
+            // $co2Total = $Device->getWeights();
             $co2ThisYear = $Device->countCO2ByYear(null, date('Y', time()));
             
-            $this->set('co2Total', $co2Total[0]->total_footprints);
+            $this->set('co2Total', $this->TotalEmission);
             $this->set('co2ThisYear', $co2ThisYear[0]->co2);
             
             $wasteThisYear = $Device->countWasteByYear(null, date('Y', time()));
             
-            $this->set('wasteTotal', $co2Total[0]->total_weights);
+            $this->set('wasteTotal', $this->TotalWeight);
             $this->set('wasteThisYear', $wasteThisYear[0]->waste);
             
             

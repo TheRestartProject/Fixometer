@@ -488,16 +488,11 @@
             
             <div class="col-md-6">
                 <h5 class="text-center">e-Waste Prevented to date</h5> 
-                <?php
-                    $sum = 0;
-                    foreach($waste_year_data as $y){
-                        $sum += $y->waste;
-                    }
-                ?>
+               
                 <span class="largetext">
-                    <?php echo number_format(round($sum), 0, '.', ','); ?> kg 
+                    <?php echo $weights[0]->total_weights; ?> kg 
                 </span>
-                <span class="subtext text-center">Total: <?php echo number_format(round($wasteTotal), 0, '.', ','); ?></span>
+                <span class="subtext text-center">Total: <?php echo number_format(round($wasteTotal), 0, '.', ','); ?> kg</span>
                 <hr />
                 
                 <h5 class="text-center">e-Waste prevented this year</h5> 
@@ -509,7 +504,7 @@
                 <span class="largetext">
                     <?php echo number_format(round($y->waste), 0, '.', ','); ?> kg 
                 </span>
-                <span class="subtext text-center">Total: <?php echo number_format(round($wasteThisYear), 0, '.', ','); ?></span>
+                <span class="subtext text-center">Total: <?php echo number_format(round($wasteThisYear), 0, '.', ','); ?> kg</span>
                 <?php 
                         }
                     }
@@ -528,7 +523,7 @@
                 <span class="largetext">
                     <?php echo number_format(round($sum), 0, '.', ','); ?> kg of CO<sub>2</sub> 
                 </span>
-                <span class="subtext text-center">Total: <?php echo number_format(round($co2Total), 0, '.', ','); ?></span>
+                <span class="subtext text-center">Total: <?php echo number_format(round($co2Total), 0, '.', ','); ?> kg of CO<sub>2</sub></span>
                 
                 <hr />
                 
@@ -541,7 +536,7 @@
                 <span class="largetext">
                     <?php echo number_format(round($y->co2), 0, '.', ','); ?> kg of CO<sub>2</sub> 
                 </span>
-                <span class="subtext text-center">Total: <?php echo number_format(round($co2ThisYear), 0, '.', ','); ?></span>
+                <span class="subtext text-center">Total: <?php echo number_format(round($co2ThisYear), 0, '.', ','); ?> kg of CO<sub>2</sub></span>
                 <?php 
                         }
                     }

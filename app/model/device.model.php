@@ -39,7 +39,6 @@
                 $sql .= ' AND `e`.`group` = :group';     
             }
             
-            //echo $sql; 
             $stmt = $this->database->prepare($sql);
             if(!is_null($group) && is_numeric($group)){
                 $stmt->bindParam(':group', $group, PDO::PARAM_INT);
@@ -195,7 +194,7 @@
         
         public function countCO2ByYear($group = null, $year = null) {
             $sql = 'SELECT
-                        (ROUND(SUM(`c`.`footprint`), 0) * ' . $this->displacement . ') AS `co2`,
+                        (ROUND(SUM(`c`.`footprint`), 0) * ' . $this->displacement . ') + (IFNULL(ROUND(SUM(`estimate`) * (SELECT * FROM `view_waste_emission_ratio`), 0),0)) AS `co2`,
                         YEAR(`e`.`event_date`) AS `year`
                     FROM `' . $this->table . '` AS `d` 
                     INNER JOIN `events` AS `e`
@@ -212,6 +211,7 @@
             }
             $sql.= ' GROUP BY `year` 
                     ORDER BY `year` DESC';
+            //echo $sql;
             $stmt = $this->database->prepare($sql);
             
             if(!is_null($group) && is_numeric($group)){
@@ -232,7 +232,7 @@
         
         public function countWasteByYear($group = null, $year = null) {
             $sql = 'SELECT
-                        (ROUND(SUM(`c`.`weight`), 3)) AS `waste`,
+                        ROUND(SUM(`c`.`weight`), 0) + IFNULL( ROUND(SUM(`d`.`estimate`), 0), 0) AS `waste`,
                         YEAR(`e`.`event_date`) AS `year`
                     FROM `' . $this->table . '` AS `d` 
                     INNER JOIN `events` AS `e`
@@ -250,7 +250,7 @@
             $sql.= ' GROUP BY `year` 
                     ORDER BY `year` DESC';
             $stmt = $this->database->prepare($sql);
-            
+            //echo $sql;
             if(!is_null($group) && is_numeric($group)){
                 $stmt->bindParam(':group', $group, PDO::PARAM_INT);
             }
