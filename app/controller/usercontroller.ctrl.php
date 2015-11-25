@@ -279,10 +279,12 @@
                             }
                             else {
                                 $data['password'] = crypt($data['new-password'], '$1$'.SECRET);
-                                unset($data['new-password']);
-                                unset($data['password-confirm']);
+                                
                             }
                         }
+                        
+                        unset($data['new-password']);
+                        unset($data['password-confirm']);
                         
                         unset($data['groups']);
                         unset($data['profile']);
