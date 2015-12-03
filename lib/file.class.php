@@ -96,7 +96,7 @@
                         $this->table = 'images';
                         
                         $image = $this->create($data);
-                        echo "REF: " . $reference. " - REF TYPE: ".$referenceType." - IMAGE: ".$image;
+                        //echo "REF: " . $reference. " - REF TYPE: ".$referenceType." - IMAGE: ".$image;
                         if(is_numeric($image) && !is_null($reference) && !is_null($referenceType)){
                             $xref = new Xref('object', $image, TBL_IMAGES, $reference, $referenceType);
                             
