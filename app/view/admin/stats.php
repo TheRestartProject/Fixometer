@@ -1,15 +1,19 @@
             <div class="container" id="public-dataviz-stats">
                 <?php if($section == 1){ ?> 
                 <section class="row" id="impact-header">
+                    <?php if($paragraph_only == 'yes'){ ?> </a> <?php } ?>
                     <div class="col-sm-12 text-center">
                                           
-                        <p class="big">                        
+                        <p class="big">
+                            <?php if($paragraph_only == 'yes'){ ?> <a href="https://therestartproject.org/impact"> <?php } ?>
                             <span class="big blue"><?php echo $pax; ?> participants</span> aided by <span class="big blue"><?php echo $hours; ?> hours of volunteered time</span> worked on <span class="big blue"><?php echo ($device_count_status[0]->counter + $device_count_status[1]->counter + $device_count_status[2]->counter) ?> devices.</span>
-                        </p> 
+                            <?php if($paragraph_only == 'yes'){ ?> </a> <?php } ?>
+                        </p>
+                        <?php if($paragraph_only == 'yes'){ ?><p class="text-center"> <a href="https://therestartproject.org/faq"> learn more </a></p><?php } ?>
                         
                     </div>
                 </section>
-                
+                <?php if(!$paragraph_only){ ?>  
                 <section class="row" id="impact-devices">
                     <div class="col-md-6 col-md-offset-3  text-center">
                     
@@ -44,6 +48,7 @@
                     </div>
                     
                 </section>
+                <?php  } ?>
                 <?php } elseif($section == 2) { ?>
                 
                 

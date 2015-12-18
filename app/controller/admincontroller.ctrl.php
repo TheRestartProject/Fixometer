@@ -36,7 +36,7 @@
         }
         
         
-        public function stats($section = 1){
+        public function stats($section = 1, $paragraph_only = false){
             //Object Instances
             $Group = new Group;
             $User = new User;
@@ -44,7 +44,7 @@
             $Device = new Device;
             
             $this->set('section', $section);
-            
+            $this->set('paragraph_only', $paragraph_only);
             $this->set('grouplist', $Group->findList());
             
             $allparties = $Party->ofThisGroup('admin', true, true);
