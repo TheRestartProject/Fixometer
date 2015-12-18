@@ -1,7 +1,11 @@
             <div class="container" id="public-dataviz-stats">
-                <?php if($section == 1){ ?> 
+                <?php if($section == 1){ ?>
+                <?php if($paragraph_only == false ) { ?>
+                <a href="https://therestartproject.org/faq">
+                <?php } ?>    
+                
                 <section class="row" id="impact-header">
-                    <?php if($paragraph_only == 'yes'){ ?> </a> <?php } ?>
+                    
                     <div class="col-sm-12 text-center">
                                           
                         <p class="big">
@@ -9,7 +13,6 @@
                             <span class="big blue"><?php echo $pax; ?> participants</span> aided by <span class="big blue"><?php echo $hours; ?> hours of volunteered time</span> worked on <span class="big blue"><?php echo ($device_count_status[0]->counter + $device_count_status[1]->counter + $device_count_status[2]->counter) ?> devices.</span>
                             <?php if($paragraph_only == 'yes'){ ?> </a> <?php } ?>
                         </p>
-                        <?php if($paragraph_only == 'yes'){ ?><p class="text-center"> <a href="https://therestartproject.org/faq"> learn more </a></p><?php } ?>
                         
                     </div>
                 </section>
@@ -46,7 +49,9 @@
                             <div class="col-xs-4 col-sm-4 col-md-4"><div class="topper  text-center"><?php echo $top[2]->name . ' [' . $top[2]->counter . ']'; ?></div></div>
                         </div>
                     </div>
-                    
+                    <?php if($paragraph_only == false ) { ?>
+                    </a>
+                    <?php } ?>
                 </section>
                 <?php  } ?>
                 <?php } elseif($section == 2) { ?>
