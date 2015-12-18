@@ -1,7 +1,7 @@
             <div class="container" id="public-dataviz-stats">
                 <?php if($section == 1){ ?>
                 <?php if($paragraph_only == false ) { ?>
-                <a href="https://therestartproject.org/faq">
+                <a href="https://therestartproject.org/faq" target="_top">
                 <?php } ?>    
                 
                 <section class="row" id="impact-header">
@@ -9,7 +9,7 @@
                     <div class="col-sm-12 text-center">
                                           
                         <p class="big">
-                            <?php if($paragraph_only == 'yes'){ ?> <a href="https://therestartproject.org/impact"> <?php } ?>
+                            <?php if($paragraph_only == 'yes'){ ?> <a href="https://therestartproject.org/impact" target="_top"> <?php } ?>
                             <span class="big blue"><?php echo $pax; ?> participants</span> aided by <span class="big blue"><?php echo $hours; ?> hours of volunteered time</span> worked on <span class="big blue"><?php echo ($device_count_status[0]->counter + $device_count_status[1]->counter + $device_count_status[2]->counter) ?> devices.</span>
                             <?php if($paragraph_only == 'yes'){ ?> </a> <?php } ?>
                         </p>
