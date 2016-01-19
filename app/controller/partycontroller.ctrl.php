@@ -567,7 +567,9 @@
         
         public function delete($id){
             if(hasRole($this->user, 'Administrator') || (hasRole($this->user, 'Host') && in_array($id, $this->hostParties))){
+                $usersDelete = $this->Party->deleteUserList($id);
                 $r = $this->Party->delete($id);
+                
                 if(!$r){
                     $response = 'd:err';
                 }

@@ -88,6 +88,7 @@
             }
         }
         
+        
         public function deleteUserList($party){
             $sql = 'DELETE FROM `events_users` WHERE `event` = :party';
             $stmt = $this->database->prepare($sql);
