@@ -7,7 +7,7 @@ define( 'APPKEY',   'l[56pOkjg_I8874.');  // should be a random string
 define( 'SECRET',   strrev(md5(APPKEY)));
 
 /** system status: can be development or production **/
-define( 'SYSTEM_STATUS', 'development');
+define( 'SYSTEM_STATUS', 'production');
 
 /** system root path and directory separator **/
 define('DS', DIRECTORY_SEPARATOR);
@@ -32,6 +32,6 @@ define('UPLOADS_URL', BASE_URL . '/' . 'uploads' . '/' );
 date_default_timezone_set('Europe/London');
 
 /** Wordpress Remote Publishing endpoint **/
-define('WP_XMLRPC_ENDPOINT', 'http://restart.dev/xmlrpc.php');
-define('WP_XMLRPC_USER', 'admin');
-define('WP_XMLRPC_PSWD', 'admin');
+define('WP_XMLRPC_ENDPOINT', 'http://wordpress.yavin/xmlrpc.php');
+define('WP_XMLRPC_USER', 'xml-bot');
+define('WP_XMLRPC_PSWD', 'dna%ba$MXF^x6#UW$fuigUkX');

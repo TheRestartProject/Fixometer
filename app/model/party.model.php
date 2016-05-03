@@ -45,6 +45,8 @@
                         `e`.`pax`,
                         `e`.`volunteers`,
                         `e`.`hours`,
+                        `e`.`free_text`,
+                        `e`.`wordpress_post_id`,
                         `g`.`name` AS `group_name`
                         
                     FROM `events` AS `e`
