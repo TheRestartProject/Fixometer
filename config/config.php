@@ -32,6 +32,6 @@ define('UPLOADS_URL', BASE_URL . '/' . 'uploads' . '/' );
 date_default_timezone_set('Europe/London');
 
 /** Wordpress Remote Publishing endpoint **/
-define('WP_XMLRPC_ENDPOINT', 'http://restart.dev/xmlrpc.php');
-define('WP_XMLRPC_USER', 'admin');
-define('WP_XMLRPC_PSWD', 'admin');
+define('WP_XMLRPC_ENDPOINT', 'https://www.therestartproject.org/fxm.php');
+define('WP_XMLRPC_USER', 'fixometer');
+define('WP_XMLRPC_PSWD', 'giannutri15Stone$87');
