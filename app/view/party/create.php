@@ -134,7 +134,7 @@
                                     <input type="hidden" name="volunteers" id="volunteers" value="0">
         
                                 <?php
-                                if(hasRole($user, 'Host')) {
+                                if(hasRole($user, 'Host') && !hasRole($user, 'Root')) {
                                 ?>
                                 
                                 <input type="hidden" name="group" id="group" value="<?php echo $usergroup->idgroups; ?>">

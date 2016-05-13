@@ -155,6 +155,8 @@
             
             $q = $stmt->execute();
             
+          //  dbga($stmt->errorInfo());
+            
             if(!$q && SYSTEM_STATUS == 'development'){
                 dbga($stmt->errorInfo());
                 $response = false;

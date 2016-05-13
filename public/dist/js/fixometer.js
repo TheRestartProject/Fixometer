@@ -52,9 +52,9 @@ $(document).ready(function(){
             ['style', ['style','bold', 'italic', 'underline', 'clear']],
             ['para', ['ul', 'ol', 'paragraph']],
             ['insert', ['link', 'hr']],
+            ['misc', ['codeview']]
         ]
     });
-    
     
     /** Load list of invitable restarters ( /party/create ) **/
     $('.users_group').change(function(){ // selectpicker users_group

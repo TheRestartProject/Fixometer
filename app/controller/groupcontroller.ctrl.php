@@ -159,15 +159,20 @@
                     unset($data['image']);
                     
                     $u = $this->Group->update($data, $id);
-                    
+                    echo "Updated---";
                     if(!$u) {
+                        
                         $response['danger'] = 'Something went wrong. Please check the data and try again.';
+                        echo $response['danger'];
                     }
                     else {
+                        echo "Here now --- ";
                         $response['success'] = 'Group updated!';
                         
+                        dbga($_FILES);
+                        
                         if(isset($_FILES['image']) && !empty($_FILES['image']) && $_FILES['image']['error'] != 4){
-                            
+                            echo "uploading image ... ";
                             $existing_image = $this->Group->hasImage($id, true);
                             if(count($existing_image) > 0){
                                 $this->Group->removeImage($id, $existing_image[0]);
@@ -177,18 +182,18 @@
                             
                         }
                         else {
-                            $group_avatar = 'boh';
+                            $group_avatar = 'null';
                         }
                         
                          /** Prepare Custom Fields for WP XML-RPC - get all needed data **/
                         $Host = $this->Group->findHost($id);
                         
                         $custom_fields = array(
-                                        array('key' => 'group_city',            'value' => $data['area']),       
-                                        array('key' => 'group_host',            'value' => $Host->hostname),       
-                                        array('key' => 'group_hostavatarurl',   'value' => UPLOADS_URL . 'mid_' .$Host->path),
-                                        array('key' => 'group_hash',            'value' => $id),
-                                        array('key' => 'group_avatar_url',      'value' => UPLOADS_URL . 'mid_' . $group_avatar ),
+                                            array('key' => 'group_city',            'value' => $data['area']),       
+                                            array('key' => 'group_host',            'value' => $Host->hostname),       
+                                            array('key' => 'group_hostavatarurl',   'value' => UPLOADS_URL . 'mid_' .$Host->path),
+                                            array('key' => 'group_hash',            'value' => $id),
+                                            array('key' => 'group_avatar_url',      'value' => UPLOADS_URL . 'mid_' . $group_avatar ),
                                         );
                         
                         
@@ -227,9 +232,8 @@
                             $this->Group->update(array('wordpress_post_id' => $wpid), $id);
                         }
                         
-                        
                         if(hasRole($this->user, 'Host')){
-                            header('Location: /host?action=gu&code=200');
+                        //    header('Location: /host?action=gu&code=200');
                         }
                     }
                     
@@ -262,7 +266,7 @@
             }
         }
         
-        public function stats($id){
+        public function stats($id, $format = 'row'){
             
             $Party = new Party;
             $Device = new Device;
@@ -294,6 +298,7 @@
             $this->set('parties', count($allparties));
             $this->set('co2', $co2);
             $this->set('waste', $waste);
+            $this->set('format', $format);
             
         }
     }

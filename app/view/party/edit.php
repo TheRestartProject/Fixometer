@@ -140,7 +140,7 @@
                                 if( hasRole($user, 'Host') ) {
                                 ?>
                                 
-                                <input type="hidden" name="group" id="group" value="<?php echo $usergroup->idgroups; ?>">
+                                <input type="hidden" name="group" id="group" value="<?php echo $formdata->group; ?>">
                                 
                                 <?php
                                 }
