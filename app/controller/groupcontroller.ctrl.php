@@ -144,6 +144,57 @@
             }
         }
         
+        /** sync all parties to wordpress - CREATES PARTIES! **/
+        public function sync(){
+            $groups = $this->Group->findAll();
+            
+            foreach($groups as $i => $group) {
+                $Host = $this->Group->findHost($group->id);
+                $Logo = $this->Group->findOne($group->id);
+                
+                
+                if(!empty($Logo->path)) {
+                    $logo =  UPLOADS_URL . 'mid_' . $Logo->path;
+                }
+                else {
+                    $logo = 'PLACEHOLDER';
+                }
+                
+                if(!empty($Host->path)) {
+                    $hostpic =  UPLOADS_URL . 'mid_' . $Host->path;
+                }
+                else {
+                    $hostpic = 'PLACEHOLDER';
+                }
+                
+                
+                $custom_fields = array(
+                                array('key' => 'group_city',            'value' => $group->area),
+                                array('key' => 'group_host',            'value' => $Host->hostname),       
+                                array('key' => 'group_hostavatarurl',   'value' => $hostpic),
+                                array('key' => 'group_hash',            'value' => $group->id),
+                                array('key' => 'group_avatar_url',      'value' => $logo ),
+                                );
+                
+                /** Start WP XML-RPC **/
+                echo "Connecting ... ";
+                $wpClient = new \HieuLe\WordpressXmlrpcClient\WordpressClient();
+                $wpClient->setCredentials(WP_XMLRPC_ENDPOINT, WP_XMLRPC_USER, WP_XMLRPC_PSWD);
+                
+                
+                $content = array(
+                            'post_type' => 'group',
+                            'custom_fields' => $custom_fields
+                            );
+                
+                $wpid = $wpClient->newPost($group->name, $group->free_text, $content);
+                echo "<strong>Posted to WP</strong> ... ";
+                $this->Group->update(array('wordpress_post_id' => $wpid), $group->id);
+                echo "Updated Fixometer recordset with WPID: " . $wpid . "<br />";
+                
+            }
+            
+        }
         
     
         public function edit($id) {
@@ -159,20 +210,20 @@
                     unset($data['image']);
                     
                     $u = $this->Group->update($data, $id);
-                    echo "Updated---";
+                    // echo "Updated---";
                     if(!$u) {
                         
                         $response['danger'] = 'Something went wrong. Please check the data and try again.';
                         echo $response['danger'];
                     }
                     else {
-                        echo "Here now --- ";
+                       // echo "Here now --- ";
                         $response['success'] = 'Group updated!';
                         
-                        dbga($_FILES);
+                        // dbga($_FILES);
                         
                         if(isset($_FILES['image']) && !empty($_FILES['image']) && $_FILES['image']['error'] != 4){
-                            echo "uploading image ... ";
+                           // echo "uploading image ... ";
                             $existing_image = $this->Group->hasImage($id, true);
                             if(count($existing_image) > 0){
                                 $this->Group->removeImage($id, $existing_image[0]);
@@ -191,7 +242,7 @@
                         $custom_fields = array(
                                             array('key' => 'group_city',            'value' => $data['area']),       
                                             array('key' => 'group_host',            'value' => $Host->hostname),       
-                                            array('key' => 'group_hostavatarurl',   'value' => UPLOADS_URL . 'mid_' .$Host->path),
+                                            array('key' => 'group_hostavatarurl',   'value' => UPLOADS_URL . 'mid_' . $Host->path),
                                             array('key' => 'group_hash',            'value' => $id),
                                             array('key' => 'group_avatar_url',      'value' => UPLOADS_URL . 'mid_' . $group_avatar ),
                                         );
