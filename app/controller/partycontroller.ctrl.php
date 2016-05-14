@@ -216,7 +216,44 @@
                 }
             }
         }
-    
+        
+        /** sync all parties to wordpress - CREATES PARTIES! **/
+        public function sync(){
+            $parties = $this->Party->findAll();
+            $Groups = new Group;
+            foreach($parties as $i => $party) {
+                $Host = $Groups->findHost($party->group_id);
+                $custom_fields = array(
+                        array('key' => 'party_host',            'value' => $Host->hostname),       
+                        array('key' => 'party_hostavatarurl',   'value' => UPLOADS_URL . 'mid_' .$Host->path),
+                        array('key' => 'party_grouphash',       'value' => $party->group_id),
+                        array('key' => 'party_location',        'value' => $party->location),
+                        array('key' => 'party_time',            'value' => $party->start . ' - ' . $party->end),
+                        array('key' => 'party_date',            'value' => $party->event_date),
+                        array('key' => 'party_timestamp',       'value' => $party->event_timestamp),
+                        array('key' => 'party_stats',           'value' => $party->id),
+                        array('key' => 'party_lat',             'value' => $party->latitude),
+                        array('key' => 'party_lon',             'value' => $party->longitude)
+                );
+                /** Start WP XML-RPC **/
+                echo "Connecting ... ";
+                $wpClient = new \HieuLe\WordpressXmlrpcClient\WordpressClient();
+                $wpClient->setCredentials(WP_XMLRPC_ENDPOINT, WP_XMLRPC_USER, WP_XMLRPC_PSWD);
+                
+                
+                $content = array(
+                            'post_type' => 'party',
+                            'custom_fields' => $custom_fields
+                            );
+                
+                $wpid = $wpClient->newPost($party->location, $party->free_text, $content);
+                echo "<strong>Posted to WP</strong> ... ";
+                $this->Party->update(array('wordpress_post_id' => $wpid), $party->id);
+                echo "Updated Fixometer recordset with WPID: " . $wpid . "<br />";
+            }
+            
+        }
+        
         public function edit($id){
             
             if( hasRole($this->user, 'Administrator') || (hasRole($this->user, 'Host') && in_array($id, $this->hostParties))){

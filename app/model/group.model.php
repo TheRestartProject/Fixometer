@@ -11,7 +11,8 @@
                         `g`.`name` AS `name`,
                         `g`.`location` AS `location`,
                         `g`.`latitude` AS `latitude`,
-                        `g`.`longitude` AS `longitude`, 
+                        `g`.`longitude` AS `longitude`,
+                        `g`.`free_text` AS `free_text`, 
                         `g`.`area` AS `area`,
                         `g`.`frequency` AS `frequency`, 
                         GROUP_CONCAT(`u`.`name` ORDER BY `u`.`name` ASC SEPARATOR ", "  )  AS `user_list`
