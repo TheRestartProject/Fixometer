@@ -1,5 +1,5 @@
                     
-                    <div class="data">
+                    <div class="data <?php echo isset($class) && $class === 'wide' ? 'wide' : 'regular'; ?>">
                         <div class="stat double">
                             <div class="col">
                                 <i class="fa fa-group"></i>
