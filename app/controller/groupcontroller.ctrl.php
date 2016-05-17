@@ -146,6 +146,7 @@
         
         /** sync all parties to wordpress - CREATES PARTIES! **/
         public function sync(){
+            /*
             $groups = $this->Group->findAll();
             
             foreach($groups as $i => $group) {
@@ -176,7 +177,6 @@
                                 array('key' => 'group_avatar_url',      'value' => $logo ),
                                 );
                 
-                /** Start WP XML-RPC **/
                 echo "Connecting ... ";
                 $wpClient = new \HieuLe\WordpressXmlrpcClient\WordpressClient();
                 $wpClient->setCredentials(WP_XMLRPC_ENDPOINT, WP_XMLRPC_USER, WP_XMLRPC_PSWD);
@@ -193,6 +193,7 @@
                 echo "Updated Fixometer recordset with WPID: " . $wpid . "<br />";
                 
             }
+            */
             
         }
         

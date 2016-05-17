@@ -273,7 +273,7 @@ time {
     min-height: 70px;
     height: 70px; 
     .count;
-    .footprint { margin: 0px 5px; background: @blue; color: white; font-size: 20px; padding: 7px 4px 6px;
+    .footprint { margin: 0px 5px; background: @blue; color: white; font-size: 20px; padding: 7px 4px 6px; min-height: 100%; 
         .subtext { display: inline-block; line-height: 20px; }
     }
 }
@@ -300,7 +300,9 @@ time {
 
 .add-info-btn { margin: 15px 32px; }
 .no-data { float: left; clear: none; width: 75%; }
-.data { float: left; clear: none; width: 75%; }
+.data { float: left; clear: none; width: 75%;
+    &.wide { width: 100%; }
+}
 
 .year-break {
     font-size: 24px; text-align: center; padding: 15px; color: white; background: lighten(@litegray, 25%);

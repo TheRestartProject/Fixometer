@@ -219,7 +219,7 @@
         
         /** sync all parties to wordpress - CREATES PARTIES! **/
         public function sync(){
-            $parties = $this->Party->findAll();
+            /* $parties = $this->Party->findAll();
             $Groups = new Group;
             foreach($parties as $i => $party) {
                 $Host = $Groups->findHost($party->group_id);
@@ -235,7 +235,6 @@
                         array('key' => 'party_lat',             'value' => $party->latitude),
                         array('key' => 'party_lon',             'value' => $party->longitude)
                 );
-                /** Start WP XML-RPC **/
                 echo "Connecting ... ";
                 $wpClient = new \HieuLe\WordpressXmlrpcClient\WordpressClient();
                 $wpClient->setCredentials(WP_XMLRPC_ENDPOINT, WP_XMLRPC_USER, WP_XMLRPC_PSWD);
@@ -251,7 +250,7 @@
                 $this->Party->update(array('wordpress_post_id' => $wpid), $party->id);
                 echo "Updated Fixometer recordset with WPID: " . $wpid . "<br />";
             }
-            
+            */
         }
         
         public function edit($id){
@@ -610,7 +609,7 @@
         }
         
         
-        public function stats($id){
+        public function stats($id, $class = null){
             $Device = new Device;
             
             $this->set('framed', true);
@@ -646,6 +645,9 @@
             
             $party->co2 = number_format(round($party->co2 * $Device->displacement), 0, '.' , ',');    
             $this->set('party', $party);
+            if(!is_null($class)) {
+                $this->set('class', 'wide');
+            }
 
         }
         
