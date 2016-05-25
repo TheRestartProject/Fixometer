@@ -33,7 +33,7 @@
                 FROM `'.$this->table.'` AS `d` 
                 INNER JOIN `categories` AS `c` ON  `d`.`category` = `c`.`idcategories`
                 INNER JOIN `events` AS `e` ON  `d`.`event` = `e`.`idevents` 
-                WHERE `d`.`repair_status` = 1';
+                WHERE `d`.`repair_status` = 1 AND `c`.`idcategories` != 46';
                     
             if(!is_null($group) && is_numeric($group)){
                 $sql .= ' AND `e`.`group` = :group';     

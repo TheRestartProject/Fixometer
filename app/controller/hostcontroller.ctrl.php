@@ -130,9 +130,11 @@
             
             $devices = $Device->ofThisGroup($group->idgroups);
             
+            /*
             foreach($devices as $i => $device){
                 
             }
+            */
             
             $this->set('need_attention', $need_attention);
             
