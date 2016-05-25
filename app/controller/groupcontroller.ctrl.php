@@ -100,11 +100,13 @@
                             $Host = $Groups->findHost($idGroup);
                             
                             $custom_fields = array(
-                                            array('key' => 'group_city',           'value' => $area),
+                                            array('key' => 'group_city',            'value' => $area),
                                             array('key' => 'group_host',            'value' => $Host->hostname),       
                                             array('key' => 'group_hostavatarurl',   'value' => UPLOADS_URL . 'mid_' .$Host->path),
                                             array('key' => 'group_hash',            'value' => $idGroup),
                                             array('key' => 'group_avatar_url',      'value' => UPLOADS_URL . 'mid_' . $group_avatar ),
+                                            array('key' => 'group_latitude',        'value' => $data['latitude']),
+                                            array('key' => 'group_longitude',       'value' => $data['longitude']),
                                             );
                             
                             
@@ -246,6 +248,8 @@
                                             array('key' => 'group_hostavatarurl',   'value' => UPLOADS_URL . 'mid_' . $Host->path),
                                             array('key' => 'group_hash',            'value' => $id),
                                             array('key' => 'group_avatar_url',      'value' => UPLOADS_URL . 'mid_' . $group_avatar ),
+                                            array('key' => 'group_latitude',        'value' => $data['latitude']),
+                                            array('key' => 'group_longitude',       'value' => $data['longitude']),
                                         );
                         
                         
