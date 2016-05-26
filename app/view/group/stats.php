@@ -66,7 +66,7 @@
     </div>
 
 <?php } elseif($format == 'mini'){ ?>
-            <div id="group-main-stats">
+            <div id="group-main-stats" class="mini">
                 <div class="col">
                     <h5>parties thrown</h5>
                     <span class="largetext"><?php echo $parties; ?></span>
