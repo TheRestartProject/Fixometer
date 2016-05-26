@@ -233,10 +233,16 @@
                             }
                             $file = new File;
                             $group_avatar = $file->upload('image', 'image', $id, TBL_GROUPS, false, true);
-                            
+                            $group_avatar = UPLOADS_URL . 'mid_' . $group_avatar ;
                         }
                         else {
-                            $group_avatar = 'null';
+                            $existing_image = $this->Group->hasImage($id, true);
+                            if( count($existing_image) > 0 ) {
+                                $group_avatar = UPLOADS_URL . 'mid_' . $existing_image[0]->path;
+                            }
+                            else {
+                                $group_avatar = 'null';
+                            }
                         }
                         
                          /** Prepare Custom Fields for WP XML-RPC - get all needed data **/
@@ -247,7 +253,7 @@
                                             array('key' => 'group_host',            'value' => $Host->hostname),       
                                             array('key' => 'group_hostavatarurl',   'value' => UPLOADS_URL . 'mid_' . $Host->path),
                                             array('key' => 'group_hash',            'value' => $id),
-                                            array('key' => 'group_avatar_url',      'value' => UPLOADS_URL . 'mid_' . $group_avatar ),
+                                            array('key' => 'group_avatar_url',      'value' => $group_avatar ),
                                             array('key' => 'group_latitude',        'value' => $data['latitude']),
                                             array('key' => 'group_longitude',       'value' => $data['longitude']),
                                         );
