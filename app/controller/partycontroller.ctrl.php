@@ -440,6 +440,20 @@
                             if(!isset($device['repaired_by']) || empty($device['repaired_by'])){
                                 $device['repaired_by'] = 29;
                             }
+                            
+                            if($method == 'update'){
+                                //echo "updating---";
+                                $Device->update($device, $iddevice);
+                            }
+                            
+                            else {
+                                //echo "creating---";
+                                $device['category_creation'] = $device['category'];
+                                $Device->create($device);
+                            }
+                            
+                            $response['success'] = 'Party info updated!';
+                            
                         }
                     }
                     
@@ -485,7 +499,7 @@
                         // Check for WP existence in DB
                         // $theParty = $this->Party->findOne($idparty);
                         if(!empty($party->wordpress_post_id)){
-                            echo "WP id present (" . $party->wordpress_post_id . ")! Editing...<br />";
+                            // echo "WP id present (" . $party->wordpress_post_id . ")! Editing...<br />";
                             // we need to remap all custom fields because they all get unique IDs across all posts, so they don't get mixed up.
                             $thePost = $wpClient->getPost($party->wordpress_post_id);
                             
@@ -512,19 +526,6 @@
                     /** EOF WP Sync **/   
                     
                     if($error == false){
-                        if($method == 'update'){
-                            //echo "updating---";
-                            $Device->update($device, $iddevice);
-                        }
-                        
-                        else {
-                            //echo "creating---";
-                            $device['category_creation'] = $device['category'];
-                            $Device->create($device);
-                        }
-                        
-                        $response['success'] = 'Party info updated!';
-                        
                         /**If is Admin, redir to host + group id **/ 
                         if(hasRole($this->user, 'Administrator')){
                             header('Location: /host/index/' . $partygroup);
