@@ -267,6 +267,14 @@
         }
     
         
+    
+        public function attendees(){
+            $sql = 'SELECT SUM(pax) AS pax FROM ' . $this->table ;
+            $stmt = $this->database->prepare($sql);
+            $stmt->execute();
+            $r = $stmt->fetch(PDO::FETCH_OBJ);
+            return $r->pax;
+        }
     }
     
     

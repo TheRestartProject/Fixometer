@@ -310,6 +310,51 @@
             
             
         }
+        public function successRates($year = null, $threshold = 10){
+            $sql .=     'SELECT 
+                            COUNT(repair_status) AS fixed, 
+                            total_devices, 
+                            categories.name AS category_name,
+                            clusters.name AS cluster_name,
+                            (COUNT(repair_status) * 100 / total_devices) AS success_rate ';
+            if(!is_null($year)){ $sql .= ', YEAR(events.event_date) AS eventyear '; }
+                            
+            $sql .=     ' FROM devices 
+                            INNER JOIN categories ON categories.idcategories = devices.category 
+                            INNER JOIN (
+                                SELECT
+                                    COUNT(iddevices) AS total_devices,
+                                    devices.category
+                                FROM devices ';
+            if(!is_null($year)){ $sql .= '
+                                INNER JOIN events ON events.idevents=devices.event 
+                                WHERE YEAR(events.event_date) = :year1 ';
+            }
+            $sql .=             'GROUP BY devices.category
+                                ) AS totals ON totals.category=devices.category  
+                            INNER JOIN clusters ON clusters.idclusters = categories.cluster ';
+            if(!is_null($year)){ $sql .= 'INNER JOIN events ON events.idevents = devices.event '; }                
+            $sql .=     'WHERE
+                            repair_status = 1 AND
+                            total_devices > ' . $threshold . ' ';
+                        
+            if(!is_null($year)){ $sql .= ' AND YEAR(events.event_date) = :year2 '; }            
+            $sql .=     'GROUP BY devices.category
+                        ORDER BY cluster ASC, success_rate DESC';
+            
+            $stmt = $this->database->prepare($sql);
+            if(!is_null($year)){
+                $bind = $stmt->bindParam(':year1', $year, PDO::PARAM_INT);
+                $bind = $stmt->bindParam(':year2', $year, PDO::PARAM_INT);
+            }
+            
+            $q = $stmt->execute();
+            $r = $stmt->fetchAll(PDO::FETCH_OBJ);
+            return $r;
+        }
+        
+       
+        
         
         
         public function guesstimates() {
