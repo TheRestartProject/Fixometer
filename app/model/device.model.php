@@ -310,7 +310,7 @@
             
             
         }
-        public function successRates($year = null, $threshold = 10){
+        public function successRates($year = null, $threshold = 10, $direction = 'DESC'){
             $sql .=     'SELECT 
                             COUNT(repair_status) AS fixed, 
                             total_devices, 
@@ -331,7 +331,7 @@
                                 WHERE YEAR(events.event_date) = :year1 ';
             }
             $sql .=             'GROUP BY devices.category
-                                ) AS totals ON totals.category=devices.category  
+                                ) AS totals ON totals.category = devices.category  
                             INNER JOIN clusters ON clusters.idclusters = categories.cluster ';
             if(!is_null($year)){ $sql .= 'INNER JOIN events ON events.idevents = devices.event '; }                
             $sql .=     'WHERE
@@ -340,9 +340,10 @@
                         
             if(!is_null($year)){ $sql .= ' AND YEAR(events.event_date) = :year2 '; }            
             $sql .=     'GROUP BY devices.category
-                        ORDER BY cluster ASC, success_rate DESC';
+                        ORDER BY cluster ASC, success_rate ' . $direction;
             
             $stmt = $this->database->prepare($sql);
+            //$stmt->bind(':direction', $direction, PDO::PARAM_STR);
             if(!is_null($year)){
                 $bind = $stmt->bindParam(':year1', $year, PDO::PARAM_INT);
                 $bind = $stmt->bindParam(':year2', $year, PDO::PARAM_INT);

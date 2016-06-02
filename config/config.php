@@ -7,7 +7,7 @@ define( 'APPKEY',   'l[56pOkjg_I8874.');  // should be a random string
 define( 'SECRET',   strrev(md5(APPKEY)));
 
 /** system status: can be development or production **/
-define( 'SYSTEM_STATUS', 'development');
+define( 'SYSTEM_STATUS', 'production');
 
 /** system root path and directory separator **/
 define('DS', DIRECTORY_SEPARATOR);
