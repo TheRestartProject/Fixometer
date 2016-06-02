@@ -14,6 +14,7 @@
                             'category_list',
                             'restarters',
                             'stats',
+                            'info',
                             'deleteimage'
                             );
         
@@ -67,7 +68,7 @@
                 include (ROOT . DS . 'app' . DS . 'view' . DS . 'export' . DS . $this->_action . '.php');	
                 
             }
-            elseif($this->_action == 'stats'){
+            elseif($this->_action == 'stats' || $this->_controller == 'outbound'){
                 /** Manage Stat Pages for iframe embedding in third party sites **/
                 include (ROOT . DS . 'app' . DS . 'view' . DS . 'head.php');
                 include (ROOT . DS . 'app' . DS . 'view' . DS . $this->_controller . DS . $this->_action . '.php');		 
