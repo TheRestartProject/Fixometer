@@ -50,6 +50,33 @@
             return $stmt->fetchAll(PDO::FETCH_OBJ);
         }
         
+        
+        public function getPartyWeights($party){            
+            /*
+            $sql = 'SELECT
+                        ROUND(SUM(`weight`), 0) AS `total_weights`,
+                        ROUND(SUM(`footprint`) * ' . $this->displacement . ', 0)  AS `total_footprints`,
+                        ROUND(SUM(`estimate`) * (SELECT * FROM view_weight_emission_ratio), 0) AS `estimate_emissions`
+                    FROM `'.$this->table.'` AS `d` 
+                    INNER JOIN `categories` AS `c` ON  `d`.`category` = `c`.`idcategories`
+                    INNER JOIN `events` AS `e` ON  `d`.`event` = `e`.`idevents` 
+                    WHERE `d`.`repair_status` = 1';
+            */
+            $sql = 'SELECT
+                    ROUND(SUM(`weight`), 0) + ROUND(SUM(`estimate`), 0) AS `total_weights`,
+                    ROUND(SUM(`footprint`) * ' . $this->displacement . ', 0) + (ROUND(SUM(`estimate`) * (SELECT * FROM `view_waste_emission_ratio`), 0))  AS `total_footprints`
+                FROM `'.$this->table.'` AS `d` 
+                INNER JOIN `categories` AS `c` ON  `d`.`category` = `c`.`idcategories`
+                INNER JOIN `events` AS `e` ON  `d`.`event` = `e`.`idevents` 
+                WHERE `d`.`repair_status` = 1 AND `c`.`idcategories` != 46 AND `e`.`idevents` = :id';
+           // echo $sql;        
+            
+            $stmt = $this->database->prepare($sql);
+            $stmt->bindParam(':id', $party, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+        }
+        
         public function getCounts(){
             $sql = 'SELECT
                         COUNT(`category`) AS `catcount`,
