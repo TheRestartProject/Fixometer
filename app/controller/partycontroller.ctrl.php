@@ -490,7 +490,7 @@
                         $text = (empty($party->free_text) ? '...' : $party->free_text);
                         $content = array(
                                         'post_type' => 'party',
-                                        'post_title' => $Host->groupname,
+                                        'post_title' => $party->location,
                                         'post_content' => $text,
                                         'custom_fields' => $custom_fields
                                         );
