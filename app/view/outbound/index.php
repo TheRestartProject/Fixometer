@@ -1,12 +1,10 @@
-
-
 <section id="ho-activity" class="row">
 	<div class="col-md-12">
 		<h2>Activity</h2>
 	</div>
 	<div class="col-md-3">
 		<div class="text-center">
-			<h4>Attendants</h4>
+			<h4>Participants</h4>
 			<div class="number"><?php echo $counters['pax']; ?></div>
 		</div>
 	</div>
@@ -31,13 +29,12 @@
 </section>
 
 <section id="ho-devices" class="row">
-
 	<div class="col-md-12">
 		<h2>Devices &amp; Appliances</h2>
 	</div>
 	<div class="col-md-3">
 		<div class="text-center">
-			<h4>Total Tentatives</h4>
+			<h4>Total Attempts</h4>
 			<div class="number"><?php echo $counters['devices']; ?></div>
 		</div>
 	</div>
@@ -55,12 +52,12 @@
 	</div>
 	<div class="col-md-3">
 		<div class="text-center">
-			<h4>Dead</h4>
+			<h4>End-of-life</h4>
 			<div class="number"><?php echo $counters['statuses'][2]->counter; ?></div>
 		</div>
 	</div>
 	<div class="col-md-12">
-		<h3>Most attempted device restarts</h3>
+		<h3>Highest number of attempts</h3>
 	</div>
 	<div class="col-md-10 col-md-offset-1">		
 		<div class="row">
@@ -83,7 +80,59 @@
 <section class="row" id="ho-rates">
 	<div class="col-md-12">
 	<div class="tab-content">
-		<div role="tabpanel" class="tab-pane active" id="all">All</div>
+		<div role="tabpanel" class="tab-pane active" id="all">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th></th>
+						<th>FIXED</th>
+						<th>REPAIRABLE</th>
+						<th>END-OF-LIFE</th>
+						<th>MOST SEEN</th>
+						<th>HIGHEST SUCCESS RATE</th>
+						<th>LOWEST SUCCESS RATE</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Computers and Home Office</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>Electronic Gadgets</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>Home Entertainment</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>Kitchen and Household Items</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 		
 		
 		

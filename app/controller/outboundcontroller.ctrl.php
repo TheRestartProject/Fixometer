@@ -31,7 +31,7 @@
 			
 			$rates = array();
 			$rates['all'] = $this->devices->successRates();
-			for($i = 2012; $i <= date('Y'); $i++) {
+			for($i = 2014; $i <= date('Y'); $i++) {
 				$rates[$i] = $this->devices->successRates($i);
 			}
 			
