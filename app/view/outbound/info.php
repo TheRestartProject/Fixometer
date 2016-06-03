@@ -16,7 +16,7 @@
 						<img src="/assets/icons/<?php echo $info['manufacture_img']; ?>" class="img-responsive">
 					</div>
 				<?php } ?>
-				<div class="col-md-12 text-center">
+				<div class="col-md-12 col-sm-12 col-xs-12 text-center">
 					<div class="legend">1 <img src="/assets/icons/<?php echo $info['manufacture_img']; ?>"> = <?php echo $info['manufacture_legend']; ?> (approximately)</div>
 					
 				</div>

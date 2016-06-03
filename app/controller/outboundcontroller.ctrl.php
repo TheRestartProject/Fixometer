@@ -35,14 +35,19 @@
 			$counters['most_seen'] = $this->devices->findMostSeen();
 			
 			$rates = array();
-			$rates['all'] = $this->devices->successRates();
-			for($i = 2014; $i <= date('Y'); $i++) {
-				$rates[$i] = $this->devices->successRates($i);
+			$mostseen = array();
+			$states = array();
+			for($i = 1; $i < 5; $i++){
+				$mostseen[$i] = $this->devices->findMostSeen(null, $i);
+				$rates['most'][$i] = $this->devices->successRates($i);
+				$rates['least'][$i] = $this->devices->successRates($i, 'ASC');
+				$states[$i] = $this->devices->clusterCount($i);
 			}
 			
-			
+			$this->set('mostseen', $mostseen);
 			$this->set('counters', $counters);
 			$this->set('rates', $rates);
+			$this->set('states', $states);
 			
 		}
 		
