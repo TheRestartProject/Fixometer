@@ -219,6 +219,19 @@
             
         }
         
+        public function clusterCount($cluster){
+            $sql = 'select count(devices.iddevices) as counter, repair_status from devices 
+                    inner join categories on categories.idcategories = devices.category 
+                    inner join clusters on clusters.idclusters = categories.cluster 
+                    where categories.cluster = :cluster and repair_status > 0 group by repair_status ORDER BY repair_status ASC';
+            $stmt = $this->database->prepare($sql);
+            $bind = $stmt->bindParam(':cluster', $cluster, PDO::PARAM_INT);
+            
+            $q = $stmt->execute();
+            $r = $stmt->fetchAll(PDO::FETCH_OBJ);
+            return $r;
+        }
+        
         public function countCO2ByYear($group = null, $year = null) {
             $sql = 'SELECT
                         (ROUND(SUM(`c`.`footprint`), 0) * ' . $this->displacement . ') + (IFNULL(ROUND(SUM(`estimate`) * (SELECT * FROM `view_waste_emission_ratio`), 0),0)) AS `co2`,
@@ -337,14 +350,14 @@
             
             
         }
-        public function successRates($year = null, $threshold = 10, $direction = 'DESC'){
+        public function successRates($cluster = null, $direction = 'DESC', $threshold = 10){
             $sql .=     'SELECT 
                             COUNT(repair_status) AS fixed, 
                             total_devices, 
                             categories.name AS category_name,
                             clusters.name AS cluster_name,
-                            (COUNT(repair_status) * 100 / total_devices) AS success_rate ';
-            if(!is_null($year)){ $sql .= ', YEAR(events.event_date) AS eventyear '; }
+                            ROUND( (COUNT(repair_status) * 100 / total_devices), 1) AS success_rate ';
+            if(!is_null($cluster)){ $sql .= ', clusters.idclusters AS cluster '; }
                             
             $sql .=     ' FROM devices 
                             INNER JOIN categories ON categories.idcategories = devices.category 
@@ -352,28 +365,24 @@
                                 SELECT
                                     COUNT(iddevices) AS total_devices,
                                     devices.category
-                                FROM devices ';
-            if(!is_null($year)){ $sql .= '
-                                INNER JOIN events ON events.idevents=devices.event 
-                                WHERE YEAR(events.event_date) = :year1 ';
-            }
-            $sql .=             'GROUP BY devices.category
+                                FROM devices
+                                GROUP BY devices.category
                                 ) AS totals ON totals.category = devices.category  
                             INNER JOIN clusters ON clusters.idclusters = categories.cluster ';
-            if(!is_null($year)){ $sql .= 'INNER JOIN events ON events.idevents = devices.event '; }                
+            // if(!is_null($year)){ $sql .= 'INNER JOIN events ON events.idevents = devices.event '; }                
             $sql .=     'WHERE
                             repair_status = 1 AND
                             total_devices > ' . $threshold . ' ';
                         
-            if(!is_null($year)){ $sql .= ' AND YEAR(events.event_date) = :year2 '; }            
+            if(!is_null($cluster)){ $sql .= ' AND cluster = :cluster '; }            
             $sql .=     'GROUP BY devices.category
-                        ORDER BY cluster ASC, success_rate ' . $direction;
+                        ORDER BY cluster ASC, success_rate ' . $direction . ' LIMIT 1';
             
             $stmt = $this->database->prepare($sql);
             //$stmt->bind(':direction', $direction, PDO::PARAM_STR);
-            if(!is_null($year)){
-                $bind = $stmt->bindParam(':year1', $year, PDO::PARAM_INT);
-                $bind = $stmt->bindParam(':year2', $year, PDO::PARAM_INT);
+            if(!is_null($cluster)){
+                $bind = $stmt->bindParam(':cluster', $cluster, PDO::PARAM_INT);
+                //$bind = $stmt->bindParam(':year2', $year, PDO::PARAM_INT);
             }
             
             $q = $stmt->execute();
