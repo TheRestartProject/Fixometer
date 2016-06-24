@@ -31,7 +31,8 @@
         /** Display Template **/
         function render() {
             extract($this->variables);
-            if(!in_array($this->_action, $this->exclude) && !in_array($this->_controller, array('rss', 'export'))){
+            
+            if(!in_array($this->_action, $this->exclude) && !in_array($this->_controller, array('rss', 'export','outbound'))){
                 /* Include Base Head @ view/head.php */
                 include (ROOT . DS . 'app' . DS . 'view' . DS . 'head.php');
                 
