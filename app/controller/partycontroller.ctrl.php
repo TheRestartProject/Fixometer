@@ -624,11 +624,13 @@
             $party->fixed_devices = 0;
             $party->repairable_devices = 0;
             $party->dead_devices = 0;
+            $party->ewaste = 0; 
                 
             foreach($party->devices as $device){
                 
                 if($device->repair_status == DEVICE_FIXED){
-                    $party->co2 += $device->footprint;
+                    $party->co2 += (!empty($device->estimate) ? ($device->estimate * $this->EmissionRatio) : $device->footprint);
+                    $party->ewaste += (!empty($device->estimate) ? $device->estimate : $device->weight);
                 }
                 
                 switch($device->repair_status){
