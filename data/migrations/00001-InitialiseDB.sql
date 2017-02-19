@@ -160,7 +160,7 @@ CREATE TABLE IF NOT EXISTS `xref` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 DROP TABLE IF EXISTS `view_waste_emission_ratio`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`fixometer_root`@`%` SQL SECURITY DEFINER VIEW `view_waste_emission_ratio` AS select (round((sum(`categories`.`footprint`) * 0.5),0) / round(sum(`categories`.`weight`),0)) AS `Ratio` from (`devices` join `categories` on((`categories`.`idcategories` = `devices`.`category`))) where (`devices`.`repair_status` = 1);
+CREATE ALGORITHM=UNDEFINED DEFINER=`fixometer_root`@`localhost` SQL SECURITY DEFINER VIEW `view_waste_emission_ratio` AS select (round((sum(`categories`.`footprint`) * 0.5),0) / round(sum(`categories`.`weight`),0)) AS `Ratio` from (`devices` join `categories` on((`categories`.`idcategories` = `devices`.`category`))) where (`devices`.`repair_status` = 1);
 
 
 ALTER TABLE `categories`
