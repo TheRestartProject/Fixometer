@@ -97,7 +97,7 @@
                             }
                             
                             /** Prepare Custom Fields for WP XML-RPC - get all needed data **/
-                            $Host = $Groups->findHost($idGroup);
+                            $Host = $this->Group->findHost($idGroup);
                             
                             $custom_fields = array(
                                             array('key' => 'group_city',            'value' => $area),
