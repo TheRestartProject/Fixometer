@@ -163,7 +163,7 @@
                                 $file->upload('file', 'image', $idParty, TBL_EVENTS);    
                             }
                             
-                            if(SYSTEM_STATUS != 'development') { 
+                            if(CONNECT_TO_WORDPRESS) { 
                                 /** Prepare Custom Fields for WP XML-RPC - get all needed data **/
                                 $Host = $Groups->findHost($group);
                                 
@@ -289,7 +289,7 @@
                     else {
                         $response['success'] = 'Party updated!';
                         
-                        if(SYSTEM_STATUS != 'development') { 
+                        if(CONNECT_TO_WORDPRESS) { 
                             /** Prepare Custom Fields for WP XML-RPC - get all needed data **/
                             $theParty = $this->Party->findThis($id);
                             $Host = $Groups->findHost($data['group']);
@@ -458,7 +458,7 @@
                     }
                     
                     
-                    if(SYSTEM_STATUS != 'development') { 
+                    if(CONNECT_TO_WORDPRESS) { 
                         /** WP Sync **/
                         $party = $this->Party->findThis($idparty, true);
                         

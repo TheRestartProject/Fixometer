@@ -32,6 +32,7 @@ define('UPLOADS_URL', BASE_URL . '/' . 'uploads' . '/' );
 date_default_timezone_set('Europe/London');
 
 /** Wordpress Remote Publishing endpoint **/
+define('CONNECT_TO_WORDPRESS', true);
 define('WP_XMLRPC_ENDPOINT', 'http://wordpress.yavin/xmlrpc.php');
 define('WP_XMLRPC_USER', 'xml-bot');
 define('WP_XMLRPC_PSWD', 'dna%ba$MXF^x6#UW$fuigUkX');
