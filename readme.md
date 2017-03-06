@@ -1,7 +1,9 @@
-## Fixometer
-Building a tool to track impact of repaired electronic devices
+# Fixometer
+
+The Fixometer is our tool to monitor the growing impact of our community repair activities and those of our network of partners. It allows members of the Restart community to log fixes occurring at the events they run, capturing the environmental and social impact of their work.  To find out more visit [the Fixometer page on our website](https://therestartproject.org/fixometer/).
 
 ## Tech
+
 The tool is built in PHP/MySQL, MVC architecture. The tool's frontend is managed and buit with Bower/Grunt (see /public). Frontend built upon Bootstrap.
 
 ### Installation
