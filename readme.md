@@ -19,4 +19,4 @@ The first version of the tool was made possible with modest funding from the Inn
 
 ## Project Management
 
-We're using ZenHub, so if you're interested to see how things are looking in terms of sprints/milestones, epics and user stories, please install the ZenHub browser plugin - https://www.zenhub.com/.
+We're using ZenHub, so if you're interested to see how things are looking in terms of sprints/milestones, epics and user stories, please install the ZenHub browser plugin - https://www.zenhub.com/.  For labels we're using the [robinpowered](https://robinpowered.com/blog/best-practice-system-for-organizing-and-tagging-github-issues/) labelling system (although note not everything currently labelled correctly yet... bear with us.)
