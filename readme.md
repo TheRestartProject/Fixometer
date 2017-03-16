@@ -15,3 +15,8 @@ We've documented our method for estimating CO2 emissions prevented through elect
 
 ## Funding and future development
 The first version of the tool was made possible with modest funding from the Innovation in Waste Prevention Fund, Defra-funded and administered by WRAP. Future development will be financed by the Shuttleworth Foundation. 
+
+
+## Project Management
+
+We're using ZenHub, so if you're interested to see how things are looking in terms of sprints/milestones, epics and user stories, please install the ZenHub browser plugin - https://www.zenhub.com/.
