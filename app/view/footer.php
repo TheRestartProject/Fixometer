@@ -10,7 +10,7 @@
                 
                 <h3>The Fixometer</h3>
                 <p>
-                   This tool was developed by The Restart Project with support from WRAP's Innovation in Waste Prevention Fund, in collaboration with The Engine Room and Circular Ecology. For technical support, please email <a href="mailto:janet@therestartproject.org">janet@therestartproject.org</a>
+                   This tool was developed by The Restart Project with support from WRAP's Innovation in Waste Prevention Fund, in collaboration with The Engine Room and Circular Ecology. For technical support, please email <a href="mailto:neil@therestartproject.org">neil@therestartproject.org</a>
                    
                     <br /><br />
                     Image on the login page &copy; <em class="blue">Heather Agyepong</em>
