@@ -105,7 +105,7 @@
                             }
                         }
                         else {
-                            $response['danger'] = 'No correspondance found. Please check your credentials and try again.';
+                            $response['danger'] = 'No user account was found for the email and password provided. Please check your details and try again.';
                             $this->set('response', $response);
                             //header('Location: /user/login');
                         }
