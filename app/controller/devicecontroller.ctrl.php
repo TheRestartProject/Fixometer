@@ -164,7 +164,7 @@
                 // get device party
                 $curr = $this->Device->findOne($id);
                 $party = $curr->event;
-                echo $party; //die();
+                // echo $party; //die();
                 
                 $r = $this->Device->delete($id);
                 if(!$r){

@@ -104,7 +104,7 @@
                 
                 foreach($party->devices as $device){
                     if($device->repair_status == DEVICE_FIXED){ 
-                        $party->co2 += (!empty($device->estimate) ? ($device->estimate * $this->EmissionRatio) : $device->footprint);
+                        $party->co2 += (!empty($device->estimate) && $device->category == 46 ? ($device->estimate * $this->EmissionRatio) : $device->footprint);
                         
                     }
                     

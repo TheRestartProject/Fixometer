@@ -62,8 +62,9 @@
 				die('Data not properaly formatted. Exiting.');
 			}
 			else {
+				$info = array();
 				$co2 = 0;
-				
+			
 				$id = (int)$id;
 				$id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
 				
@@ -73,7 +74,7 @@
 					//dbga($party->devices);
 					foreach($party->devices as $device){
 						if($device->repair_status == DEVICE_FIXED){ 
-							$co2 += (!empty($device->estimate) ? ($device->estimate * $this->EmissionRatio) : $device->footprint);
+							$co2 += (!empty($device->estimate) && $device->category == 46 ? ($device->estimate * $this->EmissionRatio) : $device->footprint);
 						}
 					}
 				}
@@ -83,21 +84,23 @@
 					foreach($allparties as $party){
 						foreach($party->devices as $device){
 							if($device->repair_status == DEVICE_FIXED){ 
-								$co2 += (!empty($device->estimate) ? ($device->estimate * $this->EmissionRatio) : $device->footprint);
+								$co2 += (!empty($device->estimate) && $device->category == 46 ? ($device->estimate * $this->EmissionRatio) : $device->footprint);
 							}
 						}
 					}
+					
+					//$weights[0]->total_footprints = $co2;
 				}
-				
-				
+				$co2 = $co2 * $this->devices->displacement; 
+		
 				if($co2 > 6000) { 
 					$info['consume_class'] 	= 'car';
 					$info['consume_image'] 	= 'Counters_C2_Driving.svg';
 					$info['consume_label'] 	= 'Equal to driving';
-					$info['consume_eql_to'] = (1 / 0.12) * $weights[0]->total_footprints;
+					$info['consume_eql_to'] = (1 / 0.12) * $co2;
 					$info['consume_eql_to'] = number_format(round($info['consume_eql_to']), 0, '.', ',') . '<small>km</small>';
 					
-					$info['manufacture_eql_to'] = round($weights[0]->total_footprints / 6000);
+					$info['manufacture_eql_to'] = round($co2 / 6000);
 					$info['manufacture_img'] 	= 'Icons_04_Assembly_Line.svg';
 					$info['manufacture_label'] 	= 'or like the manufacture of <span class="dark">' . $info['manufacture_eql_to'] . '</span> cars';
 					$info['manufacture_legend'] = ' 6000kg of CO<sub>2</sub>';
@@ -106,10 +109,10 @@
 					$info['consume_class'] 	= 'tv';
 					$info['consume_image'] 	= 'Counters_C1_TV.svg';
 					$info['consume_label'] 	= 'Like watching TV for';
-					$info['consume_eql_to'] = ((1 / 0.024) * $weights[0]->total_footprints ) / 24;
+					$info['consume_eql_to'] = ((1 / 0.024) * $co2 ) / 24;
 					$info['consume_eql_to'] = number_format(round($info['consume_eql_to']), 0, '.', ',') . '<small>days</small>';
 					
-					$info['manufacture_eql_to'] = round($weights[0]->total_footprints / 100);
+					$info['manufacture_eql_to'] = round($co2 / 100);
 					$info['manufacture_img'] = 'Icons_03_Sofa.svg';
 					$info['manufacture_label'] = 'or like the manufacture of <span class="dark">' . $info['manufacture_eql_to'] . '</span> sofas';
 					$info['manufacture_legend'] = ' 100kg of CO<sub>2</sub>';
