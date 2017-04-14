@@ -176,4 +176,17 @@
             return $response;
         }
         
+        /** check if email is already in the database **/
+        public function checkEmail($email){
+            
+            $sql = 'SELECT COUNT(idusers) AS emails FROM ' . $this->table . ' WHERE email = :email';
+            $stmt = $this->database->prepare($sql);
+            $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+            $stmt->execute();
+            $r = $stmt->fetch(PDO::FETCH_OBJ);
+            return ($r->emails > 0) ? false : true;
+        
+        }
+    
+        
     }

@@ -105,7 +105,7 @@
                             }
                         }
                         else {
-                            $response['danger'] = 'No correspondance found. Please check your credentials and try again.';
+                            $response['danger'] = 'No user account was found for the email and password provided. Please check your details and try again.';
                             $this->set('response', $response);
                             //header('Location: /user/login');
                         }
@@ -196,6 +196,9 @@
                         if(empty($group)){
                             $group = NULL;
                         }
+                        if(!$this->User->checkEmail($email)){
+                            $error['email'] = 'This email is already in use in our database. Please use another one.';   
+                        }
                         
                         if(empty($error)) {
                            // No errors. We can proceed and create the User.
@@ -262,6 +265,8 @@
                 $this->set('user', $user);
                 $this->set('header', true);
                 
+                
+                
                 // Administrators can edit users.
                 if(hasRole($user, 'Administrator') || hasRole($user, 'Host')){ 
                     
@@ -273,13 +278,21 @@
                         
                         
                         $error = false;
+                        // check for email in use
+                        $editingUser = $this->User->findOne($id);
+                        if($editingUser->email !== $data['email']){
+                            if(!$this->User->checkEmail($data['email'])){
+                                $error['email'] = 'The email you entered is already in use in our database. Please use another one.';   
+                            }    
+                        }
+                        
+                        
                         if(!empty($data['new-password'])){
                             if($data['new-password'] !== $data['password-confirm']){
                                 $error['password'] = 'The passwords are not identical!';   
                             }
                             else {
-                                $data['password'] = crypt($data['new-password'], '$1$'.SECRET);
-                                
+                                $data['password'] = crypt($data['new-password'], '$1$'.SECRET);                                
                             }
                         }
                         
@@ -385,13 +398,42 @@
             }
         }
         
-        public function logout() {
-            
+        public function logout() {            
             unset($_SESSION[APPNAME][SESSIONKEY]);
-            session_destroy();
+            session_destroy();            
+            header('Location: /user/login');            
+        }
+        
+        public function delete(){
+            $Auth = new Auth($url);
+            if(!$Auth->isLoggedIn()){
+                header('Location: /user/login');
+            }
             
-            header('Location: /user/login');
-            
+            else {                
+                $user = $Auth->getProfile();
+                $this->set('user', $user);
+                $this->set('header', true);
+                
+                // Administrators can edit users.
+                if(hasRole($user, 'Administrator') || hasRole($user, 'Host')){
+                    if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST)){
+                        $id = (int)$_POST['id'];
+                        $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
+                        
+                        // Delete Session
+                        $session = new Session;
+                        $session->destroySession($id);
+                        
+                        if($this->User->delete($id)) {
+                            header('Location: /user/all?msg=ok');    
+                        }
+                        else {
+                            header('Location: /user/all?msg=no');
+                        }
+                    }    
+                }
+            }
         }
     }
     
