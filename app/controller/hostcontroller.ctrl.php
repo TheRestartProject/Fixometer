@@ -60,6 +60,12 @@
                         break;
                     case 'ue':
                         $response['success'] = 'Profile updated.';
+                        break;
+                    case 'de':
+                        if($code == 200 ) { $response['success'] = 'Party deleted.'; }
+                        elseif( $code == 403 ) { $response['danger'] = 'Couldn\'t delete the party!'; }
+                        elseif( $code == 500 ) { $response['warning'] = 'The party has been deleted, but <strong>something went wrong while deleting it from WordPress</strong>. <br /> You\'ll need to do that manually!';  }
+                        break;
                 }
                     
                 $this->set('response', $response);    

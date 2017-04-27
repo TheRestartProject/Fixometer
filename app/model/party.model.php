@@ -37,7 +37,8 @@
             $sql = 'SELECT
                         `e`.`idevents` AS `id`,
                         UNIX_TIMESTAMP( CONCAT(`e`.`event_date`, " ", `e`.`start`) ) AS `event_date` ,
-                        UNIX_TIMESTAMP( CONCAT(`e`.`event_date`, " ", `e`.`start`) ) AS `event_timestamp`,  
+                        UNIX_TIMESTAMP( CONCAT(`e`.`event_date`, " ", `e`.`start`) ) AS `event_timestamp`,
+                        UNIX_TIMESTAMP( CONCAT(`e`.`event_date`, " ", `e`.`end`) ) AS `event_end_timestamp`,  
                         `e`.`start` AS `start`,
                         `e`.`end` AS `end`,
                         `e`.`location`,

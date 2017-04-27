@@ -175,6 +175,7 @@
                                                 array('key' => 'party_time',            'value' => $start . ' - ' . $end),
                                                 array('key' => 'party_date',            'value' => $event_date),
                                                 array('key' => 'party_timestamp',       'value' => strtotime($event_date)),
+                                                array('key' => 'party_timestamp_end',   'value' => strtotime($endTime)),
                                                 array('key' => 'party_stats',           'value' => $idParty),
                                                 array('key' => 'party_lat',             'value' => $latitude),
                                                 array('key' => 'party_lon',             'value' => $longitude)
@@ -301,6 +302,7 @@
                                             array('key' => 'party_time',            'value' => $data['start'] . ' - ' . $data['end']),
                                             array('key' => 'party_date',            'value' => $wp_date),
                                             array('key' => 'party_timestamp',       'value' => $theParty->event_timestamp),
+                                            array('key' => 'party_timestamp_end',   'value' => $theParty->event_end_timestamp),
                                             array('key' => 'party_stats',           'value' => $id),
                                             array('key' => 'party_lat',             'value' => $data['latitude']),
                                             array('key' => 'party_lon',             'value' => $data['longitude'])
@@ -474,6 +476,7 @@
                                             array('key' => 'party_time',            'value' => substr($party->start, 0, -3) . ' - ' . substr($party->end, 0, -3)),
                                             array('key' => 'party_date',            'value' => date('d/m/Y', $party->event_date)),
                                             array('key' => 'party_timestamp',       'value' => $party->event_timestamp),
+                                            array('key' => 'party_timestamp_end',   'value' => $party->event_end_timestamp),
                                             array('key' => 'party_stats',           'value' => $idparty),
                                             array('key' => 'party_lat',             'value' => $party->latitude),
                                             array('key' => 'party_lon',             'value' => $party->longitude)
@@ -586,21 +589,42 @@
         
         public function delete($id){
             if(hasRole($this->user, 'Administrator') || (hasRole($this->user, 'Host') && in_array($id, $this->hostParties))){
+                // fetch the postID in WP to delete it later
+                $party = $this->Party->findOne($id);                
+                $wpId = $party->wordpress_post_id;
+                
                 $usersDelete = $this->Party->deleteUserList($id);
                 $r = $this->Party->delete($id);
                 
                 if(!$r){
-                    $response = 'd:err';
+                    $response = 'action=de&code=403';
                 }
                 else {
-                    $response = 'd:ok';
+                    if( !is_null($wpId) && is_numeric($wpId) ) {
+                        // delete from WordPress 
+                        /** Start WP XML-RPC **/
+                        $wpClient = new \HieuLe\WordpressXmlrpcClient\WordpressClient();
+                        $wpClient->setCredentials(WP_XMLRPC_ENDPOINT, WP_XMLRPC_USER, WP_XMLRPC_PSWD);
+                    
+                        $deletion = $wpClient->deletePost($wpId);
+                        if(!$wpId){
+                            $response = 'action=de&code=500';
+                        }
+                        else {
+                            $response = 'action=de&code=200';    
+                        }                        
+                    }
+                    else {
+                        $response = 'action=de&code=200';    
+                    }
+                    
                 }
                 
                 if(hasRole($this->user, 'Host')){
-                    header('Location: /host/index/' . $response);
+                    header('Location: /host?' . $response);
                 }
                 else {
-                    header('Location: /party/index/' . $response);    
+                    header('Location: /party?' . $response);    
                 }
                 
             }
