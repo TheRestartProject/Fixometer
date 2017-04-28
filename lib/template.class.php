@@ -32,7 +32,7 @@
         function render() {
             extract($this->variables);
             
-            if(!in_array($this->_action, $this->exclude) && !in_array($this->_controller, array('rss', 'export','outbound'))){
+            if(!in_array($this->_action, $this->exclude) && !in_array($this->_controller, array('rss', 'export','outbound', 'api'))){
                 /* Include Base Head @ view/head.php */
                 include (ROOT . DS . 'app' . DS . 'view' . DS . 'head.php');
                 
