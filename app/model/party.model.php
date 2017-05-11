@@ -37,7 +37,8 @@
             $sql = 'SELECT
                         `e`.`idevents` AS `id`,
                         UNIX_TIMESTAMP( CONCAT(`e`.`event_date`, " ", `e`.`start`) ) AS `event_date` ,
-                        UNIX_TIMESTAMP( CONCAT(`e`.`event_date`, " ", `e`.`start`) ) AS `event_timestamp`,  
+                        UNIX_TIMESTAMP( CONCAT(`e`.`event_date`, " ", `e`.`start`) ) AS `event_timestamp`,
+                        UNIX_TIMESTAMP( CONCAT(`e`.`event_date`, " ", `e`.`end`) ) AS `event_end_timestamp`,  
                         `e`.`start` AS `start`,
                         `e`.`end` AS `end`,
                         `e`.`location`,
@@ -143,6 +144,63 @@
             }
         }
         
+        public function ofThisGroup2($group = 'admin', $only_past = false, $devices = false){
+            $sql = 'SELECT
+                        *,
+                        `e`.`location` AS `venue`, `g`.`name` AS group_name,
+                        
+                        
+                        UNIX_TIMESTAMP( CONCAT(`e`.`event_date`, " ", `e`.`start`) ) AS `event_timestamp`  
+                    
+                    FROM `' . $this->table . '` AS `e` 
+                        
+                        INNER JOIN `groups` as `g` ON `e`.`group` = `g`.`idgroups`
+                    
+                        LEFT JOIN (
+                            SELECT COUNT(`dv`.`iddevices`) AS `device_count`, `dv`.`event` 
+                            FROM `devices` AS `dv` 
+                            GROUP BY  `dv`.`event`
+                        ) AS `d` ON `d`.`event` = `e`.`idevents` ';
+            //UNIX_TIMESTAMP( CONCAT(`e`.`event_date`, " ", `e`.`start`) )
+            if(is_numeric($group) && $group != 'admin' ){                
+                $sql .= ' WHERE `e`.`group` = :id ';
+            }
+            
+            if($only_past == true){
+                $sql .= ' AND TIMESTAMP(`e`.`event_date`, `e`.`start`) < NOW()';
+            }
+            
+            $sql .= ' ORDER BY `e`.`event_date` DESC';
+            
+            
+            $stmt = $this->database->prepare($sql);
+            
+            if(is_numeric($group) && $group != 'admin' ){
+                $stmt->bindParam(':id', $group, PDO::PARAM_INT);
+            }
+            
+            $q = $stmt->execute();
+            if(!$q){
+                if(SYSTEM_STATUS == 'development'){
+                    $err = $stmt->errorInfo();
+                    new Error(601, $err[2]);
+                }
+            }
+            else {
+                $parties = $stmt->fetchAll(PDO::FETCH_OBJ);
+                if($devices){
+                    $devices = new Device;
+                    foreach($parties as $i => $party){
+                        $parties[$i]->devices = $devices->ofThisEvent($party->idevents);
+                    }
+                    
+                }
+                
+                return $parties;
+                
+                
+            }
+        }
         
         public function ofThisGroup($group = 'admin', $only_past = false, $devices = false){
             $sql = 'SELECT

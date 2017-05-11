@@ -88,7 +88,8 @@
                                         'free_text'     => $text,
                                         );
                         $idGroup = $this->Group->create($data);
-                        if($idGroup){
+                        if( is_numeric($idGroup) && $idGroup !== false ){
+                            
                             $response['success'] = 'Group created correctly.';
                             
                             if(isset($_FILES) && !empty($_FILES)){
@@ -97,7 +98,7 @@
                             }
                             
                             /** Prepare Custom Fields for WP XML-RPC - get all needed data **/
-                            $Host = $Groups->findHost($idGroup);
+                            $Host = $this->Group->findHost($idGroup);
                             
                             $custom_fields = array(
                                             array('key' => 'group_city',            'value' => $area),
@@ -265,7 +266,7 @@
                         
                         $content = array(
                                         'post_type' => 'group',
-                                        'post_title' => $Host->groupname,
+                                        'post_title' => $data['name'],
                                         'post_content' => $data['free_text'],
                                         'custom_fields' => $custom_fields
                                         );
@@ -290,7 +291,7 @@
                             $wpClient->editPost($theGroup->wordpress_post_id, $content);
                         }
                         else {
-                            $wpid = $wpClient->newPost($Host->groupname, $data['free_text'], $content);
+                            $wpid = $wpClient->newPost($data['name'], $data['free_text'], $content);
                             $this->Group->update(array('wordpress_post_id' => $wpid), $id);
                         }
                         
@@ -333,6 +334,12 @@
             $Party = new Party;
             $Device = new Device;
             
+            
+            $weights = $Device->getWeights();
+			$TotalWeight = $weights[0]->total_weights;
+			$TotalEmission = $weights[0]->total_footprints;
+			$EmissionRatio = $TotalEmission / $TotalWeight;
+            
             $allparties = $Party->ofThisGroup($id, true, true);
             
             $participants = 0;
@@ -346,8 +353,8 @@
                 
                 foreach($party->devices as $device){
                     if($device->repair_status == DEVICE_FIXED){ 
-                        $co2 += $device->footprint;
-                        $waste += $device->weight;
+                        $co2 +=     (!empty($device->estimate) && $device->category == 46 ? ($device->estimate * $EmissionRatio) : $device->footprint);
+                        $waste +=   (!empty($device->estimate) && $device->category == 46 ? $device->estimate : $device->weight);
                     }
                 }
             }

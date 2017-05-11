@@ -234,7 +234,7 @@
         
         public function countCO2ByYear($group = null, $year = null) {
             $sql = 'SELECT
-                        (ROUND(SUM(`c`.`footprint`), 0) * ' . $this->displacement . ') + (IFNULL(ROUND(SUM(`estimate`) * (SELECT * FROM `view_waste_emission_ratio`), 0),0)) AS `co2`,
+                        (ROUND(SUM(`c`.`footprint`), 0) * ' . $this->displacement . ') + ( CASE WHEN `d`.`category` = 46 THEN IFNULL(ROUND(SUM(`estimate`) * (SELECT * FROM `view_waste_emission_ratio`), 0),0) ELSE 0 END) AS `co2`,
                         YEAR(`e`.`event_date`) AS `year`
                     FROM `' . $this->table . '` AS `d` 
                     INNER JOIN `events` AS `e`

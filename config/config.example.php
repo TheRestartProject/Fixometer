@@ -32,6 +32,13 @@ define('UPLOADS_URL', BASE_URL . '/' . 'uploads' . '/' );
 date_default_timezone_set('Europe/London');
 
 /** Wordpress Remote Publishing endpoint **/
-define('WP_XMLRPC_ENDPOINT', 'http://wordpress.yavin/xmlrpc.php');
-define('WP_XMLRPC_USER', 'xml-bot');
-define('WP_XMLRPC_PSWD', 'dna%ba$MXF^x6#UW$fuigUkX');
+
+define('WP_XMLRPC_ENDPOINT', 'https://www.therestartproject.org/fxm.php');
+define('WP_XMLRPC_USER', 'fixometer');
+define('WP_XMLRPC_PSWD', 'giannutri15Stone$87');
+
+
+
+
+
+

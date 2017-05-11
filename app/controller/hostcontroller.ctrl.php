@@ -60,6 +60,12 @@
                         break;
                     case 'ue':
                         $response['success'] = 'Profile updated.';
+                        break;
+                    case 'de':
+                        if($code == 200 ) { $response['success'] = 'Party deleted.'; }
+                        elseif( $code == 403 ) { $response['danger'] = 'Couldn\'t delete the party!'; }
+                        elseif( $code == 500 ) { $response['warning'] = 'The party has been deleted, but <strong>something went wrong while deleting it from WordPress</strong>. <br /> You\'ll need to do that manually!';  }
+                        break;
                 }
                     
                 $this->set('response', $response);    
@@ -104,7 +110,7 @@
                 
                 foreach($party->devices as $device){
                     if($device->repair_status == DEVICE_FIXED){ 
-                        $party->co2 += (!empty($device->estimate) ? ($device->estimate * $this->EmissionRatio) : $device->footprint);
+                        $party->co2 += (!empty($device->estimate) && $device->category == 46 ? ($device->estimate * $this->EmissionRatio) : $device->footprint);
                         
                     }
                     
