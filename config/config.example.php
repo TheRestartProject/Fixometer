@@ -1,7 +1,8 @@
 <?php
 /** Application Name **/
-define( 'APPNAME',  'Fixometer'); 
+define( 'APPNAME',  'Fixometer');
 define( 'APPKEY',   'l[56pOkjg_I8874.');  // should be a random string
+define( 'APPEMAIL', 'your@email.org');
 
 /** Secret! **/
 define( 'SECRET',   strrev(md5(APPKEY)));
@@ -25,7 +26,7 @@ define('HTTP_PROTOCOL', 'http');
 define('BASE_URL', HTTP_PROTOCOL . '://' . $_SERVER['HTTP_HOST']);
 define('UPLOADS_URL', BASE_URL . '/' . 'uploads' . '/' );
 
-/** date/time 
+/** date/time
  * w/out this PHP throws warnings all over the place.
  * Should be set to same timezone as MySQL server for consistency.
  * */
@@ -33,12 +34,6 @@ date_default_timezone_set('Europe/London');
 
 /** Wordpress Remote Publishing endpoint **/
 
-define('WP_XMLRPC_ENDPOINT', 'https://www.therestartproject.org/fxm.php');
-define('WP_XMLRPC_USER', 'fixometer');
-define('WP_XMLRPC_PSWD', 'giannutri15Stone$87');
-
-
-
-
-
-
+define('WP_XMLRPC_ENDPOINT', 'endpoint');
+define('WP_XMLRPC_USER', 'wp_use');
+define('WP_XMLRPC_PSWD', 'wp_pwd');
