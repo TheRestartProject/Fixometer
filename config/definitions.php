@@ -15,3 +15,5 @@ define('WDG_PUBLIC_INFO', "Please be aware that information saved here will be p
 define('DEVICE_FIXED',      1);
 define('DEVICE_REPAIRABLE', 2);
 define('DEVICE_DEAD',       3);
+
+define('MISC_CATEGORY_ID', 46);

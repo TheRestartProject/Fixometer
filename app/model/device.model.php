@@ -306,17 +306,16 @@
         }
         
         public function findMostSeen($status = null, $cluster = null, $group = null){
-            
             $sql = 'SELECT COUNT(`d`.`category`) AS `counter`, `c`.`name` FROM `' . $this->table . '` AS `d`
                     INNER JOIN `events` AS `e`
                         ON `d`.`event` = `e`.`idevents`
                     INNER JOIN `categories` AS `c`
                         ON `d`.`category` = `c`.`idcategories`
-                    WHERE 1=1 ';
-                                
-            if(!is_null($status) && is_numeric($status)){                    
+                    WHERE 1=1 and `c`.`idcategories` <> ' . MISC_CATEGORY_ID;
+
+            if(!is_null($status) && is_numeric($status)){
                 $sql .= ' AND `d`.`repair_status` = :status ';
-            }                    
+            }
             if(!is_null($cluster) && is_numeric($cluster)){
                 $sql .= ' AND `c`.`cluster` = :cluster ';
             }
