@@ -1,5 +1,8 @@
+$.fn.selectpicker.Constructor.DEFAULTS.iconBase = 'fa';
+$.fn.selectpicker.Constructor.DEFAULTS.tickIcon = 'fa-check';
+
 $(document).ready(function(){
-    
+
     /** startup datepickers **/
     $('input.date').datetimepicker({
                 icons: {
@@ -28,23 +31,23 @@ $(document).ready(function(){
             },
             format: 'HH:mm',
             defaultDate: $(this).val()
-        
-        });    
-    
+
+        });
+
     /** linking two times in party creation **/
-    
+
     $("#start-pc").on("dp.change", function (e) {
         //alert(e);
-        
+
         var curtime = $(this).val(),
             arrtime = curtime.split(':');
         console.log(arrtime[0] + ' | ' + arrtime[1]);
-        
+
         $('#end-pc').data("DateTimePicker").date(e.date.add(3, 'h'));
     });
-    
-    
-    
+
+
+
     /** Rich Text Editors **/
     $('.rte').summernote({
         height:     300,
@@ -55,15 +58,15 @@ $(document).ready(function(){
             ['misc', ['codeview']]
         ]
     });
-    
+
     /** Load list of invitable restarters ( /party/create ) **/
     $('.users_group').change(function(){ // selectpicker users_group
         var groupId = $(this).val();
         $.getJSON('/ajax/restarters_in_group', {'group': groupId}, function(data){
             var checkboxes = '';
             data.forEach(function(e){
-                checkboxes +=   '<div class="checkbox">' + 
-                                    '<label for="users-' + e.id + '">' + 
+                checkboxes +=   '<div class="checkbox">' +
+                                    '<label for="users-' + e.id + '">' +
                                         '<input type="checkbox" checked name="users[]" id="users-' + e.id + '" value="' + e.id + '"> ' +
                                         e.name + ' (' + e.role + ')' +
                                     '</label>' +
@@ -72,18 +75,18 @@ $(document).ready(function(){
             $('.users_group_list').html(checkboxes);
         });
     });
-    
+
     /** Show/Hide repairable details ( /device/create ) **/
     $('[name="repair_status"]').click(function(){
         if($(this).is(':checked') && $(this).attr('id') == 'repair_status_2') {
-            
+
             $('#repairable-details').slideDown('slow');
         }
         else {
             $('#repairable-details').hide('fast');
         }
     });
-    
+
     /** Show/Hide Repairable details ( /party/manage ) (Host management page) **/
     $('.repairable').click(function(){
         var detailsWrap = $(this).data('target-details');
@@ -91,13 +94,13 @@ $(document).ready(function(){
             $(detailsWrap).slideDown('slow');
         }
     });
-    
+
     /** Delete object control **/
     $('.delete-control').click(function(e){
         e.preventDefault();
-        
+
         var deleteTarget     =  $(this).attr('href');
-        var deleteControlBox =  '<div class="ctrl-box-wrap">' + 
+        var deleteControlBox =  '<div class="ctrl-box-wrap">' +
                                     '<div class="ctrl-box">' +
                                         '<div class="ctrl-box-hdr">' +
                                             '<h3>Are You Sure?<h3>' +
@@ -107,59 +110,59 @@ $(document).ready(function(){
                                         '</div>' +
                                         '<div class="ctrl-box-foot">' +
                                             '<a href="' + deleteTarget + '" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</a> &nbsp;' +
-                                            '<a href="#" class="btn btn-default ctrl-box-close"><i class="fa fa-undo"></i> Cancel</a>' + 
-                                        '</div>' + 
-                                    '</div>' + 
+                                            '<a href="#" class="btn btn-default ctrl-box-close"><i class="fa fa-undo"></i> Cancel</a>' +
+                                        '</div>' +
+                                    '</div>' +
                                 '</div>';
-                
+
         if ($('.ctrl-box-wrap').length > 0) { $('.ctrl-box-wrap').remove(); }
-        
+
         $('body').append(deleteControlBox);
         $('.ctrl-box-close').click(function(){ $('.ctrl-box-wrap').remove(); });
-                
+
         return false;
     });
-    
+
     // file deletion
     $('.remove-image').click(function(e){
         e.preventDefault();
-        
+
         var Holder = $(this).parent();
         var image = $(this).data('remove-image');
         var path = $(this).data('image-path');
-        
-        $.getJSON( $(this).attr('href'), {id: image, path: path}, function(){            
-            Holder.remove();                
+
+        $.getJSON( $(this).attr('href'), {id: image, path: path}, function(){
+            Holder.remove();
         });
-        
-        return false;    
+
+        return false;
     });
-    
-    
-    
+
+
+
     /** switch stat bars / host dashboard **/
     $('.switch-view').click(function(e){
         e.preventDefault();
         var target = $(this).data('target');
         var family = $(this).data('family');
-        
+
         $('.switch-view').removeClass('active');
         $(this).addClass('active');
-        
+
         $(family).removeClass('show').addClass('hide');
         $(target).addClass('show');
-        
+
     });
-    
+
     /** toggle party views in admin console **/
     $('.party-switch').click(function(e){
         e.preventDefault();
         var target = $(this).data('target');
         var family = $(this).data('family');
-        
+
         $('.party-switch').removeClass('active');
         $(this).addClass('active');
-        
+
         if (target == 'all') {
             $('.party').addClass('show').removeClass('hide');
         }
@@ -168,7 +171,7 @@ $(document).ready(function(){
             $(target).addClass('show');
         }
     });
-    
+
     $('.category-select').change(function(){
         if($(this).val() === '46') {
             $(this).parent().next('.estimate-box').removeClass('hide').addClass('show');
@@ -177,17 +180,17 @@ $(document).ready(function(){
             $(this).parent().next('.estimate-box').removeClass('show').addClass('hide');
         }
     });
-    
+
     /** Add Device Row in Party Management **/
     $('#add-device').click(function(e){
         e.preventDefault();
-        
+
         var rows = $('#device-table > tbody > tr').length,
             categories = null,
             restarters = null,
             n = rows + 1;
-             
-        
+
+
         $.ajax({
             async: false,
             url: '/ajax/category_list',
@@ -197,7 +200,7 @@ $(document).ready(function(){
                 categories = r;
             }
         });
-        
+
         /*
         $.ajax({
             async: false,
@@ -209,8 +212,8 @@ $(document).ready(function(){
             }
         });
         */
-        
-        var tablerow =  '<tr class="newdevice">' + 
+
+        var tablerow =  '<tr class="newdevice">' +
                             '<td>' + n + '.</td>'+
                             '<td>' +
                                 '<div class="form-group">' +
@@ -220,26 +223,26 @@ $(document).ready(function(){
                                     '<option value="46">None of the above...</option>' +
                                     '</select>' +
                                 '</div>' +
-                                '<div class="form-group hide estimate-box">' + 
-                                    '<small>Please input an estimate weight (in kg)</small>' + 
-                                    '<input type="text" name="device[' + n +'][estimate]" id="device[' + n +'][estimate]" class="form-control" placeholder="Estimate...">' + 
-                                '</div>' + 
-                            '</td>' +            
+                                '<div class="form-group hide estimate-box">' +
+                                    '<small>Please input an estimate weight (in kg)</small>' +
+                                    '<input type="text" name="device[' + n +'][estimate]" id="device[' + n +'][estimate]" class="form-control" placeholder="Estimate...">' +
+                                '</div>' +
+                            '</td>' +
                             '<td>' +
                                 '<textarea class="form-control" id="device[' + n +'][problem]" name="device[' + n +'][problem]"></textarea>' +
                             '</td>' +
-                            '<td>' +                                
+                            '<td>' +
                                 '<div class="form-group">' +
                                     '<input type="text" name="device[' + n +'][brand]" id="device[' + n +'][brand]" class="form-control" placeholder="Brand...">' +
                                 '</div>' +
-                                
+
                                 '<div class="form-group">' +
                                     '<input type="text" name="device[' + n +'][model]" id="device[' + n +'][model]" class="form-control" placeholder="Model...">' +
                                 '</div>' +
-                            '</td>' +                            
+                            '</td>' +
                             '<td>' +
                                 '<div class="form-group">' +
-                                    '<div class="radio">' +                                            
+                                    '<div class="radio">' +
                                         '<label>' +
                                             '<input type="radio" name="device[' + n +'][repair_status]" id="device[' + n +'][repair_status_1]" value="1" checked> Fixed' +
                                         '</label>' +
@@ -285,16 +288,19 @@ $(document).ready(function(){
                             '</td>' +
                             '<td></td>' +
                         '</tr>';
-        
+
         $('#device-table tbody').append(tablerow);
-        
-        
-        $('.selectpicker').selectpicker();
-        
+
+
+        $('.selectpicker').selectpicker({
+          iconBase: 'fa',
+          tickIcon: 'fa-check'
+        });
+
         $('tr.newdevice .category-select').change(function(){
-            
+
             console.log($(this).val());
-            
+
             if($(this).val() === '46') {
                 $(this).parent().next('.estimate-box').removeClass('hide').addClass('show');
             }
@@ -302,18 +308,18 @@ $(document).ready(function(){
                 $(this).parent().next('.estimate-box').removeClass('show').addClass('hide');
                 $(this).parent().next('.estimate-box').children('input').val('');
             }
-        });        
-        
+        });
+
         /** Show/Hide Repairable details ( /party/manage ) (Host management page) **/
         $('tr.newdevice .repairable').click(function(){
             $(this).parent().parent().next('.repairable-details').addClass('show');
             detailswrap.css({'display': 'block'});
         });
-        
-        
+
+
     });
-    
-    /* manage needed visibility to load correctly charts (host dahsboard) */ 
+
+    /* manage needed visibility to load correctly charts (host dahsboard) */
    /* $('.charts:first-child').addClass('show');
     $('.charts:not(:first-child)').addClass('hide');
     */
@@ -321,11 +327,11 @@ $(document).ready(function(){
     if( $('#device-table').length > 0 ) {
         $('#device-table').floatThead();
     }
-    
+
     /* scrollbar for party list */
     if ($('#party-list').length > 0 ) {
-        $('#party-list').perfectScrollbar(); 
+        $('#party-list').perfectScrollbar();
     }
-    
-    
+
+
 });

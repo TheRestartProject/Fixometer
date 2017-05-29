@@ -22,7 +22,7 @@
     "bootstrap-sortable": "~1.11.1",
     "bootstrap": "~3.3.4",
     "fontawesome": "~4.3.0",
-    "bootstrap-select": "~1.6.5"
+    "bootstrap-select": "~1.12.2"
   },
   "devDependencies": {
     "eonasdan-bootstrap-datetimepicker": "~4.7.14",
