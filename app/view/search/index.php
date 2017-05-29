@@ -8,7 +8,7 @@
         </div>
     </div>
     <?php } ?>
-<?php dbga($_SESSION); ?>
+
     <section class="row profile">
       <div clasS="col-md-12">
         <form class="form-inline" action="/search" method="get">

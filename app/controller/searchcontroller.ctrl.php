@@ -25,6 +25,13 @@
     }
 
     public function index($response = null){
+
+      $this->set('charts', true);
+
+      $this->set('css', array('/components/perfect-scrollbar/css/perfect-scrollbar.min.css'));
+      $this->set('js', array('foot' => array('/components/perfect-scrollbar/js/min/perfect-scrollbar.jquery.min.js')));
+      
+
         /** Init all needed classes **/
         $Groups = new Group;
         $Parties = new Party;
