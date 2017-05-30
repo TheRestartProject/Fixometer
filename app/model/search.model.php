@@ -42,7 +42,7 @@
         $sql .= ' AND ' . implode(' AND ', $conditions);
       }
       $sql .= ' ORDER BY `e`.`event_date` DESC';
-      
+
       $stmt = $this->database->prepare($sql);
       $stmt->execute();
 
@@ -58,5 +58,61 @@
       return $parties;
 
     }
+
+    public function deviceStatusCount($parties){
+        $sql = 'SELECT COUNT(*) AS `counter`, `d`.`repair_status` AS `status`, `d`.`event`
+                FROM `devices` AS `d`';
+        $sql .= ' WHERE `repair_status` > 0 ';
+        $sql .= ' AND `d`.`event` IN (' . implode( ', ', $parties ). ')';
+        $sql .= ' GROUP BY `status`';
+
+        $stmt = $this->database->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function findMostSeen($parties, $status = 1, $cluster = null ){
+        $sql = 'SELECT COUNT(`d`.`category`) AS `counter`, `c`.`name` FROM `devices` AS `d`
+                INNER JOIN `events` AS `e`
+                    ON `d`.`event` = `e`.`idevents`
+                INNER JOIN `categories` AS `c`
+                    ON `d`.`category` = `c`.`idcategories`
+                WHERE 1=1 and `c`.`idcategories` <> ' . MISC_CATEGORY_ID;
+        $sql .= ' AND `d`.`event` IN (' . implode( ', ', $parties ) . ')';
+
+
+        if(!is_null($status) && is_numeric($status)){
+            $sql .= ' AND `d`.`repair_status` = :status ';
+        }
+        if(!is_null($cluster) && is_numeric($cluster)){
+            $sql .= ' AND `c`.`cluster` = :cluster ';
+        }
+        
+        $sql.= ' GROUP BY `d`.`category`
+                ORDER BY `counter` DESC';
+        $sql .= (!is_null($cluster) ? '  LIMIT 1' : '');
+
+
+        $stmt = $this->database->prepare($sql);
+
+        if(!is_null($status) && is_numeric($status)){
+            $stmt->bindParam(':status', $status, PDO::PARAM_INT);
+        }
+
+        if(!is_null($cluster) && is_numeric($cluster)){
+            $stmt->bindParam(':cluster', $cluster, PDO::PARAM_INT);
+        }
+
+        $q = $stmt->execute();
+        if(!$q){
+            dbga($stmt->errorCode()); dbga($stmt->errorInfo() );
+        }
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+
+
+    }
+
+
 
    }
