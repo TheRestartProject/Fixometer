@@ -84,8 +84,6 @@
                   ORDER BY `repair_status` ASC
                 ';
 
-                echo $sql;
-
         $stmt = $this->database->prepare($sql);
 
         $stmt->bindParam(':cluster', $cluster, PDO::PARAM_INT);
