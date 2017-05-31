@@ -72,6 +72,34 @@
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
+    public function countByCluster($parties, $cluster){
+        $sql = 'SELECT COUNT(*) AS `counter`, `repair_status` FROM `devices` AS `d`
+                INNER JOIN `events` AS `e`
+                    ON `d`.`event` = `e`.`idevents`
+                INNER JOIN `categories` AS `c`
+                    ON `d`.`category` = `c`.`idcategories`
+                WHERE `c`.`cluster` = :cluster AND `d`.`repair_status` > 0 ';
+        $sql .= ' AND `d`.`event` IN (' . implode( ', ', $parties ) . ') ';
+        $sql.= '  GROUP BY `repair_status`
+                  ORDER BY `repair_status` ASC
+                ';
+
+                echo $sql;
+
+        $stmt = $this->database->prepare($sql);
+
+        $stmt->bindParam(':cluster', $cluster, PDO::PARAM_INT);
+
+        $q = $stmt->execute();
+        if(!$q){
+            dbga($stmt->errorCode()); dbga($stmt->errorInfo() );
+        }
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+
+    }
+
+
+
     public function findMostSeen($parties, $status = 1, $cluster = null ){
         $sql = 'SELECT COUNT(`d`.`category`) AS `counter`, `c`.`name` FROM `devices` AS `d`
                 INNER JOIN `events` AS `e`
@@ -88,7 +116,7 @@
         if(!is_null($cluster) && is_numeric($cluster)){
             $sql .= ' AND `c`.`cluster` = :cluster ';
         }
-        
+
         $sql.= ' GROUP BY `d`.`category`
                 ORDER BY `counter` DESC';
         $sql .= (!is_null($cluster) ? '  LIMIT 1' : '');
@@ -109,8 +137,6 @@
             dbga($stmt->errorCode()); dbga($stmt->errorInfo() );
         }
         return $stmt->fetchAll(PDO::FETCH_OBJ);
-
-
     }
 
 

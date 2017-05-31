@@ -1,4 +1,4 @@
-<div class="container" id="admin-dashboard">
+<div class="container search-dashboard" id="admin-dashboard">
 
 
     <?php if(isset($response)) { ?>
@@ -381,61 +381,10 @@
                   </div>
               </section>
 
-              <!-- CO2 stats -->
               <section class="row">
-                  <div class="col-md-12">
-                      <h3>Impact</h3>
-                  </div>
-
-                  <div class="col-md-6">
-                      <h5 class="text-center">e-Waste Prevented to date</h5>
-                      <span class="largetext">
-                          <?php echo number_format(round($wasteTotal), 0, '.', ','); ?> kg
-                      </span>
-
-                      <hr />
-
-                      <h5 class="text-center">e-Waste prevented this year</h5>
-                      <?php
-
-                          foreach($waste_year_data as $y){
-                              if($y->year == date('Y', time())) {
-                      ?>
-                      <span class="largetext">
-                          <?php echo number_format(round($y->waste), 0, '.', ','); ?> kg
-                      </span>
-                      <?php
-                              }
-                          }
-                      ?>
-
-                  </div>
-
-                  <div class="col-md-6">
-                      <h5 class="text-center">CO<sub>2</sub> emission prevented to date</h5>
-
-                      <span class="largetext">
-                          <?php echo number_format(round($co2Total), 0, '.', ','); ?> kg of CO<sub>2</sub>
-                      </span>
-
-                      <hr />
-
-                      <h5 class="text-center">CO<sub>2</sub> emission prevented this year</h5>
-                      <span class="largetext">
-                          <?php echo number_format(round($co2ThisYear), 0, '.', ','); ?> kg of CO<sub>2</sub>
-                      </span>
 
 
-                  </div>
-
-
-              </section>
-
-              <hr />
-
-
-              <section class="row">
-                  <!-- Device count -->
+                <!-- Device count -->
 
                   <div class="col-md-12">
                       <h3>Devices Restarted</h3>
@@ -730,7 +679,7 @@
                   //dbga($clusters);
                   $c = 1;
                   foreach($clusters as $key => $cluster){ ?>
-                  <div class="col-md-10 <?php echo($c == 1 ? 'show' : 'hide'); ?> bargroup" id="<?php echo $key; ?>">
+                  <div class="col-md-12 <?php echo($c == 1 ? 'show' : 'hide'); ?> bargroup" id="<?php echo $key; ?>">
 
                       <div class="row">
                           <div class="col-md-2">
@@ -783,24 +732,7 @@
                   }
                   ?>
 
-                  <div class="col-md-2">
-                      <div class=" barpiece-tabs">
-                          <ul>
-                          <?php
-                          $c = 1;
-                          foreach($clusters as $key => $cluster){
-                          ?>
-                              <li><button class="btn btn-primary btn-sm <?php echo($c == 1 ? 'active' : ''); ?> switch-view" data-family=".bargroup" data-target="#<?php echo $key; ?>"><?php echo strtoupper($key); ?></button></li>
-                          <?php
-                          $c++;
-                          }
-                          ?>
 
-
-                          </ul>
-                      </div>
-
-                  </div>
               </section>
 
 

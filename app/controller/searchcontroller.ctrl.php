@@ -154,13 +154,40 @@
               $totalCO2 += $party->co2;
           }
 
+          /** Cluster dataviz **/
+          $clusters = array();
+
+          for($i = 1; $i <= 4; $i++) {
+              $cluster = $this->Search->countByCluster($partyIds, $i);
+              $total = 0;
+              foreach($cluster as $state){
+                  $total += $state->counter;
+              }
+              $cluster['total'] = $total;
+              $clusters['all'][$i] = $cluster;
+          }
+
+
+          $this->set('clusters', $clusters);
+
+          // most/least stats for clusters
+          $mostleast = array();
+          for($i = 1; $i <= 4; $i++){
+              $mostleast[$i]['most_seen'] = $this->Search->findMostSeen($partyIds,null, $i);
+              $mostleast[$i]['most_repaired'] = $this->Search->findMostSeen($partyIds,1, $i);
+              $mostleast[$i]['least_repaired'] = $this->Search->findMostSeen($partyIds,3, $i);
+
+          }
+
+          $this->set('mostleast', $mostleast);
+
 
           $this->set('pax', $participants);
           $this->set('hours', $hours_volunteered);
           $this->set('totalWeight', $totalWeight);
           $this->set('totalCO2', $totalCO2);
           $this->set('device_count_status', $this->Search->deviceStatusCount($partyIds));
-          $this->set('top', $this->Search->findMostSeen($partyIds, 1, null)); 
+          $this->set('top', $this->Search->findMostSeen($partyIds, 1, null));
           $this->set('PartyList', $PartyList);
         }
 

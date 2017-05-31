@@ -4,16 +4,16 @@
     border-bottom: 1px solid #ddd;
     padding: 40px 0px;
     .header-text {
-        line-height: 52px; 
+        line-height: 52px;
     }
 }
 
 #host-dashboard {
-   
+
     #group-profile, #impact-header {
         background: url('/assets/images/low_brow.png') no-repeat center bottom;
         padding-bottom: 75px;
-        
+
         #group-main-stats {
             margin-top: 0px;
             h5 {
@@ -24,14 +24,14 @@
             .col { border: none !important;
                 span.largetext {
                     border-right: 1px solid @blue;
-                    line-height: 70px; 
+                    line-height: 70px;
                 }
-                
+
                 &:last-child > span.largetext {
-                    border-right: none; 
+                    border-right: none;
                 }
             }
-            
+
         }
     }
 }
@@ -50,7 +50,7 @@
     .impact-devices-3 {
         span.title { font-size: 32px; .Font-PatuaOne; color: @blue;  display: block;}
         span.legend { color: @litegray; font-size: 22px; font-weight: 300;  display: block;}
-        
+
         margin-bottom: 35px;
     }
     .title-text { color: @blue; font-size: 32px; }
@@ -59,14 +59,14 @@
         background: @blue;
         color: white;
         font-size: 16px;
-        padding: 6px 12px; 
+        padding: 6px 12px;
     }
 }
 #impact-dataviz {
     .texter {padding-bottom: 35px;  }
     span.datalabel {color: @litegray; font-size: 36px; font-weight: 300;line-height: 180%;  }
     span.blue { .Font-PatuaOne; color: @blue; font-size: 36px;line-height: 180%;  }
-    
+
     .di_consume {
         position: relative;
         .text {
@@ -76,23 +76,23 @@
             padding: 12% 0%;
             height: 60%;
             .blue {padding-top: 40px; text-align: center; font-size: 36px; color: @blue; font-weight: 300; text-indent: 30px; }
-            .consume { padding-top: 10px; text-align: center;  color: white; font-weight: 400; font-size: 60px; font-weight: bold; 
+            .consume { padding-top: 10px; text-align: center;  color: white; font-weight: 400; font-size: 60px; font-weight: bold;
                 small { font-size: 48px; }
             }
         }
         &.car .text {
             right: 0;
-        }        
+        }
         &.tv .text {
             left: 0;
         }
     }
-    
+
     .di_manufacture {
-        
-        .lightblue { font-size: 36px; font-weight: 300; color: @blue; margin: 45px auto; padding: 20px 0px; 
+
+        .lightblue { font-size: 36px; font-weight: 300; color: @blue; margin: 45px auto; padding: 20px 0px;
             .dark { color: @darkgray; }
-        }        
+        }
         .legend { color: @blue; padding: 30px 0px;
             img { height: 36px; }
         }
@@ -101,18 +101,18 @@
 #host-dashboard .row, #admin-dashboard .row , .profiles, .parties {
     margin-top: 35px;
     margin-bottom: 35px;
-    
-    
+
+
     h2 {
         text-align: center;
-        
+
         line-height: 120%;
         margin-bottom: 40px;
-        
-        
+
+
         position: relative;
         overflow: hidden;
-        
+
         span.title-text {
             display: inline-block;
             vertical-align: baseline;
@@ -121,7 +121,7 @@
             *vertical-align: auto;
             position: relative;
             padding: 0 20px;
-            line-height: 90%; 
+            line-height: 90%;
             &:before, &:after {
                 content: '';
                 display: block;
@@ -130,15 +130,15 @@
                 top: 0.73em;
                 border-top: 1px solid #ddd;
             }
-    
+
             &:before { right: 100%; }
             &:after { left: 100%; }
-            
+
             .grey { color: #9a9a9a; }
         }
-        
-        
-       
+
+
+
     }
 }
 #host-dashboard .nav-pills > li a {
@@ -148,7 +148,7 @@
     margin-top: 50px;
     margin-bottom: 50px;
     padding-top: 35px;
-    padding-bottom: 35px; 
+    padding-bottom: 35px;
 }
 .profile-pic {
     .border-radius(40px);
@@ -157,30 +157,30 @@ time {
     display: block;
     clear: both;
     text-transform: uppercase;
-    
+
 }
 
 .party {
-    display: block; .clearfix; padding: 10px 0px; 
+    display: block; .clearfix; padding: 10px 0px;
     &.no-data-wrap {
         background: mistyrose;
     }
-    
+
     &:hover { text-decoration: none; }
-    
-    .date { display: block; float: left; background: @blue; padding: 5px; text-align: center; width: 30%; 
+
+    .date { display: block; float: left; background: @blue; padding: 5px; text-align: center; width: 30%;
         .day, .month, .year { display: block; line-height: 120%; clear: both; color: white; }
         .month, .year { font-size: 10px; text-transform: uppercase; color: white; letter-spacing: 1.3px; }
         .day { font-size: 32px; .Font-PatuaOne; color: white; }
     }
-    
+
     .short-body {
         display: block;
         float: left;
         clear: none;
         width: 70%;
-        padding-left: 8px; 
-        text-align: left; 
+        padding-left: 8px;
+        text-align: left;
     }
 }
 
@@ -204,40 +204,40 @@ time {
         &:last-child {
             border-right: none !important;
         }
-        
+
         h5 { font-size: 11px; text-transform: uppercase; height: 24px;  }
         .largetext { font-size: 24px; max-height: 34px !important; min-height: auto !important;   }
     }
     .group-stats-row {
-        width: 100%; display: block; float: left; clear: both; 
+        width: 100%; display: block; float: left; clear: both;
         &.first-row {
-            .col { width: 50%; display: block; float: left; clear: none; }    
+            .col { width: 50%; display: block; float: left; clear: none; }
         }
         &.second-row {
-            .col { width: 33%; display: block; float: left; clear: none; }    
+            .col { width: 33%; display: block; float: left; clear: none; }
         }
     }
     &.mini {
         .col { width: 33%; padding: 0px 6px;
             .largetext { font-size: 18px; height: auto; min-height: 24px; }
-        }        
+        }
     }
 }
 
 
 .header-col {
     display: block;
-    float: left; 
+    float: left;
     clear: none;
     width: 12.5%;
     text-align: center;
-    
-    
+
+
     &-2 {
-        width: 25%; border-right: none; 
+        width: 25%; border-right: none;
     }
     &-3 {
-        width: 37.5%; border-right: none;  
+        width: 37.5%; border-right: none;
     }
      > .largetext {
         line-height: 72px;
@@ -247,21 +247,21 @@ time {
     > .icon-label {
         display: block;
         clear: both;
-        margin: 15px 0px; 
+        margin: 15px 0px;
         font-size: 10px;
         text-transform: uppercase;
     }
-    
+
     &#header-link-box  {
         position: relative;
-        padding-top: 106px; 
+        padding-top: 106px;
         a {
             position: absolute;
             bottom: 0;
-            left: 0; 
+            left: 0;
         }
     }
-   
+
 }
 
 .location { font-size: 18px; font-weight: bold; }
@@ -275,11 +275,11 @@ time {
     clear: none;
     width: 16.66666%;
     font-size: 36px;
-    text-align: center; 
+    text-align: center;
     min-height: 70px;
-    height: 70px; 
+    height: 70px;
     .count;
-    .footprint { margin: 0px 5px; background: @blue; color: white; font-size: 20px; padding: 7px 4px 6px; min-height: 100%; 
+    .footprint { margin: 0px 5px; background: @blue; color: white; font-size: 20px; padding: 7px 4px 6px; min-height: 100%;
         .subtext { display: inline-block; line-height: 20px; }
     }
 }
@@ -287,16 +287,16 @@ time {
 .fixed { color: @fixed;}
 .repairable { color: @repairable;}
 .dead { color: @dead;}
-    
+
 .subtext { font-size: 10px; text-transform: uppercase;  display: block; clear: both; }
 .largetext { font-size: 36px; text-align: center; display: block; clear: both;  min-height: 70px; height: 70px;  }
-    
+
 .col { width: 50%; display: inline-block; float: left; text-align: center; }
 .col3 { width: 33.333%; display: inline-block; float: left; text-align: center;
     .largetext { height: 128px; line-height: 128px; }
     &:nth-child(2) {
         border-left: 1px solid @blue;
-        border-right: 1px solid @blue; 
+        border-right: 1px solid @blue;
     }
     &.no-brd {
         border-right: none;
@@ -323,33 +323,33 @@ time {
     clear: left;
     color: white;
     text-align: center;
-     
+
     padding: 4px;
     min-height: 18px;
     line-height: 18px;
-    margin: 7px auto; 
-    
+    margin: 7px auto;
+
     &:first-child {
-        margin: 12px 0px 4px;  
+        margin: 12px 0px 4px;
     }
     &:nth-child(2){
-        margin: 4px 0px 4px;  
+        margin: 4px 0px 4px;
     }
     &:last-child {
-        margin: 4px 0px 12px;  
+        margin: 4px 0px 12px;
     }
-    
+
     &.fixed {
       background-color: @fixed;
 
     }
     &.repairable {
       background-color: @repairable;
-      
+
     }
     &.end-of-life {
       background-color: @dead;
-      
+
     }
 }
 .barpiece-label {
@@ -357,16 +357,16 @@ time {
     padding: 4px;
     min-height: 18px;
     line-height: 18px;
-    margin: 7px auto; 
-    
+    margin: 7px auto;
+
     &.fixed {
-        margin: 12px 0px 4px;  
+        margin: 12px 0px 4px;
     }
     &.reparairable{
-        margin: 4px 0px 4px;  
+        margin: 4px 0px 4px;
     }
     &.dead {
-        margin: 4px 0px 12px;  
+        margin: 4px 0px 12px;
     }
 }
 
@@ -388,50 +388,53 @@ time {
         margin-bottom: 10px;
     }
     table tr td {
-        padding: 8px 0px 6px; 
+        padding: 8px 0px 6px;
     }
 }
 
 .bargroup {
     border-right: 1px solid #ddd;
 }
+.search-dashboard {
+  .bargroup { border-right: none;   }
+}
 .barpiece-tabs {
-    margin-left: 25px; padding: 82px 25px;  
+    margin-left: 25px; padding: 82px 25px;
     ul {
         list-style: none; margin: 30px auto; padding: 0px;
         li { padding: 2px 0px;
             button{ min-width: 60px; }
         }
     }
-    
+
 }
 
 .wrap-device-input {
     position: absolute; top: 0; bottom: 0; left: 0; height: 100%; background: rgba(255,255,255,0.75);z-index: 1000; width: 100%;
     .device-input {
         margin-top: 30px;
-        margin-bottom: 30px; 
+        margin-bottom: 30px;
         padding-top: 15px;
-        padding-bottom: 15px; 
+        padding-bottom: 15px;
         height: 100%;
         background: white;
-        border: 1px solid @litegray; 
+        border: 1px solid @litegray;
     }
 }
 
 
 /** vertical bar chart **/
 .v-bars {
-    
+
     width: 100%;
     height: 200px;
     display: block;
     clear: both;
     position: relative;
-    
+
     .v-bar {
         width: 50px;
-        color: white; 
+        color: white;
         margin: 15px;
         background: fade(@blue, 85%);
         border: 1px solid @blue;
@@ -449,30 +452,29 @@ time {
     span.datalabel { font-size: 19px;
         ~ span.blue { display: block; }
     }
-    
+
     #impact-devices h2 { text-align: center; }
     #impact-dataviz {
         .col-xs-4 { width: 33%; margin-top: 0px;  }
         .text {
-            padding: 5px 0px; 
+            padding: 5px 0px;
             .blue { margin-top: 0px !important; padding-top: 35px; font-size: 14px;  }
-            .consume { margin-top: 0px !important; font-size: 21px; padding-top: 0px; 
+            .consume { margin-top: 0px !important; font-size: 21px; padding-top: 0px;
                 small { font-size: 12px; }
             }
         }
     }
 }
-    
+
 
 @media (min-width: 748px) { //@screen-sm-min
     #public-dataviz-stats .col-xs-4 { width: 33%; }
     #public-dataviz-stats #impact-dataviz {
-         .text { padding: 80px 0px 0px; 
+         .text { padding: 80px 0px 0px;
             .blue { margin-top: 15px !important; font-size: 24px;  }
             .consume { margin-top: 5px; font-size: 60px;
                    small { font-size: 40px; }
             }
-        }   
+        }
     }
 }
-
