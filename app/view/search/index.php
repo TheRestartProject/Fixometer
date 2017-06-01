@@ -17,7 +17,7 @@
           <div class="form-group">
             <select id="search-groups" name="groups[]" data-width="180px" class="search-groups-class selectpicker form-control" data-live-search="true" multiple title="Choose groups...">
               <?php foreach($groups as $group){ ?>
-              <option value="<?php echo $group->id; ?>"><?php echo $group->name; ?></option>
+              <option value="<?php echo $group->id; ?>"><?php echo trim($group->name); ?></option>
               <?php } ?>
             </select>
           </div>
@@ -27,7 +27,7 @@
             <label for="parties" class="sr-only">Parties</label>
             <select class="selectpicker form-control" data-width="180px" id="search-parties" name="parties[]" title="Select parties..." data-live-search="true" multiple title="Choose parties...">
               <?php foreach($sorted_parties as $groupname => $groupparties){ ?>
-              <optgroup label="<?php echo $groupname; ?>">
+              <optgroup label="<?php echo trim($groupname); ?>">
                 <?php foreach($groupparties as $party) { ?>
                 <option value="<?php echo $party->id; ?>" data-subtext="<?php echo strftime('%d/%m/%Y', $party->event_timestamp); ?>"><?php echo $party->venue; ?></option>
                 <?php } ?>

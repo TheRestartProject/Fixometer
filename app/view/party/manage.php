@@ -7,13 +7,13 @@
                 <small>
                     <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-floppy-o"></i> save</button>
                     <a href="/party/edit/<?php echo $party->id; ?>" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> edit details</a>
-                
+
                     <?php $home_url = (hasRole($user, 'Administrator') ? '/admin' : '/host'); ?>
                     <a href="<?php echo $home_url; ?>" class="btn btn-primary btn-sm"><i class="fa fa-home"></i> back to dashboard</a>
-                
+
                 </small>
             </h1>
-            
+
             <div class="alert alert-info">
                 <?php echo WDG_PUBLIC_INFO; ?>
             </div>
@@ -22,17 +22,17 @@
     </div>
     <!-- Profiles -->
     <?php if(hasRole( $user, 'Administrator' )) { ?>
-    
-    
+
+
     <section class="row profiles">
         <div class="col-md-12">
             <h5>Admin Console</h5>
-            
+
         </div>
         <div class="col-md-6">
             <div class="btn-group btn-group-justified">
-                
-                
+
+
                 <div class="btn-group" role="group">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Groups
@@ -42,21 +42,21 @@
                         <?php foreach($grouplist as $group) { ?>
                         <li class="group-list clearfix">
                             <div class="pull-left">
-                                <?php if(!empty($group->path)) { ?> 
+                                <?php if(!empty($group->path)) { ?>
                                 <img src="/uploads/thumbnail_<?php echo $group->path; ?>" width="40" height="40" alt="<?php echo $group->name; ?> Image" class="profile-pic" />
                                 <?php } else { ?>
-                                <div class="profile-pic clearfix" style="background: #ddd; width: 40px; height: 40px; ">&nbsp;</div>    
-                                <?php } ?>                                
+                                <div class="profile-pic clearfix" style="background: #ddd; width: 40px; height: 40px; ">&nbsp;</div>
+                                <?php } ?>
                             </div>
                             <div class="pull-left">
                                 <a  href="/host/index/<?php echo $group->id; ?>" ><?php echo $group->name; ?></a>
                             </div>
                         </li>
-                        
+
                         <?php } ?>
                     </ul>
                 </div>
-                
+
                 <a class="btn btn-default" href="/group/create">Add Group</a>
             </div>
         </div>
@@ -66,18 +66,18 @@
                 <a class="btn btn-default" href="/user/create">Add User</a>
             </div>
         </div>
-        
-    </section>  
-    
-    
-    
+
+    </section>
+
+
+
     <?php } ?>
-    
+
     <div class="row">
         <div class="col-md-12">
-                
+
             <input type="hidden" name="idparty" id="idparty" value="<?php echo $party->id; ?>">
-            
+
             <div class="row">
                 <div class="col-md-12 party">
                     <div class="header-col header-col-2">
@@ -85,13 +85,13 @@
                             <span class="month"><?php echo date('M', $party->event_timestamp); ?></span>
                             <span class="day">  <?php echo date('d', $party->event_timestamp); ?></span>
                             <span class="year"> <?php echo date('Y', $party->event_timestamp); ?></span>
-                        </div> 
-                    
+                        </div>
+
                         <div class="short-body">
                             <span class="location"><?php echo $party->location; ?></span><br />
                             <span class="groupname"><?php echo $party->group_name; ?></span>
                         </div>
-                    </div>    
+                    </div>
                         <div class="data">
                             <div class="stat double">
                                 <div class="col">
@@ -101,9 +101,9 @@
                                 <div class="col">
                                     <input class="party-input" name="party[pax]" value="<?php echo $party->pax; ?>" id="party[pax]">
                                 </div>
-                                
+
                             </div>
-                            
+
                             <div class="stat double">
                                 <div class="col">
                                     <img class="" alt="The Restart Project: Logo" src="/assets/images/logo_mini.png">
@@ -112,11 +112,11 @@
                                 <div class="col">
                                     <input class="party-input" name="party[volunteers]" value="<?php echo $party->volunteers; ?>" id="party[volunteers]">
                                 </div>
-                                
+
                             </div>
-                            
+
                             <div class="stat">
-                                
+
                                 <div class="footprint">
                                     <?php echo $party->co2; ?>
                                     <span class="subtext">kg of CO<sub>2</sub></span>
@@ -125,24 +125,24 @@
                                     <span class="subtext">kg of waste<span>
                                 </div>
                             </div>
-                            
-                            
+
+
                             <div class="stat fixed">
                                 <div class="col"><i class="status mid fixed"></i></div>
-                                <div class="col"><?php echo $party->fixed_devices; ?></div>    
+                                <div class="col"><?php echo $party->fixed_devices; ?></div>
                             </div>
-                            
+
                             <div class="stat repairable">
                                 <div class="col"><i class="status mid repairable"></i></div>
                                 <div class="col"><?php echo $party->repairable_devices; ?></div>
                             </div>
-                            
+
                             <div class="stat dead">
                                 <div class="col"><i class="status mid dead"></i></div>
                                 <div class="col"><?php echo $party->dead_devices; ?></div>
                             </div>
-                            
-                        
+
+
                         </div>
                     </div>
                 </div>
@@ -167,23 +167,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        
+
                         <?php
                         if(!empty($devices)){
                             for($i = 1; $i <= count($devices); $i++){
-                        ?>        
-                                
-                        
-                        
+                        ?>
+
+
+
                         <tr class="rs-<?php echo $devices[$i-1]->repair_status; ?>">
                             <td>
                                 <?php echo $i; ?>.
                                 <input type="hidden" name="device[<?php echo $i; ?>][id]" value="<?php echo $devices[$i-1]->iddevices; ?>">
-                                
-                            </td>            
+
+                            </td>
                             <td>
                                 <div class="form-group">
-                                    <select id="device[<?php echo $i; ?>][category]" name="device[<?php echo $i; ?>][category]" class="category-select selectpicker form-control" data-live-search="true">
+                                    <select id="device[<?php echo $i; ?>][category]" name="device[<?php echo $i; ?>][category]" class="category-select form-control" data-live-search="true">
                                         <?php foreach($categories as $cluster){ ?>
                                         <optgroup label="<?php echo $cluster->name; ?>">
                                             <?php foreach($cluster->categories as $c){ ?>
@@ -200,7 +200,7 @@
                                     <small>Please input an estimate weight (in kg)</small>
                                     <input type="text" name="device[<?php echo $i; ?>][estimate]" id="device[<?php echo $i; ?>][estimate]" class="form-control" placeholder="Estimate..." value="<?php echo $devices[$i-1]->estimate; ?>">
                                 </div>
-                            </td>            
+                            </td>
                             <td>
                                 <textarea class="form-control" id="device[<?php echo $i; ?>][problem]" name="device[<?php echo $i; ?>][problem]"><?php echo $devices[$i-1]->problem; ?></textarea>
                             </td>
@@ -208,16 +208,16 @@
                                 <div class="form-group">
                                     <input type="text" name="device[<?php echo $i; ?>][brand]" id="device[<?php echo $i; ?>][brand]" class="form-control" placeholder="Brand..." value="<?php echo $devices[$i-1]->brand; ?>">
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <input type="text" name="device[<?php echo $i; ?>][model]" id="device[<?php echo $i; ?>][model]" class="form-control" placeholder="Model..." value="<?php echo $devices[$i-1]->model; ?>">
                                 </div>
-                                
-                                
+
+
                             </td>
                             <td>
                                 <div class="form-group">
-                                    <div class="radio">                                                
+                                    <div class="radio">
                                         <label>
                                             <input
                                                    type="radio"
@@ -231,14 +231,14 @@
                                     <div class="radio">
                                         <label>
                                             <input
-                                                   type="radio" 
+                                                   type="radio"
                                                    <?php echo ($devices[$i-1]->repair_status == 2 ? 'checked="checked"' : ''); ?>
                                                    name="device[<?php echo $i; ?>][repair_status]"
                                                    id="device[<?php echo $i; ?>][repair_status_2]"
                                                    value="2"
                                                    class="repairable"
                                                    data-target-details="#repairable-details-<?php echo $i; ?>">
-                                                   
+
                                                    Repairable
                                         </label>
                                     </div>
@@ -265,7 +265,7 @@
                                                    type="radio"
                                                    name="device[<?php echo $i; ?>][repair_status]"
                                                    id="device[<?php echo $i; ?>][repair_status_3]"
-                                                   value="3" 
+                                                   value="3"
                                                    <?php echo ($devices[$i-1]->repair_status == 3 ? 'checked="checked"' : ''); ?>> End of lifecycle
                                         </label>
                                     </div>
@@ -281,25 +281,25 @@
                                     </div>
                                 </div>
                             </td>
-                            <td> 
+                            <td>
                                 <a class="btn delete-control" href="/device/delete/<?php echo $devices[$i-1]->iddevices; ?>"><i class="fa fa-trash"></i></a>
                             </td>
-                            
+
                         </tr>
-                        <?php 
+                        <?php
                             }
                         }
                         ?>
-                        
-                    
+
+
                         <?php
                         $start = (!empty($devices) ? count($devices) + 1 : 1);
-                        
-                        
+
+
                         for ($i = $start; $i < $start  ; $i++) {
                         ?>
                         <tr>
-                            <td><?php echo $i; ?>.</td>            
+                            <td><?php echo $i; ?>.</td>
                             <td>
                                 <div class="form-group">
                                     <select id="device[<?php echo $i; ?>][category]" name="device[<?php echo $i; ?>][category]" class="selectpicker form-control category-select" data-live-search="true" title="Choose category...">
@@ -318,7 +318,7 @@
                                     <small>Please input an estimate weight (in kg)</small>
                                     <input type="text" name="device[<?php echo $i; ?>][estimate]" id="device[<?php echo $i; ?>][estimate]" class="form-control" placeholder="Estimate...">
                                 </div>
-                            </td>            
+                            </td>
                             <td>
                                 <textarea class="form-control" id="device[<?php echo $i; ?>][problem]" name="device[<?php echo $i; ?>][problem]"></textarea>
                             </td>
@@ -326,14 +326,14 @@
                                  <div class="form-group">
                                     <input type="text" name="device[<?php echo $i; ?>][brand]" id="device[<?php echo $i; ?>][brand]" class="form-control" placeholder="Brand...">
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <input type="text" name="device[<?php echo $i; ?>][model]" id="device[<?php echo $i; ?>][model]" class="form-control" placeholder="Model..." >
                                 </div>
                             </td>
                             <td>
                                 <div class="form-group">
-                                    <div class="radio">                                                
+                                    <div class="radio">
                                         <label>
                                             <input type="radio" name="device[<?php echo $i; ?>][repair_status]" id="device[<?php echo $i; ?>][repair_status_1]" value="1" checked> Fixed
                                         </label>
@@ -375,14 +375,14 @@
                                             <input type="checkbox" name="device[<?php echo $i; ?>][spare_parts]" id="device[<?php echo $i; ?>][spare_parts_1]" value="1"> Yes
                                         </label>
                                     </div>
-                                   
+
                                 </div>
                             </td>
-                            
-                        </tr>    
+
+                        </tr>
                         <?php } ?>
-                        
-                       
+
+
                     </tbody>
                     <tfoot>
                          <tr>

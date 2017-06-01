@@ -3,7 +3,7 @@ $.fn.selectpicker.Constructor.DEFAULTS.tickIcon = 'fa-check';
 
 $(document).ready(function(){
 
-  $('.selectpicker').selectpicker({
+  $('.selectpicker, .category-select').selectpicker({
     iconBase: 'fa',
     tickIcon: 'fa-check'
   });
@@ -11,7 +11,6 @@ $(document).ready(function(){
   /** Add Device Row in Party Management **/
   $('#add-device').click(function(e){
       e.preventDefault();
-
       var rows = $('#device-table > tbody > tr').length,
           categories = null,
           restarters = null,
@@ -27,23 +26,13 @@ $(document).ready(function(){
           }
       });
 
-      /*
-      $.ajax({
-          async: false,
-          url: '/ajax/restarters',
-          data: {},
-          dataType: "html",
-          success: function(r){
-              restarters = r;
-          }
-      });
-      */
+
 
       var tablerow =  '<tr class="newdevice">' +
                           '<td>' + n + '.</td>'+
                           '<td>' +
                               '<div class="form-group">' +
-                                  '<select id="device[' + n +'][category]" name="device[' + n + '][category]" class="category-select selectpicker form-control" data-live-search="true" tite="Choose category...">' +
+                                  '<select id="device[' + n +'][category]" name="device[' + n + '][category]" class="category-select  form-control" data-live-search="true" tite="Choose category...">' +
                                   '<option></option>' +
                                   categories +
                                   '<option value="46">None of the above...</option>' +
@@ -115,20 +104,22 @@ $(document).ready(function(){
                           '<td></td>' +
                       '</tr>';
 
-          $('#device-table tbody').append(tablerow);
-          $('tr.newdevice .category-select').selectpicker('refresh');
-          $('tr.newdevice .category-select').change(function(){
+      $('#device-table tbody').append(tablerow);
 
-            console.log($(this).val());
+      $('tr.newdevice .category-select').selectpicker();
 
-            if($(this).val() === '46') {
-                $(this).parent().next('.estimate-box').removeClass('hide').addClass('show');
-            }
-            else {
-                $(this).parent().next('.estimate-box').removeClass('show').addClass('hide');
-                $(this).parent().next('.estimate-box').children('input').val('');
-            }
-          });
+      $('tr.newdevice .category-select').change(function(){
+        var theVal = parseInt( $(this).val() );
+        if( theVal > 0 &&  theVal != null) {
+          if(theVal === 46) {
+          $(this).parent().parent().next('.estimate-box').removeClass('hide').addClass('show');
+          }
+          else {
+            $(this).parent().parent().next('.estimate-box').removeClass('show').addClass('hide');
+            $(this).parent().parent().next('.estimate-box').children('input').val('');
+          }
+        }
+    });
 
       /** Show/Hide Repairable details ( /party/manage ) (Host management page) **/
       $('tr.newdevice .repairable').click(function(){
@@ -138,8 +129,7 @@ $(document).ready(function(){
   });
 
 
-
-    $('#search-groups').change(function(){
+  $('#search-groups').change(function(){
       var chainer = $(this).find('option[value]:selected').map(function() {
                       return this.text;
                     }).get();
@@ -153,8 +143,20 @@ $(document).ready(function(){
       $('#search-parties').selectpicker('refresh');
     });
 
-    /** startup datepickers **/
-    $('input.date').datetimepicker({
+  $('.category-select').change(function(){
+    var theVal = parseInt( $(this).val() );
+    if( theVal > 0 &&  theVal != null) {
+      if(theVal === 46) {
+      $(this).parent().parent().next('.estimate-box').removeClass('hide').addClass('show');
+    }
+    else {
+      $(this).parent().parent().next('.estimate-box').removeClass('show').addClass('hide');
+    }
+  }
+  });
+
+  /** startup datepickers **/
+  $('input.date').datetimepicker({
                 icons: {
                     time: "fa fa-clock-o",
                     date: "fa fa-calendar",
@@ -168,7 +170,7 @@ $(document).ready(function(){
                 format: 'DD/MM/YYYY',
                 defaultDate: $(this).val()
             });
-    $('input.time').datetimepicker({
+  $('input.time').datetimepicker({
             icons: {
                 time: "fa fa-clock-o",
                 date: "fa fa-calendar",
@@ -184,9 +186,8 @@ $(document).ready(function(){
 
         });
 
-    /** linking two times in party creation **/
-
-    $("#start-pc").on("dp.change", function (e) {
+  /** linking two times in party creation **/
+  $("#start-pc").on("dp.change", function (e) {
         //alert(e);
 
         var curtime = $(this).val(),
@@ -198,8 +199,8 @@ $(document).ready(function(){
 
 
 
-    /** Rich Text Editors **/
-    $('.rte').summernote({
+  /** Rich Text Editors **/
+  $('.rte').summernote({
         height:     300,
         toolbar:    [
             ['style', ['style','bold', 'italic', 'underline', 'clear']],
@@ -209,8 +210,8 @@ $(document).ready(function(){
         ]
     });
 
-    /** Load list of invitable restarters ( /party/create ) **/
-    $('.users_group').change(function(){ // selectpicker users_group
+  /** Load list of invitable restarters ( /party/create ) **/
+  $('.users_group').change(function(){ // selectpicker users_group
         var groupId = $(this).val();
         $.getJSON('/ajax/restarters_in_group', {'group': groupId}, function(data){
             var checkboxes = '';
@@ -226,8 +227,8 @@ $(document).ready(function(){
         });
     });
 
-    /** Show/Hide repairable details ( /device/create ) **/
-    $('[name="repair_status"]').click(function(){
+  /** Show/Hide repairable details ( /device/create ) **/
+  $('[name="repair_status"]').click(function(){
         if($(this).is(':checked') && $(this).attr('id') == 'repair_status_2') {
 
             $('#repairable-details').slideDown('slow');
@@ -237,16 +238,16 @@ $(document).ready(function(){
         }
     });
 
-    /** Show/Hide Repairable details ( /party/manage ) (Host management page) **/
-    $('.repairable').click(function(){
+  /** Show/Hide Repairable details ( /party/manage ) (Host management page) **/
+  $('.repairable').click(function(){
         var detailsWrap = $(this).data('target-details');
         if ($(this).is(':checked')) {
             $(detailsWrap).slideDown('slow');
         }
     });
 
-    /** Delete object control **/
-    $('.delete-control').click(function(e){
+  /** Delete object control **/
+  $('.delete-control').click(function(e){
         e.preventDefault();
 
         var deleteTarget     =  $(this).attr('href');
@@ -273,8 +274,8 @@ $(document).ready(function(){
         return false;
     });
 
-    // file deletion
-    $('.remove-image').click(function(e){
+  // file deletion
+  $('.remove-image').click(function(e){
         e.preventDefault();
 
         var Holder = $(this).parent();
@@ -290,8 +291,8 @@ $(document).ready(function(){
 
 
 
-    /** switch stat bars / host dashboard **/
-    $('.switch-view').click(function(e){
+  /** switch stat bars / host dashboard **/
+  $('.switch-view').click(function(e){
         e.preventDefault();
         var target = $(this).data('target');
         var family = $(this).data('family');
@@ -304,8 +305,8 @@ $(document).ready(function(){
 
     });
 
-    /** toggle party views in admin console **/
-    $('.party-switch').click(function(e){
+  /** toggle party views in admin console **/
+  $('.party-switch').click(function(e){
         e.preventDefault();
         var target = $(this).data('target');
         var family = $(this).data('family');
@@ -323,27 +324,20 @@ $(document).ready(function(){
     });
 
 
-    $('.category-select').change(function(){
-        if($(this).val() === '46') {
-            $(this).parent().next('.estimate-box').removeClass('hide').addClass('show');
-        }
-        else {
-            $(this).parent().next('.estimate-box').removeClass('show').addClass('hide');
-        }
-    });
-    /* manage needed visibility to load correctly charts (host dahsboard) */
-   /* $('.charts:first-child').addClass('show');
-    $('.charts:not(:first-child)').addClass('hide');
-    */
-    /** sticky table headers **/
-    if( $('#device-table').length > 0 ) {
-        $('#device-table').floatThead();
-    }
 
-    /* scrollbar for party list */
-    if ($('#party-list').length > 0 ) {
-        $('#party-list').perfectScrollbar();
-    }
+  /* manage needed visibility to load correctly charts (host dahsboard) */
+  /* $('.charts:first-child').addClass('show');
+     $('.charts:not(:first-child)').addClass('hide');
+  */
+  /** sticky table headers **/
+  if( $('#device-table').length > 0 ) {
+    $('#device-table').floatThead();
+  }
+
+  /* scrollbar for party list */
+  if ($('#party-list').length > 0 ) {
+    $('#party-list').perfectScrollbar();
+  }
 
 
 });
