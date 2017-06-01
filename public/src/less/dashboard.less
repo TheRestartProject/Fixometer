@@ -1,30 +1,30 @@
 /** All Dasboard Objects **/
 .dbObject {
     margin-bottom: 25px;
-    
+
     h3 {
         color: @blue;
         margin: 0px 0px 15px;
         line-height: 120%;
     }
     ul {
-        list-style: none; padding: 0px; margin: 0px; 
+        list-style: none; padding: 0px; margin: 0px;
     }
-    
+
     a.cta {
-        
+
         padding: 4px 12px;
-        
+
         box-shadow: 0;
         -moz-box-shadow: 0;
         -webkit-box-shadow: 0;
         background: @blue;
         color: white;
         text-decoration: none;
-        
+
         .transition(all, 0.65s);
-        
-        
+
+
         &:hover {
             background: @orange;
             color: @darkgray;
@@ -39,7 +39,7 @@
     min-height: 350px;
     padding: 15px;
     background: url('/assets/images/dashboard_1.jpg') no-repeat center center;
-    
+
     li {
         margin: 0px 0px 10px;
         display: block;
@@ -49,13 +49,20 @@
             display: block;
             color: white;
             text-transform: uppercase;
-            font-size: 12px; 
+            font-size: 12px;
         }
         a.location { display: inline-block; float: left; color: @orange; padding: 4px 0px; }
         a.cta { display: inline-block; float: right;  }
-        
+
         .map-wrap {
-            display: none; height: 250px; width: 100%;  
+            display: none; height: 250px; width: 100%;
         }
     }
+}
+
+#parties-tab .media {
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #BBB;
+  height: 90px; 
 }
