@@ -53,7 +53,7 @@
 
                     GROUP BY `g`.`idgroups`
 
-                    ORDER BY `g`.`idgroups` ASC';
+                    ORDER BY `g`.`name` ASC';
             $stmt = $this->database->prepare($sql);
 
             $q = $stmt->execute();
@@ -137,7 +137,8 @@
                     ) AS `xi`
                     ON `xi`.`reference` = `g`.`idgroups`
 
-                    WHERE `ug`.`user` = :id';
+                    WHERE `ug`.`user` = :id
+                    ORDER BY `g`.`name` ASC';
 
             $stmt = $this->database->prepare($sql);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);

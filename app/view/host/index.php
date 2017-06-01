@@ -17,7 +17,6 @@
     <section class="row profiles">
         <div class="col-md-12">
             <h5>Admin Console</h5>
-
         </div>
         <div class="col-md-6">
             <div class="btn-group btn-group-justified">
@@ -61,6 +60,20 @@
 
 
 
+    <?php } ?>
+    <?php if (hasRole($user, 'Host') && count($userGroups) > 0) { ?>
+      <section class="row profiles">
+        <div class="col-md-12">
+          <?php
+          foreach($userGroups as $g) {
+            if($group->idgroups != $g->idgroups){
+          ?>
+          <a class="btn btn-primary" href="/host/index/<?php echo $g->idgroups; ?>">Switch to "<?php echo $g->name; ?>"</a>
+          <?php
+          } 
+        } ?>
+        </div>
+      </section>
     <?php } ?>
 
     <section class="row profiles" id="group-profile">
