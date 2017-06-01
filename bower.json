@@ -29,6 +29,7 @@
     "summernote": "~0.6.6",
     "bootstrap-fileinput": "~4.2.0",
     "Chart.js": "~1.0.2",
-    "jquery.floatThead": "~1.2.12"
+    "jquery.floatThead": "~1.2.12",
+    "chained": "^1.0.1"
   }
 }

@@ -10,23 +10,28 @@
     <?php } ?>
 
     <section class="row profile">
-      <div clasS="col-md-12">
-        <form class="form-inline" action="/search" method="get">
+      <div class="col-md-12">
+        <form action="/search" class="form-inline" method="get" id="filter-search">
           <input type="hidden" name="fltr" value="<?php echo bin2hex(openssl_random_pseudo_bytes(8)); ?>">
+
           <div class="form-group">
-            <label for="groups" class="sr-only">Groups</label>
-            <select class="form-control selectpicker show-tick" data-width="150px" id="groups" name="groups[]" title="Select groups..." multiple data-live-search="true">
+            <select id="search-groups" name="groups[]" data-width="180px" class="search-groups-class selectpicker form-control" data-live-search="true" multiple title="Choose groups...">
               <?php foreach($groups as $group){ ?>
               <option value="<?php echo $group->id; ?>"><?php echo $group->name; ?></option>
               <?php } ?>
             </select>
           </div>
 
+
           <div class="form-group">
             <label for="parties" class="sr-only">Parties</label>
-            <select class="form-control selectpicker show-tick" data-width="150px" id="parties" name="parties[]" title="Select parties..." multiple data-live-search="true">
-              <?php foreach($parties as $party){ ?>
-              <option value="<?php echo $party->id; ?>" data-subtext="<?php echo strftime('%d/%m/%Y', $party->event_timestamp); ?>"><?php echo $party->venue; ?></option>
+            <select class="selectpicker form-control" data-width="180px" id="search-parties" name="parties[]" title="Select parties..." data-live-search="true" multiple title="Choose parties...">
+              <?php foreach($sorted_parties as $groupname => $groupparties){ ?>
+              <optgroup label="<?php echo $groupname; ?>">
+                <?php foreach($groupparties as $party) { ?>
+                <option value="<?php echo $party->id; ?>" data-subtext="<?php echo strftime('%d/%m/%Y', $party->event_timestamp); ?>"><?php echo $party->venue; ?></option>
+                <?php } ?>
+              </optgroup>
               <?php } ?>
             </select>
           </div>
@@ -35,7 +40,7 @@
             <label for="from-date" class="sr-only">From date</label>
 
             <div class="input-group">
-              <input type="text" class="form-control date" id="from-date" name="from-date" placeholder="From date...">
+              <input type="text" class="form-control date" id="search-from-date" name="from-date" placeholder="From date...">
               <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
             </div>
           </div>
@@ -43,7 +48,7 @@
           <div class="form-group">
             <label for="from-date" class="sr-only">To date</label>
             <div class="input-group">
-              <input type="text" class="form-control date" id="to-date" name="to-date" placeholder="To date...">
+              <input type="text" class="form-control date" id="search-to-date" name="to-date" placeholder="To date...">
               <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
             </div>
           </div>

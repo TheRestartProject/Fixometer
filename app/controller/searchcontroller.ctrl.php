@@ -29,8 +29,10 @@
       $this->set('charts', true);
 
       $this->set('css', array('/components/perfect-scrollbar/css/perfect-scrollbar.min.css'));
-      $this->set('js', array('foot' => array('/components/perfect-scrollbar/js/min/perfect-scrollbar.jquery.min.js')));
-
+      $this->set('js', array('foot' => array(
+        '/components/perfect-scrollbar/js/min/perfect-scrollbar.jquery.min.js',
+        '/components/chained/jquery.chained.min.js'
+      )));
 
         /** Init all needed classes **/
         $Groups = new Group;
@@ -62,8 +64,12 @@
             $parties[$i]->id = $party->idevents;
           }
         }
-
-
+        /** set parties to be grouped by group **/
+        $sorted_parties = array();
+        foreach($parties as $party){
+          $sorted_parties[$party->group_name][] = $party;
+        }
+        $this->set('sorted_parties', $sorted_parties);
         $this->set('parties', $parties);
         $this->set('groups', $groups);
 

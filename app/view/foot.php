@@ -1,4 +1,4 @@
-        
+
         <script src="/components/moment/min/moment.min.js"></script>
         <script src="/components/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="/components/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
@@ -15,7 +15,13 @@
             }
         }
         ?>
+
+        <?php if(SYSTEM_STATUS == 'development') { ?>
+        <script src="/dist/js/fixometer.js"></script>
+        <?php } else { ?>
         <script src="/dist/js/script.min.js"></script>
+        <?php } ?>
+
         <script>
             $(document).ready(function() {
                 $('.fileinput').fileinput({
@@ -24,9 +30,10 @@
                     showRemove: false,
                     browseIcon:  '<i class="fa fa-folder-open"></i> &nbsp;',
                     browseLabel: 'Choose image...'
-                    
-                });    
+
+                });
             } );
         </script>
+
     </body>
 </html>

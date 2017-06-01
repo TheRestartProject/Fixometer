@@ -1,9 +1,28 @@
-/** Sleect picker defaults **/
+/** Select picker defaults **/
 
 $.fn.selectpicker.Constructor.DEFAULTS.iconBase = 'fa';
 $.fn.selectpicker.Constructor.DEFAULTS.tickIcon = 'fa-check';
 
 $(document).ready(function(){
+
+    $('.selectpicker').selectpicker({
+      iconBase: 'fa',
+      tickIcon: 'fa-check'
+    });
+
+    $('#search-groups').change(function(){
+      var chainer = $(this).find('option[value]:selected').map(function() {
+                      return this.text;
+                    }).get();
+                    
+      $('#search-parties optgroup').addClass('hidden');
+      for(i = 0; i < chainer.length; i++){
+        var label = chainer[i];
+        $('#search-parties optgroup[label="' + label + '"]').removeClass('hidden');
+      }
+
+      $('#search-parties').selectpicker('refresh');
+    });
 
     /** startup datepickers **/
     $('input.date').datetimepicker({
@@ -292,12 +311,6 @@ $(document).ready(function(){
                         '</tr>';
 
         $('#device-table tbody').append(tablerow);
-
-
-        $('.selectpicker').selectpicker({
-          iconBase: 'fa',
-          tickIcon: 'fa-check'
-        });
 
         $('tr.newdevice .category-select').change(function(){
 
