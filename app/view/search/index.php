@@ -62,7 +62,17 @@
 
 
     <?php if($PartyList){ ?>
+      <section class="row profiles">
+        <div class="col-md-12 text-center">
+          <?php
+          $exportUrl = $_GET;
+          unset($exportUrl['url']);
+          $exportUrl = http_build_query($exportUrl);
+          ?>
 
+          <a href="/export/parties/?<?php echo $exportUrl; ?>" class="btn btn-primary"><i class="fa fa-download"></i> Download Results (CSV) </a>
+        </div>
+      </section>
       <section class="row profiles">
           <div class="col-md-12">
               <div class="row" id="group-main-stats">
