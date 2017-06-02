@@ -115,34 +115,17 @@
                 </tbody>
             </table>
             <script>
-            $(document).ready(function(){
-              /** bootgrid tables **/
-              $('.bootg').bootgrid({
-                formatters: {
-                    "editLink": function(column, row){
-                        return "<a href=\"/device/edit/" + row.deviceID + "\"><i class=\"fa fa-pencil\"</a>";
-                    },
-                    "statusBox": function(column, row){
-                      var deviceState = '';
-                      if(row.repairstatus == 1){
-                        devicestate = 'fixed';
-                      }
-                      else if(row.repairstatus == 2){
-                        devicestate = 'repairable';
-                      }
-                      else if(row.repairstatus == 3){
-                        devicestate = 'end of life';
-                      }
-                      else {
-                        devicestate = 'N.A.';
-                      }
-                      return "<div class=\"repair-status repair-status-" + row.repairstatus + "\">" + devicestate + "</div>";
-                    }
-                }
-
-              });
-            });
+            
             </script>
         </div>
     </div>
 </div>
+
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="deviceEditor">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

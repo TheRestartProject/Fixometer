@@ -38,7 +38,8 @@
             $this->set('css', array('/components/jquery.bootgrid/dist/jquery.bootgrid.min.css'));
             $this->set('js', array('head' => array(
               '/components/jquery.bootgrid/dist/jquery.bootgrid.js',
-              '/components/jquery.bootgrid/dist/jquery.bootgrid.fa.js'
+              '/components/jquery.bootgrid/dist/jquery.bootgrid.fa.js',
+              '/dist/js/device_list.js'
             )));
 
             $Category   = new Category;
@@ -155,6 +156,47 @@
                 header('Location: /user/forbidden');
             }
         }
+
+
+        public function ajax_update($id){
+            $this->set('title', 'Edit Device');
+            if(hasRole($this->user, 'Administrator') || hasRole($this->user, 'Host') ){
+                $Categories = new Category;
+                $Device = $this->Device->findOne($id);
+
+                $this->set('title', 'Edit Device');
+                $this->set('categories', $Categories->listed());
+                $this->set('formdata', $Device);
+
+            }
+            else {
+                header('Location: /user/forbidden');
+            }
+        }
+
+        public function ajax_update_save($id){
+          if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST) && filter_var($id, FILTER_VALIDATE_INT)){
+
+              $data = $_POST;
+              $u = $this->Device->update($data, $id);
+
+              if(!$u) {
+                  $response['response_type'] = 'danger';
+                  $response['message'] = 'Something went wrong. Please check the data and try again.';
+
+              }
+              else {
+                  $response['response_type'] = 'success';
+                  $response['message'] = 'Device updated!';
+                  $response['data'] = $data;
+                  $response['id'] = $id;
+              }
+
+              echo json_encode($response);
+          }
+        }
+
+
 
 
         public function create(){

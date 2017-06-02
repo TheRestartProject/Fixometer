@@ -15,7 +15,9 @@
                             'restarters',
                             'stats',
                             'info',
-                            'deleteimage'
+                            'deleteimage',
+                            'ajax_update',
+                            'ajax_update_save' // devices modal update
                             );
 
         function __construct($controller,$action) {
