@@ -16,7 +16,7 @@
             <h5>Admin Console</h5>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-5">
             <div class="btn-group btn-group-justified">
 
 
@@ -47,13 +47,15 @@
                 <a class="btn btn-default" href="/group/create">Add Group</a>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-5">
             <div class="btn-group btn-group-justified">
                 <a class="btn btn-default" href="/user/all">Users</a>
                 <a class="btn btn-default" href="/user/create">Add User</a>
             </div>
         </div>
-
+        <div class="col-md-2">
+          <a class="btn btn-default btn-block" href="/device">Manage Devices</a>
+        </div>
 
     </section>
     <section class="row profiles">

@@ -41,14 +41,65 @@
               '/components/jquery.bootgrid/dist/jquery.bootgrid.fa.js'
             )));
 
-            $this->set('list', $this->Device->getList());
+            $Category   = new Category;
+            $Group      = new Group;
 
-            $weights = $this->Device->getWeights();
-            $stats['weights'] = $weights[0]->total_weights;
-            $stats['footprints'] = $weights[0]->total_footprints;
+            $categories = $Category->listed();
+            $this->set('categories', $categories);
+            $this->set('groups', $Group->findAll());
 
-            $this->set('stats', $stats);
-            $this->set('counts', $this->Device->getCounts());
+            if(isset($_GET['fltr']) && !empty($_GET['fltr'])){
+
+              // Get params and clean them up
+              // DATES...
+              if(isset($_GET['from-date']) && !empty($_GET['from-date'])){
+                if (!DateTime::createFromFormat('d/m/Y', $_GET['from-date'])) {
+                  $response['danger'] = 'Invalid "from date"';
+                  $fromTimeStamp = null;
+                }
+                else {
+                  $fromDate = DateTime::createFromFormat('d/m/Y', $_GET['from-date']);
+                  $fromTimeStamp = strtotime($fromDate->format('Y-m-d'));
+                }
+              }
+              else{
+                $fromTimeStamp = 1;
+              }
+
+              if(isset($_GET['to-date']) && !empty($_GET['to-date'])){
+                if (!DateTime::createFromFormat('d/m/Y', $_GET['to-date'])) {
+                  $response['danger'] = 'Invalid "to date"';
+                }
+                else {
+                  $toDate = DateTime::createFromFormat('d/m/Y', $_GET['to-date']);
+                  $toTimeStamp = strtotime($toDate->format('Y-m-d'));
+                }
+              }
+              else {
+                $toTimeStamp = time();
+              }
+
+              $params = array(
+                'brand'       => filter_var($_GET['brand'], FILTER_SANITIZE_STRING),
+                'model'       => filter_var($_GET['model'], FILTER_SANITIZE_STRING),
+                'problem'     => filter_var($_GET['free-text'], FILTER_SANITIZE_STRING),
+
+                'category'    => isset($_GET['categories']) ? implode(', ', filter_var_array($_GET['categories'], FILTER_SANITIZE_NUMBER_INT)) : null,
+                'group'       => isset($_GET['groups']) ? implode(', ', filter_var_array($_GET['groups'], FILTER_SANITIZE_NUMBER_INT)) : null,
+
+                'event_date'  => array($fromTimeStamp,  $toTimeStamp)
+
+              );
+
+
+              $list = $this->Device->getList($params);
+
+            } else {
+              $list = $this->Device->getList();
+            }
+
+            $this->set('list', $list);
+
         }
 
         public function edit($id){

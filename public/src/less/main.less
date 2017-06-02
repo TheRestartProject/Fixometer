@@ -75,18 +75,29 @@ h3 {
     margin: -8px 0px;
     padding: 8px;
     display: block;
-    &.fixed {
+    height: 36px;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 10px;
+    font-weight: 800;
+    &.fixed, &.repair-status-1 {
       background-color: @fixed;
-      color: @fixed;
+      color: darken(@fixed, 25%);
     }
-    &.repairable {
+    &.repairable, &.repair-status-2 {
       background-color: @repairable;
-      color: @repairable;
+      color:  darken(@repairable, 30%);
     }
-    &.end-of-life {
+    &.end-of-life, &.repair-status-3 {
       background-color: @dead;
-      color: @dead;
+      color: darken(@dead, 40%);
     }
+}
+.comm-cell {
+  width: 60px;
+}
+.mid-cell {
+  width: 120px;
 }
 .status-header { width: 95px; }
 
