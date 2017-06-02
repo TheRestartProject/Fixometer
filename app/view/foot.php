@@ -1,6 +1,5 @@
 
-        <script src="/components/moment/min/moment.min.js"></script>
-        <script src="/components/bootstrap/dist/js/bootstrap.min.js"></script>
+
         <script src="/components/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
         <script src="/components/bootstrap-sortable/Scripts/bootstrap-sortable.js"></script>
         <script src="/components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>

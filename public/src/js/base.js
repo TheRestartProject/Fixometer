@@ -188,6 +188,9 @@ $(document).ready(function(){
 
         });
 
+
+
+
   /** linking two times in party creation **/
   $("#start-pc").on("dp.change", function (e) {
         //alert(e);

@@ -4,9 +4,9 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        
+
         <title><?php echo $title; ?> | Fix-O-Meter</title>
-    
+
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400|Patua+One">
         <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
@@ -31,10 +31,11 @@
         <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
-        
+
         <!-- jQ needed here -->
         <script src="/components/jquery/dist/jquery.min.js"></script>
-    
+        <script src="/components/moment/min/moment.min.js"></script>
+        <script src="/components/bootstrap/dist/js/bootstrap.min.js"></script>
         <?php
         if(isset($gmaps) && $gmaps == true) {
         ?>
@@ -51,8 +52,8 @@
             }
         }
         ?>
-        
-        
+
+
     <?php
     if($charts) {
     ?>
@@ -66,6 +67,3 @@
     ?>
     </head>
     <body>
-    
-    
-    

@@ -1,4 +1,5 @@
 @import '../../components/bootstrap/less/bootstrap.less';
+
 @import 'variables.less';
 @import 'mixins.less';
 @import 'navigation.less';
@@ -56,23 +57,23 @@ h3 {
     color: @white;
     font-size: 2.2em;
     padding: 2em;
-    margin-bottom: 15px; 
+    margin-bottom: 15px;
 }
 
  .repairable-details + .radio {
-  margin-top: -5px; 
+  margin-top: -5px;
 }
 
 #repairable-details, .repairable-details {
     display: none;
-    padding-left: 15px; 
+    padding-left: 15px;
 }
 
 .repair-status {
     width: 100%;
     height: 100%;
     margin: -8px 0px;
-    padding: 8px; 
+    padding: 8px;
     display: block;
     &.fixed {
       background-color: @fixed;
@@ -93,7 +94,7 @@ h3 {
     width: 100%;
     height: 100%;
     margin: -8px 0px;
-    padding: 8px; 
+    padding: 8px;
     display: block;
     &.indicator-1 {
       background-color: crimson;
@@ -115,12 +116,12 @@ h3 {
       background-color: darkgreen;
       color: darkgreen;
     }
-    
+
 }
 .legend {
   /*display: inline-block; */
   margin: 0px;
-  padding: 0px; 
+  padding: 0px;
   .voice {
     float: left;
     clear: none;
@@ -130,7 +131,7 @@ h3 {
     min-height: 25px;
     padding: 8px;
     margin: 0px;
-    color: white; 
+    color: white;
   }
 }
 
@@ -152,7 +153,7 @@ h3 {
     &.dead {
       background-position: -256px 0;
     }
-    
+
   }
   &.mid {
     background-image: url('/assets/icons/status_sprite_med.png');
@@ -170,7 +171,7 @@ h3 {
     &.dead {
       background-position: -128px 0;
     }
-    
+
   }
   &.min {
     background-image: url('/assets/icons/status_sprite_min.png');
@@ -186,7 +187,7 @@ h3 {
       background-position: -64px 0;
     }
   }
-  
+
 }
 
 .status_title {
@@ -203,7 +204,7 @@ h3 {
     //background-image: url('/assets/icons/cluster_sprite_big.png');
     width: 128px;
     height: 128px;
-    padding: 0px; 
+    padding: 0px;
     &.cluster-1 {
       background-position: 0 0;
       background-image: url('/assets/icons/Category_Icons-01.svg');
@@ -215,10 +216,10 @@ h3 {
       background-image: url('/assets/icons/Category_Icons-03.svg');
     }
     &.cluster-4 {
-      
+
       background-image: url('/assets/icons/Category_Icons-04.svg');
     }
-    
+
   }
   &.mid {
     background-image: url('/assets/icons/cluster_sprite_med.png');
@@ -257,14 +258,14 @@ h3 {
 }
 
 .groupname {
-  font-size: 10px; 
+  font-size: 10px;
   font-weight: bold;
   text-transform: uppercase;
   }
 .shader {
   background: url('/assets/images/low_brow.png') no-repeat center bottom;
   padding-bottom: 75px;
-        
+
 }
 .login-form { width: 50%; float: left; clear: none; padding-top: 30px;
 
@@ -273,20 +274,20 @@ h3 {
         line-height: 120%;
         margin-bottom: 40px;
         margin-left: 120px;
-        margin-right: 120px; 
+        margin-right: 120px;
         position: relative;
         overflow: hidden;
-        
+
         span.title-text {
             display: inline-block;
             vertical-align: baseline;
             zoom: 1;
-            color: @blue; 
+            color: @blue;
             *display: inline;
             *vertical-align: auto;
             position: relative;
             padding: 0 20px;
-            line-height: 90%; 
+            line-height: 90%;
             &:before, &:after {
                 content: '';
                 display: block;
@@ -295,10 +296,10 @@ h3 {
                 top: 0.73em;
                 border-top: 1px solid #ddd;
             }
-    
+
             &:before { right: 100%; }
             &:after { left: 100%; }
-            
+
             .grey { color: #9a9a9a; }
         }
       }
@@ -309,7 +310,7 @@ h3 {
     margin: 25px 120px;
     color: @litegray;
     font-size: 18px;
-    font-weight: 300; 
+    font-weight: 300;
     .patua-blue {
       color: @blue;
       .Font-PatuaOne;
@@ -319,11 +320,11 @@ h3 {
   button.btn.btn-primary.login-button {
     width: 100px;
     height: 100px;
-    margin-top: 35px; 
+    margin-top: 35px;
     .border-radius(50px);
     i.fa { font-size: 50px; }
-      
-    
+
+
   }
 }
 .login-deets {
@@ -345,44 +346,44 @@ h3 {
     bottom: 0;
     width: 100%;
     padding: 35px 0px;
-    background: rgba(0,0,0, 0.6);    
+    background: rgba(0,0,0, 0.6);
   }
-  
+
   .detail {
     //background: rgba(255,255,255,0.8);
-    padding: 0px; 
-    
+    padding: 0px;
+
     width: 25%;
     display: block;
     float: left;
     &:not(:last-child) {
-      border-right: 1px solid white; 
+      border-right: 1px solid white;
     }
     h4 {
-      
+
       font-size: 14px;
       text-transform: uppercase;
       color: white;
       font-weight: 300;
     }
     .big-number {
-      color: white;      
+      color: white;
       font-size: 32px;
     }
-  } 
+  }
 }
 
 .floatThead-table thead { background: white; }
 
 .group-list {
-  padding: 8px; 
+  padding: 8px;
   a { margin-top: 10px; text-indent: 5px; line-height: 40px;  }
 }
 
 
 .party-images {
-  
-  
+
+
   & > .image {
     width: 180px;
     padding: 5px;
@@ -399,14 +400,14 @@ h3 {
       top: 5px;
       right: 5px;
       padding: 8px 16px;
-      cursor: pointer; 
+      cursor: pointer;
     }
   }
-  
+
 }
 
 .impact-avatar { border: 5px solid @litegray; }
 .big {
-  padding: 15px 5%; font-size: 50px; color: @litegray; font-weight: 300; 
+  padding: 15px 5%; font-size: 50px; color: @litegray; font-weight: 300;
   &.blue { color: @blue; .Font-PatuaOne; padding: 0px 0px; font-weight: normal;  }
 }
