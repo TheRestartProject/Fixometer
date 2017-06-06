@@ -88,7 +88,7 @@
           $toTimeStamp = null;
           $fromTimeStamp = null;
 
-          
+
 
           /** collect params **/
           if(isset($_GET['groups'])){
@@ -121,91 +121,96 @@
           }
 
           $PartyList = $this->Search->parties($searched_parties, $searched_groups, $fromTimeStamp, $toTimeStamp);
-          //dbga($PartyList[8]);
-          $partyIds = array();
-          $participants = 0;
-          $hours_volunteered = 0;
-          $totalCO2 = 0;
-          $totalWeight = 0;
-        //  dbga($PartyList[12]->devices);
-          foreach($PartyList as $i => $party){
-              if($party->device_count == 0){
-                  $need_attention++;
-              }
+          if(count($PartyList) > 0 ){
+            //dbga($PartyList[8]);
+            $partyIds = array();
+            $participants = 0;
+            $hours_volunteered = 0;
+            $totalCO2 = 0;
+            $totalWeight = 0;
+          //  dbga($PartyList[12]->devices);
+            foreach($PartyList as $i => $party){
+                if($party->device_count == 0){
+                    $need_attention++;
+                }
 
-              $partyIds[] = $party->idevents;
-
-
-              $party->co2 = 0;
-              $party->fixed_devices = 0;
-              $party->repairable_devices = 0;
-              $party->dead_devices = 0;
-              $party->guesstimates = false;
-
-              $participants += $party->pax;
-              $hours_volunteered += (($party->volunteers > 0 ? $party->volunteers * 3 : 12 ) + 9);
-
-              foreach($party->devices as $device){
+                $partyIds[] = $party->idevents;
 
 
+                $party->co2 = 0;
+                $party->fixed_devices = 0;
+                $party->repairable_devices = 0;
+                $party->dead_devices = 0;
+                $party->guesstimates = false;
 
-                  switch($device->repair_status){
-                      case 1:
-                          $party->co2 += (!empty($device->estimate) && $device->category == 46 ? ($device->estimate * $this->EmissionRatio) : $device->footprint);
-                          $party->fixed_devices++;
-                          $totalWeight += (!empty($device->estimate) && $device->category==46 ? $device->estimate : $device->weight);
+                $participants += $party->pax;
+                $hours_volunteered += (($party->volunteers > 0 ? $party->volunteers * 3 : 12 ) + 9);
 
-                          break;
-                      case 2:
-                          $party->repairable_devices++;
-                          break;
-                      case 3:
-                          $party->dead_devices++;
-                          break;
-                  }
-                  if($device->category == 46){
-                      $party->guesstimates = true;
-                  }
-              }
-              $party->co2 = number_format(round($party->co2 * $Device->displacement), 0, '.' , ',');
-              $totalCO2 += $party->co2;
+                foreach($party->devices as $device){
+
+
+
+                    switch($device->repair_status){
+                        case 1:
+                            $party->co2 += (!empty($device->estimate) && $device->category == 46 ? ($device->estimate * $this->EmissionRatio) : $device->footprint);
+                            $party->fixed_devices++;
+                            $totalWeight += (!empty($device->estimate) && $device->category==46 ? $device->estimate : $device->weight);
+
+                            break;
+                        case 2:
+                            $party->repairable_devices++;
+                            break;
+                        case 3:
+                            $party->dead_devices++;
+                            break;
+                    }
+                    if($device->category == 46){
+                        $party->guesstimates = true;
+                    }
+                }
+                $party->co2 = number_format(round($party->co2 * $Device->displacement), 0, '.' , ',');
+                $totalCO2 += $party->co2;
+            }
+
+            /** Cluster dataviz **/
+            $clusters = array();
+
+            for($i = 1; $i <= 4; $i++) {
+                $cluster = $this->Search->countByCluster($partyIds, $i);
+                $total = 0;
+                foreach($cluster as $state){
+                    $total += $state->counter;
+                }
+                $cluster['total'] = $total;
+                $clusters['all'][$i] = $cluster;
+            }
+
+
+            $this->set('clusters', $clusters);
+
+            // most/least stats for clusters
+            $mostleast = array();
+            for($i = 1; $i <= 4; $i++){
+                $mostleast[$i]['most_seen'] = $this->Search->findMostSeen($partyIds,null, $i);
+                $mostleast[$i]['most_repaired'] = $this->Search->findMostSeen($partyIds,1, $i);
+                $mostleast[$i]['least_repaired'] = $this->Search->findMostSeen($partyIds,3, $i);
+
+            }
+
+            $this->set('mostleast', $mostleast);
+
+
+            $this->set('pax', $participants);
+            $this->set('hours', $hours_volunteered);
+            $this->set('totalWeight', $totalWeight);
+            $this->set('totalCO2', $totalCO2);
+            $this->set('device_count_status', $this->Search->deviceStatusCount($partyIds));
+            $this->set('top', $this->Search->findMostSeen($partyIds, 1, null));
+            $this->set('PartyList', $PartyList);
           }
-
-          /** Cluster dataviz **/
-          $clusters = array();
-
-          for($i = 1; $i <= 4; $i++) {
-              $cluster = $this->Search->countByCluster($partyIds, $i);
-              $total = 0;
-              foreach($cluster as $state){
-                  $total += $state->counter;
-              }
-              $cluster['total'] = $total;
-              $clusters['all'][$i] = $cluster;
+          else {
+            $response['warning'] = 'No results for this set of parameters!';
           }
-
-
-          $this->set('clusters', $clusters);
-
-          // most/least stats for clusters
-          $mostleast = array();
-          for($i = 1; $i <= 4; $i++){
-              $mostleast[$i]['most_seen'] = $this->Search->findMostSeen($partyIds,null, $i);
-              $mostleast[$i]['most_repaired'] = $this->Search->findMostSeen($partyIds,1, $i);
-              $mostleast[$i]['least_repaired'] = $this->Search->findMostSeen($partyIds,3, $i);
-
-          }
-
-          $this->set('mostleast', $mostleast);
-
-
-          $this->set('pax', $participants);
-          $this->set('hours', $hours_volunteered);
-          $this->set('totalWeight', $totalWeight);
-          $this->set('totalCO2', $totalCO2);
-          $this->set('device_count_status', $this->Search->deviceStatusCount($partyIds));
-          $this->set('top', $this->Search->findMostSeen($partyIds, 1, null));
-          $this->set('PartyList', $PartyList);
         }
 
         if(!is_null($response)){

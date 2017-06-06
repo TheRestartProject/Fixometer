@@ -60,7 +60,7 @@
               </div>
               <div class="col-md-3">
                 <div class="form-group">
-                  <div class="input-group date">
+                  <div class="input-group date from-date">
                     <input type="text" class="form-control" id="search-from-date" name="from-date" placeholder="From date..." <?php if(isset($_GET['from-date']) && !empty($_GET['from-date'])){ echo ' value="' . $_GET['from-date'] . '"'; } ?> >
                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                   </div>
@@ -68,7 +68,7 @@
               </div>
               <div class="col-md-3">
                 <div class="form-group">
-                  <div class="input-group date">
+                  <div class="input-group date to-date">
                     <input type="text" class="form-control" id="search-to-date" name="to-date" placeholder="To date..." <?php if(isset($_GET['to-date']) && !empty($_GET['to-date'])){ echo ' value="' . $_GET['to-date'] . '"'; } ?> >
                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                   </div>
@@ -90,16 +90,18 @@
                 </div>
               </div>
 
-              <div class="col-md-5">
+              <div class="col-md-4">
                 <div class="form-group">
                   <input type="text" class="form-control " id="free-text" name="free-text" placeholder="Search in the comment..."  <?php if(isset($_GET['free-text']) && !empty($_GET['free-text'])){ echo ' value="' . $_GET['free-text'] . '"'; } ?> >
                 </div>
               </div>
 
               <div class="col-md-1">
+                <button class="btn btn-primary btn-block"><i class="fa fa-search"></i> Search</button>
+              </div>
 
-                <button class="btn btn-primary"><i clasS="fa fa-search"></i> Search</button>
-                <a href="/device/index" class="btn btn-default"><i class="fa fa-refresh"></i> Reset</a>
+              <div class="col-md-1">
+                <a href="/device/index" class="btn btn-default btn-block"><i class="fa fa-refresh"></i> Reset</a>
               </div>
             </div>
           </form>
