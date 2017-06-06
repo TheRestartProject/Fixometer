@@ -273,12 +273,12 @@
                             </td>
                             <td>
                                 <div class="form-group">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="hidden" name="device[<?php echo $i; ?>][spare_parts]" id="device[<?php echo $i; ?>][spare_parts_2]" value="2">
-                                            <input type="checkbox" name="device[<?php echo $i; ?>][spare_parts]" id="device[<?php echo $i; ?>][spare_parts_1]" value="1" <?php echo ($devices[$i-1]->spare_parts == 1 ? 'checked' : ''); ?>> Yes
-                                        </label>
-                                    </div>
+                                  <div class="checkbox">
+                                    <label>
+                                      <input type="hidden" name="device[<?php echo $i; ?>][spare_parts]" id="device[<?php echo $i; ?>][spare_parts_2]" value="2">
+                                      <input type="checkbox" name="device[<?php echo $i; ?>][spare_parts]" id="device[<?php echo $i; ?>][spare_parts_1]" value="1" <?php echo ($devices[$i-1]->spare_parts == 1 ? 'checked' : ''); ?>> Yes
+                                    </label>
+                                  </div>
                                 </div>
                             </td>
                             <td>

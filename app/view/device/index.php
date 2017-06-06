@@ -20,7 +20,17 @@
                     <?php foreach($categories as $cluster){ ?>
                     <optgroup label="<?php echo $cluster->name; ?>">
                       <?php foreach($cluster->categories as $c){ ?>
-                      <option value="<?php echo $c->idcategories; ?>"><?php echo $c->name; ?></option>
+                      <option value="<?php echo $c->idcategories; ?>"
+                        <?php
+                        if(isset($_GET['categories']) && !empty($_GET['categories'])){
+                          foreach($_GET['categories'] as $cat){
+                            if ($cat == $c->idcategories) { echo " selected "; }
+                          }
+                        }
+                        ?>
+                      >
+                      <?php echo $c->name; ?>
+                      </option>
                       <?php } ?>
                     </optgroup>
                     <?php } ?>
@@ -33,23 +43,33 @@
                 <div class="form-group">
                   <select id="groups" name="groups[]" class="selectpicker form-control" multiple data-live-search="true" title="Choose groups...">
                     <?php foreach($groups as $g){ ?>
-                    <option value="<?php echo $g->id; ?>"><?php echo $g->name; ?></option>
+                    <option value="<?php echo $g->id; ?>"
+                      <?php
+                      if(isset($_GET['groups']) && !empty($_GET['groups'])){
+                        foreach($_GET['groups'] as $grp){
+                          if ($grp == $g->id) { echo " selected "; }
+                        }
+                      }
+                      ?>
+                    >
+                    <?php echo $g->name; ?>
+                    </option>
                     <?php } ?>
                   </select>
                 </div>
               </div>
               <div class="col-md-3">
                 <div class="form-group">
-                  <div class="input-group">
-                    <input type="text" class="form-control date" id="search-from-date" name="from-date" placeholder="From date...">
+                  <div class="input-group date">
+                    <input type="text" class="form-control" id="search-from-date" name="from-date" placeholder="From date..." <?php if(isset($_GET['from-date']) && !empty($_GET['from-date'])){ echo ' value="' . $_GET['from-date'] . '"'; } ?> >
                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                   </div>
                 </div>
               </div>
               <div class="col-md-3">
                 <div class="form-group">
-                  <div class="input-group">
-                    <input type="text" class="form-control date" id="search-to-date" name="to-date" placeholder="To date...">
+                  <div class="input-group date">
+                    <input type="text" class="form-control" id="search-to-date" name="to-date" placeholder="To date..." <?php if(isset($_GET['to-date']) && !empty($_GET['to-date'])){ echo ' value="' . $_GET['to-date'] . '"'; } ?> >
                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                   </div>
                 </div>
@@ -57,25 +77,29 @@
             </div>
 
             <div class="row">
+
               <div class="col-md-3">
                 <div class="form-group">
-                  <input type="text" class="form-control " id="model" name="model" placeholder="Model...">
+                  <input type="text" class="form-control " id="brand" name="brand" placeholder="Brand..." <?php if(isset($_GET['brand']) && !empty($_GET['brand'])){ echo ' value="' . $_GET['brand'] . '"'; } ?> >
                 </div>
               </div>
+
               <div class="col-md-3">
                 <div class="form-group">
-                  <input type="text" class="form-control " id="brand" name="brand" placeholder="Brand...">
+                  <input type="text" class="form-control " id="model" name="model" placeholder="Model..." <?php if(isset($_GET['model']) && !empty($_GET['model'])){ echo ' value="' . $_GET['model'] . '"'; } ?> >
                 </div>
               </div>
+
               <div class="col-md-5">
                 <div class="form-group">
-                  <input type="text" class="form-control " id="free-text" name="free-text" placeholder="Search in the description...">
+                  <input type="text" class="form-control " id="free-text" name="free-text" placeholder="Search in the comment..."  <?php if(isset($_GET['free-text']) && !empty($_GET['free-text'])){ echo ' value="' . $_GET['free-text'] . '"'; } ?> >
                 </div>
               </div>
 
               <div class="col-md-1">
 
                 <button class="btn btn-primary"><i clasS="fa fa-search"></i> Search</button>
+                <a href="/device/index" class="btn btn-default"><i class="fa fa-refresh"></i> Reset</a>
               </div>
             </div>
           </form>
@@ -90,6 +114,7 @@
                         <th data-column-id="category">Category</th>
                         <th data-column-id="brand">Brand</th>
                         <th data-column-id="model">Model</th>
+                        <th data-column-id="comment">Comment</th>
                         <th data-column-id="groupName">Event (Group)</th>
                         <th data-column-id="eventDate" data-header-css-class="mid-cell">Event Date</th>
                         <th data-column-id="location">Location</th>
@@ -99,24 +124,23 @@
                 </thead>
 
                 <tbody>
-                    <?php foreach($list as $device){ ?>
-                    <tr>
-                        <td><?php echo $device->id; ?></td>
-                        <td><?php echo $device->category_name; ?></td>
-                        <td><?php echo $device->brand; ?></td>
-                        <td><?php echo $device->model; ?></td>
-                        <td><?php echo $device->group_name; ?></td>
-                        <td><?php echo strftime('%Y-%m-%d', $device->event_date); ?></td>
-                        <td><?php echo $device->event_location; ?></td>
-                        <td><?php echo $device->repair_status; ?></td>
-                        <td><a href="/device/edit/<?php echo $device->id; ?>">edit</a></td>
-                    </tr>
-                    <?php } ?>
+                  <?php foreach($list as $device){ ?>
+                  <tr>
+                    <td><?php echo $device->id; ?></td>
+                    <td><?php echo $device->category_name; ?></td>
+                    <td><?php echo $device->brand; ?></td>
+                    <td><?php echo $device->model; ?></td>
+                    <td><?php echo $device->problem; ?></td>
+                    <td><?php echo $device->group_name; ?></td>
+                    <td><?php echo strftime('%Y-%m-%d', $device->event_date); ?></td>
+                    <td><?php echo $device->event_location; ?></td>
+                    <td><?php echo $device->repair_status; ?></td>
+                    <td><a href="/device/edit/<?php echo $device->id; ?>">edit</a></td>
+                  </tr>
+                  <?php } ?>
                 </tbody>
             </table>
-            <script>
-            
-            </script>
+
         </div>
     </div>
 </div>

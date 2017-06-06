@@ -41,11 +41,80 @@
 
       <div class="col-md-6">
         <div class="form-group">
-          <label for="problem">Problem:</label>
+          <label for="problem">Comment:</label>
           <textarea class="form-control" rows="4" id="problem" name="problem" placeholder="Problem..."><?php echo $formdata->problem; ?></textarea>
         </div>
-        <div class="form-group"></div>
-        <div class="form-group"></div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="repair">Repair Status:</label>
+              <div class="radio">
+                  <label>
+                      <input
+                             type="radio"
+                             name="repair_status"
+                             id="repair_status_1"
+                             value="1"
+                             <?php echo ($formdata->repair_status == 1 ? 'checked="checked"' : ''); ?>>
+                             Fixed
+                  </label>
+              </div>
+              <div class="radio">
+                  <label>
+                      <input
+                             type="radio"
+                             <?php echo ($formdata->repair_status == 2 ? 'checked="checked"' : ''); ?>
+                             name="repair_status"
+                             id="repair_status_2"
+                             value="2"
+                             class="repairable"
+                             data-target-details="#repairable-details">
+                             Repairable
+                  </label>
+                  <div id="" class="" style="padding-left: 20px;">
+                      <div class="checkbox">
+                          <label>
+                              <input type="checkbox" name="more_time_needed" id="more_time_needed" value="1" <?php echo ($formdata->more_time_needed == 1 ? 'checked' : ''); ?> > More time needed
+                          </label>
+                      </div>
+                      <div class="checkbox">
+                          <label>
+                              <input type="checkbox" name="professional_help" id="professional_help" value="1" <?php echo ($formdata->professional_help == 1 ? 'checked' : ''); ?> > Professional help
+                          </label>
+                      </div>
+                      <div class="checkbox">
+                          <label>
+                              <input type="checkbox" name="do_it_yourself" id="do_it_yourself" value="1" <?php echo ($formdata->do_it_yourself == 1 ? 'checked' : ''); ?> > Do it yourself
+                          </label>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="radio">
+                  <label>
+                      <input
+                             type="radio"
+                             name="repair_status"
+                             id="repair_status_3"
+                             value="3"
+                             <?php echo ($formdata->repair_status == 3 ? 'checked="checked"' : ''); ?>> End of lifecycle
+                  </label>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="repair">Spare Parts:</label>
+              <div class="checkbox">
+                  <label>
+                      <input type="hidden" name="spare_parts" id="spare_parts_2" value="2">
+                      <input type="checkbox" name="spare_parts" id="spare_parts_1" value="1" <?php echo ($formdata->spare_parts == 1 ? 'checked' : ''); ?>> Yes
+                  </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
 
 

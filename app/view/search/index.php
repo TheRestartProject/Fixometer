@@ -1,5 +1,7 @@
 <div class="container search-dashboard" id="admin-dashboard">
-
+  <div class="row">
+    <h1>Stats Filter</h1>
+  </div>
 
     <?php if(isset($response)) { ?>
     <div class="row">
@@ -10,54 +12,79 @@
     <?php } ?>
 
     <section class="row profile">
-      <div class="col-md-12">
-        <form action="/search" class="form-inline" method="get" id="filter-search">
+
+        <form action="/search" class="" method="get" id="filter-search">
           <input type="hidden" name="fltr" value="<?php echo bin2hex(openssl_random_pseudo_bytes(8)); ?>">
 
-          <div class="form-group">
-            <select id="search-groups" name="groups[]" data-width="180px" class="search-groups-class selectpicker form-control" data-live-search="true" multiple title="Choose groups...">
-              <?php foreach($groups as $group){ ?>
-              <option value="<?php echo $group->id; ?>"><?php echo trim($group->name); ?></option>
-              <?php } ?>
-            </select>
+          <div class="col-md-2">
+            <h2>Search</h2>
           </div>
 
-
-          <div class="form-group">
-            <label for="parties" class="sr-only">Parties</label>
-            <select class="selectpicker form-control" data-width="180px" id="search-parties" name="parties[]" title="Select parties..." data-live-search="true" multiple title="Choose parties...">
-              <?php foreach($sorted_parties as $groupname => $groupparties){ ?>
-              <optgroup label="<?php echo trim($groupname); ?>">
-                <?php foreach($groupparties as $party) { ?>
-                <option value="<?php echo $party->id; ?>" data-subtext="<?php echo strftime('%d/%m/%Y', $party->event_timestamp); ?>"><?php echo $party->venue; ?></option>
+          <div class="col-md-5">
+            <div class="form-group">
+              <select id="search-groups" name="groups[]" class="search-groups-class selectpicker form-control" data-live-search="true" multiple title="Choose groups...">
+                <?php foreach($groups as $group){ ?>
+                <option value="<?php echo $group->id; ?>"
+                <?php
+                if(isset($_GET['groups']) && !empty($_GET['groups'])){
+                  foreach($_GET['groups'] as $g){
+                    if ($g == $group->id) { echo " selected "; }
+                  }
+                }
+                ?>
+                ><?php echo trim($group->name); ?></option>
                 <?php } ?>
-              </optgroup>
-              <?php } ?>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="from-date" class="sr-only">From date</label>
-
-            <div class="input-group">
-              <input type="text" class="form-control date" id="search-from-date" name="from-date" placeholder="From date...">
-              <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="parties" class="sr-only">Parties</label>
+              <select class="selectpicker form-control" id="search-parties" name="parties[]" title="Select parties..." data-live-search="true" multiple title="Choose parties...">
+                <?php foreach($sorted_parties as $groupname => $groupparties){ ?>
+                <optgroup label="<?php echo trim($groupname); ?>">
+                  <?php foreach($groupparties as $party) { ?>
+                  <option value="<?php echo $party->id; ?>" data-subtext="<?php echo strftime('%d/%m/%Y', $party->event_timestamp); ?>"
+                    <?php
+                    if(isset($_GET['parties']) && !empty($_GET['parties'])){
+                      foreach($_GET['parties'] as $p){
+                        if ($p == $party->id) { echo " selected "; }
+                      }
+                    }
+                    ?>
+                  ><?php echo $party->venue; ?></option>
+                  <?php } ?>
+                </optgroup>
+                <?php } ?>
+              </select>
             </div>
           </div>
 
-          <div class="form-group">
-            <label for="from-date" class="sr-only">To date</label>
-            <div class="input-group">
-              <input type="text" class="form-control date" id="search-to-date" name="to-date" placeholder="To date...">
-              <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="from-date" class="sr-only">From date</label>
+
+              <div class="input-group date">
+                <input type="text" class="form-control" id="search-from-date" name="from-date" placeholder="From date..." <?php if(isset($_GET['from-date']) && !empty($_GET['from-date'])){ echo ' value="' . $_GET['from-date'] . '"'; } ?> >
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="from-date" class="sr-only">To date</label>
+              <div class="input-group date">
+                <input type="text" class="form-control" id="search-to-date" name="to-date" placeholder="To date..." <?php if(isset($_GET['to-date']) && !empty($_GET['to-date'])){ echo ' value="' . $_GET['to-date'] . '"'; } ?>>
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+              </div>
             </div>
           </div>
 
-          <div class="form-group">
-            <button type="submit" class="btn btn-primary"><i class="fa fa-filter"></i> Filter</button>
+          <div class="col-md-2">
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary"><i class="fa fa-filter"></i> Filter</button>
+              <a href="/search" class="btn btn-default"><i class="fa fa-refresh"></i> Reset</a>
+            </div>
           </div>
         </form>
-      </div>
+
     </section>
 
 
@@ -275,7 +302,7 @@
           <div role="tabpanel" class="tab-pane" id="impact-tab">
               <section class="row" id="impact-header">
                   <div class="col-sm-12 text-center">
-                      <img src="/assets/images/logo.png" >
+
                       <h2>The Restart Project</h2>
 
                       <p class="big">
@@ -389,12 +416,7 @@
 
 
 
-              <!-- Group Achievements -->
-              <section class="row">
-                  <div class="col-md-12">
-                      <h2>Restart Project Achievements</h2>
-                  </div>
-              </section>
+
 
               <section class="row">
 
@@ -701,9 +723,9 @@
                               <span class="cluster big cluster-1"></span>
                           </div>
                           <div class="col-md-4">
-                              <div class="barpiece fixed" style="width :<?php echo round((($cluster[1][0]->counter / $cluster[1]['total']) * 100) , 4); ?>%">&nbsp;</div><div class="barpiece-label fixed"><?php echo round((($cluster[1][0]->counter / $cluster[1]['total']) * 100) , 2); ?>%</div>
-                              <div class="barpiece repairable" style="width :<?php echo round((($cluster[1][1]->counter / $cluster[1]['total']) * 100) , 4); ?>%">&nbsp;</div><div class="barpiece-label repairable"><?php echo round((($cluster[1][1]->counter / $cluster[1]['total']) * 100) , 2); ?>%</div>
-                              <div class="barpiece end-of-life" style="width :<?php echo round((($cluster[1][2]->counter / $cluster[1]['total']) * 100) , 4); ?>%">&nbsp;</div><div class="barpiece-label dead"><?php echo round((($cluster[1][2]->counter / $cluster[1]['total']) * 100) , 2); ?>%</div>
+                              <div class="barpiece fixed" style="width :<?php echo round((($cluster[1][0]->counter / $cluster[1]['total']) * 100) , 4); ?>%">&nbsp;</div><div class="barpiece-label fixed"><?php echo ($cluster[1]['total'] > 0 ? round((($cluster[1][0]->counter / $cluster[1]['total']) * 100) , 2) : '0' ); ?>%</div>
+                              <div class="barpiece repairable" style="width :<?php echo round((($cluster[1][1]->counter / $cluster[1]['total']) * 100) , 4); ?>%">&nbsp;</div><div class="barpiece-label repairable"><?php echo ($cluster[1]['total'] > 0 ? round((($cluster[1][1]->counter / $cluster[1]['total']) * 100) , 2) : '0'  ); ?>%</div>
+                              <div class="barpiece end-of-life" style="width :<?php echo round((($cluster[1][2]->counter / $cluster[1]['total']) * 100) , 4); ?>%">&nbsp;</div><div class="barpiece-label dead"><?php echo ($cluster[1]['total'] > 0 ? round((($cluster[1][2]->counter / $cluster[1]['total']) * 100) , 2) : '0' ) ; ?>%</div>
                           </div>
 
 
@@ -711,9 +733,9 @@
                               <span class="cluster big cluster-2"></span>
                           </div>
                           <div class="col-md-4">
-                              <div class="barpiece fixed" style="width :<?php echo round((($cluster[2][0]->counter / $cluster[2]['total']) * 100) , 4); ?>%">&nbsp;</div><div class="barpiece-label fixed"><?php echo round((($cluster[2][0]->counter / $cluster[2]['total']) * 100) , 2); ?>%</div>
-                              <div class="barpiece repairable" style="width :<?php echo round((($cluster[2][1]->counter / $cluster[2]['total']) * 100) , 4); ?>%">&nbsp;</div><div class="barpiece-label repairable"><?php echo round((($cluster[2][1]->counter / $cluster[2]['total']) * 100) , 2); ?>%</div>
-                              <div class="barpiece end-of-life" style="width :<?php echo round((($cluster[2][2]->counter / $cluster[2]['total']) * 100) , 4); ?>%">&nbsp;</div><div class="barpiece-label dead"><?php echo round((($cluster[2][2]->counter / $cluster[2]['total']) * 100) , 2); ?>%</div>
+                              <div class="barpiece fixed" style="width :<?php echo round((($cluster[2][0]->counter / $cluster[2]['total']) * 100) , 4); ?>%">&nbsp;</div><div class="barpiece-label fixed"><?php echo ($cluster[2]['total'] > 0 ? round((($cluster[2][0]->counter / $cluster[2]['total']) * 100) , 2) : '0' );  ?>%</div>
+                              <div class="barpiece repairable" style="width :<?php echo round((($cluster[2][1]->counter / $cluster[2]['total']) * 100) , 4); ?>%">&nbsp;</div><div class="barpiece-label repairable"><?php echo ($cluster[2]['total'] > 0 ? round((($cluster[2][1]->counter / $cluster[2]['total']) * 100) , 2) : '0' );  ?>%</div>
+                              <div class="barpiece end-of-life" style="width :<?php echo round((($cluster[2][2]->counter / $cluster[2]['total']) * 100) , 4); ?>%">&nbsp;</div><div class="barpiece-label dead"><?php echo ($cluster[2]['total'] > 0 ? round((($cluster[2][2]->counter / $cluster[2]['total']) * 100) , 2) : '0' );  ?>%</div>
                           </div>
 
                       </div>
@@ -723,18 +745,18 @@
                               <span class="cluster big cluster-3"></span>
                           </div>
                           <div class="col-md-4">
-                              <div class="barpiece fixed" style="width :<?php echo round((($cluster[3][0]->counter / $cluster[3]['total']) * 100) , 4); ?>%">&nbsp;</div><div class="barpiece-label fixed"><?php echo round((($cluster[3][0]->counter / $cluster[3]['total']) * 100) , 2); ?>%</div>
-                              <div class="barpiece repairable" style="width :<?php echo round((($cluster[3][1]->counter / $cluster[3]['total']) * 100) , 4); ?>%">&nbsp;</div><div class="barpiece-label repairable"><?php echo round((($cluster[3][1]->counter / $cluster[3]['total']) * 100) , 2); ?>%</div>
-                              <div class="barpiece end-of-life" style="width :<?php echo round((($cluster[3][2]->counter / $cluster[3]['total']) * 100) , 4); ?>%">&nbsp;</div><div class="barpiece-label dead"><?php echo round((($cluster[3][2]->counter / $cluster[3]['total']) * 100) , 2); ?>%</div>
+                              <div class="barpiece fixed" style="width :<?php echo round((($cluster[3][0]->counter / $cluster[3]['total']) * 100) , 4); ?>%">&nbsp;</div><div class="barpiece-label fixed"><?php echo ($cluster[3]['total'] > 0 ? round((($cluster[3][0]->counter / $cluster[3]['total']) * 100) , 2) : '0' );  ?>%</div>
+                              <div class="barpiece repairable" style="width :<?php echo round((($cluster[3][1]->counter / $cluster[3]['total']) * 100) , 4); ?>%">&nbsp;</div><div class="barpiece-label repairable"><?php echo ($cluster[3]['total'] > 0 ? round((($cluster[3][1]->counter / $cluster[3]['total']) * 100) , 2) : '0' );  ?>%</div>
+                              <div class="barpiece end-of-life" style="width :<?php echo round((($cluster[3][2]->counter / $cluster[3]['total']) * 100) , 4); ?>%">&nbsp;</div><div class="barpiece-label dead"><?php echo ($cluster[3]['total'] > 0 ? round((($cluster[3][2]->counter / $cluster[3]['total']) * 100) , 2) : '0' );  ?>%</div>
                           </div>
 
                           <div class="col-md-2">
                               <span class="cluster big cluster-4"></span>
                           </div>
                           <div class="col-md-4">
-                              <div class="barpiece fixed" style="width :<?php echo round((($cluster[4][0]->counter / $cluster[4]['total']) * 100) , 4); ?>%">&nbsp;</div><div class="barpiece-label fixed"><?php echo round((($cluster[4][0]->counter / $cluster[4]['total']) * 100) , 2); ?>%</div>
-                              <div class="barpiece repairable" style="width :<?php echo round((($cluster[4][1]->counter / $cluster[4]['total']) * 100) , 4); ?>%">&nbsp;</div><div class="barpiece-label repairable"><?php echo round((($cluster[4][1]->counter / $cluster[4]['total']) * 100) , 2); ?>%</div>
-                              <div class="barpiece end-of-life" style="width :<?php echo round((($cluster[4][2]->counter / $cluster[4]['total']) * 100) , 4); ?>%">&nbsp;</div><div class="barpiece-label dead"><?php echo round((($cluster[4][2]->counter / $cluster[4]['total']) * 100) , 2); ?>%</div>
+                              <div class="barpiece fixed" style="width :<?php echo round((($cluster[4][0]->counter / $cluster[4]['total']) * 100) , 4); ?>%">&nbsp;</div><div class="barpiece-label fixed"><?php echo ($cluster[4]['total'] > 0 ? round((($cluster[4][0]->counter / $cluster[4]['total']) * 100) , 2) : '0' );  ?>%</div>
+                              <div class="barpiece repairable" style="width :<?php echo round((($cluster[4][1]->counter / $cluster[4]['total']) * 100) , 4); ?>%">&nbsp;</div><div class="barpiece-label repairable"><?php echo ($cluster[4]['total'] > 0 ? round((($cluster[4][1]->counter / $cluster[4]['total']) * 100) , 2) : '0' );  ?>%</div>
+                              <div class="barpiece end-of-life" style="width :<?php echo round((($cluster[4][2]->counter / $cluster[4]['total']) * 100) , 4); ?>%">&nbsp;</div><div class="barpiece-label dead"><?php echo ($cluster[4]['total'] > 0 ? round((($cluster[4][2]->counter / $cluster[4]['total']) * 100) , 2) : '0' ); ?>%</div>
                           </div>
 
 

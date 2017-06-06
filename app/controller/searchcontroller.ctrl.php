@@ -53,7 +53,7 @@
         /** Get default data for the search dropdowns **/
         if(hasRole($this->user, 'Administrator')){
           $groups = $Groups->findList();
-          $parties = $Parties->findAll();
+          $parties = $Parties->findAllSearchable();
           foreach( $parties as $i => $party ) {
             $parties[$i]->venue = $party->location;
           }
@@ -67,7 +67,7 @@
             $groupIds[] = $group->idgroups;
           }
 
-          $parties =  $Parties->ofTheseGroups($groupIds);
+          $parties =  $Parties->ofTheseGroups($groupIds, true);
 
           foreach( $parties as $i => $party ) {
             $parties[$i]->id = $party->idevents;
@@ -87,6 +87,8 @@
           $searched_parties = null;
           $toTimeStamp = null;
           $fromTimeStamp = null;
+
+          
 
           /** collect params **/
           if(isset($_GET['groups'])){

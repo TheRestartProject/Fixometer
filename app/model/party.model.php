@@ -31,6 +31,33 @@
             return $stmt->fetchAll(PDO::FETCH_OBJ);
         }
 
+        public function findAllSearchable() {
+
+            $sql = 'SELECT
+                        `e`.`idevents` AS `id`,
+                        UNIX_TIMESTAMP( CONCAT(`e`.`event_date`, " ", `e`.`start`) ) AS `event_timestamp`,
+                        `e`.`start` AS `start`,
+                        `e`.`end` AS `end`,
+                        `e`.`location`,
+                        `e`.`latitude`,
+                        `e`.`longitude`,
+                        `e`.`pax`,
+                        `e`.`free_text`,
+                        `e`.`hours`,
+                        `g`.`name` AS `group_name`,
+                        `g`.`idgroups` AS `group_id`
+                    FROM `events` AS `e`
+                    INNER JOIN `groups` AS `g`
+                        ON `g`.`idgroups` = `e`.`group`
+                    WHERE `event_date` <= NOW()
+                    ORDER BY `e`.`event_date` DESC';
+
+            $stmt = $this->database->prepare($sql);
+            $stmt->execute();
+
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+        }
+
 
         public function findThis($id, $devices = false) {
 
@@ -231,7 +258,7 @@
 
             $sql .= ' ORDER BY `e`.`event_date` DESC';
 
-            
+
             $stmt = $this->database->prepare($sql);
 
             /* if(is_numeric($group) && $group != 'admin' ){

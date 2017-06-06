@@ -30,19 +30,17 @@ $(document).ready(function(){
         $($(this).attr("data-target")).modal("show");
 
         $($(this).attr("data-target")).on('loaded.bs.modal', function(){
+          
           $('#deviceEditor .selectpicker').selectpicker();
           $('#save-device-update').click(function(e){
 
             response = {};
-
             e.preventDefault();
 
             var theForm = $('#submit-device-update');
             var theUrl = theForm.attr('action');
             var theData = $('#submit-device-update').serialize();
 
-            console.log(theUrl);
-            console.log(theData);
             $.post(theUrl, theData, function(response){
               $('#submit-device-update .message.alert').addClass('alert-' + response.response_type).text(response.message);
               if(response.response_type === 'success'){
@@ -51,14 +49,11 @@ $(document).ready(function(){
                 dataRow.children('td').eq(1).text(categoryLabel);
                 dataRow.children('td').eq(2).text(response.data.brand);
                 dataRow.children('td').eq(3).text(response.data.model);
+                dataRow.children('td').eq(4).text(response.data.problem);
               }
             }, 'json');
-
           });
         });
-
-
-
     });
   });
 });

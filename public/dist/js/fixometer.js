@@ -8,6 +8,10 @@ $(document).ready(function(){
     tickIcon: 'fa-check'
   });
 
+  $('button[type=reset]').click(function(e){
+    $($(this).data('form')).find('.selectpicker').val('default').selectpicker('refresh');
+  });
+
   /** Add Device Row in Party Management **/
   $('#add-device').click(function(e){
       e.preventDefault();
@@ -156,7 +160,7 @@ $(document).ready(function(){
   });
 
   /** startup datepickers **/
-  $('input.date').datetimepicker({
+  $('.date, .date input').datetimepicker({
                 icons: {
                     time: "fa fa-clock-o",
                     date: "fa fa-calendar",
@@ -170,7 +174,7 @@ $(document).ready(function(){
                 format: 'DD/MM/YYYY',
                 defaultDate: $(this).val()
             });
-  $('input.time').datetimepicker({
+  $('.time').datetimepicker({
             icons: {
                 time: "fa fa-clock-o",
                 date: "fa fa-calendar",

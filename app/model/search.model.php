@@ -83,7 +83,7 @@
         $sql.= '  GROUP BY `repair_status`
                   ORDER BY `repair_status` ASC
                 ';
-
+        
         $stmt = $this->database->prepare($sql);
 
         $stmt->bindParam(':cluster', $cluster, PDO::PARAM_INT);

@@ -64,14 +64,16 @@
     <?php if (hasRole($user, 'Host') && count($userGroups) > 0) { ?>
       <section class="row profiles">
         <div class="col-md-12">
+          <p>You are a host of multiple groups.  You can switch to a different group by clicking the button(s) below.</p>        
           <?php
           foreach($userGroups as $g) {
             if($group->idgroups != $g->idgroups){
           ?>
-          <a class="btn btn-primary" href="/host/index/<?php echo $g->idgroups; ?>">Switch to "<?php echo $g->name; ?>"</a>
+          <a class="btn btn-primary" href="/host/index/<?php echo $g->idgroups; ?>"><img class="img-responsive pull-left" width="20" height="20" alt="<?php echo $g->name; ?>" src="/uploads/thumbnail_<?php echo $g->path; ?>">&nbsp;&nbsp;Switch to "<?php echo $g->name; ?>"</a>
           <?php
-          } 
-        } ?>
+            }
+          }
+          ?>
         </div>
       </section>
     <?php } ?>
