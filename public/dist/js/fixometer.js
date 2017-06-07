@@ -190,15 +190,18 @@ $(document).ready(function(){
 
         });
 
-   $('.to-date').datetimepicker({
-      useCurrent: false //Important! See issue #1075
-   });
-   $(".from-date").on("dp.change", function (e) {
-      $('.to-date').data("DateTimePicker").minDate(e.date);
-   });
-   $(".to-date").on("dp.change", function (e) {
-      $('.from-date').data("DateTimePicker").maxDate(e.date);
-   });
+  $('.from-date').datetimepicker({
+   useCurrent: false //Important! See issue #1075
+  });
+  $('.to-date').datetimepicker({
+    useCurrent: false //Important! See issue #1075
+  });
+  $(".from-date").on("dp.change", function (e) {
+    $('.to-date').data("DateTimePicker").minDate(e.date);
+  });
+  $(".to-date").on("dp.change", function (e) {
+    $('.from-date').data("DateTimePicker").maxDate(e.date);
+  });
 
 
   /** linking two times in party creation **/

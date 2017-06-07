@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <?php if(isset($response)) { printResponse($response); } ?>
-                    
+
                     <form action="/user/create" method="post" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-md-6">
@@ -23,9 +23,9 @@
                                     <input type="email" name="email" id="email" class="form-control">
                                     <?php if(isset($error) && isset($error['email']) && !empty($error['email'])) { echo '<span class="help-block text-danger">' . $error['email'] . '</span>'; } ?>
                                 </div>
-                        
+
                                 <div class="form-group <?php if(isset($error) && isset($error['role']) && !empty($error['role'])) { echo "has-error"; } ?>">
-                                    
+
                                     <label for="role">User Role:</label>
                                     <select id="role" name="role"  class="form-control selectpicker">
                                         <option></option>
@@ -35,9 +35,16 @@
                                     </select>
                                     <?php if(isset($error) && isset($error['role']) && !empty($error['role'])) { echo '<span class="help-block text-danger">' . $error['role'] . '</span>'; } ?>
                                 </div>
-                                
-                            </div>    
+
+                                <div class="form-group">
+                                    <label for="profile">Profile Picture:</label>
+                                    <input type="file" class="form-control file" name="profile" data-show-upload="false" data-show-caption="true">
+                                </div>
+
+                            </div>
                             <div class="col-md-6">
+                              <?php /*
+
                                 <div class="form-group <?php if(isset($error) && isset($error['name']) && !empty($error['name'])) { echo "has-error"; } ?>">
                                     <label for="password">Password:</label>
                                     <input type="password" name="password" id="password" class="form-control">
@@ -45,12 +52,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="c_password">Confirm Password:</label>
-                                    <input type="password" name="c_password" id="c_password" class="form-control"> 
+                                    <input type="password" name="c_password" id="c_password" class="form-control">
                                 </div>
-                                <div class="form-group">
-                                    <label for="profile">Profile Picture:</label>
-                                    <input type="file" class="form-control file" name="profile" data-show-upload="false" data-show-caption="true">
-                                </div>
+
+                                */ ?>
+
                                 <div class="form-group <?php if(isset($error) && isset($error['group']) && !empty($error['group'])) { echo "has-error"; } ?>">
                                     <label for="group">Group(s):</label>
                                         <?php foreach($groups as $group){ ?>
@@ -59,26 +65,26 @@
                                                 <input value="<?php echo $group->id; ?>" type="checkbox" name="groups[]" id="group-<?php echo $group->id; ?>"> <?php echo $group->name; ?>
                                             </label>
                                         </div>
-                                        
+
                                         <?php } ?>
                                         <?php if(isset($error) && isset($error['group']) && !empty($error['group'])) { echo '<span class="help-block text-danger">' . $error['group'] . '</span>'; } ?>
                                 </div>
-        
+
                                 <div class="form-group">
                                     <button class="btn btn-default" type="reset"><i class="fa fa-refresh"></i> reset</button>
                                     <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> save</button>
-                                    
-                                </div>        
-                                
-                                
+
+                                </div>
+
+
                             </div>
                         </div>
-                        
-                        
+
+
                     </form>
                 </div>
             </div>
-            
+
         </div>
     </div>
 </div>

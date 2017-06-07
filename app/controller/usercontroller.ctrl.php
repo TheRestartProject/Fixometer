@@ -271,10 +271,10 @@
                         // We got data! Elaborate.
                         $name   =       $_POST['name'];
                         $email  =       $_POST['email'];
-                        $pwd    =       $_POST['password'];
-                        $cpwd   =       $_POST['c_password'];
+                        /*$pwd    =       $_POST['password'];
+                        $cpwd   =       $_POST['c_password']; */
                         $role   =       $_POST['role'];
-                        $groups  =       $_POST['groups'];
+                        $groups  =      $_POST['groups'];
 
                         // dbga($group);
 
@@ -285,11 +285,11 @@
                         if(empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)){
                             $error['email'] = 'Please input a <strong>valid</strong> email.';
                         }
-
+                        /*
                         if(empty($pwd) || empty($cpwd) || !($pwd === $cpwd)){
                             $error['password'] = 'The password cannot be emtpy and must match with the confirmation field.';
                         }
-
+                        */
                         if(empty($role)){
                             $error['role'] = 'Please select a role for the User.';
                         }
@@ -302,13 +302,24 @@
                         }
 
                         if(empty($error)) {
-                           // No errors. We can proceed and create the User.
+                            // random password
+                            $pwd = bin2hex(openssl_random_pseudo_bytes(8));
+
+                            // No errors. We can proceed and create the User.
                             $data = array(  'name'     => $name,
                                             'email'    => $email,
                                             'password' => crypt($pwd, '$1$'.SECRET),
                                             'role'     => $role,
                                             //'group'    => $group
                                         );
+
+                            // add password recovery data
+                            $bytes = 32;
+                            $data['recovery'] = substr( bin2hex(openssl_random_pseudo_bytes($bytes)), 0, 24 );
+                            // add date timestamp
+                            $data['recovery_expires'] = strftime( '%Y-%m-%d %X', time() + (24 * 60 * 60));
+
+
                             $idUser = $this->User->create($data);
                             if($idUser){
 
@@ -322,13 +333,26 @@
 
                                 if(isset($_FILES) && !empty($_FILES)){
                                     $file = new File;
-
                                     $file->upload('profile', 'image', $idUser, TBL_USERS, false, true);
                                 }
 
                             }
                             if($idUser){
-                                $response['success'] = 'User created correctly.';
+                              //Send out email
+
+                              // send email to User
+                              $message = "You just got an account on <strong>" . APPNAME . "</strong>.<br />
+                                          Please click on this link to recover your password: <a href=\"" . BASE_URL . "/user/reset/?recovery=" . $data['recovery'] . "\">" . BASE_URL . "/user/reset/?recovery=" . $data['recovery'] . "</a>. <br />
+                                          If the link doesn't work, please copy and paste it in the address bar of your browser.<br />
+                                          The link will be active for the next 24 hours.";
+                              $subject = APPNAME . ": Password recovery";
+                              $headers = "From: " . APPEMAIL . "\r\n";
+                              $headers .= "MIME-Version: 1.0\r\n";
+                              $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+
+                              $sender = mail($email, $subject, $message, $headers);
+
+                              $response['success'] = 'User created correctly.';
                             }
                             else {
                                 $response['danger'] = 'User could not be created';
