@@ -190,7 +190,6 @@
             $valid_code = false;
           } else {
             $recovery = filter_var($_GET['recovery'], FILTER_SANITIZE_STRING);
-            echo $recovery;
             $user = $this->User->find(array('recovery' => $recovery));
 
             if( strtotime($user[0]->recovery_expires) > time() ) {
