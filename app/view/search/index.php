@@ -303,8 +303,6 @@
               <section class="row" id="impact-header">
                   <div class="col-sm-12 text-center">
 
-                      <h2>The Restart Project</h2>
-
                       <p class="big">
                           <span class="big blue"><?php echo $pax; ?> participants</span> aided by <span class="big blue"><?php echo $hours; ?> hours of volunteered time</span> worked on <span class="big blue"><?php echo ($device_count_status[0]->counter + $device_count_status[1]->counter + $device_count_status[2]->counter) ?> devices.</span>
                       </p>
