@@ -171,7 +171,7 @@
                     $response['danger'] = 'Could not send email with reset instructions.';
                 }
                 else {
-                    $response['success'] = 'Email Sent! Please check your inbox and follow instructions.';
+                    $response['success'] = 'Email Sent! Please check your inbox and follow instructions.  <strong>Please allow up to 10 minutes for your email to arrive, and please check your spam folder.</strong>';
                 }
 
               } else {
