@@ -56,6 +56,16 @@
                 }
                 $this->set('waste_bar_chart_stats', array_reverse($wstats, true));
 
+                if($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_GET)){
+                    $reset_result = $_GET['reset'];
+
+                    if (!empty($reset_result) && $reset_result == 'ok') {
+                        $response['success'] = '<strong>Password reset successfully</strong>. You can now login with your new password.';
+
+                        $this->set('response', $response);
+                    }
+                }
+
                 if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST)){
 
                     $response = array();
