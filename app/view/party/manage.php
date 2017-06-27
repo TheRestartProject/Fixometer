@@ -145,6 +145,9 @@
 
                         </div>
                     </div>
+                    <div class="col-md-12 text-right">
+                      <button class="btn btn-default" type="button" data-toggle="modal" data-target="#esw"><i class="fa fa-code"></i> Embeddable Stats Widget</button>                      
+                    </div>
                 </div>
             </div>
             <!-- devices -->
@@ -401,3 +404,25 @@
     </div>
 </div>
 </form>
+
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="esw">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Embeddable Party Stats Widget</h4>
+      </div>
+      <div class="modal-body">
+        <p>Copy and paste this code snippet into a page on your website to share your achievements!</p>
+          <code>
+            <pre>&lt;iframe src="https://community.therestartproject.org/party/stats/<?php echo $party->id; ?>/wide" frameborder="0" width="100%" height="80"&gt;&lt;/iframe&gt;</pre>
+          </code>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
