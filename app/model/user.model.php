@@ -150,8 +150,8 @@
         }
 
         public function create($data){
-            $sql = 'INSERT INTO `' . $this->table . '` (`created_at`, `name`, `email`, `password`, `role`)
-                    VALUES (:created_at, :name, :email, :password, :role)';
+            $sql = 'INSERT INTO `' . $this->table . '` (`created_at`, `name`, `email`, `password`, `role`, `recovery`, `recovery_expires`)
+                    VALUES (:created_at, :name, :email, :password, :role, :recovery, :recovery_expires)';
 
             $data['created_at'] = date('Y-m-d H:i:s', time() );
 
@@ -161,6 +161,8 @@
             $stmt->bindParam(':password', $data['password'], PDO::PARAM_STR);
             $stmt->bindParam(':role', $data['role'], PDO::PARAM_INT);
             $stmt->bindParam(':created_at', $data['created_at']);
+            $stmt->bindParam(':recovery', $data['recovery']);
+            $stmt->bindParam(':recovery_expires', $data['recovery_expires']);
 
             $q = $stmt->execute();
 

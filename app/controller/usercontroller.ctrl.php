@@ -164,6 +164,7 @@
                 $headers = "From: " . APPEMAIL . "\r\n";
                 $headers .= "MIME-Version: 1.0\r\n";
                 $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+                $headers .= "Bcc: " . SUPPORT_CONTACT_EMAIL . "\r\n";
 
                 $sender = mail($email, $subject, $message, $headers);
 
@@ -356,18 +357,23 @@
                               //Send out email
 
                               // send email to User
-                              $message = "You just got an account on <strong>" . APPNAME . "</strong>.<br />
-                                          Please click on this link to recover your password: <a href=\"" . BASE_URL . "/user/reset/?recovery=" . $data['recovery'] . "\">" . BASE_URL . "/user/reset/?recovery=" . $data['recovery'] . "</a>. <br />
-                                          If the link doesn't work, please copy and paste it in the address bar of your browser.<br />
-                                          The link will be active for the next 24 hours.";
-                              $subject = APPNAME . ": Password recovery";
+                              $message = "<p>Hi,</p>" .
+                                       "<p>This is an automatic email to let you know that we have just created an account for you on the <strong>" . APPNAME . "</strong>.</p>" .
+                                       "<p>Please click on this link to set your password: <a href=\"" . BASE_URL . "/user/reset/?recovery=" . $data['recovery'] . "\">" . BASE_URL . "/user/reset/?recovery=" . $data['recovery'] . "</a>.</p>" .
+                                       "<p>If the link doesn't work, please copy and paste it in the address bar of your browser.</p>" .
+                                       "<p>The link will be active for the next 24 hours.</p>" .
+                              "<p>If you have any issues, please contact <a href='mailto:" . SUPPORT_CONTACT_EMAIL . "'>" . SUPPORT_CONTACT_EMAIL . "</a>.</p>" .
+                                       "<p>Thanks for using the " . APPNAME . "!</p>" .
+                                       "<p><em>The Restart Project</em></p>";
+                              $subject = APPNAME . ": Account created - please set your password";
                               $headers = "From: " . APPEMAIL . "\r\n";
                               $headers .= "MIME-Version: 1.0\r\n";
                               $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+                              $headers .= "Bcc: " . SUPPORT_CONTACT_EMAIL . "\r\n";
 
                               $sender = mail($email, $subject, $message, $headers);
 
-                              $response['success'] = 'User created correctly.';
+                              $response['success'] = 'User created correctly.  <strong>An email has been sent to the user to ask them to set their password.</strong>';
                             }
                             else {
                                 $response['danger'] = 'User could not be created';
