@@ -2,7 +2,8 @@
 /** Application Name **/
 define( 'APPNAME',  'Fixometer');
 define( 'APPKEY',   'l[56pOkjg_I8874.');  // should be a random string
-define( 'APPEMAIL', 'your@email.org');
+define( 'APPEMAIL', 'your@email.org'); // auto generated emails are sent from this address
+define( 'SUPPORT_CONTACT_EMAIL', "fry@planetexpress.com"); // address users can contact for help
 
 /** Secret! **/
 define( 'SECRET',   strrev(md5(APPKEY)));

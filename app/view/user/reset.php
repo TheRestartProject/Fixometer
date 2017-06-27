@@ -2,13 +2,15 @@
     <div class="text-center">
         <img src="/assets/images/logo_mini.png" alt="The Restart Project">
     </div>
+    <p class="login-text"><span class="patua-blue">Welcome to our community space,</span> where you can share upcoming Restart Parties and track their social and environmental impact. By doing so, we can empower and motivate at a local level, but also build global momentum for a change.</p>
     <?php if($valid_code == false) { ?>
     <p class="login-text text-center">The recovery code you're using is invalid. Please proceed to request a new recovery link <a href="/user/recover">here</a>.</p>
     <?php  } else { ?>
-    <p class="login-text text-center">Please input your new password here.</p>
     <?php if(isset($response)) { printResponse($response); } ?>
     <div class="shader"></div>
     <h2><span class="title-text">Reset your password</span></h2>
+
+    <p class="explainer-text">Please input your new password here, and then click the button below to reset your password.</p>
 
     <form class="" method="post" action="/user/reset?recovery=<?php echo $recovery; ?>">
         <input type="hidden" name="recovery" value="<?php echo $recovery; ?>">

@@ -56,6 +56,16 @@
                 }
                 $this->set('waste_bar_chart_stats', array_reverse($wstats, true));
 
+                if($_SERVER['REQUEST_METHOD'] == 'GET' && !empty($_GET)){
+                    $reset_result = $_GET['reset'];
+
+                    if (!empty($reset_result) && $reset_result == 'ok') {
+                        $response['success'] = '<strong>Password reset successfully</strong>. You can now login with your new password.';
+
+                        $this->set('response', $response);
+                    }
+                }
+
                 if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST)){
 
                     $response = array();
@@ -140,10 +150,16 @@
                 $this->User->update($data, $id);
 
                 // send email to User
-                $message = "You've requested to recover your password for <strong>" . APPNAME . "</strong>.<br />
-                            Please click on this link to recover your password: <a href=\"" . BASE_URL . "/user/reset/?recovery=" . $data['recovery'] . "\">" . BASE_URL . "/user/reset/?recovery=" . $data['recovery'] . "</a>. <br />
-                            If the link doesn't work, please copy and paste it in the address bar of your browser.<br />
-                            The link will be active for the next 24 hours.";
+                $message = "<p>Hi,</p>" .
+                         "<p>You've requested to recover your password for the " . APPNAME . ".</p>" .
+                         "<hr/>" .
+                         "<p>Please click on this link to recover your password: <a href=\"" . BASE_URL . "/user/reset/?recovery=" . $data['recovery'] . "\">" . BASE_URL . "/user/reset/?recovery=" . $data['recovery'] . "</a>.</p>" .
+                         "<p>If the link doesn't work, please copy and paste it in the address bar of your browser.</p>" .
+                         "<p>The link will be active for the next 24 hours.</p>" .
+                         "<hr/>" .
+                         "<p>If you have any issues, or if you did <strong>not</strong> ask to recover your password, please contact <a href='mailto:" . SUPPORT_CONTACT_EMAIL . "'>" . SUPPORT_CONTACT_EMAIL . "</a>.</p>" .
+                "<p>Thanks for using the " . APPNAME . "!</p>" .
+                "<p><em>The Restart Project</em></p>";
                 $subject = APPNAME . ": Password recovery";
                 $headers = "From: " . APPEMAIL . "\r\n";
                 $headers .= "MIME-Version: 1.0\r\n";
@@ -155,7 +171,7 @@
                     $response['danger'] = 'Could not send email with reset instructions.';
                 }
                 else {
-                    $response['success'] = 'Email Sent! Please check your inbox and follow instructions.';
+                    $response['success'] = 'Email Sent! Please check your inbox and follow instructions.  <strong>Please allow up to 10 minutes for your email to arrive, and please check your spam folder.</strong>';
                 }
 
               } else {
@@ -174,7 +190,6 @@
             $valid_code = false;
           } else {
             $recovery = filter_var($_GET['recovery'], FILTER_SANITIZE_STRING);
-            echo $recovery;
             $user = $this->User->find(array('recovery' => $recovery));
 
             if( strtotime($user[0]->recovery_expires) > time() ) {

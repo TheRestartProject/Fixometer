@@ -14,7 +14,9 @@
                 <div class="form-group">
                     <label for="password" class="text-center">password</label>
                     <input type="password" class="form-control" name="password" id="password" placeholder="Your password...">
-                    <a class="btn btn-link btn-sm" href="/user/recover">password forgot?</a> 
+                    <div class="forgot-password-container">
+                        <a href="/user/recover">forgotten your password?</a> 
+                    </div>
                 </div>
                 <div class="form-group text-center">
 
