@@ -393,7 +393,7 @@
                 </table>
                 <div class="text-center">
                     <br /><br />
-                    <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-floppy-o"></i> Save &amp; Exit</button>
+                    <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-floppy-o"></i> Save</button>
                     <br /><br /><br />
                 </div>
             </div>

@@ -4,6 +4,7 @@
         <script src="/components/bootstrap-sortable/Scripts/bootstrap-sortable.js"></script>
         <script src="/components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
         <script src="/components/summernote/dist/summernote.min.js"></script>
+        <script src="/components/summernote-cleaner/summernote-cleaner.js"></script>
         <script src="/components/bootstrap-fileinput/js/fileinput.min.js"></script>
         <?php
         if(isset($js) && isset($js['foot']) && !empty($js['foot'])){
