@@ -272,7 +272,6 @@
          * */
         public function removeImage($id, $image){
 
-            var_dump($this->table);
             switch($this->table){
                 case 'users':
                     $object = TBL_USERS;
@@ -290,10 +289,6 @@
                     $object = false;
                     break;
             }
-
-            var_dump($object);
-            echo $id;
-
 
             if($object){
                 /** delete cross references **/
