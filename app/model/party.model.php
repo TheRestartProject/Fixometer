@@ -12,6 +12,7 @@
                         UNIX_TIMESTAMP( CONCAT(`e`.`event_date`, " ", `e`.`start`) ) AS `event_timestamp`,
                         `e`.`start` AS `start`,
                         `e`.`end` AS `end`,
+                        `e`.`venue`,
                         `e`.`location`,
                         `e`.`latitude`,
                         `e`.`longitude`,
@@ -38,6 +39,7 @@
                         UNIX_TIMESTAMP( CONCAT(`e`.`event_date`, " ", `e`.`start`) ) AS `event_timestamp`,
                         `e`.`start` AS `start`,
                         `e`.`end` AS `end`,
+                        `e`.`venue`,
                         `e`.`location`,
                         `e`.`latitude`,
                         `e`.`longitude`,
@@ -68,6 +70,7 @@
                         UNIX_TIMESTAMP( CONCAT(`e`.`event_date`, " ", `e`.`end`) ) AS `event_end_timestamp`,
                         `e`.`start` AS `start`,
                         `e`.`end` AS `end`,
+                        `e`.`venue`,
                         `e`.`location`,
                         `e`.`latitude`,
                         `e`.`longitude`,
@@ -129,7 +132,7 @@
         }
 
         public function ofThisUser($id, $only_past = false, $devices = false){
-            $sql = 'SELECT *, `e`.`location` AS `venue`, UNIX_TIMESTAMP( CONCAT(`e`.`event_date`, " ", `e`.`start`) ) AS `event_timestamp`
+            $sql = 'SELECT *, CONCAT_WS(", ", `e`.`venue`,  `e`.`location`) AS `venue`, UNIX_TIMESTAMP( CONCAT(`e`.`event_date`, " ", `e`.`start`) ) AS `event_timestamp`
                     FROM `' . $this->table . '` AS `e`
                     INNER JOIN `events_users` AS `eu` ON `eu`.`event` = `e`.`idevents`
                     INNER JOIN `groups` as `g` ON `e`.`group` = `g`.`idgroups`
@@ -174,7 +177,7 @@
         public function ofThisGroup2($group = 'admin', $only_past = false, $devices = false){
             $sql = 'SELECT
                         *,
-                        `e`.`location` AS `venue`, `g`.`name` AS group_name,
+                        CONCAT_WS(", ", `e`.`venue`,  `e`.`location`) AS `venue`, `g`.`name` AS group_name,
 
 
                         UNIX_TIMESTAMP( CONCAT(`e`.`event_date`, " ", `e`.`start`) ) AS `event_timestamp`
@@ -233,7 +236,7 @@
         public function ofTheseGroups($groups = 'admin', $only_past = false, $devices = false){
             $sql = 'SELECT
                         *,
-                        `e`.`location` AS `venue`, `g`.`name` AS group_name,
+                        CONCAT_WS(", ", `e`.`venue`,  `e`.`location`), `g`.`name` AS group_name,
 
 
                         UNIX_TIMESTAMP( CONCAT(`e`.`event_date`, " ", `e`.`start`) ) AS `event_timestamp`
@@ -291,7 +294,7 @@
         public function ofThisGroup($group = 'admin', $only_past = false, $devices = false){
             $sql = 'SELECT
                         *,
-                        `e`.`location` AS `venue`,
+                        CONCAT_WS(", ", `e`.`venue`,  `e`.`location`) AS `venue`,
 
 
                         UNIX_TIMESTAMP( CONCAT(`e`.`event_date`, " ", `e`.`start`) ) AS `event_timestamp`
@@ -351,6 +354,7 @@
         public function findNextParties($group = null) {
             $sql = 'SELECT
                         `e`.`idevents`,
+                        `e`.`venue`,
                         `e`.`location`,
                         UNIX_TIMESTAMP( CONCAT(`e`.`event_date`, " ", `e`.`start`) ) AS `event_timestamp`,
                         `e`.`event_date` AS `plain_date`,
@@ -394,6 +398,7 @@
         public function findLatest($limit = 10) {
             $sql = 'SELECT
                         `e`.`idevents`,
+                        `e`.`venue`,
                         `e`.`location`,
                         UNIX_TIMESTAMP( CONCAT(`e`.`event_date`, " ", `e`.`start`) ) AS `event_date`,
                         `e`.`start`,

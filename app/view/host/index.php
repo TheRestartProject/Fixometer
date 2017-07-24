@@ -183,7 +183,7 @@
                         <div class="media-body">
                             <div class="body">
                                 <time datetime="<?php echo dbDate($party->event_date); ?>"><?php echo strftime('%a, %d %b %Y %H:%M',  $party->event_timestamp); ?></time>
-                                <span clasS="location"><?php echo $party->location; ?></span>
+                                <span clasS="location"><?php echo (!empty($party->venue) ? $party->venue . ', ' . $party->location : $party->location); ?></span>
                             </div>
                             <div class="links">
                                 <a href="/party/edit/<?php echo $party->idevents; ?>" class="btn btn-default btn-sm btn-block"><i class="fa fa-edit"></i> edit</a>

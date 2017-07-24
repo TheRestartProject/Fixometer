@@ -11,20 +11,20 @@
     </div>
     <div class="row">
         <div class="container">
-            
+
             <!-- Profiles -->
     <?php if(hasRole( $user, 'Administrator' )) { ?>
-    
-    
+
+
     <section class="row profiles">
         <div class="col-md-12">
             <h5>Admin Console</h5>
-            
+
         </div>
         <div class="col-md-6">
             <div class="btn-group btn-group-justified">
-                
-                
+
+
                 <div class="btn-group" role="group">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Groups
@@ -34,21 +34,21 @@
                         <?php foreach($grouplist as $group) { ?>
                         <li class="group-list clearfix">
                             <div class="pull-left">
-                                <?php if(!empty($group->path)) { ?> 
+                                <?php if(!empty($group->path)) { ?>
                                 <img src="/uploads/thumbnail_<?php echo $group->path; ?>" width="40" height="40" alt="<?php echo $group->name; ?> Image" class="profile-pic" />
                                 <?php } else { ?>
-                                <div class="profile-pic clearfix" style="background: #ddd; width: 40px; height: 40px; ">&nbsp;</div>    
-                                <?php } ?>                                
+                                <div class="profile-pic clearfix" style="background: #ddd; width: 40px; height: 40px; ">&nbsp;</div>
+                                <?php } ?>
                             </div>
                             <div class="pull-left">
                                 <a  href="/host/index/<?php echo $group->id; ?>" ><?php echo $group->name; ?></a>
                             </div>
                         </li>
-                        
+
                         <?php } ?>
                     </ul>
                 </div>
-                
+
                 <a class="btn btn-default" href="/group/create">Add Group</a>
             </div>
         </div>
@@ -58,16 +58,16 @@
                 <a class="btn btn-default" href="/user/create">Add User</a>
             </div>
         </div>
-        
-    </section>  
-    
-    
-    
+
+    </section>
+
+
+
     <?php } ?>
-            
+
             <div class="row">
                 <div class="col-md-12">
-                    
+
                     <?php if(isset($response)) { printResponse($response); } ?>
                     <div class="alert alert-info">
                         <?php echo WDG_PUBLIC_INFO; ?>
@@ -75,7 +75,7 @@
                     <form action="/party/create" method="post" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-md-6">
-                                
+
                                 <div class="form-group <?php if(isset($error) && isset($error['event_date']) && !empty($error['event_date'])) { echo "has-error"; } ?>">
                                     <label for="event_date">Date:</label>
                                     <div class="input-group date">
@@ -86,20 +86,20 @@
                                     </div>
                                     <?php if(isset($error) && isset($error['start']) && !empty($error['start'])) { echo '<span class="help-block text-danger">' . $error['start'] . '</span>'; } ?>
                                 </div>
-                                
-                                
-                                
-                                
-                        
+
+
+
+
+
                                 <div class="form-group">
                                     <label for="free_text">Description:</label>
                                     <textarea class="form-control rte" rows="6" name="free_text" id="free_text"></textarea>
                                 </div>
-                                                        
+
                             </div>
-                            
+
                             <div class="col-md-6">
-                                
+
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group <?php if(isset($error) && isset($error['start']) && !empty($error['start'])) { echo "has-error"; } ?>">
@@ -112,7 +112,7 @@
                                             </div>
                                             <?php if(isset($error) && isset($error['start']) && !empty($error['start'])) { echo '<span class="help-block text-danger">' . $error['start'] . '</span>'; } ?>
                                         </div>
-                                        
+
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group <?php if(isset($error) && isset($error['end']) && !empty($error['end'])) { echo "has-error"; } ?>">
@@ -125,25 +125,25 @@
                                             </div>
                                             <?php if(isset($error) && isset($error['end']) && !empty($error['end'])) { echo '<span class="help-block text-danger">' . $error['end'] . '</span>'; } ?>
                                         </div>
-                                        
+
                                     </div>
-                                    
+
                                 </div>
-                                
+
                                     <input type="hidden" name="pax" id="pax" value="0">
                                     <input type="hidden" name="volunteers" id="volunteers" value="0">
-        
+
                                 <?php
                                 if(hasRole($user, 'Host') && !hasRole($user, 'Root')) {
                                 ?>
-                                
+
                                 <input type="hidden" name="group" id="group" value="<?php echo $usergroup->idgroups; ?>">
-                                
+
                                 <?php
                                 }
                                 else {
-                                ?>    
-        
+                                ?>
+
                                 <div class="form-group <?php if(isset($error) && isset($error['group']) && !empty($error['group'])) { echo "has-error"; } ?>">
                                     <label for="group">Group:</label>
                                     <select id="group" name="group"  class="form-control selectpicker users_group">
@@ -153,33 +153,36 @@
                                         <?php } ?>
                                     </select>
                                     <?php if(isset($error) && isset($error['group']) && !empty($error['group'])) { echo '<span class="help-block text-danger">' . $error['group'] . '</span>'; } ?>
-                                    
+
                                     <div class="users_group_list">
-                                        
-                                    </div>    
+
+                                    </div>
                                 </div>
                                 <?php
                                 }
                                 ?>
-                               
                                 <div class="form-group">
-                                    <label for="location">Location:</label>
+                                    <label for="venue">Venue:</label>
+                                    <input type="text" name="venue" id="venue" class="form-control" <?php if(isset($error) && !empty($error) && !empty($udata)) echo 'value="'.$udata['venue'].'"' ; ?>>
+                                </div>
+                                <div class="form-group">
+                                    <label for="location">Address:</label>
                                     <div class="input-group">
                                         <input type="text" name="location" id="location" class="form-control" <?php if(isset($error) && !empty($error) && !empty($udata)) echo 'value="'.$udata['location'].'"' ; ?>>
                                         <span class="input-group-btn">
                                             <button type="button" class="btn btn-primary" onclick="codeAddress()"><i class="fa fa-map-marker"></i> geocode</button>
                                         </span>
-                                        
-                                        
+
+
                                     </div>
                                     <p class="help-block">To share an exact location, please use a street address here and press "geocode". Afterwards, please change this line to a recognisable place name, as this will be used in the event title.</p>
                                 </div>
-                                
-                                
+
+
                                 <div class="" id="map-canvas" style="height: 350px; ">
                                     <i class="fa fa-spinner"></i>
                                 </div>
-                                
+
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -192,33 +195,33 @@
                                         </div>
                                     </div>
                                 </div>
-                                
-                                
+
+
                                 <div class="from-group">
                                     <label for="file" class="sr-only">Image:</label>
                                     <input type="file" name="file" id="file" class="form-control fileinput">
-                                </div>        
-                                        
+                                </div>
+
                             </div>
-                            
+
                         </div>
                         <div class="row buttons">
-                            
+
                             <div class="col-md-6 col-md-offset-6">
-                                
+
                                 <div class="form-group">
                                     <button class="btn btn-default" type="reset"><i class="fa fa-refresh"></i> reset</button>
                                     <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> save</button>
                                 </div>
-                                
+
                             </div>
-                            
+
                         </div>
-                        
+
                     </form>
                 </div>
             </div>
-            
+
         </div>
     </div>
 </div>

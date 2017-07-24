@@ -89,6 +89,7 @@
                     $end        =       $_POST['end'];
                     $pax        =       $_POST['pax'];
                     $free_text  =       $_POST['free_text'];
+                    $venue      =       $_POST['venue'];
                     $location   =       $_POST['location'];
                     $latitude   =       $_POST['latitude'];
                     $longitude  =       $_POST['longitude'];
@@ -136,6 +137,7 @@
                                         'end'           => $end,
                                         'pax'           => $pax,
                                         'free_text'     => $free_text,
+                                        'venue'         => $venue,
                                         'location'      => $location,
                                         'latitude'      => $latitude,
                                         'longitude'     => $longitude,
@@ -171,7 +173,7 @@
                                                 array('key' => 'party_host',            'value' => $Host->hostname),
                                                 array('key' => 'party_hostavatarurl',   'value' => UPLOADS_URL . 'mid_' .$Host->path),
                                                 array('key' => 'party_grouphash',       'value' => $group),
-                                                array('key' => 'party_location',        'value' => $location),
+                                                array('key' => 'party_location',        'value' => (!empty($venue) ? $venue .', ' . $location : $location)),
                                                 array('key' => 'party_time',            'value' => $start . ' - ' . $end),
                                                 array('key' => 'party_date',            'value' => $event_date),
                                                 array('key' => 'party_timestamp',       'value' => strtotime($event_date)),
@@ -298,7 +300,7 @@
                                             array('key' => 'party_host',            'value' => $Host->hostname),
                                             array('key' => 'party_hostavatarurl',   'value' => UPLOADS_URL . 'mid_' . $Host->path),
                                             array('key' => 'party_grouphash',       'value' => $data['group']),
-                                            array('key' => 'party_location',        'value' => $data['location']),
+                                            array('key' => 'party_location',        'value' => ( !empty($data['venue']) ? $data['venue'] . ', ' . $data['location'] : $data['location'])),
                                             array('key' => 'party_time',            'value' => $data['start'] . ' - ' . $data['end']),
                                             array('key' => 'party_date',            'value' => $wp_date),
                                             array('key' => 'party_timestamp',       'value' => $theParty->event_timestamp),

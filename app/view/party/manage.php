@@ -88,7 +88,7 @@
                         </div>
 
                         <div class="short-body">
-                            <span class="location"><?php echo $party->location; ?></span><br />
+                            <span class="location"><?php echo (!empty($party->venue) ? $party->venue . ', ' . $party->location : $party->location); ?></span><br />
                             <span class="groupname"><?php echo $party->group_name; ?></span>
                         </div>
                     </div>

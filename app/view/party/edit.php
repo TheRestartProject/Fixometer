@@ -166,6 +166,12 @@
                                 ?>
 
                                 <div class="form-group">
+                                    <label for="venue">Venue:</label>
+                                    <input type="text" name="venue" id="venue" class="form-control" value="<?php echo $formdata->venue; ?>">                                       
+                                </div>
+
+
+                                <div class="form-group">
                                     <label for="location">Location:</label>
                                     <div class="input-group">
                                         <input type="text" name="location" id="location" class="form-control" value="<?php echo $formdata->location; ?>">
