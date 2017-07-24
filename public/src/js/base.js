@@ -33,7 +33,6 @@ $(document).ready(function(){
       });
 
 
-
       var tablerow =  '<tr class="newdevice">' +
                           '<td>' + n + '.</td>'+
                           '<td>' +
@@ -59,6 +58,9 @@ $(document).ready(function(){
 
                               '<div class="form-group">' +
                                   '<input type="text" name="device[' + n +'][model]" id="device[' + n +'][model]" class="form-control" placeholder="Model...">' +
+                              '</div>' +
+                              '<div class="form-group">' +
+                                  '<input type="text" name="device[' + n +'][age]" id="device[' + n +'][age]" class="form-control" placeholder="Age...">' +
                               '</div>' +
                           '</td>' +
                           '<td>' +

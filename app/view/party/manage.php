@@ -146,7 +146,7 @@
                         </div>
                     </div>
                     <div class="col-md-12 text-right">
-                      <button class="btn btn-default" type="button" data-toggle="modal" data-target="#esw"><i class="fa fa-code"></i> Embeddable Stats Widget</button>                      
+                      <button class="btn btn-default" type="button" data-toggle="modal" data-target="#esw"><i class="fa fa-code"></i> Embeddable Stats Widget</button>
                     </div>
                 </div>
             </div>
@@ -163,7 +163,7 @@
                             <th>#</th>
                             <th>Category</th>
                             <th>Comment</th>
-                            <th>Brand/Model (if known)</th>
+                            <th>Brand/Model/Age</th>
                             <th>Repair Status</th>
                             <th>Spare Parts?</th>
                             <th></th>
@@ -216,6 +216,9 @@
                                     <input type="text" name="device[<?php echo $i; ?>][model]" id="device[<?php echo $i; ?>][model]" class="form-control" placeholder="Model..." value="<?php echo $devices[$i-1]->model; ?>">
                                 </div>
 
+                                <div class="form-group">
+                                    <input type="text" name="device[<?php echo $i; ?>][age]" id="device[<?php echo $i; ?>][age]" class="form-control" placeholder="Age..." value="<?php echo $devices[$i-1]->age; ?>">
+                                </div>
 
                             </td>
                             <td>
@@ -332,6 +335,10 @@
 
                                 <div class="form-group">
                                     <input type="text" name="device[<?php echo $i; ?>][model]" id="device[<?php echo $i; ?>][model]" class="form-control" placeholder="Model..." >
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="text" name="device[<?php echo $i; ?>][age]" id="device[<?php echo $i; ?>][age]" class="form-control" placeholder="Age..." >
                                 </div>
                             </td>
                             <td>

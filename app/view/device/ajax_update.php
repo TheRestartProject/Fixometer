@@ -37,6 +37,10 @@
           <label for="model">Model:</label>
           <input type="text" class="form-control " id="model" name="model" placeholder="Model..." value="<?php echo $formdata->model; ?>">
         </div>
+        <div class="form-group">
+          <label for="model">Age:</label>
+          <input type="text" class="form-control " id="age" name="age" placeholder="Age..." value="<?php echo $formdata->age; ?>">
+        </div>
       </div>
 
       <div class="col-md-6">
