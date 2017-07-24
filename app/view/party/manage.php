@@ -146,7 +146,7 @@
                         </div>
                     </div>
                     <div class="col-md-12 text-right">
-                      <button class="btn btn-default" type="button" data-toggle="modal" data-target="#esw"><i class="fa fa-code"></i> Embeddable Stats Widget</button>
+                      <button class="btn btn-default" type="button" data-toggle="modal" data-target="#esw"><i class="fa fa-share"></i> Share your stats</button>
                     </div>
                 </div>
             </div>
@@ -422,10 +422,14 @@
         <h4 class="modal-title">Embeddable Party Stats Widget</h4>
       </div>
       <div class="modal-body">
-        <p>Copy and paste this code snippet into a page on your website to share your achievements!</p>
+        <p>Copy and paste this code snippet into a page on your website to share your party achievements!</p>
           <code>
             <pre>&lt;iframe src="https://community.therestartproject.org/party/stats/<?php echo $party->id; ?>/wide" frameborder="0" width="100%" height="80"&gt;&lt;/iframe&gt;</pre>
           </code>
+          <p>This widget will display an infographic such as the ones found on the group pages in the Restart Project website. </p>
+            <code>
+              <pre>&lt;iframe src="https://community.therestartproject.org/outbound/info/party/<?php echo $party->id; ?>" frameborder="0" width="100%" height="600"&gt;&lt;/iframe&gt;</pre>
+            </code>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
