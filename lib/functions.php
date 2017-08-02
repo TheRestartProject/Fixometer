@@ -5,7 +5,7 @@
      * returns boolean
      * */
     function hasRole($user, $role){
-        
+
         if($user->role == 'Root'){
             return true;
         }
@@ -14,13 +14,13 @@
                 return true;
             }
             else {
-                return false; 
+                return false;
             }
-        }        
+        }
     }
-    
-    
-    
+
+
+
     /** Prints out Bootstrap alerts
      * finds key of response and
      * uses it to format the alert
@@ -45,18 +45,18 @@
             echo '<div class="alert alert-' . $type . '  alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <i class="fa fa-' . $icon . '"></i> ' . $text . '
-                    
+
                 </div>';
         }
     }
-    
+
     /** Parse responses from deletion
      * and passes off the info to printResponse
      * */
     function parseResponse($response){
         $res = array();
         $r = explode(':', $response);
-       
+
         switch($r[0]){
             case 'd':
                 if($r[1] == 'err') {
@@ -71,7 +71,7 @@
         }
         return $res;
     }
-    
+
     /**
      * verify that an array index exists and is not empty or null.
      * can also do some type control.
@@ -102,12 +102,12 @@
                 }
             }
             else {
-                return true;    
+                return true;
             }
-            
+
         }
     }
-    
+
     /** prints friendly arrays
      * used mainly for debugging
      * */
@@ -116,13 +116,13 @@
         print_r($array);
         echo '</pre></div>';
     }
-    
+
     function dsql($sql){
         echo '<div class="dbg"><pre>';
         echo $sql;
         echo '</pre></div>';
     }
-    
+
     /**
      * Rearranges an array
      * used to "reflow" the $_FILES array
@@ -131,12 +131,27 @@
     function rearrange($arr){
         foreach($arr as $key => $all){
             foreach($all as $i => $val){
-                $new[$i][$key] = $val;   
-            }   
+                $new[$i][$key] = $val;
+            }
         }
         return $new;
     }
-    
+
+
+    function reflow($files){
+      $reflowed = array();
+
+      foreach($files as $label => $entries) {
+        foreach($entries as $entry => $value){
+          $reflowed[$entry][$label] = $value['image'];
+        }
+      }
+
+      return $reflowed;
+
+    }
+
+
     /**
      *DateTime printers
      **/
@@ -145,11 +160,11 @@
         $date = $date[1].'/'.$date[0].'/'.$date[2];
         return $date;
     }
-    
+
     function dateFormat($timestamp){
         return date('D, j M Y, H:i', $timestamp);
     }
-    
+
     function dateFormatNoTime($timestamp){
         return date('D, j M Y', $timestamp);
     }
@@ -165,9 +180,9 @@
     }
     function dbDateNoTime($string){
         $d = explode('/', $string);
-        return implode('-', array_reverse($d)); 
+        return implode('-', array_reverse($d));
     }
-    
+
     /**
      * make things look pretty.
      * 1 = Fixed
@@ -194,7 +209,7 @@
         }
         echo '<div class="'.$repClass.'">' . $text . '</div>';
     }
-    
+
     /**
      * Avoid warnings if bars are not set at all
      * */
@@ -205,4 +220,3 @@
             return -15 ;
         }
     }
-    

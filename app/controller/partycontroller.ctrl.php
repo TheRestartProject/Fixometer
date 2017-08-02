@@ -420,8 +420,12 @@
                     if(isset($_POST['device'])){
                         $devices = $_POST['device'];
 
-
-
+                        // Rearrange files to more friendly Array
+                        if(isset($_FILES) && !empty($_FILES)){
+                          $files = reflow($_FILES['device']);
+                          $File = new File;
+                        }
+                        dbga($files);
                         foreach ($devices as $i => $device){
 
                             //dbga($device);
@@ -448,13 +452,21 @@
                             if($method == 'update'){
                                 //echo "updating---";
                                 $Device->update($device, $iddevice);
+                                if($files[$i]['error'] == 0){
+                                  $File->simpleUpload($files[$i], 'device', $iddevice, 'Device S/N Image');
+                                }
                             }
 
                             else {
                                 //echo "creating---";
                                 $device['category_creation'] = $device['category'];
-                                $Device->create($device);
+                                $iddevice = $Device->create($device);
+                                if($files[$i]['error'] == 0){
+                                  $File->simpleUpload($files[$i], 'device', $iddevice, 'Device S/N Image');
+                                }
                             }
+
+
 
                             $response['success'] = 'Party info updated!';
 

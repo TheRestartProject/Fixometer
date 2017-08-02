@@ -29,7 +29,15 @@
                     showUpload: false,
                     showRemove: false,
                     browseIcon:  '<i class="fa fa-folder-open"></i> &nbsp;',
-                    browseLabel: 'Choose image...'
+                    browseLabel: 'Choose image...',
+                    previewFileIcon: '<i class="fa fa-file"></i>',
+                    browseIcon: '<i class="fa fa-folder-open"></i> &nbsp;',
+                    browseClass: 'btn btn-primary',
+                    removeIcon: '<i class="fa fa-trash"></i> ',
+                    removeClass: 'btn btn-default',
+                    cancelIcon: '<i class="fa fa-ban-circle"></i> ',
+                    cancelClass: 'btn btn-default',
+                    uploadIcon: '<i class="fa fa-upload"></i> ',
 
                 });
             } );

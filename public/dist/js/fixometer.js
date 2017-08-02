@@ -12,6 +12,20 @@ $(document).ready(function(){
     $($(this).data('form')).find('.selectpicker').val('default').selectpicker('refresh');
   });
 
+/*
+  $('.file').fileinput({
+    data-preview-file-icon="<i class="fa fa-file"></i>",
+    data-browse-icon="<i class="fa fa-folder-open"></i> &nbsp;",
+    data-upload-icon="<i class="fa fa-upload"></i>"
+    browseClass: 'btn btn-primary',
+    data-remove-icon="<i class='fa fa-trash'></i>" ,
+    removeClass: 'btn btn-default',
+    cancelIcon: '<i class="fa fa-ban-circle"></i> ',
+    cancelClass: 'btn btn-default',
+    data-upload-icon="<i class="fa fa-upload"></i>",
+  });
+*/
+
   /** Add Device Row in Party Management **/
   $('#add-device').click(function(e){
       e.preventDefault();
@@ -48,6 +62,12 @@ $(document).ready(function(){
                           '</td>' +
                           '<td>' +
                               '<textarea class="form-control" id="device[' + n +'][problem]" name="device[' + n +'][problem]"></textarea>' +
+                          '</td>' +
+                          '<td>' +
+                            '<div class="form-group">' +
+                              '<input type="file" class="form-control file" name="device[' + n + '][image]" id="device[' + n + ']image" data-show-upload="false" data-show-caption="true">' +
+                              '<small>upload a picture of the model/serial no. of the device</small>' +
+                            '</div>' +
                           '</td>' +
                           '<td>' +
                               '<div class="form-group">' +
@@ -113,7 +133,12 @@ $(document).ready(function(){
       $('#device-table tbody').append(tablerow);
 
       $('tr.newdevice .category-select').selectpicker();
-
+      $('tr.newdevice .file').fileinput({
+        browseIcon: '&nbsp;<span class="fa fa-upload"></span>&nbsp;',
+        removeIcon: '<i class="fa fa-trash"></i> &nbsp;',
+        previewFileIcon: '<i class="fa fa-file"></i> &nbsp;',
+        icon: '<i class="fa fa-file"></i> &nbsp;',
+      });
       $('tr.newdevice .category-select').change(function(){
         var theVal = parseInt( $(this).val() );
         if( theVal > 0 &&  theVal != null) {
@@ -231,12 +256,12 @@ $(document).ready(function(){
         ],
         cleaner: {
           notTime: 2400, // Time to display Notifications.
-          action: 'both', // both|button|paste 'button' only cleans via toolbar button, 'paste' only clean when pasting content, both does both options.
-          newline: '<br>', // Summernote's default is to use '<p><br></p>'
+          action: 'paste', // both|button|paste 'button' only cleans via toolbar button, 'paste' only clean when pasting content, both does both options.
+          newline: '<br />', // Summernote's default is to use '<p><br></p>'
           notStyle: 'position:absolute;top:0;left:0;right:0', // Position of Notification
           icon: '<i class="note-icon"><span class="fa fa-paintbrush"></span></i>',
-          keepHtml: true, // Remove all Html formats
-          keepOnlyTags: ['<p>', '<br>', '<ul>', '<li>', '<b>', '<strong>','<i>', '<a>'], // If keepHtml is true, remove all tags except these
+          keepHtml: false, // Remove all Html formats
+          keepOnlyTags: ['<br>'], // If keepHtml is true, remove all tags except these
           keepClasses: false, // Remove Classes
           badTags: ['style', 'script', 'applet', 'embed', 'noframes', 'noscript', 'html'], // Remove full tags with contents
           badAttributes: ['style', 'start'] // Remove attributes from remaining tags

@@ -1,6 +1,6 @@
 
-<form action="/party/manage/<?php echo $party->id; ?>" method="post" id="party-edit">
-<div class="container">
+<form action="/party/manage/<?php echo $party->id; ?>" method="post" id="party-edit" enctype="multipart/form-data">
+<div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
             <h1>Edit Party
@@ -78,8 +78,8 @@
 
             <input type="hidden" name="idparty" id="idparty" value="<?php echo $party->id; ?>">
 
-            <div class="row">
-                <div class="col-md-12 party">
+            <div class="row party " >
+                <div class="col-md-12">
                     <div class="header-col header-col-2">
                         <div class="date">
                             <span class="month"><?php echo date('M', $party->event_timestamp); ?></span>
@@ -151,11 +151,11 @@
                 </div>
             </div>
             <!-- devices -->
-            <div class="row">
-                <div class="col-md-12">
-                    <h3>Devices</h3>
-                </div>
+            <div class="col-md-12">
+              <h3>Devices</h3>
             </div>
+
+
             <div class="col-md-12">
                 <table class="table sticky-header" id="device-table">
                     <thead>
@@ -163,6 +163,7 @@
                             <th>#</th>
                             <th>Category</th>
                             <th>Comment</th>
+                            <th style="width: 280px !important;">Image</th>
                             <th>Brand/Model/Age</th>
                             <th>Repair Status</th>
                             <th>Spare Parts?</th>
@@ -208,6 +209,26 @@
                                 <textarea class="form-control" id="device[<?php echo $i; ?>][problem]" name="device[<?php echo $i; ?>][problem]"><?php echo $devices[$i-1]->problem; ?></textarea>
                             </td>
                             <td>
+
+                              <?php if(!empty($devices[$i-1]->path)) { ?>
+                                <img src="/public/uploads/<?php echo $devices[$i-1]->path; ?>" class="img-responsive device-img">
+                              <?php } ?>
+
+                              <div class="form-group">
+                                <input type="file" class="form-control file" name="device[<?php echo $i; ?>][image]"
+                                data-show-upload="false"
+                                data-show-caption="true"
+                                data-preview-file-icon="<i class='fa fa-file'></i>",
+                                data-browse-icon="<i class='fa fa-folder-open'></i> &nbsp;",
+                                data-upload-icon="<i class='fa fa-upload'></i>"
+                                data-remove-icon="<i class='fa fa-trash'></i>"
+                                data-cancel-icon="<i class='fa fa-ban-circle'></i>"
+                                data-file-icon="<i class='fa fa-file'></i>" 
+                                >
+                              </div>
+
+                            </td>
+                            <td>
                                 <div class="form-group">
                                     <input type="text" name="device[<?php echo $i; ?>][brand]" id="device[<?php echo $i; ?>][brand]" class="form-control" placeholder="Brand..." value="<?php echo $devices[$i-1]->brand; ?>">
                                 </div>
@@ -226,12 +247,12 @@
                                     <div class="radio">
                                         <label>
                                             <input
-                                                   type="radio"
-                                                   name="device[<?php echo $i; ?>][repair_status]"
-                                                   id="device[<?php echo $i; ?>][repair_status_1]"
-                                                   value="1"
-                                                   <?php echo ($devices[$i-1]->repair_status == 1 ? 'checked="checked"' : ''); ?>>
-                                                   Fixed
+                                              type="radio"
+                                              name="device[<?php echo $i; ?>][repair_status]"
+                                              id="device[<?php echo $i; ?>][repair_status_1]"
+                                              value="1"
+                                              <?php echo ($devices[$i-1]->repair_status == 1 ? 'checked="checked"' : ''); ?>>
+                                              Fixed
                                         </label>
                                     </div>
                                     <div class="radio">
@@ -327,6 +348,13 @@
                             </td>
                             <td>
                                 <textarea class="form-control" id="device[<?php echo $i; ?>][problem]" name="device[<?php echo $i; ?>][problem]"></textarea>
+                            </td>
+                            <td>
+
+                              <div class="form-group">
+                                <input type="file" class="form-control file" name="device[<?php echo $i; ?>][image]" data-show-upload="false" data-show-caption="true">
+                              </div>
+
                             </td>
                             <td>
                                  <div class="form-group">

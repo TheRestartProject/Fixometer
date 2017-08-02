@@ -164,7 +164,14 @@
         public function ofThisEvent($event){
             $sql = 'SELECT * FROM `' . $this->table . '` AS `d`
                     INNER JOIN `categories` AS `c` ON `c`.`idcategories` = `d`.`category`
+                    LEFT JOIN (
+                      SELECT * FROM xref
+                        INNER JOIN images ON images.idimages = xref.object
+                        WHERE object_type = ' . TBL_IMAGES . ' AND reference_type = ' . TBL_DEVICES . '
+                      ) AS i ON i.reference = d.iddevices
+
                     WHERE `event` = :event';
+
             $stmt = $this->database->prepare($sql);
             $stmt->bindParam(':event', $event, PDO::PARAM_INT);
             $stmt->execute();
