@@ -162,7 +162,7 @@
                                 }
                                 ?>
                                 <div class="form-group">
-                                    <label for="venue">Venue:</label>
+                                    <label for="venue">Venue Name:</label>
                                     <input type="text" name="venue" id="venue" class="form-control" <?php if(isset($error) && !empty($error) && !empty($udata)) echo 'value="'.$udata['venue'].'"' ; ?>>
                                 </div>
                                 <div class="form-group">
@@ -175,7 +175,9 @@
 
 
                                     </div>
-                                    <p class="help-block">To share an exact location, please use a street address here and press "geocode". Afterwards, please change this line to a recognisable place name, as this will be used in the event title.</p>
+                                    <p class="help-block">
+                                        To pinpoint the party venue on the map, please enter a venue name and the address, then press "geocode". 
+                                    </p>
                                 </div>
 
 
