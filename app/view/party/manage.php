@@ -447,15 +447,19 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Embeddable Party Stats Widget</h4>
+        <h4 class="modal-title">Share your party's stats</h4>
       </div>
       <div class="modal-body">
         <p>Copy and paste this code snippet into a page on your website to share your party achievements!</p>
-          <code>
+        <div><strong>Headline stats</strong></div>
+        <p>This widget shows the headline stats for your party &mdash; the number of participants, number of Restarters, the CO<sub>2</sub> and waste diverted, and the numbers of fixed, repairable, and end-of-life devices
+        </p>
+        <code style="padding:0">
             <pre>&lt;iframe src="https://community.therestartproject.org/party/stats/<?php echo $party->id; ?>/wide" frameborder="0" width="100%" height="80"&gt;&lt;/iframe&gt;</pre>
-          </code>
-          <p>This widget will display an infographic such as the ones found on the group pages in the Restart Project website. </p>
-            <code>
+        </code>
+        <div><strong>CO<sub>2</sub> equivalence visualisation</strong></div>
+        <p>This widget displays an infographic of an easy-to-understand equivalent of the CO<sub>2</sub> emissions that this party has diverted, such as equivalent number of cars manufactured.</p>
+            <code style="padding:0">
               <pre>&lt;iframe src="https://community.therestartproject.org/outbound/info/party/<?php echo $party->id; ?>" frameborder="0" width="100%" height="600"&gt;&lt;/iframe&gt;</pre>
             </code>
       </div>
