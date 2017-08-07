@@ -135,7 +135,7 @@
         </div>
 
         <div class="col-md-12 text-right">
-          <a class="btn btn-default" href="/search"><i class="fa fa-filter"></i> Filter Stats</a>
+          <a class="btn btn-default" href="/search"><i class="fa fa-filter"></i> Filter Parties</a>
           <button class="btn btn-default" type="button" data-toggle="modal" data-target="#esw"><i class="fa fa-share"></i> Share your stats</button>
         </div>
     </section>

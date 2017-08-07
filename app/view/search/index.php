@@ -1,6 +1,6 @@
 <div class="container search-dashboard" id="admin-dashboard">
   <div class="row">
-    <h1>Stats Filter</h1>
+    <h1>Parties Filter</h1>
   </div>
 
     <?php if(isset($response)) { ?>
