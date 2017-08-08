@@ -211,7 +211,11 @@
                             <td>
 
                               <?php if(!empty($devices[$i-1]->path)) { ?>
-                                <img src="/public/uploads/<?php echo $devices[$i-1]->path; ?>" class="img-responsive device-img">
+                                <div class="device-img-wrap">
+                                  <a href="#" data-toggle="modal" data-target="#device-img-modal">
+                                  <img src="/public/uploads/<?php echo $devices[$i-1]->path; ?>" class="img-responsive device-img">
+                                  </a>
+                                </div>
                               <?php } ?>
 
                               <div class="form-group">
@@ -223,7 +227,7 @@
                                 data-upload-icon="<i class='fa fa-upload'></i>"
                                 data-remove-icon="<i class='fa fa-trash'></i>"
                                 data-cancel-icon="<i class='fa fa-ban-circle'></i>"
-                                data-file-icon="<i class='fa fa-file'></i>" 
+                                data-file-icon="<i class='fa fa-file'></i>"
                                 >
                               </div>
 
@@ -458,6 +462,25 @@
             <code>
               <pre>&lt;iframe src="https://community.therestartproject.org/outbound/info/party/<?php echo $party->id; ?>" frameborder="0" width="100%" height="600"&gt;&lt;/iframe&gt;</pre>
             </code>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="device-img-modal">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Device S/N Image</h4>
+      </div>
+      <div class="modal-body">
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

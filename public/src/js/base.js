@@ -27,6 +27,11 @@ $(document).ready(function(){
     data-upload-icon="<i class="fa fa-upload"></i>",
   });
 */
+$("#device-img-modal").on("show.bs.modal", function(e) {
+  var img = $(e.relatedTarget).clone();
+  console.log(img);
+  $(this).find(".modal-body").empty().append(img.find('img').removeClass('device-img'));
+});
 
   /** Add Device Row in Party Management **/
   $('#add-device').click(function(e){
@@ -189,49 +194,50 @@ $(document).ready(function(){
   });
 
   /** startup datepickers **/
-  $('.date, .date input').datetimepicker({
-                icons: {
-                    time: "fa fa-clock-o",
-                    date: "fa fa-calendar",
-                    up: "fa fa-arrow-up",
-                    down: "fa fa-arrow-down",
-                    previous: 'fa fa-chevron-left',
-                    next: 'fa fa-chevron-right',
-                    today: 'fa fa-screenshot',
-                    clear: 'fa fa-trash'
-                },
-                format: 'DD/MM/YYYY',
-                defaultDate: $(this).val()
-            });
-  $('.time').datetimepicker({
-            icons: {
-                time: "fa fa-clock-o",
-                date: "fa fa-calendar",
-                up: "fa fa-arrow-up",
-                down: "fa fa-arrow-down",
-                previous: 'fa fa-chevron-left',
-                next: 'fa fa-chevron-right',
-                today: 'fa fa-screenshot',
-                clear: 'fa fa-trash'
-            },
-            format: 'HH:mm',
-            defaultDate: $(this).val()
+  if( $('.date, .date input').length > 0 ){
+    $('.date, .date input').datetimepicker({
+                  icons: {
+                      time: "fa fa-clock-o",
+                      date: "fa fa-calendar",
+                      up: "fa fa-arrow-up",
+                      down: "fa fa-arrow-down",
+                      previous: 'fa fa-chevron-left',
+                      next: 'fa fa-chevron-right',
+                      today: 'fa fa-screenshot',
+                      clear: 'fa fa-trash'
+                  },
+                  format: 'DD/MM/YYYY',
+                  defaultDate: $(this).val()
+              });
+    $('.time').datetimepicker({
+              icons: {
+                  time: "fa fa-clock-o",
+                  date: "fa fa-calendar",
+                  up: "fa fa-arrow-up",
+                  down: "fa fa-arrow-down",
+                  previous: 'fa fa-chevron-left',
+                  next: 'fa fa-chevron-right',
+                  today: 'fa fa-screenshot',
+                  clear: 'fa fa-trash'
+              },
+              format: 'HH:mm',
+              defaultDate: $(this).val()
 
-        });
+          });
 
-  $('.from-date').datetimepicker({
-   useCurrent: false //Important! See issue #1075
-  });
-  $('.to-date').datetimepicker({
-    useCurrent: false //Important! See issue #1075
-  });
-  $(".from-date").on("dp.change", function (e) {
-    $('.to-date').data("DateTimePicker").minDate(e.date);
-  });
-  $(".to-date").on("dp.change", function (e) {
-    $('.from-date').data("DateTimePicker").maxDate(e.date);
-  });
-
+    $('.from-date').datetimepicker({
+     useCurrent: false //Important! See issue #1075
+    });
+    $('.to-date').datetimepicker({
+      useCurrent: false //Important! See issue #1075
+    });
+    $(".from-date").on("dp.change", function (e) {
+      $('.to-date').data("DateTimePicker").minDate(e.date);
+    });
+    $(".to-date").on("dp.change", function (e) {
+      $('.from-date').data("DateTimePicker").maxDate(e.date);
+    });
+  }
 
   /** linking two times in party creation **/
   $("#start-pc").on("dp.change", function (e) {
@@ -398,6 +404,7 @@ $(document).ready(function(){
   if ($('#party-list').length > 0 ) {
     $('#party-list').perfectScrollbar();
   }
+
 
 
 });

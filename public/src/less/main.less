@@ -432,9 +432,28 @@ h3 {
   padding: 15px 5%; font-size: 50px; color: @litegray; font-weight: 300;
   &.blue { color: @blue; .Font-PatuaOne; padding: 0px 0px; font-weight: normal;  }
 }
-
+.device-img-wrap {
+    max-width: 280px;
+    max-height: calc(280px * 1.25);
+    overflow: hidden;
+}
 .device-img {
   max-width: 280px;
   height: auto;
-  margin-bottom: 10px; 
+  margin-bottom: 10px;
+
+  -webkit-transition: all 1s ease; /* Safari and Chrome */
+  -moz-transition: all 1s ease; /* Firefox */
+  -o-transition: all 1s ease; /* IE 9 */
+  -ms-transition: all 1s ease; /* Opera */
+  transition: all 1s ease;
+
+  &:hover {
+    -webkit-transform:scale(1.5); /* Safari and Chrome */
+    -moz-transform:scale(1.5); /* Firefox */
+    -ms-transform:scale(1.5); /* IE 9 */
+    -o-transform:scale(1.5); /* Opera */
+    transform:scale(1.5);
+  }
+
 }
