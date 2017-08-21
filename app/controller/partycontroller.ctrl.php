@@ -173,7 +173,7 @@
                                                 array('key' => 'party_host',            'value' => $Host->hostname),
                                                 array('key' => 'party_hostavatarurl',   'value' => UPLOADS_URL . 'mid_' .$Host->path),
                                                 array('key' => 'party_grouphash',       'value' => $group),
-                                                array('key' => 'party_location',        'value' => (!empty($venue) ? $venue .', ' . $location : $location)),
+                                                array('key' => 'party_location',        'value' => (!empty($venue) ? $venue : $location)),
                                                 array('key' => 'party_time',            'value' => $start . ' - ' . $end),
                                                 array('key' => 'party_date',            'value' => $event_date),
                                                 array('key' => 'party_timestamp',       'value' => strtotime($event_date)),
@@ -425,7 +425,7 @@
                           $files = reflow($_FILES['device']);
                           $File = new File;
                         }
-                        dbga($files);
+                        //dbga($files);
                         foreach ($devices as $i => $device){
 
                             //dbga($device);

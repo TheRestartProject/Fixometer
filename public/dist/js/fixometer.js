@@ -30,6 +30,24 @@ $("#device-img-modal").on("show.bs.modal", function(e) {
   console.log(img);
   $(this).find(".modal-body").empty().append(img.find('img').removeClass('device-img'));
 });
+/** Ajax delete of images from party management **/
+$('.device-image-delete').click(function(e){
+  e.preventDefault();
+  if(confirm('Are you sure? This cannot be undone.')){
+    var imageWrap = $(this).parent('.device-img-wrap');
+    var id = $(this).data('device-image');
+    var path = $(this).next().children('img').attr('src');
+    var file = path.split('/').pop();
+    $.post('/ajax/delete_device_image', {'id': id, 'file': file}, function(res){
+      if(res == 1){
+        imageWrap.remove();
+      }
+      else {
+        alert('Could not delete this file.');
+      }
+    });
+  }
+});
 
   /** Add Device Row in Party Management **/
   $('#add-device').click(function(e){

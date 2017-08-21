@@ -212,8 +212,9 @@
 
                               <?php if(!empty($devices[$i-1]->path)) { ?>
                                 <div class="device-img-wrap">
+                                  <a href="#" class="device-image-delete pull-right" data-device-image="<?php echo $devices[$i-1]->idimages; ?>"><i class="fa fa-times"></i></a>
                                   <a href="#" data-toggle="modal" data-target="#device-img-modal">
-                                  <img src="/public/uploads/<?php echo $devices[$i-1]->path; ?>" class="img-responsive device-img">
+                                    <img src="/public/uploads/<?php echo $devices[$i-1]->path; ?>" class="img-responsive device-img">
                                   </a>
                                 </div>
                               <?php } ?>
