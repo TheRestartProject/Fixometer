@@ -94,7 +94,7 @@
             </div>
         </div>
         <div class="col-md-12 text-center">
-            <a class="btn btn-default" href="/search"><i class="fa fa-filter"></i> Filter Stats</a>
+            <a class="btn btn-default" href="/search"><i class="fa fa-filter"></i> Filter Parties</a>
         </div>
     </section>
 

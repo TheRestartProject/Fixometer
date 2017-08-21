@@ -135,7 +135,7 @@
         </div>
 
         <div class="col-md-12 text-right">
-          <a class="btn btn-default" href="/search"><i class="fa fa-filter"></i> Filter Stats</a>
+          <a class="btn btn-default" href="/search"><i class="fa fa-filter"></i> Filter Parties</a>
           <button class="btn btn-default" type="button" data-toggle="modal" data-target="#esw"><i class="fa fa-share"></i> Share your stats</button>
         </div>
     </section>
@@ -974,17 +974,22 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Embeddable Group Stats Widget</h4>
+        <h4 class="modal-title">Share your group's stats</h4>
       </div>
       <div class="modal-body">
-        <p>Copy and paste this code snippet into a page on your website to share your achievements!</p>
-          <code>
+        <p>Copy and paste the code snippets below into a page on your website to share your group's achievements!</p>
+        <div><strong>Headline stats</strong></div>
+        <p>This widget shows the headline stats for your group &mdash; the number of participants at your parties; the hours volunteered; the number of parties thrown; the amount of waste prevented and the amount of CO<sub>2</sub> emissions prevented.
+        </p>
+        <code style="padding:0">
             <pre>&lt;iframe src="https://community.therestartproject.org/group/stats/<?php echo $group->idgroups; ?>" frameborder="0" width="100%" height="115"&gt;&lt;/iframe&gt;</pre>
-          </code>
-          <p>This widget will display an infographic such as the ones found on the group pages in the Restart Project website. </p>
-            <code>
-              <pre>&lt;iframe src="https://community.therestartproject.org/outbound/info/group/<?php echo $group->idgroups; ?>" frameborder="0" width="100%" height="600"&gt;&lt;/iframe&gt;</pre>
-            </code>
+        </code>
+
+        <div><strong>CO<sub>2</sub> equivalence visualisation</strong></div>
+        <p>This widget displays an infographic of an easy-to-understand equivalent of the CO<sub>2</sub> emissions that your group has diverted, such as equivalent number of cars manufactured.</p>
+        <code style="padding:0">
+            <pre>&lt;iframe src="https://community.therestartproject.org/outbound/info/group/<?php echo $group->idgroups; ?>" frameborder="0" width="100%" height="600"&gt;&lt;/iframe&gt;</pre>
+        </code>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

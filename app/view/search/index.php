@@ -1,8 +1,14 @@
 <div class="container search-dashboard" id="admin-dashboard">
-  <div class="row">
-    <h1>Stats Filter</h1>
-  </div>
-
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6">
+            <h1>Parties Filter
+                <small>
+            <?php $home_url = (hasRole($user, 'Administrator') ? '/admin' : '/host'); ?>
+            <a href="<?php echo $home_url; ?>" class="btn btn-primary btn-sm"><i class="fa fa-home"></i> back to dashboard</a>
+    </small>
+            </h1>
+        </div>
+    </div>
     <?php if(isset($response)) { ?>
     <div class="row">
         <div class="col-md-12">
