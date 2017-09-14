@@ -38,3 +38,14 @@ date_default_timezone_set('Europe/London');
 define('WP_XMLRPC_ENDPOINT', 'endpoint');
 define('WP_XMLRPC_USER', 'wp_use');
 define('WP_XMLRPC_PSWD', 'wp_pwd');
+
+
+/** languages **/
+define('DEFAULT_LANG', 'en');
+define('LANGUAGE_COOKIE', APPNAME . '_language');
+$fixometer_languages = array(
+  'en' => 'English',
+  'es' => 'Spanish',
+  'it' => 'Italian',
+  'no' => 'Norwegian',
+);

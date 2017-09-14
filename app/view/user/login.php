@@ -5,7 +5,7 @@
             <p class="login-text"><span class="patua-blue">Welcome to our community space,</span> where you can share upcoming Restart Parties and track their social and environmental impact. By doing so, we can empower and motivate at a local level, but also build global momentum for a change.</p>
             <?php if(isset($response)) { printResponse($response); } ?>
             <div class="shader"></div>
-            <h2><span class="title-text">login</span></h2>
+            <h2><span class="title-text"><?php _t('login', array('0' => 'total', '1' => 'another')); ?></span></h2>
             <form class="" method="post" action="/user/login">
                 <div class="form-group">
                     <label for="email" class="text-center">email</label>
@@ -15,7 +15,7 @@
                     <label for="password" class="text-center">password</label>
                     <input type="password" class="form-control" name="password" id="password" placeholder="Your password...">
                     <div class="forgot-password-container">
-                        <a href="/user/recover">forgotten your password?</a> 
+                        <a href="/user/recover">forgotten your password?</a>
                     </div>
                 </div>
                 <div class="form-group text-center">
@@ -23,6 +23,8 @@
                     <button type="submit" class="form-control btn btn-primary login-button" name="submit" id="submit"><i class="fa fa-sign-in"></i><span class="sr-only">Login</span></button>
                 </div>
             </form>
+
+            <?php lng_switcher(); ?>
         </div>
         <?php
         /** select random bkground **/

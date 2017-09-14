@@ -102,6 +102,11 @@
                             }
 
                             if($pass == true){
+                              // fetch lang preference
+                              $lang = (isset($_COOKIE[LANGUAGE_COOKIE]) ? $_COOKIE[LANGUAGE_COOKIE] : 'en');
+                              $this->User->update(array( 'language' => $lang ), $user[0]->idusers);
+
+
                                 if(hasRole($user[0], 'Administrator')){
                                     header('Location: /admin');
                                 }
@@ -401,6 +406,9 @@
         public function edit($id){
             $this->set('title', 'Edit User');
 
+            global $fixometer_languages;
+            $this->set('langs', $fixometer_languages);
+
             $Auth = new Auth($url);
             if(!$Auth->isLoggedIn()){
                 header('Location: /user/login');
@@ -452,6 +460,9 @@
 
                         if(!is_array($error)){
                             $u = $this->User->update($data, $id);
+
+                            $expire = time() + (60 * 60 * 24 * 365 * 10);
+                            setcookie(LANGUAGE_COOKIE, $data['language'], $time, '/', $_SERVER['HTTP_HOST']);
 
                             $ug = new Usersgroups;
                             $ug->createUsersGroups($id, $sent_groups);
@@ -580,5 +591,14 @@
                     }
                 }
             }
+        }
+
+        public function lng($lang){
+          global $fixometer_languages;
+          if(in_array($lang, array_keys($fixometer_languages))){
+            $expire = time() + (60 * 60 * 24 * 365 * 10);
+            setcookie(LANGUAGE_COOKIE, $lang, $time, '/', $_SERVER['HTTP_HOST']);
+            header('Location: /user/login');
+          }
         }
     }

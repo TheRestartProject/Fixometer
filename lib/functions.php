@@ -220,3 +220,62 @@
             return -15 ;
         }
     }
+
+
+    /***** I18N *****/
+
+    /** language Switcher **/
+    function lng_switcher($print = true){
+      global $fixometer_languages;
+      $switcher = '<ul class="lng-switcher">';
+      foreach($fixometer_languages as $k => $lang){
+        $switcher .= '<li><a href="/user/lng/' . $k . '" title="' . $lang . '">' . $k . '</a></li>';
+      }
+      $switcher .= '</ul>';
+
+      if($print == true){
+        echo $switcher;
+      }
+      else {
+        return $switcher;
+      }
+    }
+
+    /** translator **/
+    function _t($string, $tokens = null, $print = true){
+      global $lang;
+      if($lang === DEFAULT_LANG){
+        if($print){
+          echo $string;
+          return true;
+        }
+        else {
+          return $string;
+        }
+      }
+      global $translations;
+
+      // check for tokens
+      if(!empty($tokens)){
+        extract($tokens, EXTR_PREFIX_ALL, 'tfx');
+
+        
+      }
+
+      // get the string
+      if(in_array($string, array_keys($translations))){
+        $translation = $translations[$string];
+      }
+      else {
+        $translation = '<span class="to-i18n">' . $string . '</span>';
+      }
+
+      if($print){
+        echo $translation;
+        return true;
+      }
+      else {
+        return $translation;
+      }
+
+    }

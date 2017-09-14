@@ -8,15 +8,15 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    
+
                     <?php if(isset($response)) { printResponse($response); } ?>
-                    
+
                     <div class="alert alert-info">
                         <i class="fa fa-exclamation-circle fa-lg"></i> Please be advised that your name and avatar will be shared on your group's public page on our website. (You can use a nickname or another image if you prefer.)
                     </div>
 
                     <form action="/user/edit/<?php echo $data->idusers; ?>" method="post" enctype="multipart/form-data">
-                        
+
                         <input type="hidden" name="id" id="id" value="<?php echo $data->idusers; ?>">
                         <div class="row">
                             <div class="col-md-6">
@@ -30,24 +30,24 @@
                                     <input type="email" name="email" id="email" class="form-control" value="<?php echo $data->email; ?>">
                                     <?php if(isset($error) && isset($error['email']) && !empty($error['email'])) { echo '<span class="help-block text-danger">' . $error['email'] . '</span>'; } ?>
                                 </div>
-                                
-                                
+
+
                                 <div class="form-group <?php if(isset($error) && isset($error['password']) && !empty($error['password'])) { echo "has-error"; } ?>">
                                     <label for="new-password">New Password:</label>
                                     <input type="password" name="new-password" id="new-password" class="form-control">
-                                    
+
                                     <label for="password-confirm">Confirm New Password:</label>
                                     <input type="password" name="password-confirm" id="password-confirm" class="form-control"">
-                                    
-                                    
+
+
                                     <?php if(isset($error) && isset($error['password']) && !empty($error['password'])) { echo '<span class="help-block text-danger">' . $error['password'] . '</span>'; } ?>
                                 </div>
-                
-                                
-                                
+
+
+
                                 <?php if(hasRole($user, 'Administrator')){ ?>
                                 <div class="form-group <?php if(isset($error) && isset($error['role']) && !empty($error['role'])) { echo "has-error"; } ?>">
-                                    
+
                                     <label for="role">User Role:</label>
                                     <select id="role" name="role"  class="form-control selectpicker">
                                         <option></option>
@@ -58,19 +58,28 @@
                                     <?php if(isset($error) && isset($error['role']) && !empty($error['role'])) { echo '<span class="help-block text-danger">' . $error['role'] . '</span>'; } ?>
                                 </div>
                                 <?php } ?>
-                            </div>    
-                            <div class="col-md-6">  
-                                
+                            </div>
+                            <div class="col-md-6">
+
+                                <div class="form-group">
+                                  <label for="language">Language preference:</label>
+                                  <select id="language" name="language"  class="form-control selectpicker">
+                                      <option></option>
+                                      <?php foreach($langs as $k => $l){ ?>
+                                      <option value="<?php echo $k; ?>" <?php echo ($k == $data->language ? 'selected' : ''); ?>><?php echo $l; ?></option>
+                                      <?php } ?>
+                                  </select>
+                                </div>
                                 <div class="form-group">
                                     <label for="profile">Profile Picture:</label>
                                     <input type="file" class="form-control file" name="profile" data-show-upload="false" data-show-caption="true">
                                 </div>
-                                
-                                
+
+
                                 <?php $groupclass = (hasRole($user, 'Administrator') ? 'show' : 'hidden'); ?>
                                 <div class="form-group <?php echo $groupclass; ?> <?php if(isset($error) && isset($error['group']) && !empty($error['group'])) { echo "has-error"; } ?>">
                                     <label for="group">Group(s):</label>
-                                    
+
                                         <?php foreach($groups as $group){ ?>
                                          <div class="checkbox">
                                             <label>
@@ -80,25 +89,25 @@
                                                     name="groups[]"
                                                     id="group-<?php echo $group->id; ?>"
                                                     <?php echo (in_array($group->id, $data->groups) ? ' checked ' : ''); ?>
-                                                >    
+                                                >
                                                 <?php echo $group->name; ?>
                                             </label>
                                         </div>
                                         <?php } ?>
                                     <?php if(isset($error) && isset($error['group']) && !empty($error['group'])) { echo '<span class="help-block text-danger">' . $error['group'] . '</span>'; } ?>
                                 </div>
-                                
-                                
+
+
                                 <div class="form-group">
                                     <button class="btn btn-default" type="reset"><i class="fa fa-refresh"></i> reset</button>
-                                    <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> save</button>                                    
-                                </div>   
+                                    <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> save</button>
+                                </div>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
-            
+
         </div>
     </div>
 </div>
