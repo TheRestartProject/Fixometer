@@ -1,9 +1,9 @@
 <?php
 
-// Example usage:
-// php create_translations.php ../translations/source.csv ../translations/
+// Example usage from root Fixo folder:
+// php create_translations.php data/translations-source.csv lang/
 
-require '../vendor/league/csv/autoload.php';
+require 'vendor/league/csv/autoload.php';
 
 use League\Csv\Reader;
 

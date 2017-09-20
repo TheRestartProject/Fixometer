@@ -45,7 +45,7 @@ define('DEFAULT_LANG', 'en');
 define('LANGUAGE_COOKIE', APPNAME . '_language');
 $fixometer_languages = array(
   'en' => 'English',
-  'es' => 'Spanish',
-  'it' => 'Italian',
-  'no' => 'Norwegian',
+  'de' => 'Deutsch',
+  'it' => 'Italiano',
+  'no' => 'Norsk',
 );
