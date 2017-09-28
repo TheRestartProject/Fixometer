@@ -1,27 +1,40 @@
 <?php
 
 // Example usage from root Fixo folder:
-// php create_translations.php data/translations-source.csv lang/
+// php scripts/create_translations.php data/translations-source lang/
 
 require 'vendor/league/csv/autoload.php';
 
 use League\Csv\Reader;
 
-$source_file = $argv[1];
+$input_folder = $argv[1];
 $output_folder = $argv[2];
-
-echo 'Reading ' . $source_file;
-$reader = Reader::createFromPath($source_file);
-$reader->setHeaderOffset(0);
-
 $translations = array();
 
-foreach($reader->getRecords() as $row)
+echo 'Reading files from ' . $input_folder;
+
+// For each file in the input folder.
+$dir = new DirectoryIterator($input_folder);
+
+foreach ($dir as $fileInfo)
 {
-    $translations['en'][$row['en']] = $row['en'];
-    $translations['it'][$row['en']] = $row['it'];
-    $translations['no'][$row['en']] = $row['no'];
-    $translations['de'][$row['en']] = $row['de'];
+    if (!$fileInfo->isFile())
+        continue;
+
+    $source_file = $fileInfo->getPathname(); 
+
+    echo "\nReading $source_file";
+
+    $reader = Reader::createFromPath($source_file);
+    $reader->setHeaderOffset(0);
+
+    foreach($reader->getRecords() as $row)
+    {
+        $translations['en'][$row['en']] = $row['en'];
+        $translations['it'][$row['en']] = $row['it'];
+        $translations['no'][$row['en']] = $row['no'];
+        $translations['de'][$row['en']] = $row['de'];
+    }
 }
 
 echo "\nOutputting translation files to " . $output_folder;
