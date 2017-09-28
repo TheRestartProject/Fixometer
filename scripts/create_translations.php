@@ -1,7 +1,15 @@
 <?php
 
-// Example usage from root Fixo folder:
-// php scripts/create_translations.php data/translations-source lang/
+/**
+ * Script to read in CSV files of translations.
+ * Outputs them to a PHP file for each language.
+ * The output language files are composed of one array,
+ * keyed by the English version of a piece of text, and
+ * the values are the translations for the given language.
+ *
+ * Example usage from root Fixo folder:
+ * php scripts/create_translations.php data/translations-source lang/
+ */
 
 require 'vendor/league/csv/autoload.php';
 
@@ -11,11 +19,16 @@ $input_folder = $argv[1];
 $output_folder = $argv[2];
 $translations = array();
 
-echo 'Reading files from ' . $input_folder;
+// Pull the translations into an array of arrays. 1 array for each language,
+// keyed by the short code for that language. Each language array is keyed by
+// the English version of the particular piece of text, and the value is the
+// translated version for that language.
 
-// For each file in the input folder.
+echo "\nReading files from $input_folder...";
+
 $dir = new DirectoryIterator($input_folder);
 
+echo "\n";
 foreach ($dir as $fileInfo)
 {
     if (!$fileInfo->isFile())
@@ -23,7 +36,7 @@ foreach ($dir as $fileInfo)
 
     $source_file = $fileInfo->getPathname(); 
 
-    echo "\nReading $source_file";
+    echo "\nProcessing $source_file...";
 
     $reader = Reader::createFromPath($source_file);
     $reader->setHeaderOffset(0);
@@ -37,7 +50,11 @@ foreach ($dir as $fileInfo)
     }
 }
 
-echo "\nOutputting translation files to " . $output_folder;
+
+// Write out a PHP file for each language.
+
+echo "\n\nOutputting translation files to $output_folder...";
+
 
 foreach ($translations as $language => $language_translations)
 {
@@ -58,4 +75,4 @@ foreach ($translations as $language => $language_translations)
     fclose($fh);
 }
 
-echo "\nComplete.";
+echo "\n\nComplete.\n";
