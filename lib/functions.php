@@ -242,8 +242,12 @@
     }
 
     /** translator **/
+
+    /****** IMPLEMENT CONTEXT VARIABLE *******/
     function _t($string, $tokens = null, $print = true){
       global $lang;
+      global $translations;
+
       if($lang === DEFAULT_LANG){
         if($print){
           echo $string;
@@ -253,13 +257,10 @@
           return $string;
         }
       }
-      global $translations;
 
       // check for tokens
       if(!empty($tokens)){
         extract($tokens, EXTR_PREFIX_ALL, 'tfx');
-
-        
       }
 
       // get the string
@@ -267,7 +268,12 @@
         $translation = $translations[$string];
       }
       else {
-        $translation = '<span class="to-i18n">' . $string . '</span>';
+        if(HIGHLIGHT_I18N){
+          $translation = '<span class="to-i18n">' . $string . '</span>';
+        }
+        else {
+          $translation = $string;
+        }
       }
 
       if($print){
@@ -277,5 +283,4 @@
       else {
         return $translation;
       }
-
     }

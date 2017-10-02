@@ -43,6 +43,7 @@ define('WP_XMLRPC_PSWD', 'wp_pwd');
 /** languages **/
 define('DEFAULT_LANG', 'en');
 define('LANGUAGE_COOKIE', APPNAME . '_language');
+define('HIGHLIGHT_I18N', true);
 $fixometer_languages = array(
   'en' => 'English',
   'es' => 'Spanish',
