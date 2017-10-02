@@ -1,30 +1,60 @@
 <?php
 
-// Example usage from root Fixo folder:
-// php create_translations.php data/translations-source.csv lang/
+/**
+ * Script to read in CSV files of translations.
+ * Outputs them to a PHP file for each language.
+ * The output language files are composed of one array,
+ * keyed by the English version of a piece of text, and
+ * the values are the translations for the given language.
+ *
+ * Example usage from root Fixo folder:
+ * php scripts/create_translations.php data/translations-source lang/
+ */
 
 require 'vendor/league/csv/autoload.php';
 
 use League\Csv\Reader;
 
-$source_file = $argv[1];
+$input_folder = $argv[1];
 $output_folder = $argv[2];
-
-echo 'Reading ' . $source_file;
-$reader = Reader::createFromPath($source_file);
-$reader->setHeaderOffset(0);
-
 $translations = array();
 
-foreach($reader->getRecords() as $row)
+// Pull the translations into an array of arrays. 1 array for each language,
+// keyed by the short code for that language. Each language array is keyed by
+// the English version of the particular piece of text, and the value is the
+// translated version for that language.
+
+echo "\nReading files from $input_folder...";
+
+$dir = new DirectoryIterator($input_folder);
+
+echo "\n";
+foreach ($dir as $fileInfo)
 {
-    $translations['en'][$row['en']] = $row['en'];
-    $translations['it'][$row['en']] = $row['it'];
-    $translations['no'][$row['en']] = $row['no'];
-    $translations['de'][$row['en']] = $row['de'];
+    if (!$fileInfo->isFile())
+        continue;
+
+    $source_file = $fileInfo->getPathname(); 
+
+    echo "\nProcessing $source_file...";
+
+    $reader = Reader::createFromPath($source_file);
+    $reader->setHeaderOffset(0);
+
+    foreach($reader->getRecords() as $row)
+    {
+        $translations['en'][$row['en']] = $row['en'];
+        $translations['it'][$row['en']] = $row['it'];
+        $translations['no'][$row['en']] = $row['no'];
+        $translations['de'][$row['en']] = $row['de'];
+    }
 }
 
-echo "\nOutputting translation files to " . $output_folder;
+
+// Write out a PHP file for each language.
+
+echo "\n\nOutputting translation files to $output_folder...";
+
 
 foreach ($translations as $language => $language_translations)
 {
@@ -45,4 +75,4 @@ foreach ($translations as $language => $language_translations)
     fclose($fh);
 }
 
-echo "\nComplete.";
+echo "\n\nComplete.\n";
