@@ -1,8 +1,9 @@
+
         <div class="login-form">
             <div class="text-center">
                 <img src="/assets/images/logo_mini.png" alt="The Restart Project">
             </div>
-            <p class="login-text"><?php _t('<span class="patua-blue">Welcome to our community space</span>, where you can share upcoming Restart Parties and track their social and environmental impact. By doing so, we can empower and motivate at a local level, but also build global momentum for a change.')?></p>
+            <p class="login-text"><?php _t('<span class="patua-blue">Welcome to our community space</span>, where you can share upcoming Restart Parties and track their social and environmental impact. By doing so, we can empower and motivate at a local level, but also build global momentum for a change.'); ?></p>
             <?php if(isset($response)) { printResponse($response); } ?>
             <div class="shader"></div>
             <h2><span class="title-text"><?php _t('login', array('0' => 'total', '1' => 'another')); ?></span></h2>
@@ -12,8 +13,8 @@
                     <input type="email" class="form-control" name="email" id="email" placeholder="<?php _t('Your email...')?>">
                 </div>
                 <div class="form-group">
-                    <label for="password" class="text-center">password</label>
-                    <input type="password" class="form-control" name="password" id="password" placeholder="<?php _t('Your password...')?>">
+                    <label for="password" class="text-center"> <?php _t('password'); ?> </label>
+                    <input type="password" class="form-control" name="password" id="password" placeholder="<?php _t('Your password...'); ?>">
                     <div class="forgot-password-container">
                         <a href="/user/recover"><?php _t('forgotten your password?')?></a>
                     </div>

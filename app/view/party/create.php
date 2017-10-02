@@ -62,7 +62,6 @@
     </section>
 
 
-
     <?php } ?>
 
             <div class="row">
@@ -176,7 +175,7 @@
 
                                     </div>
                                     <p class="help-block">
-                                        To pinpoint the party venue on the map, please enter the venue name and the address in the fields above, then press "geocode". 
+                                        To pinpoint the party venue on the map, please enter the venue name and the address in the fields above, then press "geocode".
                                     </p>
                                 </div>
 

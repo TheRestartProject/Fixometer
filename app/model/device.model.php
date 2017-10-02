@@ -214,7 +214,7 @@
                 $sql .= ' AND YEAR(`event_date`) = :year ';
             }
 
-            $sql .= ' GROUP BY `status`';
+            $sql .= ' GROUP BY `status`, `event`';
 
             $stmt = $this->database->prepare($sql);
             if(!is_null($g) && is_numeric($g)){
@@ -299,7 +299,7 @@
             if(!is_null($year)){
                 $sql.=' AND YEAR(`e`.`event_date`) = :year ';
             }
-            $sql.= ' GROUP BY `year`
+            $sql.= ' GROUP BY `year`, `category`
                     ORDER BY `year` DESC';
             //echo $sql;
             $stmt = $this->database->prepare($sql);
@@ -310,7 +310,7 @@
             if(!is_null($year) && is_numeric($year)){
                 $stmt->bindParam(':year', $year, PDO::PARAM_INT);
             }
-
+            
             $q = $stmt->execute();
             if(!$q){
                 dbga($stmt->errorCode()); dbga($stmt->errorInfo() );
