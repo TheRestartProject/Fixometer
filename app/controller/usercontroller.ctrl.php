@@ -88,7 +88,7 @@
                                                         'password' => crypt($uput_password, '$1$' . SECRET)
                                                     )
                                                 );
-
+                                                
 
                         if(!empty($user)){
                             $Auth = new Auth;

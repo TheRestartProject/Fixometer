@@ -33,7 +33,7 @@
 
 
                                 <div class="form-group <?php if(isset($error) && isset($error['password']) && !empty($error['password'])) { echo "has-error"; } ?>">
-                                    <label for="new-password">New Password:</label>
+                                    <label for="new-password"><?php _t('New Password') ?>:</label>
                                     <input type="password" name="new-password" id="new-password" class="form-control">
 
                                     <label for="password-confirm">Confirm New Password:</label>

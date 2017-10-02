@@ -2,18 +2,18 @@
     <div class="text-center">
         <img src="/assets/images/logo_mini.png" alt="The Restart Project">
     </div>
-    <p class="login-text"><span class="patua-blue">Welcome to our community space,</span> where you can share upcoming Restart Parties and track their social and environmental impact. By doing so, we can empower and motivate at a local level, but also build global momentum for a change.</p>
+    <p class="login-text"><?php _t("<span class=\"patua-blue\">Welcome to our community space,</span> where you can share upcoming Restart Parties and track their social and environmental impact. By doing so, we can empower and motivate at a local level, but also build global momentum for a change.");?></p>
     <?php if(isset($response)) { printResponse($response); } ?>
     <div class="shader"></div>
-    <h2><span class="title-text">recover your password</span></h2>
+    <h2><span class="title-text"><?php _t("recover your password");?></span></h2>
 
-    <p class="explainer-text">Please input the email address that was used when you first registered with the Fixometer. The system will send you an email with instructions on how to recover the access to your account. </p>
+    <p class="explainer-text"><?php _t("Please input the email address that was used when you first registered with the Fixometer. The system will send you an email with instructions on how to recover the access to your account.");?> </p>
 
     <form class="" method="post" action="/user/recover">
 
         <div class="form-group">
-            <label for="email" class="text-center">email</label>
-            <input type="email" class="form-control" name="email" id="email" placeholder="Your email...">
+            <label for="email" class="text-center"><?php _t("email");?></label>
+            <input type="email" class="form-control" name="email" id="email" placeholder="<?php _t("Your email...");?>">
         </div>
 
         <div class="form-group text-center">
@@ -30,31 +30,30 @@ $rand = rand(1, 4);
 
         <div class="detail-wrap">
             <div class="detail">
-                <h4>Devices Restarted</h4>
+                <h4><?php _t('Devices Restarted')?></h4>
                 <span class="big-number">
                     <span class="big-number"><?php echo number_format($devices[0]->counter, 0, '-', ','); ?></span>
                 </span>
             </div>
 
             <div class="detail">
-                <h4>CO<sub>2</sub> emission prevented</h4>
+                <h4><?php _t("CO<sub>2</sub> Emission prevented") ?></h4>
                 <span class="big-number"><?php echo number_format($weights[0]->total_footprints, 0, '-', ','); ?> kg</span>
             </div>
             <div class="detail">
-                <h4>waste prevented</h4>
+                <h4><?php _t('Waste prevented')?></h4>
                 <span class="big-number"><?php echo number_format($weights[0]->total_weights, 0, '-', ','); ?> kg</span>
             </div>
 
 
             <div class="detail">
-                <h4>parties thrown</h4>
+                <h4><?php _t('Parties thrown') ?></h4>
                 <span class="big-number"><?php echo count($allparties) - count($nextparties); ?></span>
             </div>
 
         </div>
 
 </div>
-
 <div class="container">
 
     <div class="row">

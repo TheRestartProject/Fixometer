@@ -62,29 +62,29 @@
         <div class="col-md-12">
             <div class="row" id="group-main-stats">
                 <div class="col">
-                    <h5>participants</h5>
+                    <h5><?php _t("participants");?></h5>
                     <span class="largetext"><?php echo $pax; ?></span>
                 </div>
 
                 <div class="col">
-                    <h5>hours volunteered</h5>
+                    <h5><?php _t("hours volunteered");?></h5>
                     <span class="largetext"><?php echo $hours; ?></span>
                 </div>
 
                 <div class="col">
-                    <h5>parties thrown</h5>
+                    <h5><?php _t("parties thrown");?></h5>
                     <span class="largetext"><?php echo count($allparties); ?></span>
                 </div>
 
                 <div class="col">
-                    <h5>waste prevented</h5>
+                    <h5><?php _t("waste prevented");?></h5>
                     <span class="largetext">
                         <?php echo number_format(round($wasteTotal), 0, '.', ','); ?> kg
                     </span>
                 </div>
 
                 <div class="col">
-                    <h5>CO<sub>2</sub> emission prevented</h5>
+                    <h5><?php _t("CO<sub>2</sub> emission prevented");?></h5>
 
                     <span class="largetext">
                         <?php echo number_format(round($co2Total), 0, '.', ','); ?> kg
@@ -94,7 +94,7 @@
             </div>
         </div>
         <div class="col-md-12 text-center">
-            <a class="btn btn-default" href="/search"><i class="fa fa-filter"></i> Filter Parties</a>
+            <a class="btn btn-default" href="/search"><i class="fa fa-filter"></i> <?php _t("Filter Parties");?></a>
         </div>
     </section>
 
@@ -104,9 +104,9 @@
      <!-- Tabs -->
     <!-- Nav tabs -->
     <ul class="nav nav-pills nav-justified" role="tablist">
-        <li role="presentation" class="active"><a href="#parties-tab" aria-controls="Parties" role="tab" data-toggle="pill">Parties</a></li>
-        <li role="presentation"><a href="#impact-tab" aria-controls="Impact" role="tab" data-toggle="pill">Impact</a></li>
-        <li role="presentation"><a href="#details-tab" aria-controls="Details" role="tab" data-toggle="pill">Details</a></li>
+        <li role="presentation" class="active"><a href="#parties-tab" aria-controls="Parties" role="tab" data-toggle="pill"><?php _t("Parties");?></a></li>
+        <li role="presentation"><a href="#impact-tab" aria-controls="Impact" role="tab" data-toggle="pill"><?php _t("Impact");?></a></li>
+        <li role="presentation"><a href="#details-tab" aria-controls="Details" role="tab" data-toggle="pill"><?php _t("Details");?></a></li>
     </ul>
 
 
@@ -121,8 +121,8 @@
             <section class="row parties">
                 <header>
                 <div class="col-md-12" id="upcomingparties">
-                    <h2>Upcoming Restart Parties
-                        <a class="btn btn-primary btn-sm" href="/party/create"><i class="fa fa-plus"></i> New Party</a></h2>
+                    <h2><?php _t("Upcoming Restart Parties");?>
+                        <a class="btn btn-primary btn-sm" href="/party/create"><i class="fa fa-plus"></i> <?php _t("New Party");?></a></h2>
                 </div>
                 </header>
                 <?php foreach($upcomingparties as $party){ ?>
@@ -137,8 +137,8 @@
                                 <span clasS="location"><?php  echo (!empty($party->venue) ? $party->venue . ', ' . $party->location : $party->location); ?></span>
                             </div>
                             <div class="links">
-                                <a href="/party/edit/<?php echo $party->idevents; ?>" class="btn btn-default btn-sm btn-block"><i class="fa fa-edit"></i> edit</a>
-                                <a href="/party/delete/<?php echo $party->idevents; ?>" class="btn btn-danger btn-sm btn-block delete-control"><i class="fa fa-trash"></i> delete</a>
+                                <a href="/party/edit/<?php echo $party->idevents; ?>" class="btn btn-default btn-sm btn-block"><i class="fa fa-edit"></i> <?php _t("edit");?></a>
+                                <a href="/party/delete/<?php echo $party->idevents; ?>" class="btn btn-danger btn-sm btn-block delete-control"><i class="fa fa-trash"></i> <?php _t("delete");?></a>
                             </div>
                         </div>
                     </div>
@@ -146,7 +146,7 @@
                 </div>
                 <?php } ?>
                 <div class="col-md-3 col-md-offset-9">
-                    <a href="http://www.therestartproject.org/events">view all upcoming events</a>
+                    <a href="http://www.therestartproject.org/events"><?php _t("view all upcoming events");?></a>
                 </div>
             </section>
 
@@ -156,7 +156,7 @@
                 <header>
                     <div class="col-md-12"  id="allparties">
                         <h2>
-                            All Parties <a href="/party" class="btn btn-primary btn-sm">View/edit all parties</a>
+                            <?php _t("All Parties");?> <a href="/party" class="btn btn-primary btn-sm"><?php _t("View/edit all parties");?></a>
                         </h2>
                     </div>
                 </header>
@@ -168,21 +168,21 @@
                 <div class="col-md-12" id="party-list-header">
                     <div class="header-col header-col-2">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-primary btn-sm party-switch active" data-target="all">All Parties</button>
-                                <button type="button" class="btn btn-primary btn-sm party-switch" data-target=".no-data-wrap">Need Attention</button>
-                                <button type="button" class="btn btn-primary btn-sm party-switch" data-target=".guesstimates">Guesstimated</button>
+                                <button type="button" class="btn btn-primary btn-sm party-switch active" data-target="all"><?php _t("All Parties");?></button>
+                                <button type="button" class="btn btn-primary btn-sm party-switch" data-target=".no-data-wrap"><?php _t("Need Attention");?></button>
+                                <button type="button" class="btn btn-primary btn-sm party-switch" data-target=".guesstimates"><?php _t("Guesstimated");?></button>
                             </div>
 
                     </div>
 
                     <div class="header-col">
                         <img src="/assets/icons/icon_pax.png" alt="Participants" class="header-icon">
-                        <span class="icon-label">Participants</span>
+                        <span class="icon-label"><?php _t("Participants");?></span>
                     </div>
 
                     <div class="header-col">
                         <img src="/assets/icons/icon_volunters.png" alt="Restarters" class="header-icon">
-                        <span class="icon-label">Restarters</span>
+                        <span class="icon-label"><?php _t("Restarters");?></span>
                     </div>
 
                     <div class="header-col">
@@ -192,17 +192,17 @@
 
                     <div class="header-col">
                         <img src="/assets/icons/icon_fixed.png" alt="Fixed" class="header-icon">
-                        <span class="icon-label">Fixed</span>
+                        <span class="icon-label"><?php _t("Fixed");?></span>
                     </div>
 
                     <div class="header-col">
                         <img src="/assets/icons/icon_repairable.png" alt="Repairable" class="header-icon">
-                        <span class="icon-label">Repairable</span>
+                        <span class="icon-label"><?php _t("Repairable");?></span>
                     </div>
 
                     <div class="header-col">
                         <img src="/assets/icons/icon_dead.png" alt="Dead" class="header-icon">
-                        <span class="icon-label">Dead</span>
+                        <span class="icon-label"><?php _t("Dead");?></span>
                     </div>
 
                 </div>
@@ -240,7 +240,7 @@
                         </div>
                         <div class="header-col header-col-3">
                             <button class="btn btn-primary btn-lg add-info-btn">
-                                <i class="fa fa-cloud-upload"></i> Add Information
+                                <i class="fa fa-cloud-upload"></i> <?php _t("Add Information");?>
                             </button>
                         </div>
                         <div class="header-col">
@@ -328,9 +328,9 @@
                     <h2>The Restart Project</h2>
 
                     <p class="big">
-                        <span class="big blue"><?php echo $pax; ?> participants</span> aided by
-                        <span class="big blue"><?php echo $hours; ?> hours of volunteered time</span> worked on
-                        <span class="big blue"><?php echo ($device_count_status[0]->counter + $device_count_status[1]->counter + $device_count_status[2]->counter) ?> devices.</span>
+                        <span class="big blue"><?php echo $pax; ?> <?php _t("participants");?></span> <?php _t("aided by");?>
+                        <span class="big blue"><?php echo $hours; ?> <?php _t("hours of volunteered time");?></span> <?php _t("worked on");?>
+                        <span class="big blue"><?php echo ($device_count_status[0]->counter + $device_count_status[1]->counter + $device_count_status[2]->counter) ?> <?php _t("devices.");?>"</span>
                     </p>
 
                 </div>
@@ -342,25 +342,25 @@
                     <div class="impact-devices-1">
                         <img src="/assets/icons/impact_device_1.jpg" class="" width="200">
                         <span class="title"><?php echo (int)$device_count_status[0]->counter;?></span>
-                        <span class="legend">were fixed</span>
+                        <span class="legend"><?php _t("were fixed");?></span>
                     </div>
 
                     <div class="impact-devices-2">
                         <img src="/assets/icons/impact_device_2.jpg" class="" width="200">
                         <span class="title"><?php echo (int)$device_count_status[1]->counter;?></span>
-                        <span class="legend">were still repairable</span>
+                        <span class="legend"><?php _t("were still repairable");?></span>
                     </div>
 
                     <div class="impact-devices-3">
                         <img src="/assets/icons/impact_device_3.jpg" class="" width="200">
                         <span class="title"><?php echo (int)$device_count_status[2]->counter;?></span>
-                        <span class="legend">were dead</span>
+                        <span class="legend"><?php _t("were dead");?></span>
                     </div>
 
                 </div>
 
                 <div class="col-md-12">
-                    <h2><span class="title-text">Most Repaired Devices</span></h2>
+                    <h2><span class="title-text"><?php _t("Most Repaired Devices");?></span></h2>
 
                     <div class="row">
                         <div class="col-md-4"><div class="topper  text-center"><?php echo $top[0]->name . ' [' . $top[0]->counter . ']'; ?></div></div>
@@ -373,10 +373,10 @@
 
             <section class="row" id="impact-dataviz">
                 <div class="col-md-12 text-center texter">
-                    <span class="datalabel">Total waste prevented: </span><span class="blue">  <?php echo number_format(round($wasteTotal), 0, '.', ','); ?> kg </span>
+                    <span class="datalabel"><?php _t("Total waste prevented:");?> </span><span class="blue">  <?php echo number_format(round($wasteTotal), 0, '.', ','); ?> kg </span>
                 </div>
                 <div class="col-md-12 text-center texter">
-                    <span class="datalabel">Total CO<sub>2</sub> emission prevented: </span><span class="blue"><?php echo number_format(round($co2Total), 0, '.', ','); ?> kg</span>
+                    <span class="datalabel"><?php _t("Total CO<sub>2</sub> emission prevented:");?> </span><span class="blue"><?php echo number_format(round($co2Total), 0, '.', ','); ?> kg</span>
                 </div>
                 <div class="col-md-12">
                     <?php
@@ -410,7 +410,7 @@
                     <div class="di_consume <?php echo $consume_class; ?>">
                         <img src="/assets/icons/<?php echo $consume_image; ?>" class="img-responsive">
                         <div class="text">
-                            <div class="blue"><?php echo $consume_label; ?></div>
+                            <div class="blue"><?php _t($consume_label); ?></div>
                             <div class="consume"><?php echo $consume_eql_to; ?></div>
                         </div>
                     </div>
@@ -423,7 +423,7 @@
                             </div>
                         <?php } ?>
                         <div class="col-md-12 text-center">
-                            <div class="legend">1 <img src="/assets/icons/<?php echo $manufacture_img; ?>"> = <?php echo $manufacture_legend; ?> (approximately)</div>
+                            <div class="legend">1 <img src="/assets/icons/<?php echo $manufacture_img; ?>"> = <?php echo $manufacture_legend; ?> (<?php _t("approximately");?>)</div>
 
                         </div>
                     </div>
@@ -443,7 +443,7 @@
             <!-- Group Achievements -->
             <section class="row">
                 <div class="col-md-12">
-                    <h2>Restart Project Achievements</h2>
+                    <h2>Restart Project <?php _t("Achievements");?></h2>
                 </div>
             </section>
 
@@ -454,14 +454,14 @@
                 </div>
 
                 <div class="col-md-6">
-                    <h5 class="text-center">e-Waste Prevented to date</h5>
+                    <h5 class="text-center"><?php _t("e-Waste Prevented to date");?></h5>
                     <span class="largetext">
                         <?php echo number_format(round($wasteTotal), 0, '.', ','); ?> kg
                     </span>
 
                     <hr />
 
-                    <h5 class="text-center">e-Waste prevented this year</h5>
+                    <h5 class="text-center"><?php _t("e-Waste prevented this year");?></h5>
                     <?php
 
                         foreach($waste_year_data as $y){
@@ -478,7 +478,7 @@
                 </div>
 
                 <div class="col-md-6">
-                    <h5 class="text-center">CO<sub>2</sub> emission prevented to date</h5>
+                    <h5 class="text-center">CO<sub>2</sub><?php _t("emission prevented to date");?></h5>
 
                     <span class="largetext">
                         <?php echo number_format(round($co2Total), 0, '.', ','); ?> kg of CO<sub>2</sub>
@@ -486,7 +486,7 @@
 
                     <hr />
 
-                    <h5 class="text-center">CO<sub>2</sub> emission prevented this year</h5>
+                    <h5 class="text-center">CO<sub>2</sub> <?php _t("emission prevented this year");?></h5>
                     <span class="largetext">
                         <?php echo number_format(round($co2ThisYear), 0, '.', ','); ?> kg of CO<sub>2</sub>
                     </span>
@@ -504,14 +504,14 @@
                 <!-- Device count -->
 
                 <div class="col-md-12">
-                    <h3>Devices Restarted</h3>
+                    <h3><?php _t("Devices Restarted");?></h3>
                     <div class="row">
                         <div class="col-md-4 count">
                             <div class="col">
                                 <img src="/assets/icons/fixed_circle.jpg">
                             </div>
                             <div class="col">
-                                <span class="status_title">Fixed</span>
+                                <span class="status_title"><?php _t("Fixed");?></span>
                                 <span class="largetext fixed">
                                     <?php echo $device_count_status[0]->counter; ?>
                                 </span>
@@ -523,7 +523,7 @@
                                 <img src="/assets/icons/repairable_circle.jpg">
                             </div>
                             <div class="col">
-                                <span class="status_title">Repairable</span>
+                                <span class="status_title"><?php _t("Repairable");?></span>
                                 <span class="largetext repairable">
 
                                     <?php echo $device_count_status[1]->counter; ?>
@@ -536,7 +536,7 @@
                                 <img src="/assets/icons/dead_circle.jpg">
                             </div>
                             <div class="col">
-                                <span class="status_title">Dead</span>
+                                <span class="status_title"><?php _t("Dead");?></span>
                                 <span class="largetext dead">
                                     <?php echo $device_count_status[2]->counter; ?>
                                 </span>
@@ -553,7 +553,7 @@
             <!-- category details -->
             <section class="row">
                 <div class="col-md-12">
-                    <h3>Category Details</h3>
+                    <h3><?php _t("Category Details");?></h3>
                 </div>
 
                 <div class="row">
@@ -561,15 +561,15 @@
                     <div class="col-md-4">
                         <div class="col3">
                             <img src="/assets/icons/icon_fixed.png" title="fixed items" alt="Fixed Items icon">
-                            <span class="subtext">fixed</span>
+                            <span class="subtext"><?php _t("fixed");?></span>
                         </div>
                         <div class="col3 no-brd">
                             <img src="/assets/icons/icon_repairable.png" title="repairable items" alt="repairable Items icon">
-                            <span class="subtext">repairable</span>
+                            <span class="subtext"><?php _t("repairable");?></span>
                         </div>
                         <div class="col3">
                             <img src="/assets/icons/icon_dead.png" title="dead items" alt="dead Items icon">
-                            <span class="subtext">dead</span>
+                            <span class="subtext"><?php _t("dead");?></span>
                         </div>
                     </div>
 
@@ -598,23 +598,23 @@
                                 <thead>
                                     <tr>
                                         <th colspan="3">
-                                            Computers and Home Office
+                                            <?php _t("Computers and Home Office");?>
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="table-label">Most seen:</td>
+                                        <td class="table-label"><?php _t("Most seen:");?></td>
                                         <td class="table-data"><?php echo $mostleast[1]['most_seen'][0]->name; ?></td>
                                         <td class="table-count"><?php echo $mostleast[1]['most_seen'][0]->counter; ?></td>
                                     </tr>
                                     <tr>
-                                        <td class="table-label">Most repaired:</td>
+                                        <td class="table-label"><?php _t("Most repaired:");?></td>
                                         <td class="table-data"><?php echo $mostleast[1]['most_repaired'][0]->name; ?></td>
                                         <td class="table-count"><?php echo $mostleast[1]['most_repaired'][0]->counter; ?></td>
                                     </tr>
                                     <tr>
-                                        <td class="table-label">Least repaired:</td>
+                                        <td class="table-label"><?php _t("Least repaired:");?></td>
                                         <td class="table-data"><?php echo $mostleast[1]['least_repaired'][0]->name; ?></td>
                                         <td class="table-count"><?php echo $mostleast[1]['least_repaired'][0]->counter; ?></td>
                                     </tr>
@@ -652,23 +652,23 @@
                                 <thead>
                                     <tr>
                                         <th colspan="3">
-                                            Electronic Gadgets
+                                            <?php _t("Electronic Gadgets");?>
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="table-label">Most seen:</td>
+                                        <td class="table-label"><?php _t("Most seen:");?></td>
                                         <td class="table-data"><?php echo $mostleast[2]['most_seen'][0]->name; ?></td>
                                         <td class="table-count"><?php echo $mostleast[2]['most_seen'][0]->counter; ?></td>
                                     </tr>
                                     <tr>
-                                        <td class="table-label">Most repaired:</td>
+                                        <td class="table-label"><?php _t("Most repaired:");?></td>
                                         <td class="table-data"><?php echo $mostleast[2]['most_repaired'][0]->name; ?></td>
                                         <td class="table-count"><?php echo $mostleast[2]['most_repaired'][0]->counter; ?></td>
                                     </tr>
                                     <tr>
-                                        <td class="table-label">Least repaired:</td>
+                                        <td class="table-label"><?php _t("Least repaired:");?></td>
                                         <td class="table-data"><?php echo $mostleast[2]['least_repaired'][0]->name; ?></td>
                                         <td class="table-count"><?php echo $mostleast[2]['least_repaired'][0]->counter; ?></td>
                                     </tr>
@@ -705,23 +705,23 @@
                                 <thead>
                                     <tr>
                                         <th colspan="3">
-                                            Home Entertainment
+                                            <?php _t("Home Entertainment");?>
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="table-label">Most seen:</td>
+                                        <td class="table-label"><?php _t("Most seen:");?></td>
                                         <td class="table-data"><?php echo $mostleast[3]['most_seen'][0]->name; ?></td>
                                         <td class="table-count"><?php echo $mostleast[3]['most_seen'][0]->counter; ?></td>
                                     </tr>
                                     <tr>
-                                        <td class="table-label">Most repaired:</td>
+                                        <td class="table-label"><?php _t("Most repaired:");?></td>
                                         <td class="table-data"><?php echo $mostleast[3]['most_repaired'][0]->name; ?></td>
                                         <td class="table-count"><?php echo $mostleast[3]['most_repaired'][0]->counter; ?></td>
                                     </tr>
                                     <tr>
-                                        <td class="table-label">Least repaired:</td>
+                                        <td class="table-label"><?php _t("Least repaired:";?></td>
                                         <td class="table-data"><?php echo $mostleast[3]['least_repaired'][0]->name; ?></td>
                                         <td class="table-count"><?php echo $mostleast[3]['least_repaired'][0]->counter; ?></td>
                                     </tr>
@@ -757,23 +757,23 @@
                                 <thead>
                                     <tr>
                                         <th colspan="3">
-                                            Kitchen and Household Items
+                                            <?php _t("Kitchen and Household Items");?>
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="table-label">Most seen:</td>
+                                        <td class="table-label"><?php _t("Most seen:");?></td>
                                         <td class="table-data"><?php echo $mostleast[4]['most_seen'][0]->name; ?></td>
                                         <td class="table-count"><?php echo $mostleast[4]['most_seen'][0]->counter; ?></td>
                                     </tr>
                                     <tr>
-                                        <td class="table-label">Most repaired:</td>
+                                        <td class="table-label"><?php _t("Most repaired:");?></td>
                                         <td class="table-data"><?php echo $mostleast[4]['most_repaired'][0]->name; ?></td>
                                         <td class="table-count"><?php echo $mostleast[4]['most_repaired'][0]->counter; ?></td>
                                     </tr>
                                     <tr>
-                                        <td class="table-label">Least repaired:</td>
+                                        <td class="table-label"><?php _t("Least repaired:");?></td>
                                         <td class="table-data"><?php echo $mostleast[4]['least_repaired'][0]->name; ?></td>
                                         <td class="table-count"><?php echo $mostleast[4]['least_repaired'][0]->counter; ?></td>
                                     </tr>
@@ -790,7 +790,7 @@
             <!--categories-->
             <section class="row">
                 <div class="col-md-12">
-                    <h3>Devices Restarted per Category</h3>
+                    <h3><?php _t("Devices Restarted per Category");?></h3>
                 </div>
                 <?php
                 //dbga($clusters);
