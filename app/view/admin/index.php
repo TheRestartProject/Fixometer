@@ -721,7 +721,7 @@
                                         <td class="table-count"><?php echo $mostleast[3]['most_repaired'][0]->counter; ?></td>
                                     </tr>
                                     <tr>
-                                        <td class="table-label"><?php _t("Least repaired:";?></td>
+                                        <td class="table-label"><?php _t("Least repaired:");?></td>
                                         <td class="table-data"><?php echo $mostleast[3]['least_repaired'][0]->name; ?></td>
                                         <td class="table-count"><?php echo $mostleast[3]['least_repaired'][0]->counter; ?></td>
                                     </tr>
