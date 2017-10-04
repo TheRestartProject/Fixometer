@@ -163,8 +163,8 @@
                             <th>#</th>
                             <th><?php _t("Category");?></th>
                             <th><?php _t("Comment");?></th>
-                            <th style="width: 280px !important;"><?php _t("Image");?></th>
-                            <th><?php _t("Brand/Model/Age");?></th>
+                            <!-- <th style="width: 280px !important;"><?php _t("Image");?></th>-->
+                            <th><?php _t("Brand/Model");?></th>
                             <th><?php _t("Repair Status");?></th>
                             <th><?php _t("Spare Parts?");?></th>
                             <th></th>
@@ -208,7 +208,7 @@
                             <td>
                                 <textarea class="form-control" id="device[<?php echo $i; ?>][problem]" name="device[<?php echo $i; ?>][problem]"><?php echo $devices[$i-1]->problem; ?></textarea>
                             </td>
-                            <td>
+                            <!-- <td>
 
                               <?php if(!empty($devices[$i-1]->path)) { ?>
                                 <div class="device-img-wrap">
@@ -232,7 +232,7 @@
                                 >
                               </div>
 
-                            </td>
+                            </td>-->
                             <td>
                                 <div class="form-group">
                                     <input type="text" name="device[<?php echo $i; ?>][brand]" id="device[<?php echo $i; ?>][brand]" class="form-control" placeholder="<?php _t("Brand...");?>" value="<?php echo $devices[$i-1]->brand; ?>">
@@ -243,7 +243,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="text" name="device[<?php echo $i; ?>][age]" id="device[<?php echo $i; ?>][age]" class="form-control" placeholder="<?php _t("Age...");?>" value="<?php echo $devices[$i-1]->age; ?>">
+                                    <input type="hidden" name="device[<?php echo $i; ?>][age]" id="device[<?php echo $i; ?>][age]" class="form-control" placeholder="<?php _t("Age...");?>" value="<?php echo $devices[$i-1]->age; ?>">
                                 </div>
 
                             </td>
@@ -354,13 +354,13 @@
                             <td>
                                 <textarea class="form-control" id="device[<?php echo $i; ?>][problem]" name="device[<?php echo $i; ?>][problem]"></textarea>
                             </td>
-                            <td>
+                            <!-- <td>
 
                               <div class="form-group">
                                 <input type="file" class="form-control file" name="device[<?php echo $i; ?>][image]" data-show-upload="false" data-show-caption="true">
                               </div>
 
-                            </td>
+                            </td>-->
                             <td>
                                  <div class="form-group">
                                     <input type="text" name="device[<?php echo $i; ?>][brand]" id="device[<?php echo $i; ?>][brand]" class="form-control" placeholder="<?php _t("Brand...");?>">
@@ -371,7 +371,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="text" name="device[<?php echo $i; ?>][age]" id="device[<?php echo $i; ?>][age]" class="form-control" placeholder="<?php _t("Age...");?>" >
+                                    <input type="hidden" name="device[<?php echo $i; ?>][age]" id="device[<?php echo $i; ?>][age]" class="form-control" placeholder="<?php _t("Age...");?>" >
                                 </div>
                             </td>
                             <td>
