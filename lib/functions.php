@@ -264,7 +264,7 @@
       }
 
       // get the string
-      if(in_array($string, array_keys($translations))){
+      if(in_array($string, array_keys($translations)) && !empty($translations[$string])){
         $translation = $translations[$string];
       }
       else {
@@ -277,10 +277,10 @@
       }
 
       if($print){
-        echo $translation;
+          echo html_entity_decode($translation, ENT_QUOTES);
         return true;
       }
       else {
-        return $translation;
+          return html_entity_decode($translation, ENT_QUOTES);
       }
     }
