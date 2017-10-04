@@ -330,7 +330,7 @@
                     <p class="big">
                         <span class="big blue"><?php echo $pax; ?> <?php _t("participants");?></span> <?php _t("aided by");?>
                         <span class="big blue"><?php echo $hours; ?> <?php _t("hours of volunteered time");?></span> <?php _t("worked on");?>
-                        <span class="big blue"><?php echo ($device_count_status[0]->counter + $device_count_status[1]->counter + $device_count_status[2]->counter) ?> <?php _t("devices.");?>"</span>
+                        <span class="big blue"><?php echo ($device_count_status[0]->counter + $device_count_status[1]->counter + $device_count_status[2]->counter) ?> <?php _t("devices.");?></span>
                     </p>
 
                 </div>
