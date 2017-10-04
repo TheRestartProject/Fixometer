@@ -2,12 +2,12 @@
     <div class="row">
         <div class="col-md-12">
             <h1><?php echo $title; ?></h1>
-            <a class="btn btn-default btn-sm" href="/device/create"><i class="fa fa-plus"></i> New Device</a>
-            <a href="/export/devices" class="btn btn-default btn-sm"><i class="fa fa-download"></i> All Device Data</a>
+            <a class="btn btn-default btn-sm" href="/device/create"><i class="fa fa-plus"></i> <?php _t("New Device");?></a>
+            <a href="/export/devices" class="btn btn-default btn-sm"><i class="fa fa-download"></i> <?php _t("All Device Data");?></a>
             <hr />
         </div>
         <div class="col-md-1">
-            <h2>Search</h2>
+            <h2><?php _t("Search");?></h2>
 
         </div>
         <div class="col-md-11">
@@ -16,7 +16,7 @@
             <div class="row">
               <div class="col-md-3">
                 <div class="form-group">
-                  <select id="categories" name="categories[]" class="selectpicker form-control" multiple data-live-search="true" title="Choose categories...">
+                  <select id="categories" name="categories[]" class="selectpicker form-control" multiple data-live-search="true" title="<?php _t("Choose categories...");?>"">
                     <?php foreach($categories as $cluster){ ?>
                     <optgroup label="<?php echo $cluster->name; ?>">
                       <?php foreach($cluster->categories as $c){ ?>
@@ -41,7 +41,7 @@
               </div>
               <div class="col-md-3">
                 <div class="form-group">
-                  <select id="groups" name="groups[]" class="selectpicker form-control" multiple data-live-search="true" title="Choose groups...">
+                  <select id="groups" name="groups[]" class="selectpicker form-control" multiple data-live-search="true" title="<?php _t("Choose groups...");?>"">
                     <?php foreach($groups as $g){ ?>
                     <option value="<?php echo $g->id; ?>"
                       <?php
@@ -61,7 +61,7 @@
               <div class="col-md-3">
                 <div class="form-group">
                   <div class="input-group date from-date">
-                    <input type="text" class="form-control" id="search-from-date" name="from-date" placeholder="From date..." <?php if(isset($_GET['from-date']) && !empty($_GET['from-date'])){ echo ' value="' . $_GET['from-date'] . '"'; } ?> >
+                    <input type="text" class="form-control" id="search-from-date" name="from-date" placeholder="<'php _t("From date...");?>"" <?php if(isset($_GET['from-date']) && !empty($_GET['from-date'])){ echo ' value="' . $_GET['from-date'] . '"'; } ?> >
                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                   </div>
                 </div>
@@ -69,7 +69,7 @@
               <div class="col-md-3">
                 <div class="form-group">
                   <div class="input-group date to-date">
-                    <input type="text" class="form-control" id="search-to-date" name="to-date" placeholder="To date..." <?php if(isset($_GET['to-date']) && !empty($_GET['to-date'])){ echo ' value="' . $_GET['to-date'] . '"'; } ?> >
+                    <input type="text" class="form-control" id="search-to-date" name="to-date" placeholder="<?php _t("To date...");?>"" <?php if(isset($_GET['to-date']) && !empty($_GET['to-date'])){ echo ' value="' . $_GET['to-date'] . '"'; } ?> >
                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                   </div>
                 </div>
@@ -80,28 +80,28 @@
 
               <div class="col-md-3">
                 <div class="form-group">
-                  <input type="text" class="form-control " id="brand" name="brand" placeholder="Brand..." <?php if(isset($_GET['brand']) && !empty($_GET['brand'])){ echo ' value="' . $_GET['brand'] . '"'; } ?> >
+                  <input type="text" class="form-control " id="brand" name="brand" placeholder="<?php _t("Brand...");?>"" <?php if(isset($_GET['brand']) && !empty($_GET['brand'])){ echo ' value="' . $_GET['brand'] . '"'; } ?> >
                 </div>
               </div>
 
               <div class="col-md-3">
                 <div class="form-group">
-                  <input type="text" class="form-control " id="model" name="model" placeholder="Model..." <?php if(isset($_GET['model']) && !empty($_GET['model'])){ echo ' value="' . $_GET['model'] . '"'; } ?> >
+                  <input type="text" class="form-control " id="model" name="model" placeholder="<?php _t("Model...");?>"" <?php if(isset($_GET['model']) && !empty($_GET['model'])){ echo ' value="' . $_GET['model'] . '"'; } ?> >
                 </div>
               </div>
 
               <div class="col-md-4">
                 <div class="form-group">
-                  <input type="text" class="form-control " id="free-text" name="free-text" placeholder="Search in the comment..."  <?php if(isset($_GET['free-text']) && !empty($_GET['free-text'])){ echo ' value="' . $_GET['free-text'] . '"'; } ?> >
+                  <input type="text" class="form-control " id="free-text" name="free-text" placeholder="<?php _t("Search in the comment...");?>""  <?php if(isset($_GET['free-text']) && !empty($_GET['free-text'])){ echo ' value="' . $_GET['free-text'] . '"'; } ?> >
                 </div>
               </div>
 
               <div class="col-md-1">
-                <button class="btn btn-primary btn-block"><i class="fa fa-search"></i> Search</button>
+                <button class="btn btn-primary btn-block"><i class="fa fa-search"></i> <?php _t("Search");?></button>
               </div>
 
               <div class="col-md-1">
-                <a href="/device/index" class="btn btn-default btn-block"><i class="fa fa-refresh"></i> Reset</a>
+                <a href="/device/index" class="btn btn-default btn-block"><i class="fa fa-refresh"></i> <?php _t("Reset");?></a>
               </div>
             </div>
           </form>
@@ -113,15 +113,15 @@
                 <thead>
                     <tr>
                         <th data-column-id="deviceID"  data-header-css-class="comm-cell" data-identifier="true" data-type="numeric">#</th>
-                        <th data-column-id="category">Category</th>
-                        <th data-column-id="brand">Brand</th>
-                        <th data-column-id="model">Model</th>
-                        <th data-column-id="comment">Comment</th>
-                        <th data-column-id="groupName">Event (Group)</th>
-                        <th data-column-id="eventDate" data-header-css-class="mid-cell">Event Date</th>
+                        <th data-column-id="category"><?php _t("Category");?></th>
+                        <th data-column-id="brand"><?php _t("Brand");?></th>
+                        <th data-column-id="model"><?php _t("Model");?></th>
+                        <th data-column-id="comment"><?php _t("Comment");?></th>
+                        <th data-column-id="groupName"><?php _t("Event (Group)");?>"</th>
+                        <th data-column-id="eventDate" data-header-css-class="mid-cell"><?php _t("Event Date");?></th>
                         <th data-column-id="location">Location</th>
-                        <th data-column-id="repairstatus" data-header-css-class="mid-cell" data-formatter="statusBox">Repair state</th>
-                        <th data-column-id="edit" data-header-css-class="comm-cell" data-formatter="editLink" data-sortable="false">edit</th>
+                        <th data-column-id="repairstatus" data-header-css-class="mid-cell" data-formatter="statusBox">"<?php _t("Repair state");?></th>
+                        <th data-column-id="edit" data-header-css-class="comm-cell" data-formatter="editLink" data-sortable="false"><?php _t("edit");?></th>
                     </tr>
                 </thead>
 

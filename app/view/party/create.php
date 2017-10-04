@@ -4,7 +4,7 @@
             <h1><?php echo $title; ?>
             <small>
                     <?php $home_url = (hasRole($user, 'Administrator') ? '/admin' : '/host'); ?>
-                    <a href="<?php echo $home_url; ?>" class="btn btn-primary btn-sm"><i class="fa fa-home"></i> back to dashboard</a>
+                    <a href="<?php echo $home_url; ?>" class="btn btn-primary btn-sm"><i class="fa fa-home"></i> <?php _t("back to dashboard");?></a>
             </small>
             </h1>
         </div>
@@ -18,7 +18,7 @@
 
     <section class="row profiles">
         <div class="col-md-12">
-            <h5>Admin Console</h5>
+            <h5><?php _t("Admin Console");?></h5>
 
         </div>
         <div class="col-md-6">
@@ -27,7 +27,7 @@
 
                 <div class="btn-group" role="group">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Groups
+                        <?php _t("Groups");?>
                       <span class="fa fa-chevron-down"></span>
                     </button>
                     <ul class="dropdown-menu">
@@ -49,13 +49,13 @@
                     </ul>
                 </div>
 
-                <a class="btn btn-default" href="/group/create">Add Group</a>
+                <a class="btn btn-default" href="/group/create"><?php _t("Add Group");?></a>
             </div>
         </div>
         <div class="col-md-6">
             <div class="btn-group btn-group-justified">
-                <a class="btn btn-default" href="/user/all">Users</a>
-                <a class="btn btn-default" href="/user/create">Add User</a>
+                <a class="btn btn-default" href="/user/all"><?php _t("Users");?></a>
+                <a class="btn btn-default" href="/user/create"><?php _t("Add User");?></a>
             </div>
         </div>
 
@@ -91,7 +91,7 @@
 
 
                                 <div class="form-group">
-                                    <label for="free_text">Description:</label>
+                                    <label for="free_text"><?php _t("Description:");?></label>
                                     <textarea class="form-control rte" rows="6" name="free_text" id="free_text"></textarea>
                                 </div>
 
@@ -161,21 +161,21 @@
                                 }
                                 ?>
                                 <div class="form-group">
-                                    <label for="venue">Venue Name:</label>
+                                    <label for="venue"><?php _t("Venue Name:");?>"</label>
                                     <input type="text" name="venue" id="venue" class="form-control" <?php if(isset($error) && !empty($error) && !empty($udata)) echo 'value="'.$udata['venue'].'"' ; ?>>
                                 </div>
                                 <div class="form-group">
-                                    <label for="location">Address:</label>
+                                    <label for="location"><?php _t("Address:");?></label>
                                     <div class="input-group">
                                         <input type="text" name="location" id="location" class="form-control" <?php if(isset($error) && !empty($error) && !empty($udata)) echo 'value="'.$udata['location'].'"' ; ?>>
                                         <span class="input-group-btn">
-                                            <button type="button" class="btn btn-primary" onclick="codeAddress()"><i class="fa fa-map-marker"></i> geocode</button>
+                                            <button type="button" class="btn btn-primary" onclick="codeAddress()"><i class="fa fa-map-marker"></i> <?php _t("geocode");?></button>
                                         </span>
 
 
                                     </div>
                                     <p class="help-block">
-                                        To pinpoint the party venue on the map, please enter the venue name and the address in the fields above, then press "geocode".
+                                        <?php _t("To pinpoint the party venue on the map, please enter the venue name and the address in the fields above, then press "geocode".");?>
                                     </p>
                                 </div>
 
@@ -187,19 +187,19 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="text" name="latitude" id="latitude" class="form-control" placeholder="latitude..." <?php if(isset($error) && !empty($error) && !empty($udata)) echo 'value="'.$udata['latitude'].'"' ; ?>>
+                                          <input type="text" name="latitude" id="latitude" class="form-control" placeholder="<?php _t("latitude...");?>" <?php if(isset($error) && !empty($error) && !empty($udata)) echo 'value="'.$udata['latitude'].'"' ; ?>>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="text" name="longitude" id="longitude" class="form-control" placeholder="longitude..." <?php if(isset($error) && !empty($error) && !empty($udata)) echo 'value="'.$udata['longitude'].'"' ; ?>>
+                                            <input type="text" name="longitude" id="longitude" class="form-control" placeholder="<?php _t("longitude...");?>" <?php if(isset($error) && !empty($error) && !empty($udata)) echo 'value="'.$udata['longitude'].'"' ; ?>>
                                         </div>
                                     </div>
                                 </div>
 
 
                                 <div class="from-group">
-                                    <label for="file" class="sr-only">Image:</label>
+                                    <label for="file" class="sr-only"><?php _t("Image:");?></label>
                                     <input type="file" name="file" id="file" class="form-control fileinput">
                                 </div>
 
@@ -211,8 +211,8 @@
                             <div class="col-md-6 col-md-offset-6">
 
                                 <div class="form-group">
-                                    <button class="btn btn-default" type="reset"><i class="fa fa-refresh"></i> reset</button>
-                                    <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> save</button>
+                                    <button class="btn btn-default" type="reset"><i class="fa fa-refresh"></i> <?php _t("reset");?></button>
+                                    <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> <?php _t("save");?></button>
                                 </div>
 
                             </div>
