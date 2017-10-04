@@ -6,6 +6,7 @@
             <p class="login-text"><?php _t('<span class="patua-blue">Welcome to our community space</span>, where you can share upcoming Restart Parties and track their social and environmental impact. By doing so, we can empower and motivate at a local level, but also build global momentum for a change.'); ?></p>
             <?php if(isset($response)) { printResponse($response); } ?>
             <div class="shader"></div>
+
             <h2><span class="title-text"><?php _t('login', array('0' => 'total', '1' => 'another')); ?></span></h2>
             <form class="" method="post" action="/user/login">
                 <div class="form-group">
@@ -25,7 +26,11 @@
                 </div>
             </form>
 
-            <?php lng_switcher(); ?>
+            <div id="language-switcher" style="text-align:center">
+    <?php lng_switcher(); ?>
+            </div>
+
+
         </div>
         <?php
         /** select random bkground **/
