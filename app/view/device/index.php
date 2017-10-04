@@ -16,7 +16,7 @@
             <div class="row">
               <div class="col-md-3">
                 <div class="form-group">
-                  <select id="categories" name="categories[]" class="selectpicker form-control" multiple data-live-search="true" title="<?php _t("Choose categories...");?>"">
+                  <select id="categories" name="categories[]" class="selectpicker form-control" multiple data-live-search="true" title="<?php _t("Choose categories...");?>">
                     <?php foreach($categories as $cluster){ ?>
                     <optgroup label="<?php echo $cluster->name; ?>">
                       <?php foreach($cluster->categories as $c){ ?>
@@ -41,7 +41,7 @@
               </div>
               <div class="col-md-3">
                 <div class="form-group">
-                  <select id="groups" name="groups[]" class="selectpicker form-control" multiple data-live-search="true" title="<?php _t("Choose groups...");?>"">
+                  <select id="groups" name="groups[]" class="selectpicker form-control" multiple data-live-search="true" title="<?php _t("Choose groups...");?>">
                     <?php foreach($groups as $g){ ?>
                     <option value="<?php echo $g->id; ?>"
                       <?php
@@ -61,7 +61,7 @@
               <div class="col-md-3">
                 <div class="form-group">
                   <div class="input-group date from-date">
-                    <input type="text" class="form-control" id="search-from-date" name="from-date" placeholder="<?php _t("From date...");?>"" <?php if(isset($_GET['from-date']) && !empty($_GET['from-date'])){ echo ' value="' . $_GET['from-date'] . '"'; } ?> >
+                    <input type="text" class="form-control" id="search-from-date" name="from-date" placeholder="<?php _t("From date...");?>" <?php if(isset($_GET['from-date']) && !empty($_GET['from-date'])){ echo ' value="' . $_GET['from-date'] . '"'; } ?> >
                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                   </div>
                 </div>
@@ -69,7 +69,7 @@
               <div class="col-md-3">
                 <div class="form-group">
                   <div class="input-group date to-date">
-                    <input type="text" class="form-control" id="search-to-date" name="to-date" placeholder="<?php _t("To date...");?>"" <?php if(isset($_GET['to-date']) && !empty($_GET['to-date'])){ echo ' value="' . $_GET['to-date'] . '"'; } ?> >
+                    <input type="text" class="form-control" id="search-to-date" name="to-date" placeholder="<?php _t("To date...");?>" <?php if(isset($_GET['to-date']) && !empty($_GET['to-date'])){ echo ' value="' . $_GET['to-date'] . '"'; } ?> >
                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                   </div>
                 </div>
@@ -80,19 +80,19 @@
 
               <div class="col-md-3">
                 <div class="form-group">
-                  <input type="text" class="form-control " id="brand" name="brand" placeholder="<?php _t("Brand...");?>"" <?php if(isset($_GET['brand']) && !empty($_GET['brand'])){ echo ' value="' . $_GET['brand'] . '"'; } ?> >
+                  <input type="text" class="form-control " id="brand" name="brand" placeholder="<?php _t("Brand...");?>" <?php if(isset($_GET['brand']) && !empty($_GET['brand'])){ echo ' value="' . $_GET['brand'] . '"'; } ?> >
                 </div>
               </div>
 
               <div class="col-md-3">
                 <div class="form-group">
-                  <input type="text" class="form-control " id="model" name="model" placeholder="<?php _t("Model...");?>"" <?php if(isset($_GET['model']) && !empty($_GET['model'])){ echo ' value="' . $_GET['model'] . '"'; } ?> >
+                  <input type="text" class="form-control " id="model" name="model" placeholder="<?php _t("Model...");?>" <?php if(isset($_GET['model']) && !empty($_GET['model'])){ echo ' value="' . $_GET['model'] . '"'; } ?> >
                 </div>
               </div>
 
               <div class="col-md-4">
                 <div class="form-group">
-                  <input type="text" class="form-control " id="free-text" name="free-text" placeholder="<?php _t("Search in the comment...");?>""  <?php if(isset($_GET['free-text']) && !empty($_GET['free-text'])){ echo ' value="' . $_GET['free-text'] . '"'; } ?> >
+                  <input type="text" class="form-control " id="free-text" name="free-text" placeholder="<?php _t("Search in the comment...");?>"  <?php if(isset($_GET['free-text']) && !empty($_GET['free-text'])){ echo ' value="' . $_GET['free-text'] . '"'; } ?> >
                 </div>
               </div>
 
@@ -120,7 +120,7 @@
                         <th data-column-id="groupName"><?php _t("Event (Group)");?></th>
                         <th data-column-id="eventDate" data-header-css-class="mid-cell"><?php _t("Event Date");?></th>
                         <th data-column-id="location">Location</th>
-                        <th data-column-id="repairstatus" data-header-css-class="mid-cell" data-formatter="statusBox">"<?php _t("Repair state");?></th>
+                        <th data-column-id="repairstatus" data-header-css-class="mid-cell" data-formatter="statusBox"><?php _t("Repair state");?></th>
                         <th data-column-id="edit" data-header-css-class="comm-cell" data-formatter="editLink" data-sortable="false"><?php _t("edit");?></th>
                     </tr>
                 </thead>
