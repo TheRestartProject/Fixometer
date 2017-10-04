@@ -103,7 +103,7 @@
         <div class="col-md-9">
             <div class="row" id="group-main-stats">
                 <div class="col">
-                    <h5><?php _("participants");?></h5>
+                    <h5><?php _t("participants");?></h5>
                     <span class="largetext"><?php echo $pax; ?></span>
                 </div>
 
@@ -417,7 +417,7 @@
                             $sum += $y->waste;
                         }
                     ?>
-                    <span class="datalabel"><?php _t("Total waste prevented:");?> </span><span class="blue">  <?php echo $weights[0]-><?php _t("total_weights;");?>" ?> kg </span>
+                    <span class="datalabel"> <?php _t("Total waste prevented:"); ?> </span><span class="blue">  <?php echo $weights[0]->total_weights; ?> kg </span>
 
                 </div>
                 <div class="col-md-12 text-center texter">
@@ -428,7 +428,7 @@
                         }
                         //$di_co2 = number_format(round($sum), 0, '.', ',');
                     ?>
-                    <span class="datalabel"><?php _t("Total CO<sub>2</sub> emission prevented:");?>" </span><span class="blue"><?php echo $weights[0]-><?php _t("total_footprints;");?> ?> kg</span>
+                    <span class="datalabel"><?php _t("Total CO<sub>2</sub> emission prevented:");?>" </span><span class="blue"><?php echo $weights[0]->total_footprints; ?> kg</span>
 
                 </div>
                 <div class="col-md-12">
@@ -511,7 +511,7 @@
                 <h5 class="text-center"><?php _t("e-Waste Prevented to date");?></h5>
 
                 <span class="largetext">
-                    <?php echo $weights[0]-><?php _t("total_weights;");?> ?> kg
+                    <?php echo $weights[0]->total_weights; ?> kg
                 </span>
                 <span class="subtext text-center"><?php _t("Total:");?>" <?php echo number_format(round($wasteTotal), 0, '.', ','); ?> kg</span>
                 <hr />

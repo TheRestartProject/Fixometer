@@ -17,7 +17,7 @@
 
                                 <div class="form-group <?php if(isset($error) && isset($error['event']) && !empty($error['event'])) { echo "has-error"; } ?>">
 
-                                    <label for="event"><?php _t("Restart Party:");?>"</label>
+                                    <label for="event"><?php _t("Restart Party:");?></label>
                                     <select id="event" name="event"  class="form-control selectpicker" data-live-search="true">
                                         <option></option>
                                         <?php foreach($events as $event){ ?>

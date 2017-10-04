@@ -161,7 +161,7 @@
                                 }
                                 ?>
                                 <div class="form-group">
-                                    <label for="venue"><?php _t("Venue Name:");?>"</label>
+                                    <label for="venue"><?php _t("Venue Name:");?></label>
                                     <input type="text" name="venue" id="venue" class="form-control" <?php if(isset($error) && !empty($error) && !empty($udata)) echo 'value="'.$udata['venue'].'"' ; ?>>
                                 </div>
                                 <div class="form-group">
@@ -175,7 +175,7 @@
 
                                     </div>
                                     <p class="help-block">
-                                        <?php _t("To pinpoint the party venue on the map, please enter the venue name and the address in the fields above, then press "geocode".");?>
+                                        <?php _t("To pinpoint the party venue on the map, please enter the venue name and the address in the fields above, then press \"geocode\".");?>
                                     </p>
                                 </div>
 

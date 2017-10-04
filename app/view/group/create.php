@@ -13,13 +13,13 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group <?php if(isset($error) && isset($error['name']) && !empty($error['name'])) { echo "has-error"; } ?>">
-                            <label for="name"><?php _t("Name:");?>"</label>
+                            <label for="name"><?php _t("Name:");?></label>
                             <input type="text" name="name" id="name" class="form-control" <?php if(isset($error) && !empty($error) && !empty($udata)) echo 'value="'.$udata['name'].'"' ; ?>>
                             <?php if(isset($error) && isset($error['name']) && !empty($error['name'])) { echo '<span class="help-block text-danger">' . $error['name'] . '</span>'; } ?>
                         </div>
 
                         <div class="form-group">
-                            <label for="free_text"><?php _t("Description:");?>"</label>
+                            <label for="free_text"><?php _t("Description:");?></label>
                             <textarea class="form-control rte" rows="6" name="free_text" id="free_text"></textarea>
                         </div>
 
@@ -27,7 +27,7 @@
 
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="location"><?php _t("Location: where do you keep your fixing tools and supplies?");?>"</label>
+                            <label for="location"><?php _t("Location: where do you keep your fixing tools and supplies?");?></label>
 
                             <div class="input-group">
                                 <input type="text" name="location" id="location" class="form-control" <?php if(isset($error) && !empty($error) && !empty($udata)) echo 'value="'.$udata['location'].'"' ; ?>>
@@ -46,7 +46,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <input type="text" name="latitude" id="latitude" class="form-control" placeholder="<'php _t("latitude...");?>" <?php if(isset($error) && !empty($error) && !empty($udata)) echo 'value="'.$udata['latitude'].'"' ; ?>>
+                                    <input type="text" name="latitude" id="latitude" class="form-control" placeholder="<?php _t("latitude...");?>" <?php if(isset($error) && !empty($error) && !empty($udata)) echo 'value="'.$udata['latitude'].'"' ; ?>>
                                 </div>
                             </div>
                             <div class="col-md-4">

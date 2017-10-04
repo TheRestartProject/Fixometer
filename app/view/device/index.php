@@ -61,7 +61,7 @@
               <div class="col-md-3">
                 <div class="form-group">
                   <div class="input-group date from-date">
-                    <input type="text" class="form-control" id="search-from-date" name="from-date" placeholder="<'php _t("From date...");?>"" <?php if(isset($_GET['from-date']) && !empty($_GET['from-date'])){ echo ' value="' . $_GET['from-date'] . '"'; } ?> >
+                    <input type="text" class="form-control" id="search-from-date" name="from-date" placeholder="<?php _t("From date...");?>"" <?php if(isset($_GET['from-date']) && !empty($_GET['from-date'])){ echo ' value="' . $_GET['from-date'] . '"'; } ?> >
                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                   </div>
                 </div>
@@ -117,7 +117,7 @@
                         <th data-column-id="brand"><?php _t("Brand");?></th>
                         <th data-column-id="model"><?php _t("Model");?></th>
                         <th data-column-id="comment"><?php _t("Comment");?></th>
-                        <th data-column-id="groupName"><?php _t("Event (Group)");?>"</th>
+                        <th data-column-id="groupName"><?php _t("Event (Group)");?></th>
                         <th data-column-id="eventDate" data-header-css-class="mid-cell"><?php _t("Event Date");?></th>
                         <th data-column-id="location">Location</th>
                         <th data-column-id="repairstatus" data-header-css-class="mid-cell" data-formatter="statusBox">"<?php _t("Repair state");?></th>

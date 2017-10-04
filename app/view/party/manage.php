@@ -166,7 +166,7 @@
                             <th style="width: 280px !important;"><?php _t("Image");?></th>
                             <th><?php _t("Brand/Model/Age");?></th>
                             <th><?php _t("Repair Status");?></th>
-                            <th><?php _t("Spare Parts?");?>"</th>
+                            <th><?php _t("Spare Parts?");?></th>
                             <th></th>
                         </tr>
                     </thead>
@@ -455,7 +455,7 @@
         <h4 class="modal-title"><?php _t("Share your party's stats");?></h4>
       </div>
       <div class="modal-body">
-        <p><?php _t("Copy and paste this code snippet into a page on your website to share your party achievements!");?>"</p>
+        <p><?php _t("Copy and paste this code snippet into a page on your website to share your party achievements!");?></p>
         <div><strong><?php _t("Headline stats");?></strong></div>
         <p><?php _t("This widget shows the headline stats for your party &mdash; the number of participants, number of Restarters, the CO<sub>2</sub> and waste diverted, and the numbers of fixed, repairable, and end-of-life devices");?>
         </p>

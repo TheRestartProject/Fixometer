@@ -53,7 +53,7 @@
         <div class="col-md-6">
             <div class="btn-group btn-group-justified">
                 <a class="btn btn-default" href="/user/all"><?php _t("Users");?></a>
-                <a class="btn btn-default" href="/user/create"><?php _t("Add User");?</a>
+                <a class="btn btn-default" href="/user/create"><?php _t("Add User");?></a>
             </div>
         </div>
 
@@ -72,7 +72,7 @@
                             <div class="col-md-6">
                                 <input type="hidden" name="id" value="<?php echo $formdata->idevents; ?>" >
                                 <div class="form-group <?php if(isset($error) && isset($error['event_date']) && !empty($error['event_date'])) { echo "has-error"; } ?>">
-                                    <label for="event_date"><?php _t("Date:");?>"</label>
+                                    <label for="event_date"><?php _t("Date:");?></label>
                                     <div class="input-group date">
                                         <input type="text" name="event_date" id="event_date" class="form-control date" value="<?php echo strftime('%d/%m/%Y', strtotime($formdata->event_date)); ?>">
 
@@ -87,7 +87,7 @@
 
                                     <div class="col-md-6">
                                         <div class="form-group <?php if(isset($error) && isset($error['start']) && !empty($error['start'])) { echo "has-error"; } ?>">
-                                            <label for="start"><?php _t("Start:");?>"</label>
+                                            <label for="start"><?php _t("Start:");?></label>
                                             <div class="input-group time">
                                                 <input type="text" name="start" id="start" class="form-control time" value="<?php echo substr($formdata->start, 0, 5); ?>">
                                                 <span class="input-group-addon">
@@ -100,7 +100,7 @@
 
                                     <div class="col-md-6">
                                         <div class="form-group <?php if(isset($error) && isset($error['end']) && !empty($error['end'])) { echo "has-error"; } ?>">
-                                            <label for="end"><?php _t("End:");?>"</label>
+                                            <label for="end"><?php _t("End:");?></label>
                                             <div class="input-group time">
                                                 <input type="text" name="end" id="end" class="form-control time" value="<?php echo substr($formdata->end, 0, 5); ?>">
                                                 <span class="input-group-addon">
@@ -117,7 +117,7 @@
 
 
                                 <div class="form-group">
-                                    <label for="free_text"><?php _t("Description:");?>"</label>
+                                    <label for="free_text"><?php _t("Description:");?></label>
                                     <textarea class="form-control rte" rows="6" name="free_text" id="free_text"><?php echo $formdata->free_text; ?></textarea>
                                 </div>
 
@@ -166,20 +166,20 @@
                                 ?>
 
                                 <div class="form-group">
-                                    <label for="venue"><?php _t("Venue:");?>"</label>
+                                    <label for="venue"><?php _t("Venue:");?></label>
                                     <input type="text" name="venue" id="venue" class="form-control" value="<?php echo $formdata->venue; ?>">
                                 </div>
 
 
                                 <div class="form-group">
-                                    <label for="location"><?php _t("Location:");?>"</label>
+                                    <label for="location"><?php _t("Location:");?></label>
                                     <div class="input-group">
-                                        <input type="text" name="location" id="location" class="form-control" value="<?php echo $formdata-><?php _t("location;");?>" ?>">
+                                        <input type="text" name="location" id="location" class="form-control" value="<?php echo $formdata->location; ?>">
                                         <span class="input-group-btn">
                                             <button type="button" class="btn btn-primary" onclick="codeAddress()"><i class="fa fa-map-marker"></i> <?php _t("geocode");?></button>
                                         </span>
                                     </div>
-                                    <p class="help-block"><?php _t("To share an exact location, please use a street address here and press "geocode". Afterwards, please change this line to a recognisable place name, as this will be used in the event title.");?></p>
+                                    <p class="help-block"><?php _t("To share an exact location, please use a street address here and press \"geocode\". Afterwards, please change this line to a recognisable place name, as this will be used in the event title.");?></p>
                                 </div>
 
 
@@ -195,7 +195,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input type="text" name="longitude" id="longitude" class="form-control" placeholder="<?php _t("longitude...");?>""  value="<?php echo $formdata->longitude; ?>">
+                                            <input type="text" name="longitude" id="longitude" class="form-control" placeholder="<?php _t("longitude...");?>"  value="<?php echo $formdata->longitude; ?>">
                                         </div>
                                     </div>
                                 </div>
