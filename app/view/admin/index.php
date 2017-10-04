@@ -13,7 +13,7 @@
     <!-- Profiles -->
     <section class="row profiles">
         <div class="col-md-12">
-            <h5>Admin Console</h5>
+            <h5><?php _t("Admin Console");?></h5>
         </div>
 
         <div class="col-md-5">
@@ -22,7 +22,7 @@
 
                 <div class="btn-group" role="group">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Groups
+                        <?php _t("Groups");?>
                       <span class="fa fa-chevron-down"></span>
                     </button>
                     <ul class="dropdown-menu">
@@ -44,17 +44,17 @@
                     </ul>
                 </div>
 
-                <a class="btn btn-default" href="/group/create">Add Group</a>
+                <a class="btn btn-default" href="/group/create"><?php _t("Add Group");?></a>
             </div>
         </div>
         <div class="col-md-5">
             <div class="btn-group btn-group-justified">
-                <a class="btn btn-default" href="/user/all">Users</a>
-                <a class="btn btn-default" href="/user/create">Add User</a>
+                <a class="btn btn-default" href="/user/all"><?php _t("Users");?></a>
+                <a class="btn btn-default" href="/user/create"><?php _t("Add User");?></a>
             </div>
         </div>
         <div class="col-md-2">
-          <a class="btn btn-default btn-block" href="/device">Manage Devices</a>
+          <a class="btn btn-default btn-block" href="/device"><?php _t("Manage Devices");?></a>
         </div>
 
     </section>

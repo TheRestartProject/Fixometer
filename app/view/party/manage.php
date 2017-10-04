@@ -3,13 +3,13 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <h1>Edit Party
+            <h1><?php _t("Edit Party");?>
                 <small>
-                    <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-floppy-o"></i> save</button>
-                    <a href="/party/edit/<?php echo $party->id; ?>" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> edit details</a>
+                    <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-floppy-o"></i> <?php _t("save");?></button>
+                    <a href="/party/edit/<?php echo $party->id; ?>" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> <?php _t("edit details");?></a>
 
                     <?php $home_url = (hasRole($user, 'Administrator') ? '/admin' : '/host'); ?>
-                    <a href="<?php echo $home_url; ?>" class="btn btn-primary btn-sm"><i class="fa fa-home"></i> back to dashboard</a>
+                    <a href="<?php echo $home_url; ?>" class="btn btn-primary btn-sm"><i class="fa fa-home"></i> <?php _t("back to dashboard");?></a>
 
                 </small>
             </h1>
@@ -26,7 +26,7 @@
 
     <section class="row profiles">
         <div class="col-md-12">
-            <h5>Admin Console</h5>
+            <h5><?php _t("Admin Console");?></h5>
 
         </div>
         <div class="col-md-6">
@@ -35,7 +35,7 @@
 
                 <div class="btn-group" role="group">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Groups
+                        <?php _t("Groups");?>
                       <span class="fa fa-chevron-down"></span>
                     </button>
                     <ul class="dropdown-menu">
@@ -57,13 +57,13 @@
                     </ul>
                 </div>
 
-                <a class="btn btn-default" href="/group/create">Add Group</a>
+                <a class="btn btn-default" href="/group/create"><?php _t("Add Group");?></a>
             </div>
         </div>
         <div class="col-md-6">
             <div class="btn-group btn-group-justified">
-                <a class="btn btn-default" href="/user/all">Users</a>
-                <a class="btn btn-default" href="/user/create">Add User</a>
+                <a class="btn btn-default" href="/user/all"><?php _t("Users");?></a>
+                <a class="btn btn-default" href="/user/create"><?php _t("Add User");?></a>
             </div>
         </div>
 
@@ -96,7 +96,7 @@
                             <div class="stat double">
                                 <div class="col">
                                     <i class="fa fa-group"></i>
-                                    <span class="subtext">participants</span>
+                                    <span class="subtext"><?php _t("participants");?></span>
                                 </div>
                                 <div class="col">
                                     <input class="party-input" name="party[pax]" value="<?php echo $party->pax; ?>" id="party[pax]">
@@ -107,7 +107,7 @@
                             <div class="stat double">
                                 <div class="col">
                                     <img class="" alt="The Restart Project: Logo" src="/assets/images/logo_mini.png">
-                                    <span class="subtext">restarters</span>
+                                    <span class="subtext"><?php _t("restarters");?></span>
                                 </div>
                                 <div class="col">
                                     <input class="party-input" name="party[volunteers]" value="<?php echo $party->volunteers; ?>" id="party[volunteers]">
@@ -119,10 +119,10 @@
 
                                 <div class="footprint">
                                     <?php echo $party->co2; ?>
-                                    <span class="subtext">kg of CO<sub>2</sub></span>
+                                    <span class="subtext"><?php _t("kg of CO<sub>2</sub>");?>"</span>
                                     <br />
                                     <?php echo number_format($party->ewaste, 0); ?>
-                                    <span class="subtext">kg of waste<span>
+                                    <span class="subtext"><?php _t("kg of waste");?><span>
                                 </div>
                             </div>
 
@@ -146,13 +146,13 @@
                         </div>
                     </div>
                     <div class="col-md-12 text-right">
-                      <button class="btn btn-default" type="button" data-toggle="modal" data-target="#esw"><i class="fa fa-share"></i> Share your stats</button>
+                      <button class="btn btn-default" type="button" data-toggle="modal" data-target="#esw"><i class="fa fa-share"></i> <?php _t("Share your stats");?></button>
                     </div>
                 </div>
             </div>
             <!-- devices -->
             <div class="col-md-12">
-              <h3>Devices</h3>
+              <h3><?php _t("Devices");?></h3>
             </div>
 
 
@@ -161,12 +161,12 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Category</th>
-                            <th>Comment</th>
-                            <th style="width: 280px !important;">Image</th>
-                            <th>Brand/Model/Age</th>
-                            <th>Repair Status</th>
-                            <th>Spare Parts?</th>
+                            <th><?php _t("Category");?></th>
+                            <th><?php _t("Comment");?></th>
+                            <th style="width: 280px !important;"><?php _t("Image");?></th>
+                            <th><?php _t("Brand/Model/Age");?></th>
+                            <th><?php _t("Repair Status");?></th>
+                            <th><?php _t("Spare Parts?");?>"</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -195,14 +195,14 @@
                                             <?php } ?>
                                         </optgroup>
                                         <?php } ?>
-                                        <option value="46" <?php echo ($devices[$i-1]->category == 46 ? ' selected':''); ?>>None of the above...</option>
+                                        <option value="46" <?php echo ($devices[$i-1]->category == 46 ? ' selected':''); ?>><?php _t("None of the above...");?>"</option>
                                     </select>
                                 </div>
                                 <div class="form-group
                                     <?php echo ($devices[$i-1]->category == 46 ? 'show' : 'hide'); ?>
                                      estimate-box">
-                                    <small>Please input an estimate weight (in kg)</small>
-                                    <input type="text" name="device[<?php echo $i; ?>][estimate]" id="device[<?php echo $i; ?>][estimate]" class="form-control" placeholder="Estimate..." value="<?php echo $devices[$i-1]->estimate; ?>">
+                                    <small><?php _t("Please input an estimate weight (in kg)");?>"</small>
+                                    <input type="text" name="device[<?php echo $i; ?>][estimate]" id="device[<?php echo $i; ?>][estimate]" class="form-control" placeholder="<?php _t("Estimate...");?>" value="<?php echo $devices[$i-1]->estimate; ?>">
                                 </div>
                             </td>
                             <td>
@@ -235,15 +235,15 @@
                             </td>
                             <td>
                                 <div class="form-group">
-                                    <input type="text" name="device[<?php echo $i; ?>][brand]" id="device[<?php echo $i; ?>][brand]" class="form-control" placeholder="Brand..." value="<?php echo $devices[$i-1]->brand; ?>">
+                                    <input type="text" name="device[<?php echo $i; ?>][brand]" id="device[<?php echo $i; ?>][brand]" class="form-control" placeholder="<?php _t("Brand...");?>" value="<?php echo $devices[$i-1]->brand; ?>">
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="text" name="device[<?php echo $i; ?>][model]" id="device[<?php echo $i; ?>][model]" class="form-control" placeholder="Model..." value="<?php echo $devices[$i-1]->model; ?>">
+                                    <input type="text" name="device[<?php echo $i; ?>][model]" id="device[<?php echo $i; ?>][model]" class="form-control" placeholder="<?php _t("Model...");?>" value="<?php echo $devices[$i-1]->model; ?>">
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="text" name="device[<?php echo $i; ?>][age]" id="device[<?php echo $i; ?>][age]" class="form-control" placeholder="Age..." value="<?php echo $devices[$i-1]->age; ?>">
+                                    <input type="text" name="device[<?php echo $i; ?>][age]" id="device[<?php echo $i; ?>][age]" class="form-control" placeholder="<?php _t("Age...");?>" value="<?php echo $devices[$i-1]->age; ?>">
                                 </div>
 
                             </td>
@@ -257,7 +257,7 @@
                                               id="device[<?php echo $i; ?>][repair_status_1]"
                                               value="1"
                                               <?php echo ($devices[$i-1]->repair_status == 1 ? 'checked="checked"' : ''); ?>>
-                                              Fixed
+                                              <?php _t("Fixed");?>
                                         </label>
                                     </div>
                                     <div class="radio">
@@ -271,23 +271,23 @@
                                                    class="repairable"
                                                    data-target-details="#repairable-details-<?php echo $i; ?>">
 
-                                                   Repairable
+                                                   <?php _t("Repairable");?>
                                         </label>
                                     </div>
                                     <div id="repairable-details-<?php echo $i; ?>" class="repairable-details">
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="device[<?php echo $i; ?>][more_time_needed]" id="device[<?php echo $i; ?>][more_time_needed]" value="1" <?php echo ($devices[$i-1]->more_time_needed == 1 ? 'checked' : ''); ?> > More time needed
+                                                <input type="checkbox" name="device[<?php echo $i; ?>][more_time_needed]" id="device[<?php echo $i; ?>][more_time_needed]" value="1" <?php echo ($devices[$i-1]->more_time_needed == 1 ? 'checked' : ''); ?> > <?php _t("More time needed");?>
                                             </label>
                                         </div>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="device[<?php echo $i; ?>][professional_help]" id="device[<?php echo $i; ?>][professional_help]" value="1" <?php echo ($devices[$i-1]->professional_help == 1 ? 'checked' : ''); ?> > Professional help
+                                                <input type="checkbox" name="device[<?php echo $i; ?>][professional_help]" id="device[<?php echo $i; ?>][professional_help]" value="1" <?php echo ($devices[$i-1]->professional_help == 1 ? 'checked' : ''); ?> > <?php _t("Professional help");?>
                                             </label>
                                         </div>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="device[<?php echo $i; ?>][do_it_yourself]" id="device[<?php echo $i; ?>][do_it_yourself]" value="1" <?php echo ($devices[$i-1]->do_it_yourself == 1 ? 'checked' : ''); ?> > Do it yourself
+                                                <input type="checkbox" name="device[<?php echo $i; ?>][do_it_yourself]" id="device[<?php echo $i; ?>][do_it_yourself]" value="1" <?php echo ($devices[$i-1]->do_it_yourself == 1 ? 'checked' : ''); ?> > <?php _t("Do it yourself");?>
                                             </label>
                                         </div>
                                     </div>
@@ -298,7 +298,7 @@
                                                    name="device[<?php echo $i; ?>][repair_status]"
                                                    id="device[<?php echo $i; ?>][repair_status_3]"
                                                    value="3"
-                                                   <?php echo ($devices[$i-1]->repair_status == 3 ? 'checked="checked"' : ''); ?>> End of lifecycle
+                                                   <?php echo ($devices[$i-1]->repair_status == 3 ? 'checked="checked"' : ''); ?>> <?php _t("End of lifecycle");?>
                                         </label>
                                     </div>
                                 </div>
@@ -343,12 +343,12 @@
                                             <?php } ?>
                                         </optgroup>
                                         <?php } ?>
-                                        <option value="46">None of the above...</option>
+                                        <option value="46"><?php _t("None of the above...");?></option>
                                     </select>
                                 </div>
                                 <div class="form-group hide estimate-box">
-                                    <small>Please input an estimate weight (in kg)</small>
-                                    <input type="text" name="device[<?php echo $i; ?>][estimate]" id="device[<?php echo $i; ?>][estimate]" class="form-control" placeholder="Estimate...">
+                                    <small><?php _t("Please input an estimate weight (in kg)");?></small>
+                                    <input type="text" name="device[<?php echo $i; ?>][estimate]" id="device[<?php echo $i; ?>][estimate]" class="form-control" placeholder="<?php _t("Estimate...");?>">
                                 </div>
                             </td>
                             <td>
@@ -363,49 +363,49 @@
                             </td>
                             <td>
                                  <div class="form-group">
-                                    <input type="text" name="device[<?php echo $i; ?>][brand]" id="device[<?php echo $i; ?>][brand]" class="form-control" placeholder="Brand...">
+                                    <input type="text" name="device[<?php echo $i; ?>][brand]" id="device[<?php echo $i; ?>][brand]" class="form-control" placeholder="<?php _t("Brand...");?>">
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="text" name="device[<?php echo $i; ?>][model]" id="device[<?php echo $i; ?>][model]" class="form-control" placeholder="Model..." >
+                                    <input type="text" name="device[<?php echo $i; ?>][model]" id="device[<?php echo $i; ?>][model]" class="form-control" placeholder="<?php _t("Model...");?>" >
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="text" name="device[<?php echo $i; ?>][age]" id="device[<?php echo $i; ?>][age]" class="form-control" placeholder="Age..." >
+                                    <input type="text" name="device[<?php echo $i; ?>][age]" id="device[<?php echo $i; ?>][age]" class="form-control" placeholder="<?php _t("Age...");?>" >
                                 </div>
                             </td>
                             <td>
                                 <div class="form-group">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="device[<?php echo $i; ?>][repair_status]" id="device[<?php echo $i; ?>][repair_status_1]" value="1" checked> Fixed
+                                            <input type="radio" name="device[<?php echo $i; ?>][repair_status]" id="device[<?php echo $i; ?>][repair_status_1]" value="1" checked> <?php _t("Fixed");?>
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" class="repairable" data-target-details="#repairable-details-<?php echo $i; ?>" name="device[<?php echo $i; ?>][repair_status]" id="device[<?php echo $i; ?>][repair_status_2]" value="2"> Repairable
+                                            <input type="radio" class="repairable" data-target-details="#repairable-details-<?php echo $i; ?>" name="device[<?php echo $i; ?>][repair_status]" id="device[<?php echo $i; ?>][repair_status_2]" value="2"> <?php _t("Repairable");?>
                                         </label>
                                     </div>
                                     <div id="repairable-details-<?php echo $i; ?>" class="repairable-details">
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="device[<?php echo $i; ?>][more_time_needed]" id="device[<?php echo $i; ?>][more_time_needed]" value="1"> More time needed
+                                                <input type="checkbox" name="device[<?php echo $i; ?>][more_time_needed]" id="device[<?php echo $i; ?>][more_time_needed]" value="1"> <?php _t("More time needed");?>
                                             </label>
                                         </div>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="device[<?php echo $i; ?>][professional_help]" id="device-<?php echo $i; ?>[professional_help]" value="1"> Professional help
+                                                <input type="checkbox" name="device[<?php echo $i; ?>][professional_help]" id="device-<?php echo $i; ?>[professional_help]" value="1"> <?php _t("Professional help");?>
                                             </label>
                                         </div>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" name="device[<?php echo $i; ?>][do_it_yourself]" id="device[<?php echo $i; ?>][do_it_yourself]" value="1"> Do it yourself
+                                                <input type="checkbox" name="device[<?php echo $i; ?>][do_it_yourself]" id="device[<?php echo $i; ?>][do_it_yourself]" value="1"> <?php _t("Do it yourself");?>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="device[<?php echo $i; ?>][repair_status]" id="device[<?php echo $i; ?>][repair_status_3]" value="3"> End of lifecycle
+                                            <input type="radio" name="device[<?php echo $i; ?>][repair_status]" id="device[<?php echo $i; ?>][repair_status_3]" value="3"> <?php _t("End of lifecycle");?>
                                         </label>
                                     </div>
                                 </div>
@@ -415,7 +415,7 @@
                                     <div class="checkbox">
                                         <label>
                                             <input type="hidden" name="device[<?php echo $i; ?>][spare_parts]" id="device[<?php echo $i; ?>][spare_parts_2]" value="2">
-                                            <input type="checkbox" name="device[<?php echo $i; ?>][spare_parts]" id="device[<?php echo $i; ?>][spare_parts_1]" value="1"> Yes
+                                            <input type="checkbox" name="device[<?php echo $i; ?>][spare_parts]" id="device[<?php echo $i; ?>][spare_parts_1]" value="1"> <?php _t("Yes");?>
                                         </label>
                                     </div>
 
@@ -429,14 +429,14 @@
                     </tbody>
                     <tfoot>
                          <tr>
-                            <td colspan="3"><button class="btn btn-primary text-center" type="button" id="add-device"><i class="fa fa-plus"></i> Add Device</button></td>
+                            <td colspan="3"><button class="btn btn-primary text-center" type="button" id="add-device"><i class="fa fa-plus"></i> <?php _t("Add Device");?></button></td>
                             <td colspan="3"></td>
                         </tr>
                     </tfoot>
                 </table>
                 <div class="text-center">
                     <br /><br />
-                    <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-floppy-o"></i> Save</button>
+                    <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-floppy-o"></i> <?php _t("Save");?></button>
                     <br /><br /><br />
                 </div>
             </div>
@@ -452,24 +452,24 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Share your party's stats</h4>
+        <h4 class="modal-title"><?php _t("Share your party's stats");?></h4>
       </div>
       <div class="modal-body">
-        <p>Copy and paste this code snippet into a page on your website to share your party achievements!</p>
-        <div><strong>Headline stats</strong></div>
-        <p>This widget shows the headline stats for your party &mdash; the number of participants, number of Restarters, the CO<sub>2</sub> and waste diverted, and the numbers of fixed, repairable, and end-of-life devices
+        <p><?php _t("Copy and paste this code snippet into a page on your website to share your party achievements!");?>"</p>
+        <div><strong><?php _t("Headline stats");?></strong></div>
+        <p><?php _t("This widget shows the headline stats for your party &mdash; the number of participants, number of Restarters, the CO<sub>2</sub> and waste diverted, and the numbers of fixed, repairable, and end-of-life devices");?>
         </p>
         <code style="padding:0">
             <pre>&lt;iframe src="https://community.therestartproject.org/party/stats/<?php echo $party->id; ?>/wide" frameborder="0" width="100%" height="80"&gt;&lt;/iframe&gt;</pre>
         </code>
-        <div><strong>CO<sub>2</sub> equivalence visualisation</strong></div>
-        <p>This widget displays an infographic of an easy-to-understand equivalent of the CO<sub>2</sub> emissions that this party has diverted, such as equivalent number of cars manufactured.</p>
+        <div><strong><?php _t("CO<sub>2</sub> equivalence visualisation");?></strong></div>
+        <p><?php _t("This widget displays an infographic of an easy-to-understand equivalent of the CO<sub>2</sub> emissions that this party has diverted, such as equivalent number of cars manufactured.");?></p>
             <code style="padding:0">
               <pre>&lt;iframe src="https://community.therestartproject.org/outbound/info/party/<?php echo $party->id; ?>" frameborder="0" width="100%" height="600"&gt;&lt;/iframe&gt;</pre>
             </code>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><?php _t("Close");?></button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -482,13 +482,13 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Device S/N Image</h4>
+        <h4 class="modal-title"><?php _t("Device S/N Image");?></h4>
       </div>
       <div class="modal-body">
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><?php _t("Close");?></button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

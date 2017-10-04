@@ -46,13 +46,13 @@
                     </ul>
                 </div>
 
-                <a class="btn btn-default" href="/group/create">Add Group</a>
+                <a class="btn btn-default" href="/group/create"><?php _t("Add Group");?></a>
             </div>
         </div>
         <div class="col-md-6">
             <div class="btn-group btn-group-justified">
-                <a class="btn btn-default" href="/user/all">Users</a>
-                <a class="btn btn-default" href="/user/create">Add User</a>
+                <a class="btn btn-default" href="/user/all"><?php _t("Users");?></a>
+                <a class="btn btn-default" href="/user/create"><?php _t("Add User");?></a>
             </div>
         </div>
 
@@ -64,7 +64,7 @@
     <?php if (hasRole($user, 'Host') && count($userGroups) > 0) { ?>
       <section class="row profiles">
         <div class="col-md-12">
-          <p>You are a host of multiple groups.  You can switch to a different group by clicking the button(s) below.</p>
+          <p><?php _t("You are a host of multiple groups.  You can switch to a different group by clicking the button(s) below.");?></p>
           <?php
           foreach($userGroups as $g) {
             if($group->idgroups != $g->idgroups){
@@ -93,7 +93,7 @@
                 <div class="media-body">
 
                     <span><?php echo $group->location . (!empty($group->area) ? ', ' . $group->area : ''); ?></span><br />
-                    <a href="/group/edit/<?php echo $group->idgroups; ?>" class="small"><i class="fa fa-edit"></i> Edit Group...</a>
+                    <a href="/group/edit/<?php echo $group->idgroups; ?>" class="small"><i class="fa fa-edit"></i> <?php _t("Edit Group...");?></a>
 
                 </div>
             </div>
@@ -103,22 +103,22 @@
         <div class="col-md-9">
             <div class="row" id="group-main-stats">
                 <div class="col">
-                    <h5>participants</h5>
+                    <h5><?php _("participants");?></h5>
                     <span class="largetext"><?php echo $pax; ?></span>
                 </div>
 
                 <div class="col">
-                    <h5>hours volunteered</h5>
+                    <h5><?php _t("hours volunteered");?></h5>
                     <span class="largetext"><?php echo $hours; ?></span>
                 </div>
 
                 <div class="col">
-                    <h5>parties thrown</h5>
+                    <h5><?php _t("parties thrown");?></h5>
                     <span class="largetext"><?php echo count($allparties); ?></span>
                 </div>
 
                 <div class="col">
-                    <h5>waste prevented</h5>
+                    <h5><?php _t("waste prevented");?></h5>
 
                     <span class="largetext">
                         <?php echo $weights[0]->total_weights; ?> kg
@@ -126,7 +126,7 @@
                 </div>
 
                 <div class="col">
-                    <h5>CO<sub>2</sub> emission prevented</h5>
+                    <h5><?php _t("CO<sub>2</sub> emission prevented");?></h5>
 
                     <span class="largetext"><?php echo $weights[0]->total_footprints; ?> kg</span>
                 </div>
@@ -135,8 +135,8 @@
         </div>
 
         <div class="col-md-12 text-right">
-          <a class="btn btn-default" href="/search"><i class="fa fa-filter"></i> Filter Parties</a>
-          <button class="btn btn-default" type="button" data-toggle="modal" data-target="#esw"><i class="fa fa-share"></i> Share your stats</button>
+          <a class="btn btn-default" href="/search"><i class="fa fa-filter"></i> <?php _t("Filter Parties");?></a>
+          <button class="btn btn-default" type="button" data-toggle="modal" data-target="#esw"><i class="fa fa-share"></i> <?php _t("Share your stats");?></button>
         </div>
     </section>
 
@@ -146,9 +146,9 @@
     <!-- Tabs -->
     <!-- Nav tabs -->
     <ul class="nav nav-pills nav-justified" role="tablist">
-        <li role="presentation" class="active"><a href="#parties-tab" aria-controls="Parties" role="tab" data-toggle="pill">Parties</a></li>
-        <li role="presentation"><a href="#impact-tab" aria-controls="Impact" role="tab" data-toggle="pill">Impact</a></li>
-        <li role="presentation"><a href="#details-tab" aria-controls="Details" role="tab" data-toggle="pill">Details</a></li>
+        <li role="presentation" class="active"><a href="#parties-tab" aria-controls="Parties" role="tab" data-toggle="pill"><?php _t("Parties");?></a></li>
+        <li role="presentation"><a href="#impact-tab" aria-controls="Impact" role="tab" data-toggle="pill"><?php _t("Impact");?></a></li>
+        <li role="presentation"><a href="#details-tab" aria-controls="Details" role="tab" data-toggle="pill"><?php _t("Details");?></a></li>
     </ul>
 
 
@@ -160,7 +160,7 @@
                 <header>
                 <div class="col-md-12" id="upcomingparties">
                     <h2>
-                        <span class="title-text">Upcoming Restart Parties <a href="/party/create" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> New Party</a></span>
+                        <span class="title-text"><?php _t("Upcoming Restart Parties");?> <a href="/party/create" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> <?php _t("New Party");?></a></span>
 
                     </h2>
                 </div>
@@ -170,7 +170,7 @@
                 <?php
                 if(empty($upcomingparties)){
                 ?>
-                <div class="col-md-12"><p class="text-center">No Upcoming Parties. <a href="/party/create">Add a party.</a></p></div>
+                <div class="col-md-12"><p class="text-center"><?php _t("No Upcoming Parties.");?>" <a href="/party/create"><?php _t("Add a party.");?></a></p></div>
                 <?php
                 } else { ?>
 
@@ -213,37 +213,37 @@
 
                 <div class="col-md-12" id="party-list-header">
                     <div class="header-col header-col-2" id="header-link-box">
-                        <a href="http://www.therestartproject.org/party">view all upcoming events</a>
+                        <a href="http://www.therestartproject.org/party"><?php _t("view all upcoming events");?></a>
                     </div>
 
                     <div class="header-col">
                         <img src="/assets/icons/icon_pax.png" alt="Participants" class="header-icon">
-                        <span class="icon-label">Participants</span>
+                        <span class="icon-label"><?php _t("Participants");?></span>
                     </div>
 
                     <div class="header-col">
                         <img src="/assets/icons/icon_volunters.png" alt="Restarters" class="header-icon">
-                        <span class="icon-label">Restarters</span>
+                        <span class="icon-label"><?php _t("Restarters");?></span>
                     </div>
 
                     <div class="header-col">
                         <img src="/assets/icons/icon_emissions.png" alt="CO2 Emissions Prevented" class="header-icon">
-                        <span class="icon-label">CO<sub>2</sub> Emissions prevented</span>
+                        <span class="icon-label">CO<sub>2</sub> <?php _t("Emissions prevented");?></span>
                     </div>
 
                     <div class="header-col">
                         <img src="/assets/icons/icon_fixed.png" alt="Fixed" class="header-icon">
-                        <span class="icon-label">Fixed</span>
+                        <span class="icon-label"><?php _t("Fixed");?></span>
                     </div>
 
                     <div class="header-col">
                         <img src="/assets/icons/icon_repairable.png" alt="Repairable" class="header-icon">
-                        <span class="icon-label">Repairable</span>
+                        <span class="icon-label"><?php _t("Repairable");?></span>
                     </div>
 
                     <div class="header-col">
                         <img src="/assets/icons/icon_dead.png" alt="Dead" class="header-icon">
-                        <span class="icon-label">Dead</span>
+                        <span class="icon-label"><?php _t("Dead");?></span>
                     </div>
 
                 </div>
@@ -282,7 +282,7 @@
 
                         <div class="header-col header-col-3">
                             <button class="btn btn-primary btn-lg add-info-btn">
-                                <i class="fa fa-cloud-upload"></i> Add Information
+                                <i class="fa fa-cloud-upload"></i> <?php _t("Add Information");?>
                             </button>
                         </div>
                         <div class="header-col">
@@ -368,7 +368,7 @@
                     <h2><?php echo $group->name; ?></h2>
 
                     <p class="big">
-                        <span class="big blue"><?php echo $pax; ?> participants</span> aided by <span class="big blue"><?php echo $hours; ?> hours of volunteered time</span> worked on <span class="big blue"><?php echo ($group_device_count_status[0]->counter + $group_device_count_status[1]->counter + $group_device_count_status[2]->counter) ?> devices.</span>
+                        <span class="big blue"><?php echo $pax; ?> <?php _t("participants");?></span> <?php _t("aided by");?> <span class="big blue"><?php echo $hours; ?> <?php _t("hours of volunteered time");?></span> <?php _t("worked on");?> <span class="big blue"><?php echo ($group_device_count_status[0]->counter + $group_device_count_status[1]->counter + $group_device_count_status[2]->counter) ?> devices.</span>
                     </p>
 
                 </div>
@@ -380,25 +380,25 @@
                     <div class="impact-devices-1">
                         <img src="/assets/icons/impact_device_1.jpg" class="" width="200">
                         <span class="title"><?php echo (int)$group_device_count_status[0]->counter;?></span>
-                        <span class="legend">were fixed</span>
+                        <span class="legend"><?php _t("were fixed");?></span>
                     </div>
 
                     <div class="impact-devices-2">
                         <img src="/assets/icons/impact_device_2.jpg" class="" width="200">
                         <span class="title"><?php echo (int)$group_device_count_status[1]->counter;?></span>
-                        <span class="legend">were still repairable</span>
+                        <span class="legend"><?php _t("were still repairable");?></span>
                     </div>
 
                     <div class="impact-devices-3">
                         <img src="/assets/icons/impact_device_3.jpg" class="" width="200">
                         <span class="title"><?php echo (int)$group_device_count_status[2]->counter;?></span>
-                        <span class="legend">were dead</span>
+                        <span class="legend"><?php _t("were dead");?></span>
                     </div>
 
                 </div>
 
                 <div class="col-md-12">
-                    <h2><span class="title-text">Most Repaired Devices</span></h2>
+                    <h2><span class="title-text"><?php _t("Most Repaired Devices");?></span></h2>
 
                     <div class="row">
                         <div class="col-md-4"><div class="topper  text-center"><?php echo $top[0]->name . ' [' . $top[0]->counter . ']'; ?></div></div>
@@ -417,7 +417,7 @@
                             $sum += $y->waste;
                         }
                     ?>
-                    <span class="datalabel">Total waste prevented: </span><span class="blue">  <?php echo $weights[0]->total_weights; ?> kg </span>
+                    <span class="datalabel"><?php _t("Total waste prevented:");?> </span><span class="blue">  <?php echo $weights[0]-><?php _t("total_weights;");?>" ?> kg </span>
 
                 </div>
                 <div class="col-md-12 text-center texter">
@@ -428,7 +428,7 @@
                         }
                         //$di_co2 = number_format(round($sum), 0, '.', ',');
                     ?>
-                    <span class="datalabel">Total CO<sub>2</sub> emission prevented: </span><span class="blue"><?php echo $weights[0]->total_footprints; ?> kg</span>
+                    <span class="datalabel"><?php _t("Total CO<sub>2</sub> emission prevented:");?>" </span><span class="blue"><?php echo $weights[0]-><?php _t("total_footprints;");?> ?> kg</span>
 
                 </div>
                 <div class="col-md-12">
@@ -463,26 +463,26 @@
                     <div class="di_consume <?php echo $consume_class; ?>">
                         <img src="/assets/icons/<?php echo $consume_image; ?>" class="img-responsive">
                         <div class="text">
-                            <div class="blue"><?php echo $consume_label; ?></div>
+                            <div class="blue"><?php _t( $consume_label); ?></div>
                             <div class="consume"><?php echo $consume_eql_to; ?></div>
                         </div>
                     </div>
 
                     <div class="di_manufacture">
-                        <div class="col-md-12 text-center"><div class="lightblue"><?php echo $manufacture_label; ?></div></div>
+                        <div class="col-md-12 text-center"><div class="lightblue"><?php _t( $manufacture_label); ?></div></div>
                         <?php for($i = 1; $i<= $manufacture_eql_to; $i++){ ?>
                             <div class="col-md-3 text-center">
                                 <img src="/assets/icons/<?php echo $manufacture_img; ?>" class="img-responsive">
                             </div>
                         <?php } ?>
                         <div class="col-md-12 text-center">
-                            <div class="legend">1 <img src="/assets/icons/<?php echo $manufacture_img; ?>"> = <?php echo $manufacture_legend; ?> (approximately)</div>
+                            <div class="legend">1 <img src="/assets/icons/<?php echo $manufacture_img; ?>"> = <?php echo $manufacture_legend; ?> <?php _t("(approximately)");?></div>
 
                         </div>
                     </div>
 
                     <div class="col-md-12 text-right">
-                      <button class="btn btn-default" type="button" data-toggle="modal" data-target="#esw"><i class="fa fa-share"></i> Share your stats</button>
+                      <button class="btn btn-default" type="button" data-toggle="modal" data-target="#esw"><i class="fa fa-share"></i> <?php _t("Share your stats");?></button>
                     </div>
                 </div>
 
@@ -504,19 +504,19 @@
             <!-- CO2 stats -->
             <section class="row parties">
             <div class="col-md-12">
-                 <h2><span class="title-text">Impact</span></h2>
+                 <h2><span class="title-text"><?php _t("Impact");?></span></h2>
             </div>
 
             <div class="col-md-6">
-                <h5 class="text-center">e-Waste Prevented to date</h5>
+                <h5 class="text-center"><?php _t("e-Waste Prevented to date");?></h5>
 
                 <span class="largetext">
-                    <?php echo $weights[0]->total_weights; ?> kg
+                    <?php echo $weights[0]-><?php _t("total_weights;");?> ?> kg
                 </span>
-                <span class="subtext text-center">Total: <?php echo number_format(round($wasteTotal), 0, '.', ','); ?> kg</span>
+                <span class="subtext text-center"><?php _t("Total:");?>" <?php echo number_format(round($wasteTotal), 0, '.', ','); ?> kg</span>
                 <hr />
 
-                <h5 class="text-center">e-Waste prevented this year</h5>
+                <h5 class="text-center"><?php _t("e-Waste prevented this year");?></h5>
                 <?php
 
                     foreach($waste_year_data as $y){
@@ -534,7 +534,7 @@
             </div>
 
             <div class="col-md-6">
-                <h5 class="text-center">CO<sub>2</sub> emission prevented to date</h5>
+                <h5 class="text-center">CO<sub>2</sub> <?php _t("emission prevented to date");?></h5>
                 <?php
                     $sum = 0;
                     foreach($year_data as $y){
@@ -548,16 +548,16 @@
 
                 <hr />
 
-                <h5 class="text-center">CO<sub>2</sub> emission prevented this year</h5>
+                <h5 class="text-center">CO<sub>2</sub> <?php _t("emission prevented this year");?></h5>
                 <?php
 
                     foreach($year_data as $y){
                         if($y->year == date('Y', time())) {
                 ?>
                 <span class="largetext">
-                    <?php echo number_format(round($y->co2), 0, '.', ','); ?> kg of CO<sub>2</sub>
+                    <?php echo number_format(round($y->co2), 0, '.', ','); ?> <?php _t("kg of CO");?><sub>2</sub>
                 </span>
-                <span class="subtext text-center">Total: <?php echo number_format(round($co2ThisYear), 0, '.', ','); ?> kg of CO<sub>2</sub></span>
+                <span class="subtext text-center"><?php _t("Total:");?>" <?php echo number_format(round($co2ThisYear), 0, '.', ','); ?> <?php _t("kg of CO");?><sub>2</sub></span>
                 <?php
                         }
                     }
@@ -574,14 +574,14 @@
             <!-- Device count -->
 
             <div class="col-md-12">
-                <h2><span class="title-text">Devices Restarted</span></h2>
+                <h2><span class="title-text"><?php _t("Devices Restarted");?></span></h2>
                 <div class="row">
                     <div class="col-md-4 count">
                         <div class="col">
                             <img src="/assets/icons/fixed_circle.jpg">
                         </div>
                         <div class="col">
-                            <span class="status_title">Fixed</span>
+                            <span class="status_title"><?php _t("Fixed");?></span>
                             <span class="largetext fixed">
                                 <?php echo (int)$group_device_count_status[0]->counter; ?>
                             </span>
@@ -594,7 +594,7 @@
                             <img src="/assets/icons/repairable_circle.jpg">
                         </div>
                         <div class="col">
-                            <span class="status_title">Repairable</span>
+                            <span class="status_title"><?php _t("Repairable");?></span>
                             <span class="largetext repairable">
                                 <?php echo (int)$group_device_count_status[1]->counter; ?>
                             </span>
@@ -612,7 +612,7 @@
                             <span class="largetext dead">
                                 <?php echo (int)$group_device_count_status[2]->counter; ?>
                             </span>
-                            <span class="subtext textblue">total: <?php echo $device_count_status[2]->counter; ?></span>
+                            <span class="subtext textblue"><?php _t("total:");?>" <?php echo $device_count_status[2]->counter; ?></span>
                         </div>
                     </div>
                 </div>
@@ -625,7 +625,7 @@
             <!-- category details -->
             <section class="row">
             <div class="col-md-12">
-                <h2><span class="title-text">Category Details</span></h2>
+                <h2><span class="title-text"><?php _t("Category Details");?></span></h2>
             </div>
 
             <div class="row">
@@ -633,15 +633,15 @@
                 <div class="col-md-4 category-table">
                     <div class="col3">
                         <img src="/assets/icons/icon_fixed.png" title="fixed items" alt="Fixed Items icon">
-                        <span class="subtext">fixed</span>
+                        <span class="subtext"><?php _t("fixed");?></span>
                     </div>
                     <div class="col3 no-brd">
                         <img src="/assets/icons/icon_repairable.png" title="repairable items" alt="repairable Items icon">
-                        <span class="subtext">repairable</span>
+                        <span class="subtext"><?php _t("repairable");?></span>
                     </div>
                     <div class="col3">
                         <img src="/assets/icons/icon_dead.png" title="dead items" alt="dead Items icon">
-                        <span class="subtext">dead</span>
+                        <span class="subtext"><?php _t("dead");?></span>
                     </div>
                 </div>
 
@@ -671,23 +671,23 @@
                             <thead>
                                 <tr>
                                     <th colspan="3">
-                                        Computers and Home Office
+                                        <?php _t("Computers and Home Office");?>
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="table-label">Most seen:</td>
+                                    <td class="table-label"><?php _t("Most seen:");?>"</td>
                                     <td class="table-data"><?php echo $mostleast[1]['most_seen'][0]->name; ?></td>
                                     <td class="table-count"><?php echo $mostleast[1]['most_seen'][0]->counter; ?></td>
                                 </tr>
                                 <tr>
-                                    <td class="table-label">Most repaired:</td>
+                                    <td class="table-label"><?php _t("Most repaired:");?>"</td>
                                     <td class="table-data"><?php echo $mostleast[1]['most_repaired'][0]->name; ?></td>
                                     <td class="table-count"><?php echo $mostleast[1]['most_repaired'][0]->counter; ?></td>
                                 </tr>
                                 <tr>
-                                    <td class="table-label">Least repaired:</td>
+                                    <td class="table-label"><?php _t("Least repaired:");?>"</td>
                                     <td class="table-data"><?php echo $mostleast[1]['least_repaired'][0]->name; ?></td>
                                     <td class="table-count"><?php echo $mostleast[1]['least_repaired'][0]->counter; ?></td>
                                 </tr>
@@ -726,23 +726,23 @@
                             <thead>
                                 <tr>
                                     <th colspan="3">
-                                        Electronic Gadgets
+                                        <?php _t("Electronic Gadgets");?>
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="table-label">Most seen:</td>
+                                    <td class="table-label"><?php _t("Most seen:");?>"</td>
                                     <td class="table-data"><?php echo $mostleast[2]['most_seen'][0]->name; ?></td>
                                     <td class="table-count"><?php echo $mostleast[2]['most_seen'][0]->counter; ?></td>
                                 </tr>
                                 <tr>
-                                    <td class="table-label">Most repaired:</td>
+                                    <td class="table-label"><?php _t("Most repaired:");?></td>
                                     <td class="table-data"><?php echo $mostleast[2]['most_repaired'][0]->name; ?></td>
                                     <td class="table-count"><?php echo $mostleast[2]['most_repaired'][0]->counter; ?></td>
                                 </tr>
                                 <tr>
-                                    <td class="table-label">Least repaired:</td>
+                                    <td class="table-label"><?php _t("Least repaired:");?></td>
                                     <td class="table-data"><?php echo $mostleast[2]['least_repaired'][0]->name; ?></td>
                                     <td class="table-count"><?php echo $mostleast[2]['least_repaired'][0]->counter; ?></td>
                                 </tr>
@@ -779,23 +779,23 @@
                             <thead>
                                 <tr>
                                     <th colspan="3">
-                                        Home Entertainment
+                                        <?php _t("Home Entertainment");?>
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="table-label">Most seen:</td>
+                                    <td class="table-label"><?php _t("Most seen:");?>"</td>
                                     <td class="table-data"><?php echo $mostleast[3]['most_seen'][0]->name; ?></td>
                                     <td class="table-count"><?php echo $mostleast[3]['most_seen'][0]->counter; ?></td>
                                 </tr>
                                 <tr>
-                                    <td class="table-label">Most repaired:</td>
+                                    <td class="table-label"><?php _t("Most repaired:");?>"</td>
                                     <td class="table-data"><?php echo $mostleast[3]['most_repaired'][0]->name; ?></td>
                                     <td class="table-count"><?php echo $mostleast[3]['most_repaired'][0]->counter; ?></td>
                                 </tr>
                                 <tr>
-                                    <td class="table-label">Least repaired:</td>
+                                    <td class="table-label"><?php _t("Least repaired:");?></td>
                                     <td class="table-data"><?php echo $mostleast[3]['least_repaired'][0]->name; ?></td>
                                     <td class="table-count"><?php echo $mostleast[3]['least_repaired'][0]->counter; ?></td>
                                 </tr>
@@ -831,23 +831,23 @@
                             <thead>
                                 <tr>
                                     <th colspan="3">
-                                        Kitchen and Household Items
+                                        <?php _t("Kitchen and Household Items");?>
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="table-label">Most seen:</td>
+                                    <td class="table-label"><?php _t("Most seen:");?></td>
                                     <td class="table-data"><?php echo $mostleast[4]['most_seen'][0]->name; ?></td>
                                     <td class="table-count"><?php echo $mostleast[4]['most_seen'][0]->counter; ?></td>
                                 </tr>
                                 <tr>
-                                    <td class="table-label">Most repaired:</td>
+                                    <td class="table-label"><?php _t("Most repaired:");?></td>
                                     <td class="table-data"><?php echo $mostleast[4]['most_repaired'][0]->name; ?></td>
                                     <td class="table-count"><?php echo $mostleast[4]['most_repaired'][0]->counter; ?></td>
                                 </tr>
                                 <tr>
-                                    <td class="table-label">Least repaired:</td>
+                                    <td class="table-label"><?php _t("Least repaired:");?></td>
                                     <td class="table-data"><?php echo $mostleast[4]['least_repaired'][0]->name; ?></td>
                                     <td class="table-count"><?php echo $mostleast[4]['least_repaired'][0]->counter; ?></td>
                                 </tr>
@@ -865,7 +865,7 @@
             <!--categories-->
             <section class="row">
             <div class="col-md-12">
-                <h2><span class="title-text">Devices Restarted per Category</span></h2>
+                <h2><span class="title-text"><?php _t("Devices Restarted per Category");?></span></h2>
             </div>
             <?php
             //dbga($clusters);
@@ -974,19 +974,19 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Share your group's stats</h4>
+        <h4 class="modal-title"><?php _t("Share your group's stats");?></h4>
       </div>
       <div class="modal-body">
-        <p>Copy and paste the code snippets below into a page on your website to share your group's achievements!</p>
-        <div><strong>Headline stats</strong></div>
-        <p>This widget shows the headline stats for your group &mdash; the number of participants at your parties; the hours volunteered; the number of parties thrown; the amount of waste prevented and the amount of CO<sub>2</sub> emissions prevented.
+        <p><?php _t("Copy and paste the code snippets below into a page on your website to share your group's achievements!");?>"</p>
+        <div><strong><?php _t("Headline stats");?></strong></div>
+        <p><?php _t("This widget shows the headline stats for your group &mdash; the number of participants at your parties; the hours volunteered; the number of parties thrown; the amount of waste prevented and the amount of CO<sub>2</sub> emissions prevented.");?>
         </p>
         <code style="padding:0">
             <pre>&lt;iframe src="https://community.therestartproject.org/group/stats/<?php echo $group->idgroups; ?>" frameborder="0" width="100%" height="115"&gt;&lt;/iframe&gt;</pre>
         </code>
 
-        <div><strong>CO<sub>2</sub> equivalence visualisation</strong></div>
-        <p>This widget displays an infographic of an easy-to-understand equivalent of the CO<sub>2</sub> emissions that your group has diverted, such as equivalent number of cars manufactured.</p>
+        <div><strong>CO<sub>2</sub> <?php _t("equivalence visualisation");?></strong></div>
+        <p><?php _t("This widget displays an infographic of an easy-to-understand equivalent of the CO<sub>2</sub> emissions that your group has diverted, such as equivalent number of cars manufactured.");?>"</p>
         <code style="padding:0">
             <pre>&lt;iframe src="https://community.therestartproject.org/outbound/info/group/<?php echo $group->idgroups; ?>" frameborder="0" width="100%" height="600"&gt;&lt;/iframe&gt;</pre>
         </code>

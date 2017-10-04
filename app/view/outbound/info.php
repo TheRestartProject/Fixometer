@@ -8,7 +8,7 @@
 					<div class="consume"><?php echo $info['consume_eql_to']; ?></div>
 				</div>
 			</div>
-		
+
 			<div class="di_manufacture">
 				<div class="col-md-12 text-center"><div class="lightblue"><?php echo $info['manufacture_label']; ?></div></div>
 				<?php for($i = 1; $i<= $info['manufacture_eql_to']; $i++){ ?>
@@ -17,11 +17,11 @@
 					</div>
 				<?php } ?>
 				<div class="col-md-12 col-sm-12 col-xs-12 text-center">
-					<div class="legend">1 <img src="/assets/icons/<?php echo $info['manufacture_img']; ?>"> = <?php echo $info['manufacture_legend']; ?> (approximately)</div>
-					
+					<div class="legend">1 <img src="/assets/icons/<?php echo $info['manufacture_img']; ?>"> = <?php echo $info['manufacture_legend']; ?> <?php _t("(approximately)");?></div>
+
 				</div>
 			</div>
-			
+
 		</div>
 	</section>
 </div>
