@@ -452,18 +452,18 @@
                             if($method == 'update'){
                                 //echo "updating---";
                                 $Device->update($device, $iddevice);
-                                if($files[$i]['error'] == 0){
+                                /*if($files[$i]['error'] == 0){
                                   $File->simpleUpload($files[$i], 'device', $iddevice, 'Device S/N Image');
-                                }
+                                  }*/
                             }
 
                             else {
                                 //echo "creating---";
                                 $device['category_creation'] = $device['category'];
                                 $iddevice = $Device->create($device);
-                                if($files[$i]['error'] == 0){
+                                /*if($files[$i]['error'] == 0){
                                   $File->simpleUpload($files[$i], 'device', $iddevice, 'Device S/N Image');
-                                }
+                                  }*/
                             }
 
 

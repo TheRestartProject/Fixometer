@@ -43,10 +43,11 @@ foreach ($dir as $fileInfo)
 
     foreach($reader->getRecords() as $row)
     {
-        $translations['en'][$row['en']] = $row['en'];
-        $translations['it'][$row['en']] = $row['it'];
-        $translations['no'][$row['en']] = $row['no'];
-        $translations['de'][$row['en']] = $row['de'];
+        $key = htmlentities($row['en'], ENT_QUOTES);
+        $translations['en'][$key] = htmlentities($row['en'], ENT_QUOTES);
+        $translations['it'][$key] = htmlentities($row['it'], ENT_QUOTES);
+        $translations['no'][$key] = htmlentities($row['no'], ENT_QUOTES);
+        $translations['de'][$key] = htmlentities($row['de'], ENT_QUOTES);
     }
 }
 

@@ -86,12 +86,12 @@ $('.device-image-delete').click(function(e){
                           '<td>' +
                               '<textarea class="form-control" id="device[' + n +'][problem]" name="device[' + n +'][problem]"></textarea>' +
                           '</td>' +
-                          '<td>' +
+                          /*'<td>' +
                             '<div class="form-group">' +
                               '<input type="file" class="form-control file" name="device[' + n + '][image]" id="device[' + n + ']image" data-show-upload="false" data-show-caption="true">' +
                               '<small>upload a picture of the model/serial no. of the device</small>' +
                             '</div>' +
-                          '</td>' +
+                          '</td>' +*/
                           '<td>' +
                               '<div class="form-group">' +
                                   '<input type="text" name="device[' + n +'][brand]" id="device[' + n +'][brand]" class="form-control" placeholder="Brand...">' +
@@ -101,7 +101,7 @@ $('.device-image-delete').click(function(e){
                                   '<input type="text" name="device[' + n +'][model]" id="device[' + n +'][model]" class="form-control" placeholder="Model...">' +
                               '</div>' +
                               '<div class="form-group">' +
-                                  '<input type="text" name="device[' + n +'][age]" id="device[' + n +'][age]" class="form-control" placeholder="Age...">' +
+                                  '<input type="hidden" name="device[' + n +'][age]" id="device[' + n +'][age]" class="form-control" placeholder="Age...">' +
                               '</div>' +
                           '</td>' +
                           '<td>' +
