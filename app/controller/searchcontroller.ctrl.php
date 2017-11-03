@@ -27,6 +27,7 @@
             $this->TotalEmission = $weights[0]->total_footprints;
             $this->EmissionRatio = $this->TotalEmission / $this->TotalWeight;
 
+
             if(hasRole($this->user, 'Host')){
                 $User = new User;
                 $this->set('profile', $User->profilePage($this->user->id));
@@ -151,8 +152,10 @@
 
 
                     switch($device->repair_status){
+
                         case 1:
-                            $party->co2 += (!empty($device->estimate) && $device->category == 46 ? ($device->estimate * $this->EmissionRatio) : $device->footprint);
+
+                            $party->co2 =  $party->co2 + (!empty($device->estimate) && $device->category == 46 ? ($device->estimate * $this->EmissionRatio) : $device->footprint);
                             $party->fixed_devices++;
                             $totalWeight += (!empty($device->estimate) && $device->category==46 ? $device->estimate : $device->weight);
 
@@ -168,8 +171,11 @@
                         $party->guesstimates = true;
                     }
                 }
+
                 $party->co2 = number_format(round($party->co2 * $Device->displacement), 0, '.' , ',');
+
                 $totalCO2 += $party->co2;
+
             }
 
             /** Cluster dataviz **/
