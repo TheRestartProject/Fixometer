@@ -26,9 +26,11 @@
                 </div>
             </form>
 
+                  <?php if (featureIsEnabled(FEATURE__LANGUAGE_SWITCHER)): ?>
             <div id="language-switcher" style="text-align:center">
     <?php lng_switcher(); ?>
             </div>
+                   <?php endif ?>
 
 
         </div>

@@ -61,6 +61,7 @@
                             </div>
                             <div class="col-md-6">
 
+                                <?php if (featureIsEnabled(FEATURE__LANGUAGE_SWITCHER)): ?>
                                 <div class="form-group">
                                   <label for="language">Language preference:</label>
                                   <select id="language" name="language"  class="form-control selectpicker">
@@ -70,6 +71,7 @@
                                       <?php } ?>
                                   </select>
                                 </div>
+                                <?php endif ?>
                                 <div class="form-group">
                                     <label for="profile">Profile Picture:</label>
                                     <input type="file" class="form-control file" name="profile" data-show-upload="false" data-show-caption="true">

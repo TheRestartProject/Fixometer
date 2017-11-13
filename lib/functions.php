@@ -222,6 +222,11 @@
     }
 
 
+    function featureIsEnabled($feature) {
+        return $feature === true;
+    }
+
+
     /***** I18N *****/
 
     /** language Switcher **/

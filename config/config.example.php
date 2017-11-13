@@ -50,3 +50,6 @@ $fixometer_languages = array(
   'it' => 'Italiano',
   'no' => 'Norsk',
 );
+
+/** feature toggles **/
+define('FEATURE__LANGUAGE_SWITCHER', false);
