@@ -163,7 +163,9 @@
                             <th>#</th>
                             <th><?php _t("Category");?></th>
                             <th><?php _t("Comment");?></th>
-                            <!-- <th style="width: 280px !important;"><?php _t("Image");?></th>-->
+<?php if (featureIsEnabled(FEATURE__DEVICE_PHOTOS)): ?>
+                            <th style="width: 280px !important;"><?php _t("Image");?></th>
+<?php endif ?>
                             <th><?php _t("Brand/Model");?></th>
                             <th><?php _t("Repair Status");?></th>
                             <th><?php _t("Spare Parts?");?></th>
@@ -208,7 +210,9 @@
                             <td>
                                 <textarea class="form-control" id="device[<?php echo $i; ?>][problem]" name="device[<?php echo $i; ?>][problem]"><?php echo $devices[$i-1]->problem; ?></textarea>
                             </td>
-                            <!-- <td>
+
+                            <?php if (featureIsEnabled(FEATURE__DEVICE_PHOTOS)): ?>
+                            <td>
 
                               <?php if(!empty($devices[$i-1]->path)) { ?>
                                 <div class="device-img-wrap">
@@ -232,7 +236,9 @@
                                 >
                               </div>
 
-                            </td>-->
+                            </td>
+                            <?php endif ?>
+
                             <td>
                                 <div class="form-group">
                                     <input type="text" name="device[<?php echo $i; ?>][brand]" id="device[<?php echo $i; ?>][brand]" class="form-control" placeholder="<?php _t("Brand...");?>" value="<?php echo $devices[$i-1]->brand; ?>">
@@ -354,13 +360,15 @@
                             <td>
                                 <textarea class="form-control" id="device[<?php echo $i; ?>][problem]" name="device[<?php echo $i; ?>][problem]"></textarea>
                             </td>
-                            <!-- <td>
 
+                            <?php if (featureIsEnabled(FEATURE__DEVICE_PHOTOS)): ?>
+                            <td>
                               <div class="form-group">
                                 <input type="file" class="form-control file" name="device[<?php echo $i; ?>][image]" data-show-upload="false" data-show-caption="true">
                               </div>
+                            </td>
+                            <?php endif ?>
 
-                            </td>-->
                             <td>
                                  <div class="form-group">
                                     <input type="text" name="device[<?php echo $i; ?>][brand]" id="device[<?php echo $i; ?>][brand]" class="form-control" placeholder="<?php _t("Brand...");?>">
@@ -446,7 +454,7 @@
 </form>
 
 
-
+<!-- MODAL DIALOG FOR SHARING STATISTICS -->
 <div class="modal fade" tabindex="-1" role="dialog" id="esw">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -477,6 +485,7 @@
 
 
 
+<!-- MODAL DIALOG FOR VIEWING IMAGES -->
 <div class="modal fade" tabindex="-1" role="dialog" id="device-img-modal">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">

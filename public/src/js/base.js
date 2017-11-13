@@ -87,14 +87,16 @@ $('.device-image-delete').click(function(e){
                           '</td>' +
                           '<td>' +
                               '<textarea class="form-control" id="device[' + n +'][problem]" name="device[' + n +'][problem]"></textarea>' +
-                          '</td>' +
-                          /*'<td>' +
-                            '<div class="form-group">' +
-                              '<input type="file" class="form-control file" name="device[' + n + '][image]" id="device[' + n + ']image" data-show-upload="false" data-show-caption="true">' +
-                              '<small>upload a picture of the model/serial no. of the device</small>' +
-                            '</div>' +
-                          '</td>' +*/
-                          '<td>' +
+          '</td>';
+      if (feature__device_photos === true) {
+          tablerow += '<td>' +
+                '<div class="form-group">' +
+                '<input type="file" class="form-control file" name="device[' + n + '][image]" id="device[' + n + ']image" data-show-upload="false" data-show-caption="true">' +
+                '<small>upload a picture of the model/serial no. of the device</small>' +
+                '</div>' +
+              '</td>';
+      }
+      tablerow += '<td>' +
                               '<div class="form-group">' +
                                   '<input type="text" name="device[' + n +'][brand]" id="device[' + n +'][brand]" class="form-control" placeholder="Brand...">' +
                               '</div>' +
