@@ -87,6 +87,7 @@ $('.device-image-delete').click(function(e){
                               '<textarea class="form-control" id="device[' + n +'][problem]" name="device[' + n +'][problem]"></textarea>' +
           '</td>';
       if (feature__device_photos === true) {
+          var ageInputClass = feature__device_age ? 'text' : 'hidden';
           tablerow += '<td>' +
                 '<div class="form-group">' +
                 '<input type="file" class="form-control file" name="device[' + n + '][image]" id="device[' + n + ']image" data-show-upload="false" data-show-caption="true">' +
@@ -103,7 +104,7 @@ $('.device-image-delete').click(function(e){
                                   '<input type="text" name="device[' + n +'][model]" id="device[' + n +'][model]" class="form-control" placeholder="Model...">' +
                               '</div>' +
                               '<div class="form-group">' +
-                                  '<input type="hidden" name="device[' + n +'][age]" id="device[' + n +'][age]" class="form-control" placeholder="Age...">' +
+                                  '<input type="' + ageInputClass + '" name="device[' + n +'][age]" id="device[' + n +'][age]" class="form-control" placeholder="Age...">' +
                               '</div>' +
                           '</td>' +
                           '<td>' +

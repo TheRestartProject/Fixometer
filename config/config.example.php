@@ -53,3 +53,5 @@ $fixometer_languages = array(
 
 /** feature toggles **/
 define('FEATURE__LANGUAGE_SWITCHER', false);
+define('FEATURE__DEVICE_PHOTOS', false);
+define('FEATURE__PRODUCT_AGE', false);

@@ -166,7 +166,7 @@
 <?php if (featureIsEnabled(FEATURE__DEVICE_PHOTOS)): ?>
                             <th style="width: 280px !important;"><?php _t("Image");?></th>
 <?php endif ?>
-                            <th><?php _t("Brand/Model");?></th>
+                            <th><?php _t("Device Details");?></th>
                             <th><?php _t("Repair Status");?></th>
                             <th><?php _t("Spare Parts?");?></th>
                             <th></th>
@@ -249,7 +249,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="hidden" name="device[<?php echo $i; ?>][age]" id="device[<?php echo $i; ?>][age]" class="form-control" placeholder="<?php _t("Age...");?>" value="<?php echo $devices[$i-1]->age; ?>">
+                                    <?php $ageInputType = (featureIsEnabled(FEATURE__DEVICE_AGE)) ? "text" : "hidden"; ?>
+                                    <input type="<?php echo $ageInputType; ?>" name="device[<?php echo $i; ?>][age]" id="device[<?php echo $i; ?>][age]" class="form-control" placeholder="<?php _t("Age...");?>" value="<?php echo $devices[$i-1]->age; ?>">
                                 </div>
 
                             </td>

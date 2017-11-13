@@ -53,9 +53,8 @@
         }
         ?>
         <script type="text/javascript">
-          <?php if (featureIsEnabled(FEATURE__DEVICE_PHOTOS)): ?>
-            var feature__device_photos = true;
-          <?php endif ?>
+            var feature__device_photos = <?php var_export(featureIsEnabled(FEATURE__DEVICE_PHOTOS)); ?>;
+            var feature__device_age = <?php var_export(featureIsEnabled(FEATURE__DEVICE_AGE)); ?>;
         </script>
 
 
