@@ -138,7 +138,8 @@
                 $party->guesstimates = false;
 
                 $participants += $party->pax;
-                $hours_volunteered += (($party->volunteers > 0 ? $party->volunteers * 3 : 12 ) + 9);
+                $party->hours_volunteered = (($party->volunteers > 0 ? $party->volunteers * 3 : 12 ) + 9);
+                $hours_volunteered += $party->hours_volunteered;
 
                 foreach($party->devices as $device){
 
@@ -179,14 +180,14 @@
                   '"' .($party->fixed_devices > 0 ? $party->fixed_devices : "0"). '"',
                   '"' .($party->repairable_devices > 0 ? $party->repairable_devices : "0"). '"',
                   '"' .($party->dead_devices > 0 ? $party->dead_devices : "0"). '"',
-
+                  '"' .($party->hours_volunteered > 0 ? $party->hours_volunteered : "0"). '"',
                 );
             }
 
             /** lets format the array **/
             $headers = array(
               array(
-                "Date","Venue","Group","Participants","Volunteers","CO2 (kg)","Weight (kg)","Fixed","Repairable","Dead"
+                  "Date","Venue","Group","Participants","Volunteers","CO2 (kg)","Weight (kg)","Fixed","Repairable","Dead","Hours Volunteered"
               )
             );
             $data = array_merge($headers, $PartyArray);
