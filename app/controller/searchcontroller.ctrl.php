@@ -172,10 +172,9 @@
                     }
                 }
 
-                $party->co2 = number_format(round($party->co2 * $Device->displacement), 0, '.' , ',');
+                $party->co2 = $party->co2 * $Device->displacement;
 
                 $totalCO2 += $party->co2;
-
             }
 
             /** Cluster dataviz **/
@@ -190,7 +189,6 @@
                 $cluster['total'] = $total;
                 $clusters['all'][$i] = $cluster;
             }
-
 
             $this->set('clusters', $clusters);
 

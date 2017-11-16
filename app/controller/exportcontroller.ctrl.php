@@ -164,8 +164,8 @@
                         $party->guesstimates = true;
                     }
                 }
-                $party->co2 = number_format(round($party->co2 * $Device->displacement), 0, '.' , ',');
-                $party->weight = number_format(round($party->weight), 0, '.', ',');
+                $party->co2 = $party->co2 * $Device->displacement;
+                $party->weight = $party->weight;
 
                 $totalCO2 += $party->co2;
 
@@ -175,8 +175,8 @@
                   '"' . $party->name . '"',
                   '"' .($party->pax  > 0 ? $party->pax : "0"). '"',
                   '"' .($party->volunteers  > 0 ? $party->volunteers : "0"). '"',
-                  '"' .($party->co2 > 0 ? $party->co2 : "0"). '"',
-                  '"' .($party->weight > 0 ? $party->weight : "0"). '"',
+                  '"' .($party->co2 > 0 ? round($party->co2,2) : "0"). '"',
+                  '"' .($party->weight > 0 ? round($party->weight,2) : "0"). '"',
                   '"' .($party->fixed_devices > 0 ? $party->fixed_devices : "0"). '"',
                   '"' .($party->repairable_devices > 0 ? $party->repairable_devices : "0"). '"',
                   '"' .($party->dead_devices > 0 ? $party->dead_devices : "0"). '"',

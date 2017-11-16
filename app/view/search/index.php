@@ -275,7 +275,7 @@
 
                         <div class="header-col">
                             <span class="largetext">
-                                 <?php echo $party->co2; ?> kg
+                                 <?php echo number_format(round($party->co2), 0, '.', ''); ?> kg
                             </span>
                         </div>
 
