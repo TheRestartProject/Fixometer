@@ -298,6 +298,67 @@ ALTER TABLE `users_groups`
   ADD CONSTRAINT `fkGroupGroups` FOREIGN KEY (`group`) REFERENCES `groups` (`idgroups`) ON DELETE CASCADE ON UPDATE NO ACTION,
   ADD CONSTRAINT `fkUserUsers` FOREIGN KEY (`user`) REFERENCES `users` (`idusers`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
+INSERT INTO `category_revisions` (`idcategory_revisions`, `revision`, `created_at`, `modified_at`) VALUES
+(1, 'First Revision', NULL, '2015-05-19 08:15:03');
+
+INSERT INTO `clusters` (`idclusters`, `name`) VALUES
+(1, 'Computers and Home Office'),
+(2, 'Electronic Gadgets'),
+(3, 'Home Entertainment'),
+(4, 'Kitchen and Household Items');
+
+INSERT INTO `permissions` (`idpermissions`, `permission`) VALUES
+(1, 'Create User'),
+(2, 'Edit User'),
+(3, 'Delete User'),
+(4, 'Create Party');
+
+
+INSERT INTO `roles` (`idroles`, `role`) VALUES
+(1, 'Root'),
+(2, 'Administrator'),
+(3, 'Host'),
+(4, 'Restarter'),
+(5, 'Guest');
+
+INSERT INTO `categories` (`idcategories`, `name`, `weight`, `footprint`, `footprint_reliability`, `lifecycle`, `lifecycle_reliability`, `extendend_lifecycle`, `extendend_lifecycle_reliability`, `revision`, `cluster`) VALUES
+(11, 'Desktop computer', 9.15, 398.4, 5, NULL, NULL, NULL, NULL, 1, 1),
+(12, 'Flat screen 15-17"', 2.7, 72.4, 2, NULL, NULL, NULL, NULL, 1, 1),
+(13, 'Flat screen 19-20"', 3.72, 102.93, 5, NULL, NULL, NULL, NULL, 1, 1),
+(14, 'Flat screen 22-24"', 5, 167.8, 5, NULL, NULL, NULL, NULL, 1, 1),
+(15, 'Laptop large', 2.755, 322.79, 5, NULL, NULL, NULL, NULL, 1, 1),
+(16, 'Laptop medium', 2.26, 258.25, 5, NULL, NULL, NULL, NULL, 1, 1),
+(17, 'Laptop small', 2.14, 142.18, 4, NULL, NULL, NULL, NULL, 1, 1),
+(18, 'Paper shredder', 7, 47.7, 2, NULL, NULL, NULL, NULL, 1, 1),
+(19, 'PC Accessory', 1.185, 18.87, 4, NULL, NULL, NULL, NULL, 1, 1),
+(20, 'Printer/scanner', 7.05, 47.7, 4, NULL, NULL, NULL, NULL, 1, 1),
+(21, 'Digital Compact Camera', 0.113, 6.13, 4, NULL, NULL, NULL, NULL, 1, 2),
+(22, 'DLSR / Video Camera', 0.27, 4.05, 4, NULL, NULL, NULL, NULL, 1, 2),
+(23, 'Handheld entertainment device', 0.149, 13, 4, NULL, NULL, NULL, NULL, 1, 2),
+(24, 'Headphones', 0.26, 4.05, 3, NULL, NULL, NULL, NULL, 1, 2),
+(25, 'Mobile', 0.14, 35.82, 4, NULL, NULL, NULL, NULL, 1, 2),
+(26, 'Tablet', 0.51, 107.76, 5, NULL, NULL, NULL, NULL, 1, 2),
+(27, 'Flat screen 26-30"', 10.6, 284.25, 1, NULL, NULL, NULL, NULL, 1, 3),
+(28, 'Flat screen 32-37"', 18.7, 359.4, 3, NULL, NULL, NULL, NULL, 1, 3),
+(29, 'Hi-Fi integrated', 10.9, 109.5, 3, NULL, NULL, NULL, NULL, 1, 3),
+(30, 'Hi-Fi separates', 10.9, 109.5, 4, NULL, NULL, NULL, NULL, 1, 3),
+(31, 'Musical instrument', 10.9, 109.5, 3, NULL, NULL, NULL, NULL, 1, 3),
+(32, 'Portable radio', 2.5, 66, 2, NULL, NULL, NULL, NULL, 1, 3),
+(33, 'Projector', 2.35, 46, 4, NULL, NULL, NULL, NULL, 1, 3),
+(34, 'TV and gaming-related accessories', 1, 25, 4, NULL, NULL, NULL, NULL, 1, 3),
+(35, 'Aircon/Dehumidifier', 18.5, 109.53, 2, NULL, NULL, NULL, NULL, 1, 4),
+(36, 'Decorative or safety lights', 0.015, 13.43, 4, NULL, NULL, NULL, NULL, 1, 4),
+(37, 'Fan', 0.88, 4.52, 2, NULL, NULL, NULL, NULL, 1, 4),
+(38, 'Hair & Beauty item', 0.69, 6, 4, NULL, NULL, NULL, NULL, 1, 4),
+(39, 'Kettle', 1.4, 17.1, 4, NULL, NULL, NULL, NULL, 1, 4),
+(40, 'Lamp', 0.703, 4.62, 2, NULL, NULL, NULL, NULL, 1, 4),
+(41, 'Power tool', 2.84, 26.6, 3, NULL, NULL, NULL, NULL, 1, 4),
+(42, 'Small kitchen item', 2.7, 15.8, 4, NULL, NULL, NULL, NULL, 1, 4),
+(43, 'Toaster', 1.04, 5, 2, NULL, NULL, NULL, NULL, 1, 4),
+(44, 'Toy', 1.27, 15, 4, NULL, NULL, NULL, NULL, 1, 4),
+(45, 'Vacuum', 7.78, 41, 4, NULL, NULL, NULL, NULL, 1, 4),
+(46, 'Misc', 1, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL);
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
