@@ -3,6 +3,8 @@ $.fn.selectpicker.Constructor.DEFAULTS.tickIcon = 'fa-check';
 
 $(document).ready(function(){
 
+  $('[data-toggle="popover"]').popover(); //enable bootstrap popovers
+
   $('.selectpicker, .category-select').selectpicker({
     iconBase: 'fa',
     tickIcon: 'fa-check'
