@@ -191,18 +191,33 @@ $('.device-image-delete').click(function(e){
 
 
   $('#search-groups').change(function(){
-      var chainer = $(this).find('option[value]:selected').map(function() {
-                      return this.text;
-                    }).get();
+    var chainer = $(this).find('option[value]:selected').map(function() {
+                    return this.text;
+                  }).get();
 
-      $('#search-parties optgroup').addClass('hidden');
-      for(i = 0; i < chainer.length; i++){
-        var label = chainer[i];
-        $('#search-parties optgroup[label="' + label + '"]').removeClass('hidden');
-      }
+    $('#search-parties optgroup').addClass('hidden');
+    for(i = 0; i < chainer.length; i++){
+      var label = chainer[i];
+      $('#search-parties optgroup[label="' + label + '"]').removeClass('hidden');
+    }
 
-      $('#search-parties').selectpicker('refresh');
-    });
+    $('#search-parties').selectpicker('refresh');
+  });
+
+  if( $('#search-groups option:selected').val() > 0 ){
+  var chainer = $('#search-groups').find('option[value]:selected').map(function() {
+                    return this.text;
+                  }).get();
+
+    $('#search-parties optgroup').addClass('hidden');
+    for(i = 0; i < chainer.length; i++){
+      var label = chainer[i];
+      $('#search-parties optgroup[label="' + label + '"]').removeClass('hidden');
+    }
+
+    $('#search-parties').selectpicker('refresh');
+  }
+
 
   $('.category-select').change(function(){
     var theVal = parseInt( $(this).val() );
