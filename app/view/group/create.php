@@ -19,6 +19,11 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="name">Website: <i class="fa fa-question-circle" data-toggle="popover" title="{REPLACE TITLE}" data-content="{REPLACE CONTENT}"></i></label>
+                            <input type="text" name="website" id="website" class="form-control" <?php if(isset($error) && !empty($error) && !empty($udata)) echo 'value="'.$udata['website'].'"' ; ?>>                          
+                        </div>
+
+                        <div class="form-group">
                             <label for="free_text"><?php _t("Description:");?>  <i class="fa fa-question-circle" data-toggle="popover" title="{REPLACE TITLE}" data-content="{REPLACE CONTENT}"></i></label>
                             <textarea class="form-control rte" rows="6" name="free_text" id="free_text"></textarea>
                         </div>

@@ -52,6 +52,7 @@
 
                     // We got data! Elaborate.
                     $name       =       $_POST['name'];
+                    $website    =       $_POST['website'];
                     $area       =       $_POST['area'];
                     $freq       =       $_POST['frequency'];
                     $location   =       $_POST['location'];
@@ -80,6 +81,7 @@
                     if(empty($error)) {
                         // No errors. We can proceed and create the User.
                         $data = array(  'name'          => $name,
+                                        'website'       => $website,
                                         'area'          => $area,
                                         'frequency'     => $freq,
                                         'location'      => $location,
@@ -103,6 +105,7 @@
                             $custom_fields = array(
                                             array('key' => 'group_city',            'value' => $area),
                                             array('key' => 'group_host',            'value' => $Host->hostname),
+                                            array('key' => 'group_website',         'value' => $website),
                                             array('key' => 'group_hostavatarurl',   'value' => UPLOADS_URL . 'mid_' .$Host->path),
                                             array('key' => 'group_hash',            'value' => $idGroup),
                                             array('key' => 'group_avatar_url',      'value' => UPLOADS_URL . 'mid_' . $group_avatar ),
@@ -252,6 +255,7 @@
                         $custom_fields = array(
                                             array('key' => 'group_city',            'value' => $data['area']),
                                             array('key' => 'group_host',            'value' => $Host->hostname),
+                                            array('key' => 'group_website',         'value' => $data['website']),
                                             array('key' => 'group_hostavatarurl',   'value' => UPLOADS_URL . 'mid_' . $Host->path),
                                             array('key' => 'group_hash',            'value' => $id),
                                             array('key' => 'group_avatar_url',      'value' => $group_avatar ),
