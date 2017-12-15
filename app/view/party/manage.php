@@ -161,14 +161,14 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th><?php _t("Category");?></th>
-                            <th><?php _t("Comment");?></th>
+                            <th><?php _t("Category");?> <i class="fa fa-question-circle" data-toggle="popover" title="{REPLACE TITLE}" data-content="{REPLACE CONTENT}"></i></th>
+                            <th><?php _t("Comment");?> <i class="fa fa-question-circle" data-toggle="popover" title="{REPLACE TITLE}" data-content="{REPLACE CONTENT}"></i></th>
 <?php if (featureIsEnabled(FEATURE__DEVICE_PHOTOS)): ?>
-                            <th style="width: 280px !important;"><?php _t("Image");?></th>
+                            <th style="width: 280px !important;"><?php _t("Image");?> <i class="fa fa-question-circle" data-toggle="popover" title="{REPLACE TITLE}" data-content="{REPLACE CONTENT}"></i></th>
 <?php endif ?>
-                            <th><?php _t("Device Details");?></th>
-                            <th><?php _t("Repair Status");?></th>
-                            <th><?php _t("Spare Parts?");?></th>
+                            <th><?php _t("Device Details");?> <i class="fa fa-question-circle" data-toggle="popover" title="{REPLACE TITLE}" data-content="{REPLACE CONTENT}"></i></th>
+                            <th><?php _t("Repair Status");?> <i class="fa fa-question-circle" data-toggle="popover" title="{REPLACE TITLE}" data-content="{REPLACE CONTENT}"></i></th>
+                            <th><?php _t("Spare Parts?");?> <i class="fa fa-question-circle" data-toggle="popover" title="{REPLACE TITLE}" data-content="{REPLACE CONTENT}"></i></th>
                             <th></th>
                         </tr>
                     </thead>
