@@ -72,7 +72,7 @@
                             <div class="col-md-6">
                                 <input type="hidden" name="id" value="<?php echo $formdata->idevents; ?>" >
                                 <div class="form-group <?php if(isset($error) && isset($error['event_date']) && !empty($error['event_date'])) { echo "has-error"; } ?>">
-                                    <label for="event_date"><?php _t("Date:");?></label>
+                                    <label for="event_date"><?php _t("Date:");?>  <i class="fa fa-question-circle" data-toggle="popover" title="{REPLACE TITLE}" data-content="{REPLACE CONTENT}"></i></label>
                                     <div class="input-group date">
                                         <input type="text" name="event_date" id="event_date" class="form-control date" value="<?php echo strftime('%d/%m/%Y', strtotime($formdata->event_date)); ?>">
 
@@ -87,7 +87,7 @@
 
                                     <div class="col-md-6">
                                         <div class="form-group <?php if(isset($error) && isset($error['start']) && !empty($error['start'])) { echo "has-error"; } ?>">
-                                            <label for="start"><?php _t("Start:");?></label>
+                                            <label for="start"><?php _t("Start:");?>  <i class="fa fa-question-circle" data-toggle="popover" title="{REPLACE TITLE}" data-content="{REPLACE CONTENT}"></i></label>
                                             <div class="input-group time">
                                                 <input type="text" name="start" id="start" class="form-control time" value="<?php echo substr($formdata->start, 0, 5); ?>">
                                                 <span class="input-group-addon">
@@ -100,7 +100,7 @@
 
                                     <div class="col-md-6">
                                         <div class="form-group <?php if(isset($error) && isset($error['end']) && !empty($error['end'])) { echo "has-error"; } ?>">
-                                            <label for="end"><?php _t("End:");?></label>
+                                            <label for="end"><?php _t("End:");?>  <i class="fa fa-question-circle" data-toggle="popover" title="{REPLACE TITLE}" data-content="{REPLACE CONTENT}"></i></label>
                                             <div class="input-group time">
                                                 <input type="text" name="end" id="end" class="form-control time" value="<?php echo substr($formdata->end, 0, 5); ?>">
                                                 <span class="input-group-addon">
@@ -117,7 +117,7 @@
 
 
                                 <div class="form-group">
-                                    <label for="free_text"><?php _t("Description:");?></label>
+                                    <label for="free_text"><?php _t("Description:");?>  <i class="fa fa-question-circle" data-toggle="popover" title="{REPLACE TITLE}" data-content="{REPLACE CONTENT}"></i></label>
                                     <textarea class="form-control rte" rows="6" name="free_text" id="free_text"><?php echo $formdata->free_text; ?></textarea>
                                 </div>
 
@@ -125,13 +125,13 @@
 
                             <div class="col-md-6">
                                 <div class="form-group <?php if(isset($error) && isset($error['pax']) && !empty($error['pax'])) { echo "has-error"; } ?>">
-                                    <label for="pax"><?php _t("Participants");?> (#):</label>
+                                    <label for="pax"><?php _t("Participants");?> (#):  <i class="fa fa-question-circle" data-toggle="popover" title="{REPLACE TITLE}" data-content="{REPLACE CONTENT}"></i></label>
                                     <input type="text" name="pax" id="pax" class="form-control" value="<?php echo $formdata->pax; ?>">
                                     <?php if(isset($error) && isset($error['pax']) && !empty($error['pax'])) { echo '<span class="help-block text-danger">' . $error['pax'] . '</span>'; } ?>
                                 </div>
 
                                 <div class="form-group <?php if(isset($error) && isset($error['volunteers']) && !empty($error['volunteers'])) { echo "has-error"; } ?>">
-                                    <label for="volunteers">Volunteers (#):</label>
+                                    <label for="volunteers">Volunteers (#):  <i class="fa fa-question-circle" data-toggle="popover" title="{REPLACE TITLE}" data-content="{REPLACE CONTENT}"></i></label>
                                     <input type="text" name="volunteers" id="volunteers" class="form-control" value="<?php echo $formdata->volunteers; ?>">
                                     <?php if(isset($error) && isset($error['volunteers']) && !empty($error['volunteers'])) { echo '<span class="help-block text-danger">' . $error['volunteers'] . '</span>'; } ?>
                                 </div>
@@ -148,7 +148,7 @@
                                 ?>
 
                                 <div class="form-group <?php if(isset($error) && isset($error['group']) && !empty($error['group'])) { echo "has-error"; } ?>">
-                                    <label for="group"><?php _t("Group:");?></label>
+                                    <label for="group"><?php _t("Group:");?>  <i class="fa fa-question-circle" data-toggle="popover" title="{REPLACE TITLE}" data-content="{REPLACE CONTENT}"></i></label>
                                     <select id="group" name="group"  class="form-control selectpicker users_group">
                                         <option></option>
                                         <?php foreach($group_list as $group){ ?>
@@ -166,13 +166,13 @@
                                 ?>
 
                                 <div class="form-group">
-                                    <label for="venue"><?php _t("Venue:");?></label>
+                                    <label for="venue"><?php _t("Venue:");?>  <i class="fa fa-question-circle" data-toggle="popover" title="{REPLACE TITLE}" data-content="{REPLACE CONTENT}"></i></label>
                                     <input type="text" name="venue" id="venue" class="form-control" value="<?php echo $formdata->venue; ?>">
                                 </div>
 
 
                                 <div class="form-group">
-                                    <label for="location"><?php _t("Location:");?></label>
+                                    <label for="location"><?php _t("Location:");?>  <i class="fa fa-question-circle" data-toggle="popover" title="{REPLACE TITLE}" data-content="{REPLACE CONTENT}"></i></label>
                                     <div class="input-group">
                                         <input type="text" name="location" id="location" class="form-control" value="<?php echo $formdata->location; ?>">
                                         <span class="input-group-btn">
@@ -220,7 +220,7 @@
 
                                     </div>
                                     <small class="clearfix">Images are displayed in this ratio for ease of management</small>
-                                    <label for="file" class="sr-only">Image:</label>
+                                    <label for="file" class="sr-only">Image:  <i class="fa fa-question-circle" data-toggle="popover" title="{REPLACE TITLE}" data-content="{REPLACE CONTENT}"></i></label>
                                     <input type="file" name="file[]" id="file" class="form-control fileinput" multiple>
                                 </div>
 

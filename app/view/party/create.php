@@ -76,7 +76,7 @@
                             <div class="col-md-6">
 
                                 <div class="form-group <?php if(isset($error) && isset($error['event_date']) && !empty($error['event_date'])) { echo "has-error"; } ?>">
-                                    <label for="event_date">Date:</label>
+                                    <label for="event_date">Date:  <i class="fa fa-question-circle" data-toggle="popover" title="{REPLACE TITLE}" data-content="{REPLACE CONTENT}"></i></label>
                                     <div class="input-group date">
                                         <input type="text" name="event_date" id="event_date" class="form-control date">
                                         <span class="input-group-addon">
@@ -91,7 +91,7 @@
 
 
                                 <div class="form-group">
-                                    <label for="free_text"><?php _t("Description:");?></label>
+                                    <label for="free_text"><?php _t("Description:");?>  <i class="fa fa-question-circle" data-toggle="popover" title="{REPLACE TITLE}" data-content="{REPLACE CONTENT}"></i></label>
                                     <textarea class="form-control rte" rows="6" name="free_text" id="free_text"></textarea>
                                 </div>
 
@@ -102,7 +102,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group <?php if(isset($error) && isset($error['start']) && !empty($error['start'])) { echo "has-error"; } ?>">
-                                            <label for="start">Start:</label>
+                                            <label for="start">Start:  <i class="fa fa-question-circle" data-toggle="popover" title="{REPLACE TITLE}" data-content="{REPLACE CONTENT}"></i></label>
                                             <div class="input-group time">
                                                 <input type="text" name="start" id="start-pc" class="form-control time">
                                                 <span class="input-group-addon">
@@ -115,7 +115,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group <?php if(isset($error) && isset($error['end']) && !empty($error['end'])) { echo "has-error"; } ?>">
-                                            <label for="end">End:</label>
+                                            <label for="end">End:  <i class="fa fa-question-circle" data-toggle="popover" title="{REPLACE TITLE}" data-content="{REPLACE CONTENT}"></i></label>
                                             <div class="input-group time">
                                                 <input type="text" name="end" id="end-pc" class="form-control time">
                                                 <span class="input-group-addon">
@@ -144,7 +144,7 @@
                                 ?>
 
                                 <div class="form-group <?php if(isset($error) && isset($error['group']) && !empty($error['group'])) { echo "has-error"; } ?>">
-                                    <label for="group">Group:</label>
+                                    <label for="group">Group:  <i class="fa fa-question-circle" data-toggle="popover" title="{REPLACE TITLE}" data-content="{REPLACE CONTENT}"></i></label>
                                     <select id="group" name="group"  class="form-control selectpicker users_group">
                                         <option></option>
                                         <?php foreach($group_list as $group){ ?>
@@ -161,11 +161,11 @@
                                 }
                                 ?>
                                 <div class="form-group">
-                                    <label for="venue"><?php _t("Venue Name:");?></label>
+                                    <label for="venue"><?php _t("Venue Name:");?>  <i class="fa fa-question-circle" data-toggle="popover" title="{REPLACE TITLE}" data-content="{REPLACE CONTENT}"></i></label>
                                     <input type="text" name="venue" id="venue" class="form-control" <?php if(isset($error) && !empty($error) && !empty($udata)) echo 'value="'.$udata['venue'].'"' ; ?>>
                                 </div>
                                 <div class="form-group">
-                                    <label for="location"><?php _t("Address:");?></label>
+                                    <label for="location"><?php _t("Address:");?>  <i class="fa fa-question-circle" data-toggle="popover" title="{REPLACE TITLE}" data-content="{REPLACE CONTENT}"></i></label>
                                     <div class="input-group">
                                         <input type="text" name="location" id="location" class="form-control" <?php if(isset($error) && !empty($error) && !empty($udata)) echo 'value="'.$udata['location'].'"' ; ?>>
                                         <span class="input-group-btn">
@@ -199,7 +199,7 @@
 
 
                                 <div class="from-group">
-                                    <label for="file" class="sr-only"><?php _t("Image:");?></label>
+                                    <label for="file" class="sr-only"><?php _t("Image:");?>  <i class="fa fa-question-circle" data-toggle="popover" title="{REPLACE TITLE}" data-content="{REPLACE CONTENT}"></i></label>
                                     <input type="file" name="file" id="file" class="form-control fileinput">
                                 </div>
 
