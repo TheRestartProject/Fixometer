@@ -256,9 +256,17 @@
             */
         }
 
-        public function edit($id){
+        public function userHasEditPartyPermission($user, $partyId) {
+            return
+                hasRole($user, 'Administrator') ||
+                (hasRole($user, 'Host') && in_array($partyId, $this->hostParties));
+        }
 
-            if( hasRole($this->user, 'Administrator') || (hasRole($this->user, 'Host') && in_array($id, $this->hostParties))){
+        public function edit($id) {
+
+            if (!$this->userHasEditPartyPermission($this->user, $id)) {
+                header('Location: /user/forbidden');
+            }
 
                 $Groups = new Group;
                 $File = new File;
@@ -384,11 +392,6 @@
                 $this->set('formdata', $Party);
 
                 $this->set('grouplist', $Groups->findList());
-
-            }
-            else {
-                header('Location: /user/forbidden');
-            }
         }
 
 
