@@ -76,7 +76,8 @@
                             <div class="col-md-6">
 
                                 <div class="form-group <?php if(isset($error) && isset($error['event_date']) && !empty($error['event_date'])) { echo "has-error"; } ?>">
-                                    <label for="event_date">Date:  <i class="fa fa-question-circle" data-toggle="popover" title="{REPLACE TITLE}" data-content="{REPLACE CONTENT}"></i></label>
+                                    <label for="event_date">Date:  </label>
+                                    <i class="fa fa-question-circle" data-toggle="popover" title="Date party takes place" data-content="This is the date that the party will happen on.  You can select the date from the calendar."></i>
                                     <div class="input-group date">
                                         <input type="text" name="event_date" id="event_date" class="form-control date">
                                         <span class="input-group-addon">
@@ -91,7 +92,8 @@
 
 
                                 <div class="form-group">
-                                    <label for="free_text"><?php _t("Description:");?>  <i class="fa fa-question-circle" data-toggle="popover" title="{REPLACE TITLE}" data-content="{REPLACE CONTENT}"></i></label>
+                                    <label for="free_text"><?php _t("Description:");?></label>
+                                    <i class="fa fa-question-circle" data-toggle="popover" title="Promotional description of your event" data-content="This is a description of the party that is displayed to members of the public to in advance of the party.  This information is published on The Restart Project website, and helps to promote your event."></i>
                                     <textarea class="form-control rte" rows="6" name="free_text" id="free_text"></textarea>
                                 </div>
 
@@ -102,7 +104,8 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group <?php if(isset($error) && isset($error['start']) && !empty($error['start'])) { echo "has-error"; } ?>">
-                                            <label for="start">Start:  <i class="fa fa-question-circle" data-toggle="popover" title="{REPLACE TITLE}" data-content="{REPLACE CONTENT}"></i></label>
+                                            <label for="start">Start: </label>
+                                            <i class="fa fa-question-circle" data-toggle="popover" title="Start time of the party" data-content="This is the time that the party starts at, i.e. the time that members of the public should arrive at.  You can select the time using the timepicker."></i>
                                             <div class="input-group time">
                                                 <input type="text" name="start" id="start-pc" class="form-control time">
                                                 <span class="input-group-addon">
@@ -115,7 +118,8 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group <?php if(isset($error) && isset($error['end']) && !empty($error['end'])) { echo "has-error"; } ?>">
-                                            <label for="end">End:  <i class="fa fa-question-circle" data-toggle="popover" title="{REPLACE TITLE}" data-content="{REPLACE CONTENT}"></i></label>
+                                            <label for="end">End: </label>
+                                            <i class="fa fa-question-circle" data-toggle="popover" title="End time of the party" data-content="This is the time the party finishes at, i.e. when fixing stops and members of the public need to leave.  You can select the time using the timepicker."></i>
                                             <div class="input-group time">
                                                 <input type="text" name="end" id="end-pc" class="form-control time">
                                                 <span class="input-group-addon">
@@ -144,7 +148,8 @@
                                 ?>
 
                                 <div class="form-group <?php if(isset($error) && isset($error['group']) && !empty($error['group'])) { echo "has-error"; } ?>">
-                                    <label for="group">Group:  <i class="fa fa-question-circle" data-toggle="popover" title="{REPLACE TITLE}" data-content="{REPLACE CONTENT}"></i></label>
+                                    <label for="group">Group: </label>
+                                    <i class="fa fa-question-circle" data-toggle="popover" title="Group hosting the party" data-content="This is the Restart group that is hosting the party."></i>
                                     <select id="group" name="group"  class="form-control selectpicker users_group">
                                         <option></option>
                                         <?php foreach($group_list as $group){ ?>
@@ -161,11 +166,13 @@
                                 }
                                 ?>
                                 <div class="form-group">
-                                    <label for="venue"><?php _t("Venue Name:");?>  <i class="fa fa-question-circle" data-toggle="popover" title="{REPLACE TITLE}" data-content="{REPLACE CONTENT}"></i></label>
+                                    <label for="venue"><?php _t("Party Name:");?> </label>
+                                    <i class="fa fa-question-circle" data-toggle="popover" title="Short name of the party" data-content="This is a short name for the party that is used on The Restart Project website as part of the promotion of your party. The recommended style for this is to use the name of the city/town/village/hamlet for the party name (e.g. Andover) or, if in a larger city, to use a specific neighbourhood or venue (e.g. Tooting instead of London), without using the term 'Restart Party' or other variant."></i>
                                     <input type="text" name="venue" id="venue" class="form-control" <?php if(isset($error) && !empty($error) && !empty($udata)) echo 'value="'.$udata['venue'].'"' ; ?>>
                                 </div>
                                 <div class="form-group">
-                                    <label for="location"><?php _t("Address:");?>  <i class="fa fa-question-circle" data-toggle="popover" title="{REPLACE TITLE}" data-content="{REPLACE CONTENT}"></i></label>
+                                    <label for="location"><?php _t("Location:");?> </label>
+                                    <i class="fa fa-question-circle" data-toggle="popover" title="Location of the party" data-content="This is the location of your party, and is used to display where your party is on a map to members of the public.  Please fill in the address of the party here, including e.g. venue name, street address, and postcode, and then press the 'geocode' button.  This will then show you on the map below the location that will be displayed to members of the public on The Restart Project website.  If it isn't correct, please try entering a more specific address and pressing 'geocode' again."></i>
                                     <div class="input-group">
                                         <input type="text" name="location" id="location" class="form-control" <?php if(isset($error) && !empty($error) && !empty($udata)) echo 'value="'.$udata['location'].'"' ; ?>>
                                         <span class="input-group-btn">
@@ -174,9 +181,9 @@
 
 
                                     </div>
-                                    <p class="help-block">
+                                    <!-- <p class="help-block">
                                         <?php _t("To pinpoint the party venue on the map, please enter the venue name and the address in the fields above, then press \"geocode\".");?>
-                                    </p>
+                                    </p>-->
                                 </div>
 
 
