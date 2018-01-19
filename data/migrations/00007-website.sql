@@ -1,2 +1,2 @@
-ALTER TABLE `fixometer`.`groups`
+ALTER TABLE `groups`
 ADD COLUMN `website` TEXT NULL DEFAULT NULL AFTER `free_text`;
