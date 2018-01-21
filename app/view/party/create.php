@@ -215,8 +215,9 @@
 
 
                                 <div class="from-group">
-                                    <label for="file" class="sr-only"><?php _t("Image:");?>  <i class="fa fa-question-circle" data-toggle="popover" title="{REPLACE TITLE}" data-content="{REPLACE CONTENT}"></i></label>
+                                    <label for="file" class="sr-only"><?php _t("Image:");?></label>
                                     <input type="file" name="file" id="file" class="form-control fileinput">
+                                    <i class="fa fa-question-circle" data-toggle="popover" title="Uploaded images" data-content="Images uploaded here are displayed on your party's public page on The Restart Project website.  NOTE: not currently implemented, coming soon!  You can upload images, but they are not currently displayed on the public page."></i>
                                 </div>
 
                             </div>
