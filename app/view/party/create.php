@@ -69,7 +69,16 @@
 
                     <?php if(isset($response)) { printResponse($response); } ?>
                     <div class="alert alert-info">
-                        <?php echo WDG_PUBLIC_INFO; ?>
+                        <p>
+                        This page allows you to create a party for your group.  You can find more detailed information about how to use this page <a href="https://therestartproject.org/welcome-to-our-community-space/#Create_an_upcoming_Restart_Party_to_announce_it" target="_blank">here</a>.
+
+                        </p>
+                        <p>
+                            For guidance on completing each piece of information, you can click on the <i class="fa fa-question-circle"></i> icon next to the name of the field.  
+                        </p>
+                        <p>
+                        <?php echo WDG_PUBLIC_INFO; ?>.
+                        </p>
                     </div>
                     <form action="/party/create" method="post" enctype="multipart/form-data">
                         <div class="row">
