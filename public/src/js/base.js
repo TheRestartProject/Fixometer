@@ -86,7 +86,7 @@ $('.device-image-delete').click(function(e){
                                   '<small>Please input an estimate weight (in kg)</small>' +
                                   '<div class="input-group">' +
                                   '<input type="text" name="device[' + n +'][estimate]" id="device[' + n +'][estimate]" class="form-control" placeholder="Estimate...">' +
-                                  '<span class="input-group-addon>kg</span>' +
+                                  '<span class="input-group-addon">kg</span>' +
                                   '</div>' +
                               '</div>' +
                           '</td>' +
