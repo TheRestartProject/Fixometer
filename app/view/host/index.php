@@ -85,7 +85,7 @@
 
                 <div class="media-left">
                     <?php if(empty($group->path)){ ?>
-                    <img src="http://www.placehold.it/60?text=group+avatar" alt="<?php echo $group->name; ?> Image" class="profile-pic" />
+                    <img src="https://www.placehold.it/60?text=group+avatar" alt="<?php echo $group->name; ?> Image" class="profile-pic" />
                     <?php } else { ?>
                     <img src="/uploads/thumbnail_<?php echo $group->path; ?>" width="60" height="60" alt="<?php echo $group->name; ?> Image" class="profile-pic" />
                     <?php } ?>
