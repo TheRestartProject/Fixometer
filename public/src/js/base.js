@@ -306,8 +306,8 @@ $('.device-image-delete').click(function(e){
           newline: '<br />', // Summernote's default is to use '<p><br></p>'
           notStyle: 'position:absolute;top:0;left:0;right:0', // Position of Notification
           icon: '<i class="note-icon"><span class="fa fa-paintbrush"></span></i>',
-          keepHtml: false, // Remove all Html formats
-          keepOnlyTags: ['<br>'], // If keepHtml is true, remove all tags except these
+          keepHtml: true, // Allow the tags in keepOnlyTags
+          keepOnlyTags: ['<p>', '<br>', '<ul>', '<li>', '<b>', '<strong>','<i>', '<a>', '<h1>', '<h2>', '<h3>', '<h4>', '<h5>', '<h6>'],
           keepClasses: false, // Remove Classes
           badTags: ['style', 'script', 'applet', 'embed', 'noframes', 'noscript', 'html'], // Remove full tags with contents
           badAttributes: ['style', 'start'] // Remove attributes from remaining tags
