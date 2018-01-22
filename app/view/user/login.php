@@ -45,23 +45,23 @@
                     <div class="detail">
                         <h4><?php _t('Devices Restarted')?></h4>
                         <span class="big-number">
-                            <span class="big-number"><?php echo number_format($devices[0]->counter, 0, '-', ','); ?></span>
+                            <span id="devices-restarted-value" class="big-number"><?php echo number_format($devices[0]->counter, 0, '-', ','); ?></span>
                         </span>
                     </div>
 
                     <div class="detail">
                         <h4><?php _t("CO<sub>2</sub> Emission prevented") ?></h4>
-                        <span class="big-number"><?php echo number_format($weights[0]->total_footprints, 0, '-', ','); ?> kg</span>
+                        <span id="co2-prevented-value" class="big-number"><?php echo number_format($weights[0]->total_footprints, 0, '-', ','); ?> kg</span>
                     </div>
                     <div class="detail">
                         <h4><?php _t('Waste prevented')?></h4>
-                        <span class="big-number"><?php echo number_format($weights[0]->total_weights, 0, '-', ','); ?> kg</span>
+                        <span id="waste-prevented-value" class="big-number"><?php echo number_format($weights[0]->total_weights, 0, '-', ','); ?> kg</span>
                     </div>
 
 
                     <div class="detail">
                         <h4><?php _t('Parties thrown') ?></h4>
-                        <span class="big-number"><?php echo count($allparties) - count($nextparties); ?></span>
+                        <span id="parties-thrown-value" class="big-number"><?php echo count($allparties) - count($nextparties); ?></span>
                     </div>
 
                 </div>
