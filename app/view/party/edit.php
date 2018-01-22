@@ -182,7 +182,7 @@
 
                                 <div class="form-group">
                                     <label for="venue"><?php _t("Party Name:");?></label>
-                                    <i class="fa fa-question-circle" data-toggle="popover" title="Short name of the party" data-content="This is a short name for the party that is used on The Restart Project website as part of the promotion of your party. The recommended style for this is to use the name of the city/town/village/hamlet for the party name (e.g. Andover) or, if in a larger city, to use a specific neighbourhood or venue (e.g. Tooting instead of London), without using the term 'Restart Party' or other variant."></i>
+                                    <i class="fa fa-question-circle" data-toggle="popover" title="Short name of the party" data-content="This is a short name for the party that is used on The Restart Project website as part of the promotion of your party. The recommended style for this is to use the name of the city/town/village/hamlet for the party name (e.g. Andover) or, if in a larger city, to use a specific neighbourhood (e.g. Tooting instead of London), or even a specific venue name (e.g. The Goodlife Centre). Try to avoid using the term 'Restart Party' or other variant."></i>
                                     <input type="text" name="venue" id="venue" class="form-control" value="<?php echo $formdata->venue; ?>">
                                 </div>
 
