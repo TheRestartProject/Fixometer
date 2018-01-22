@@ -170,7 +170,7 @@
                 <?php
                 if(empty($upcomingparties)){
                 ?>
-                <div class="col-md-12"><p class="text-center"><?php _t("No Upcoming Parties.");?>" <a href="/party/create"><?php _t("Add a party.");?></a></p></div>
+                <div class="col-md-12"><p class="text-center"><?php _t("No Upcoming Parties.");?> <a href="/party/create"><?php _t("Add a party.");?></a></p></div>
                 <?php
                 } else { ?>
 

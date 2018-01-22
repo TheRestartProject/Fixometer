@@ -215,13 +215,13 @@
                                             <?php } ?>
                                         </optgroup>
                                         <?php } ?>
-                                        <option value="46" <?php echo ($devices[$i-1]->category == 46 ? ' selected':''); ?>><?php _t("None of the above...");?>"</option>
+                                        <option value="46" <?php echo ($devices[$i-1]->category == 46 ? ' selected':''); ?>><?php _t("None of the above...");?></option>
                                     </select>
                                 </div>
                                 <div class="form-group
                                     <?php echo ($devices[$i-1]->category == 46 ? 'show' : 'hide'); ?>
                                      estimate-box">
-                                    <small><?php _t("Please input an estimate weight (in kg)");?>"</small>
+                                    <small><?php _t("Please input an estimate weight (in kg)");?></small>
                                     <input type="text" name="device[<?php echo $i; ?>][estimate]" id="device[<?php echo $i; ?>][estimate]" class="form-control" placeholder="<?php _t("Estimate...");?>" value="<?php echo $devices[$i-1]->estimate; ?>">
                                 </div>
                             </td>

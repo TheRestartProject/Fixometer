@@ -76,6 +76,8 @@
                         <p>
                             For guidance on completing each piece of information, you can click on the <i class="fa fa-question-circle"></i> icon next to the name of the field.  
                         </p>
+                    </div>
+                    <div class="alert alert-warning">
                         <p>
                         <?php echo WDG_PUBLIC_INFO; ?>.
                         </p>
