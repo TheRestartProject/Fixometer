@@ -977,7 +977,7 @@
         <h4 class="modal-title"><?php _t("Share your group's stats");?></h4>
       </div>
       <div class="modal-body">
-        <p><?php _t("Copy and paste the code snippets below into a page on your website to share your group's achievements!");?>"</p>
+        <p><?php _t("Copy and paste the code snippets below into a page on your website to share your group's achievements!");?></p>
         <div><strong><?php _t("Headline stats");?></strong></div>
         <p><?php _t("This widget shows the headline stats for your group &mdash; the number of participants at your parties; the hours volunteered; the number of parties thrown; the amount of waste prevented and the amount of CO<sub>2</sub> emissions prevented.");?>
         </p>
@@ -986,7 +986,7 @@
         </code>
 
         <div><strong>CO<sub>2</sub> <?php _t("equivalence visualisation");?></strong></div>
-        <p><?php _t("This widget displays an infographic of an easy-to-understand equivalent of the CO<sub>2</sub> emissions that your group has diverted, such as equivalent number of cars manufactured.");?>"</p>
+        <p><?php _t("This widget displays an infographic of an easy-to-understand equivalent of the CO<sub>2</sub> emissions that your group has diverted, such as equivalent number of cars manufactured.");?></p>
         <code style="padding:0">
             <pre>&lt;iframe src="https://community.therestartproject.org/outbound/info/group/<?php echo $group->idgroups; ?>" frameborder="0" width="100%" height="600"&gt;&lt;/iframe&gt;</pre>
         </code>
