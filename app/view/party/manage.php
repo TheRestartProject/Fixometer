@@ -1,6 +1,6 @@
 
 <form action="/party/manage/<?php echo $party->id; ?>" method="post" id="party-edit" enctype="multipart/form-data">
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         <div class="col-md-12">
             <h1><?php _t("Edit Party");?>
@@ -186,7 +186,7 @@
 <?php endif ?>
 <th><?php _t("Device Details");?> <i class="fa fa-question-circle" data-toggle="popover" data-html="true" title="Information about the device" data-content="<p>Please provide as much information as is known about the device.</p><p><strong>Brand</strong>.  This is the company that makes the device.  Examples: Apple; Dyson; Sony.</p><p><strong>Model</strong>. This is the specific model of the device.  Examples: iPhone 5s;  DC50; Xperia Z1 Compact.</p><p><strong>Age</strong>. This is the age of the device in years, since the year of manufacture."></i></th>
 <th><?php _t("Repair Status");?> <i class="fa fa-question-circle" data-toggle="popover" title="The outcome of the repair attempt" data-html="true" data-content="<p><strong>Fixed</strong>. Have we prevented the purchase of another device? Will this device still be used?</p><p><strong>Repairable</strong>. If an owner of an unrepaired device will try to fix it at home, come back to another Restart Party, or get help from a friend or a professional.</p><p><strong>End of lifecyle</strong>. When a participant tells you they have given up, and are going to recycle a device.</p><p>See <a href='https://therestartproject.org/welcome-to-our-community-space/#Enteringdata'>here</a> for more detailed information.</p>"></i></th>
-<th><?php _t("Spare Parts?");?> <i class="fa fa-question-circle" data-toggle="popover" title="Spare parts required?" data-content="Whether a spare part (or parts) would be needed to complete the repair successfully.  Ticking this box does not necessarily indicate that the needed part(s) were available at the party, only that there is a need for an additional part(s).   Please be sure to indicate in the comments field what part is needed (if known) and whether it is available at the party."></i></th>
+<th> <i class="fa fa-question-circle" data-toggle="popover" title="Spare parts required?" data-content="Whether a spare part (or parts) would be needed to complete the repair successfully.  Ticking this box does not necessarily indicate that the needed part(s) were available at the party, only that there is a need for an additional part(s).   Please be sure to indicate in the comments field what part is needed (if known) and whether it is available at the party."></i> <?php _t("Spare Parts?");?></th>
                             <th></th>
                         </tr>
                     </thead>
