@@ -135,7 +135,7 @@
 
                                 <div class="footprint">
                                     <?php echo $party->co2; ?>
-                                    <span class="subtext"><?php _t("kg of CO<sub>2</sub>");?>"</span>
+                                    <span class="subtext"><?php _t("kg of CO<sub>2</sub>");?></span>
                                     <br />
                                     <?php echo number_format($party->ewaste, 0); ?>
                                     <span class="subtext"><?php _t("kg of waste");?><span>
@@ -178,7 +178,7 @@
                         <tr>
                             <th>#</th>
                             <th><?php _t("Device Category");?>
-                                <i class="fa fa-question-circle" data-toggle="popover" title="Device Category" data-html="true" data-content="<p>This is the category that the device best fits into.  You can find more information on the different categories <a href='https://therestartproject.org/welcome-to-our-community-space/#What_if_a_device_does_not_fit_in_any_of_the_categories'>here</a>.</p><p>If a device does not fit in any of the categories, you have the option of choosing 'None of the above' at the end of the drop-down menu. You will then be encouraged to estimate the weight of the device. Please use this option only as a last resort.</p>"></i>
+                                <i class="fa fa-question-circle" data-toggle="popover" title="Device Category" data-html="true" data-content="<p>This is the category that the device best fits into.  You can find more information on the different categories <a href='https://therestartproject.org/welcome-to-our-community-space/#What_if_a_device_does_not_fit_in_any_of_the_categories'>here</a>.</p><p>If a device does not fit in any of the categories, you have the option of choosing 'None of the above' at the end of the drop-down menu. You will then be encouraged to estimate the weight of the device. Please use this option only as a last resort, and please ensure that you put the weight value in kilograms (e.g. 0.2 instead of 200).</p>"></i>
                             </th>
                             <th><?php _t("Device Details");?> <i class="fa fa-question-circle" data-toggle="popover" data-html="true" title="Information about the device" data-content="<p>Please provide as much information as is known about the device.</p><p><strong>Brand</strong>.  This is the company that makes the device.  Examples: Apple; Dyson; Sony.</p><p><strong>Model</strong>. This is the specific model of the device.  Examples: iPhone 5s;  DC50; Xperia Z1 Compact.</p><p><strong>Age</strong>. This is the age of the device in years, since the year of manufacture."></i></th>
                             <th><?php _t("Repair Comments");?> <i class="fa fa-question-circle" data-toggle="popover" title="Information about the repair attempt" data-html="true" data-content="<p>Please try and provide as much information as you can on the fault and on the solution or advice given (if any).  Information such as: what the fault was; what was the cause of the fault; what the solution was or could be.  Any further information that you think might be useful can be provided here as well.</p><p>For example: <br/><em>Cracked screen.  The phone had been dropped.  Recommended purchasing replacement screen and attending next party.</em></p><p>or</p><p><em>Would not turn on.  Fuse had blown.  Replaced fuse.</em></p>"></i></th>
@@ -222,7 +222,10 @@
                                     <?php echo ($devices[$i-1]->category == 46 ? 'show' : 'hide'); ?>
                                      estimate-box">
                                     <small><?php _t("Please input an estimate weight (in kg)");?></small>
+                                    <div class="input-group">
                                     <input type="text" name="device[<?php echo $i; ?>][estimate]" id="device[<?php echo $i; ?>][estimate]" class="form-control" placeholder="<?php _t("Estimate...");?>" value="<?php echo $devices[$i-1]->estimate; ?>">
+                                    <span class="input-group-addon">kg</span>
+                                    </div>
                                 </div>
                             </td>
 
@@ -375,7 +378,10 @@
                                 </div>
                                 <div class="form-group hide estimate-box">
                                     <small><?php _t("Please input an estimate weight (in kg)");?></small>
-                                    <input type="text" name="device[<?php echo $i; ?>][estimate]" id="device[<?php echo $i; ?>][estimate]" class="form-control" placeholder="<?php _t("Estimate...");?>">
+                                    <div class="input-group">
+                                        <input type="text" name="device[<?php echo $i; ?>][estimate]" id="device[<?php echo $i; ?>][estimate]" class="form-control" placeholder="<?php _t("Estimate...");?>">
+                                        <span class="input-group-addon">kg</span>
+                                    </div>
                                 </div>
                             </td>
 
