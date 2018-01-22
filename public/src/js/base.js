@@ -87,6 +87,19 @@ $('.device-image-delete').click(function(e){
                                   '<input type="text" name="device[' + n +'][estimate]" id="device[' + n +'][estimate]" class="form-control" placeholder="Estimate...">' +
                               '</div>' +
                           '</td>' +
+                            '<td>' +
+                            '<div class="form-group">' +
+                            '<input type="text" name="device[' + n +'][brand]" id="device[' + n +'][brand]" class="form-control" placeholder="Brand - e.g. Apple, Dyson">' +
+                            '</div>' +
+
+                            '<div class="form-group">' +
+                            '<input type="text" name="device[' + n +'][model]" id="device[' + n +'][model]" class="form-control" placeholder="Model - e.g. iPhone 5s, DC50">' +
+                            '</div>' +
+                            '<div class="form-group">' +
+                            '<input type="' + ageInputClass + '" name="device[' + n +'][age]" id="device[' + n +'][age]" class="form-control" placeholder="Age - e.g. 3 years">' +
+                            '</div>' +
+                            '</td>' +
+
                           '<td>' +
                               '<textarea rows="6" class="form-control" placeholder="Information about the repair.  Where possible, try to provide: fault; cause of fault; and solution/advice given" id="device[' + n +'][problem]" name="device[' + n +'][problem]"></textarea>' +
           '</td>';
@@ -99,19 +112,7 @@ $('.device-image-delete').click(function(e){
                 '</div>' +
               '</td>';
       }
-      tablerow += '<td>' +
-                              '<div class="form-group">' +
-                                  '<input type="text" name="device[' + n +'][brand]" id="device[' + n +'][brand]" class="form-control" placeholder="Brand - e.g. Apple, Dyson">' +
-                              '</div>' +
-
-                              '<div class="form-group">' +
-                                  '<input type="text" name="device[' + n +'][model]" id="device[' + n +'][model]" class="form-control" placeholder="Model - e.g. iPhone 5s, DC50">' +
-                              '</div>' +
-                              '<div class="form-group">' +
-                                  '<input type="' + ageInputClass + '" name="device[' + n +'][age]" id="device[' + n +'][age]" class="form-control" placeholder="Age - e.g. 3 years">' +
-                              '</div>' +
-                          '</td>' +
-                          '<td>' +
+      tablerow +=                           '<td>' +
                               '<div class="form-group">' +
                                   '<div class="radio">' +
                                       '<label>' +

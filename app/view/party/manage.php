@@ -177,14 +177,14 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th><?php _t("Category");?>
+                            <th><?php _t("Device Category");?>
                                 <i class="fa fa-question-circle" data-toggle="popover" title="Device Category" data-html="true" data-content="<p>This is the category that the device best fits into.  You can find more information on the different categories <a href='https://therestartproject.org/welcome-to-our-community-space/#What_if_a_device_does_not_fit_in_any_of_the_categories'>here</a>.</p><p>If a device does not fit in any of the categories, you have the option of choosing 'None of the above' at the end of the drop-down menu. You will then be encouraged to estimate the weight of the device. Please use this option only as a last resort.</p>"></i>
                             </th>
+                            <th><?php _t("Device Details");?> <i class="fa fa-question-circle" data-toggle="popover" data-html="true" title="Information about the device" data-content="<p>Please provide as much information as is known about the device.</p><p><strong>Brand</strong>.  This is the company that makes the device.  Examples: Apple; Dyson; Sony.</p><p><strong>Model</strong>. This is the specific model of the device.  Examples: iPhone 5s;  DC50; Xperia Z1 Compact.</p><p><strong>Age</strong>. This is the age of the device in years, since the year of manufacture."></i></th>
                             <th><?php _t("Repair Comments");?> <i class="fa fa-question-circle" data-toggle="popover" title="Information about the repair attempt" data-html="true" data-content="<p>Please try and provide as much information as you can on the fault and on the solution or advice given (if any).  Information such as: what the fault was; what was the cause of the fault; what the solution was or could be.  Any further information that you think might be useful can be provided here as well.</p><p>For example: <br/><em>Cracked screen.  The phone had been dropped.  Recommended purchasing replacement screen and attending next party.</em></p><p>or</p><p><em>Would not turn on.  Fuse had blown.  Replaced fuse.</em></p>"></i></th>
 <?php if (featureIsEnabled(FEATURE__DEVICE_PHOTOS)): ?>
                             <th style="width: 280px !important;"><?php _t("Image");?> <i class="fa fa-question-circle" data-toggle="popover" title="{REPLACE TITLE}" data-content="{REPLACE CONTENT}"></i></th>
 <?php endif ?>
-<th><?php _t("Device Details");?> <i class="fa fa-question-circle" data-toggle="popover" data-html="true" title="Information about the device" data-content="<p>Please provide as much information as is known about the device.</p><p><strong>Brand</strong>.  This is the company that makes the device.  Examples: Apple; Dyson; Sony.</p><p><strong>Model</strong>. This is the specific model of the device.  Examples: iPhone 5s;  DC50; Xperia Z1 Compact.</p><p><strong>Age</strong>. This is the age of the device in years, since the year of manufacture."></i></th>
 <th><?php _t("Repair Status");?> <i class="fa fa-question-circle" data-toggle="popover" title="The outcome of the repair attempt" data-html="true" data-content="<p><strong>Fixed</strong>. Have we prevented the purchase of another device? Will this device still be used?</p><p><strong>Repairable</strong>. If an owner of an unrepaired device will try to fix it at home, come back to another Restart Party, or get help from a friend or a professional.</p><p><strong>End of lifecyle</strong>. When a participant tells you they have given up, and are going to recycle a device.</p><p>See <a href='https://therestartproject.org/welcome-to-our-community-space/#Enteringdata'>here</a> for more detailed information.</p>"></i></th>
 <th> <i class="fa fa-question-circle" data-toggle="popover" title="Spare parts required?" data-content="Whether a spare part (or parts) would be needed to complete the repair successfully.  Ticking this box does not necessarily indicate that the needed part(s) were available at the party, only that there is a need for an additional part(s).   Please be sure to indicate in the comments field what part is needed (if known) and whether it is available at the party."></i> <?php _t("Spare Parts?");?></th>
                             <th></th>
@@ -225,6 +225,23 @@
                                     <input type="text" name="device[<?php echo $i; ?>][estimate]" id="device[<?php echo $i; ?>][estimate]" class="form-control" placeholder="<?php _t("Estimate...");?>" value="<?php echo $devices[$i-1]->estimate; ?>">
                                 </div>
                             </td>
+
+                            <td>
+                                <div class="form-group">
+                                    <input type="text" name="device[<?php echo $i; ?>][brand]" id="device[<?php echo $i; ?>][brand]" class="form-control" placeholder="<?php _t("Brand - e.g. Apple, Dyson");?>" value="<?php echo $devices[$i-1]->brand; ?>">
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="text" name="device[<?php echo $i; ?>][model]" id="device[<?php echo $i; ?>][model]" class="form-control" placeholder="<?php _t("Model - e.g. iPhone 5s, DC50");?>" value="<?php echo $devices[$i-1]->model; ?>">
+                                </div>
+
+                                <div class="form-group">
+                                    <?php $ageInputType = (featureIsEnabled(FEATURE__DEVICE_AGE)) ? "text" : "hidden"; ?>
+                                    <input type="<?php echo $ageInputType; ?>" name="device[<?php echo $i; ?>][age]" id="device[<?php echo $i; ?>][age]" class="form-control" placeholder="<?php _t("Age - e.g. 3 years");?>" value="<?php echo $devices[$i-1]->age; ?>">
+                                </div>
+
+                            </td>
+
                             <td>
                                 <textarea rows="6" class="form-control" id="device[<?php echo $i; ?>][problem]" name="device[<?php echo $i; ?>][problem]"><?php echo $devices[$i-1]->problem; ?></textarea>
                             </td>
@@ -257,21 +274,6 @@
                             </td>
                             <?php endif ?>
 
-                            <td>
-                                <div class="form-group">
-                                    <input type="text" name="device[<?php echo $i; ?>][brand]" id="device[<?php echo $i; ?>][brand]" class="form-control" placeholder="<?php _t("Brand - e.g. Apple, Dyson");?>" value="<?php echo $devices[$i-1]->brand; ?>">
-                                </div>
-
-                                <div class="form-group">
-                                    <input type="text" name="device[<?php echo $i; ?>][model]" id="device[<?php echo $i; ?>][model]" class="form-control" placeholder="<?php _t("Model - e.g. iPhone 5s, DC50");?>" value="<?php echo $devices[$i-1]->model; ?>">
-                                </div>
-
-                                <div class="form-group">
-                                    <?php $ageInputType = (featureIsEnabled(FEATURE__DEVICE_AGE)) ? "text" : "hidden"; ?>
-                                    <input type="<?php echo $ageInputType; ?>" name="device[<?php echo $i; ?>][age]" id="device[<?php echo $i; ?>][age]" class="form-control" placeholder="<?php _t("Age - e.g. 3 years");?>" value="<?php echo $devices[$i-1]->age; ?>">
-                                </div>
-
-                            </td>
                             <td>
                                 <div class="form-group">
                                     <div class="radio">
@@ -376,17 +378,6 @@
                                     <input type="text" name="device[<?php echo $i; ?>][estimate]" id="device[<?php echo $i; ?>][estimate]" class="form-control" placeholder="<?php _t("Estimate...");?>">
                                 </div>
                             </td>
-                            <td>
-                                <textarea rows="6" class="form-control" id="device[<?php echo $i; ?>][problem]" name="device[<?php echo $i; ?>][problem]"></textarea>
-                            </td>
-
-                            <?php if (featureIsEnabled(FEATURE__DEVICE_PHOTOS)): ?>
-                            <td>
-                              <div class="form-group">
-                                <input type="file" class="form-control file" name="device[<?php echo $i; ?>][image]" data-show-upload="false" data-show-caption="true">
-                              </div>
-                            </td>
-                            <?php endif ?>
 
                             <td>
                                  <div class="form-group">
@@ -401,6 +392,19 @@
                                     <input type="hidden" name="device[<?php echo $i; ?>][age]" id="device[<?php echo $i; ?>][age]" class="form-control" placeholder="<?php _t("Age - e.g. 3 years");?>" >
                                 </div>
                             </td>
+
+                            <td>
+                                <textarea rows="6" class="form-control" id="device[<?php echo $i; ?>][problem]" name="device[<?php echo $i; ?>][problem]"></textarea>
+                            </td>
+
+                            <?php if (featureIsEnabled(FEATURE__DEVICE_PHOTOS)): ?>
+                            <td>
+                              <div class="form-group">
+                                <input type="file" class="form-control file" name="device[<?php echo $i; ?>][image]" data-show-upload="false" data-show-caption="true">
+                              </div>
+                            </td>
+                            <?php endif ?>
+
                             <td>
                                 <div class="form-group">
                                     <div class="radio">
