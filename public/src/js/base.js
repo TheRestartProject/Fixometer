@@ -88,7 +88,7 @@ $('.device-image-delete').click(function(e){
                               '</div>' +
                           '</td>' +
                           '<td>' +
-                              '<textarea class="form-control" placeholder="Try to provide fault; cause of fault; solution/advice given" id="device[' + n +'][problem]" name="device[' + n +'][problem]"></textarea>' +
+                              '<textarea rows="6" class="form-control" placeholder="Information about the repair.  Where possible, try to provide: fault; cause of fault; and solution/advice given" id="device[' + n +'][problem]" name="device[' + n +'][problem]"></textarea>' +
           '</td>';
       if (feature__device_photos === true) {
           var ageInputClass = feature__device_age ? 'text' : 'hidden';

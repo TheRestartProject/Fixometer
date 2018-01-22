@@ -180,7 +180,7 @@
                             <th><?php _t("Category");?>
                                 <i class="fa fa-question-circle" data-toggle="popover" title="Device Category" data-html="true" data-content="<p>This is the category that the device best fits into.  You can find more information on the different categories <a href='https://therestartproject.org/welcome-to-our-community-space/#What_if_a_device_does_not_fit_in_any_of_the_categories'>here</a>.</p><p>If a device does not fit in any of the categories, you have the option of choosing 'None of the above' at the end of the drop-down menu. You will then be encouraged to estimate the weight of the device. Please use this option only as a last resort.</p>"></i>
                             </th>
-                            <th><?php _t("Comment");?> <i class="fa fa-question-circle" data-toggle="popover" title="Information about the repair attempt" data-html="true" data-content="<p>Please try and provide as much information as you can on the fault and on the solution or advice given (if any).  Information such as: what the fault was; what was the cause of the fault; what the solution was or could be.  Any further information that you think might be useful can be provided here as well.</p><p>For example: <br/><em>Cracked screen.  The phone had been dropped.  Recommended purchasing replacement screen and attending next party.</em></p><p>or</p><p><em>Would not turn on.  Fuse had blown.  Replaced fuse.</em></p>"></i></th>
+                            <th><?php _t("Repair Comments");?> <i class="fa fa-question-circle" data-toggle="popover" title="Information about the repair attempt" data-html="true" data-content="<p>Please try and provide as much information as you can on the fault and on the solution or advice given (if any).  Information such as: what the fault was; what was the cause of the fault; what the solution was or could be.  Any further information that you think might be useful can be provided here as well.</p><p>For example: <br/><em>Cracked screen.  The phone had been dropped.  Recommended purchasing replacement screen and attending next party.</em></p><p>or</p><p><em>Would not turn on.  Fuse had blown.  Replaced fuse.</em></p>"></i></th>
 <?php if (featureIsEnabled(FEATURE__DEVICE_PHOTOS)): ?>
                             <th style="width: 280px !important;"><?php _t("Image");?> <i class="fa fa-question-circle" data-toggle="popover" title="{REPLACE TITLE}" data-content="{REPLACE CONTENT}"></i></th>
 <?php endif ?>
@@ -226,7 +226,7 @@
                                 </div>
                             </td>
                             <td>
-                                <textarea class="form-control" id="device[<?php echo $i; ?>][problem]" name="device[<?php echo $i; ?>][problem]"><?php echo $devices[$i-1]->problem; ?></textarea>
+                                <textarea rows="6" class="form-control" id="device[<?php echo $i; ?>][problem]" name="device[<?php echo $i; ?>][problem]"><?php echo $devices[$i-1]->problem; ?></textarea>
                             </td>
 
                             <?php if (featureIsEnabled(FEATURE__DEVICE_PHOTOS)): ?>
@@ -377,7 +377,7 @@
                                 </div>
                             </td>
                             <td>
-                                <textarea class="form-control" id="device[<?php echo $i; ?>][problem]" name="device[<?php echo $i; ?>][problem]"></textarea>
+                                <textarea rows="6" class="form-control" id="device[<?php echo $i; ?>][problem]" name="device[<?php echo $i; ?>][problem]"></textarea>
                             </td>
 
                             <?php if (featureIsEnabled(FEATURE__DEVICE_PHOTOS)): ?>
