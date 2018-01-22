@@ -304,7 +304,7 @@
                                         array('key' => 'party_host',            'value' => $Host->hostname),
                                         array('key' => 'party_hostavatarurl',   'value' => UPLOADS_URL . 'mid_' . $Host->path),
                                         array('key' => 'party_grouphash',       'value' => $data['group']),
-                                        array('key' => 'party_location',        'value' => ( !empty($data['venue']) ? $data['venue'] . ', ' . $data['location'] : $data['location'])),
+                                        array('key' => 'party_location',        'value' => $data['location']),
                                         array('key' => 'party_time',            'value' => $data['start'] . ' - ' . $data['end']),
                                         array('key' => 'party_date',            'value' => $wp_date),
                                         array('key' => 'party_timestamp',       'value' => $theParty->event_timestamp),
@@ -317,7 +317,7 @@
 
                         $content = array(
                                         'post_type' => 'party',
-                                        'post_title' => $data['location'],
+                                        'post_title' => !empty($data['venue']) ? $data['venue'] : $data['location'],
                                         'post_content' => $data['free_text'],
                                         'custom_fields' => $custom_fields
                                         );
