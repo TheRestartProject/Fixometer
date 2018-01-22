@@ -11,7 +11,7 @@
 
                     <?php if(isset($response)) { printResponse($response); } ?>
 
-                    <div class="alert alert-info">
+                    <div class="alert alert-warning">
                         <i class="fa fa-exclamation-circle fa-lg"></i> Please be advised that your name and avatar will be shared on your group's public page on our website. (You can use a nickname or another image if you prefer.)
                     </div>
 
