@@ -132,7 +132,7 @@
         }
 
         public function ofThisUser($id, $only_past = false, $devices = false){
-            $sql = 'SELECT *, CONCAT_WS(", ", `e`.`venue`,  `e`.`location`) AS `venue`, UNIX_TIMESTAMP( CONCAT(`e`.`event_date`, " ", `e`.`start`) ) AS `event_timestamp`
+            $sql = 'SELECT *, `e`.`venue` AS `venue`, `e`.`location` as `location`, UNIX_TIMESTAMP( CONCAT(`e`.`event_date`, " ", `e`.`start`) ) AS `event_timestamp`
                     FROM `' . $this->table . '` AS `e`
                     INNER JOIN `events_users` AS `eu` ON `eu`.`event` = `e`.`idevents`
                     INNER JOIN `groups` as `g` ON `e`.`group` = `g`.`idgroups`
@@ -177,7 +177,8 @@
         public function ofThisGroup2($group = 'admin', $only_past = false, $devices = false){
             $sql = 'SELECT
                         *,
-                        CONCAT_WS(", ", `e`.`venue`,  `e`.`location`) AS `venue`, `g`.`name` AS group_name,
+			`e`.`venue` AS `venue`, `e`.`location` as `location`,
+                        `g`.`name` AS group_name,
 
 
                         UNIX_TIMESTAMP( CONCAT(`e`.`event_date`, " ", `e`.`start`) ) AS `event_timestamp`
@@ -236,7 +237,8 @@
         public function ofTheseGroups($groups = 'admin', $only_past = false, $devices = false){
             $sql = 'SELECT
                         *,
-                        CONCAT_WS(", ", `e`.`venue`,  `e`.`location`), `g`.`name` AS group_name,
+			`e`.`venue` AS `venue`, `e`.`location` as `location`,
+                        `g`.`name` AS group_name,
 
 
                         UNIX_TIMESTAMP( CONCAT(`e`.`event_date`, " ", `e`.`start`) ) AS `event_timestamp`
@@ -294,7 +296,7 @@
         public function ofThisGroup($group = 'admin', $only_past = false, $devices = false){
             $sql = 'SELECT
                         *,
-                        CONCAT_WS(", ", `e`.`venue`,  `e`.`location`) AS `venue`,
+			`e`.`venue` AS `venue`, `e`.`location` as `location`,
 
 
                         UNIX_TIMESTAMP( CONCAT(`e`.`event_date`, " ", `e`.`start`) ) AS `event_timestamp`
