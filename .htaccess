@@ -4,5 +4,6 @@
     RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [NE,L,R=301]
     RewriteRule ^(craft)($|/) - [L]    
     RewriteRule ^$ public/ [L]
+    RewriteRule ^map$ public/map/index.php [L]
     RewriteRule (.*) public/$1 [L]
 </IfModule>
