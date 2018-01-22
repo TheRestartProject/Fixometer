@@ -101,14 +101,14 @@ $('.device-image-delete').click(function(e){
       }
       tablerow += '<td>' +
                               '<div class="form-group">' +
-                                  '<input type="text" name="device[' + n +'][brand]" id="device[' + n +'][brand]" class="form-control" placeholder="Brand... (e.g. Apple, Dyson, Sony, etc)">' +
+                                  '<input type="text" name="device[' + n +'][brand]" id="device[' + n +'][brand]" class="form-control" placeholder="Brand - e.g. Apple, Dyson">' +
                               '</div>' +
 
                               '<div class="form-group">' +
-                                  '<input type="text" name="device[' + n +'][model]" id="device[' + n +'][model]" class="form-control" placeholder="Model... (e.g. iPhone 5s, DC50)">' +
+                                  '<input type="text" name="device[' + n +'][model]" id="device[' + n +'][model]" class="form-control" placeholder="Model - e.g. iPhone 5s, DC50">' +
                               '</div>' +
                               '<div class="form-group">' +
-                                  '<input type="' + ageInputClass + '" name="device[' + n +'][age]" id="device[' + n +'][age]" class="form-control" placeholder="Age... (e.g. 3 years)">' +
+                                  '<input type="' + ageInputClass + '" name="device[' + n +'][age]" id="device[' + n +'][age]" class="form-control" placeholder="Age - e.g. 3 years">' +
                               '</div>' +
                           '</td>' +
                           '<td>' +
