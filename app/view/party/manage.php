@@ -259,16 +259,16 @@
 
                             <td>
                                 <div class="form-group">
-                                    <input type="text" name="device[<?php echo $i; ?>][brand]" id="device[<?php echo $i; ?>][brand]" class="form-control" placeholder="<?php _t("Brand... (e.g. Apple, Dyson, Sony, etc)");?>" value="<?php echo $devices[$i-1]->brand; ?>">
+                                    <input type="text" name="device[<?php echo $i; ?>][brand]" id="device[<?php echo $i; ?>][brand]" class="form-control" placeholder="<?php _t("Brand - e.g. Apple, Dyson");?>" value="<?php echo $devices[$i-1]->brand; ?>">
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="text" name="device[<?php echo $i; ?>][model]" id="device[<?php echo $i; ?>][model]" class="form-control" placeholder="<?php _t("Model... (e.g. iPhone 5s, DC50, Xperia Z1 Compact");?>" value="<?php echo $devices[$i-1]->model; ?>">
+                                    <input type="text" name="device[<?php echo $i; ?>][model]" id="device[<?php echo $i; ?>][model]" class="form-control" placeholder="<?php _t("Model - e.g. iPhone 5s, DC50");?>" value="<?php echo $devices[$i-1]->model; ?>">
                                 </div>
 
                                 <div class="form-group">
                                     <?php $ageInputType = (featureIsEnabled(FEATURE__DEVICE_AGE)) ? "text" : "hidden"; ?>
-                                    <input type="<?php echo $ageInputType; ?>" name="device[<?php echo $i; ?>][age]" id="device[<?php echo $i; ?>][age]" class="form-control" placeholder="<?php _t("Age... (e.g. 3 years)");?>" value="<?php echo $devices[$i-1]->age; ?>">
+                                    <input type="<?php echo $ageInputType; ?>" name="device[<?php echo $i; ?>][age]" id="device[<?php echo $i; ?>][age]" class="form-control" placeholder="<?php _t("Age - e.g. 3 years");?>" value="<?php echo $devices[$i-1]->age; ?>">
                                 </div>
 
                             </td>
@@ -390,15 +390,15 @@
 
                             <td>
                                  <div class="form-group">
-                                    <input type="text" name="device[<?php echo $i; ?>][brand]" id="device[<?php echo $i; ?>][brand]" class="form-control" placeholder="<?php _t("Brand... (e.g. Apple, Dyson, Sony, etc)");?>">
+                                    <input type="text" name="device[<?php echo $i; ?>][brand]" id="device[<?php echo $i; ?>][brand]" class="form-control" placeholder="<?php _t("Brand - e.g. Apple, Dyson");?>">
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="text" name="device[<?php echo $i; ?>][model]" id="device[<?php echo $i; ?>][model]" class="form-control" placeholder="<?php _t("Model... (e.g. iPhone 5s, DC50, Xperia Z1 Compact");?>" >
+                                    <input type="text" name="device[<?php echo $i; ?>][model]" id="device[<?php echo $i; ?>][model]" class="form-control" placeholder="<?php _t("Model - e.g. iPhone 5s, DC50");?>" >
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="hidden" name="device[<?php echo $i; ?>][age]" id="device[<?php echo $i; ?>][age]" class="form-control" placeholder="<?php _t("Age... (e.g. 3 years)");?>" >
+                                    <input type="hidden" name="device[<?php echo $i; ?>][age]" id="device[<?php echo $i; ?>][age]" class="form-control" placeholder="<?php _t("Age - e.g. 3 years");?>" >
                                 </div>
                             </td>
                             <td>
