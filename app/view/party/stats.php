@@ -20,10 +20,10 @@
                         
                         <div class="stat">                            
                             <div class="footprint">
-                                <?php echo $party->co2; ?>
+                                <span id="co2-diverted-value"><?php echo $party->co2; ?></span>
                                 <span class="subtext">kg of CO<sub>2</sub></span>
                                 <br />
-                                <?php echo number_format($party->ewaste, 0); ?>
+                                <span id="ewaste-diverted-value"><?php echo number_format($party->ewaste, 0); ?></span>
                                 <span class="subtext">kg of waste<span>
                             </div>
                         </div>
