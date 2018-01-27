@@ -8,7 +8,7 @@
             <div class="shader"></div>
 
             <h2><span class="title-text"><?php _t('login', array('0' => 'total', '1' => 'another')); ?></span></h2>
-            <form class="" method="post" action="/user/login">
+            <form id="login" class="" method="post" action="/user/login">
                 <div class="form-group">
                     <label for="email" class="text-center"><?php _t("email")?></label>
                     <input type="email" class="form-control" name="email" id="email" placeholder="<?php _t('Your email...')?>">
