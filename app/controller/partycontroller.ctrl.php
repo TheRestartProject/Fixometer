@@ -651,48 +651,23 @@
         }
 
 
-        public function stats($id, $class = null){
-            $Device = new Device;
+        public function stats($id, $class = null)
+        {
+            $deviceGateway = new Device;
+            $averageCo2PerKilo = $deviceGateway->getWasteEmissionRatio();
+            $displacementRatio = $deviceGateway->displacement;
 
-            $this->set('framed', true);
             $party = $this->Party->findThis($id, true);
 
-            if($party->device_count == 0){
-                $need_attention++;
-            }
+            $party->calculateStatistics($averageCo2PerKilo, $displacementRatio);
+            $party->co2 = number_format(round($party->co2), 0, '.' , ',');
 
-            $party->co2 = 0;
-            $party->fixed_devices = 0;
-            $party->repairable_devices = 0;
-            $party->dead_devices = 0;
-            $party->ewaste = 0;
-
-            foreach($party->devices as $device){
-
-                if($device->repair_status == DEVICE_FIXED){
-                    $party->co2 += (!empty($device->estimate) && $device->category == 46 ? ($device->estimate * $this->EmissionRatio) : $device->footprint);
-                    $party->ewaste += (!empty($device->estimate) && $device->category == 46  ? $device->estimate : $device->weight);
-                }
-
-                switch($device->repair_status){
-                    case 1:
-                        $party->fixed_devices++;
-                        break;
-                    case 2:
-                        $party->repairable_devices++;
-                        break;
-                    case 3:
-                        $party->dead_devices++;
-                        break;
-                }
-            }
-
-            $party->co2 = number_format(round($party->co2 * $Device->displacement), 0, '.' , ',');
             $this->set('party', $party);
+
+            $this->set('framed', true);
             if(!is_null($class)) {
                 $this->set('class', 'wide');
             }
-
         }
 
         public function deleteimage(){

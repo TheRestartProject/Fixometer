@@ -59,6 +59,19 @@
             return $stmt->fetchAll(PDO::FETCH_OBJ);
         }
 
+        public function getWasteEmissionRatio()
+        {
+            $sql = 'SELECT Ratio
+                    FROM `view_waste_emission_ratio`'
+            ;
+
+            $stmt = $this->database->prepare($sql);
+            $stmt->execute();
+            $ratio = $stmt->fetchColumn(0);
+
+            return $ratio;
+        }
+
         public function getWeights($group = null){
             /*
             $sql = 'SELECT
@@ -71,8 +84,8 @@
                     WHERE `d`.`repair_status` = 1';
             */
             $sql = 'SELECT
-                    ROUND(SUM(`weight`), 0) + ROUND(SUM(`estimate`), 0) AS `total_weights`,
-                    ROUND(SUM(`footprint`) * ' . $this->displacement . ', 0) + (ROUND(SUM(`estimate`) * (SELECT * FROM `view_waste_emission_ratio`), 0))  AS `total_footprints`
+                    ROUND(SUM(`weight`), 0) + ROUND(SUM(ifnull(`estimate`,0)), 0) AS `total_weights`,
+                    ROUND(SUM(`footprint`) * ' . $this->displacement . ', 0) + (ROUND(SUM(ifnull(`estimate`,0)) * (SELECT * FROM `view_waste_emission_ratio`), 0))  AS `total_footprints`
                 FROM `'.$this->table.'` AS `d`
                 INNER JOIN `categories` AS `c` ON  `d`.`category` = `c`.`idcategories`
                 INNER JOIN `events` AS `e` ON  `d`.`event` = `e`.`idevents`

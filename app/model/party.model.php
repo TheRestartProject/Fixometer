@@ -61,7 +61,7 @@
         }
 
 
-        public function findThis($id, $devices = false) {
+        public function findThis($id, $includeDevices = false) {
 
             $sql = 'SELECT
                         `e`.`idevents` AS `id`,
@@ -92,9 +92,37 @@
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $q = $stmt->execute();
 
-            $party =  $stmt->fetch(PDO::FETCH_OBJ);
+            $data = $stmt->fetch(PDO::FETCH_OBJ);
+            $party = $this->partyFromData($data, $includeDevices);
 
-            if($devices){
+            return $party;
+        }
+
+        /**
+         * Converts from anonymous data object to typed Party object.
+         */
+        public function partyFromData($data, $includeDevices)
+        {
+            $party = new PartyDomain();
+            $party->id = $data->id;
+            $party->event_date = $data->event_date;
+            $party->event_timestamp = $data->event_timestamp;
+            $party->event_end_timestamp = $data->event_end_timestamp;
+            $party->start = $data->start;
+            $party->end = $data->end;
+            $party->venue = $data->venue;
+            $party->location = $data->location;
+            $party->latitude = $data->latitude;
+            $party->group = $data->group;
+            $party->pax = $data->pax;
+            $party->volunteers = $data->volunteers;
+            $party->hours = $data->hours;
+            $party->free_text = $data->free_text;
+            $party->wordpress_post_id = $data->wordpress_post_id;
+            $party->group_name = $data->group_name;
+
+            if ($includeDevices)
+            {
                 $devices = new Device;
                 $party->devices = $devices->ofThisEvent($party->id);
             }
@@ -426,4 +454,6 @@
             $r = $stmt->fetch(PDO::FETCH_OBJ);
             return $r->pax;
         }
+
+
     }

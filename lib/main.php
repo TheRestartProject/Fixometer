@@ -86,6 +86,9 @@
         elseif(file_exists(ROOT . DS . 'app' . DS . 'model' . DS . strtolower($className) . '.model.php')){
             require_once(ROOT . DS . 'app' . DS . 'model' . DS . strtolower($className) . '.model.php');
         }
+        elseif(file_exists(ROOT . DS . 'app' . DS . 'domain' . DS . strtolower($className) . '.class.php')){
+            require_once(ROOT . DS . 'app' . DS . 'domain' . DS . strtolower($className) . '.class.php');
+        }
 
         elseif(file_exists(ROOT .  DS . 'app' . DS . 'controller' . DS . strtolower($className).'.ctrl.php')){
             require_once(ROOT . DS . 'app' . DS . 'controller' . DS . strtolower($className).'.ctrl.php');
