@@ -83,9 +83,10 @@
                     if(!isset($response['danger'])){
                         // No errors, we can proceed and see if we can auth this guy here.
 
+                        $encrypted_password = crypt($uput_password, '$1$' . SECRET);
                         $user = $this->User->find(array(
                                                         'email' => $uput_email,
-                                                        'password' => crypt($uput_password, '$1$' . SECRET)
+                                                        'password' => $encrypted_password
                                                     )
                                                 );
                                                 

@@ -565,36 +565,9 @@
                 $restarters = $User->find(array('idroles' => 4));
 
 
-                $party->co2 = 0;
-                $party->ewaste = 0;
-                $party->fixed_devices = 0;
-                $party->repairable_devices = 0;
-                $party->dead_devices = 0;
+                $party->calculateStatistics($Device->EmissionRatio, $Device->displacement);
 
-
-                if(!empty($party->devices)){
-                    foreach($party->devices as $device){
-
-                        if($device->repair_status == DEVICE_FIXED){
-                            $party->co2     += (!empty($device->estimate) && $device->category==46 ? ($device->estimate * $this->EmissionRatio) : $device->footprint);
-                            $party->ewaste  += (!empty($device->estimate) && $device->category==46 ? $device->estimate : $device->weight);
-                        }
-
-                        switch($device->repair_status){
-                            case 1:
-                                $party->fixed_devices++;
-                                break;
-                            case 2:
-                                $party->repairable_devices++;
-                                break;
-                            case 3:
-                                $party->dead_devices++;
-                                break;
-                        }
-                    }
-                }
-
-                $party->co2 = number_format(round($party->co2 * $Device->displacement), 0, '.' , ',');
+                $party->co2 = number_format(round($party->co2), 0, '.' , ',');
 
                 $this->set('party', $party);
                 $this->set('devices', $party->devices);

@@ -137,8 +137,8 @@
                                 <span clasS="location"><?php  echo (!empty($party->venue) ? $party->venue : $party->location); ?></span>
                             </div>
                             <div class="links">
-                                <a href="/party/edit/<?php echo $party->idevents; ?>" class="btn btn-default btn-sm btn-block"><i class="fa fa-edit"></i> <?php _t("edit");?></a>
-                                <a href="/party/delete/<?php echo $party->idevents; ?>" class="btn btn-danger btn-sm btn-block delete-control"><i class="fa fa-trash"></i> <?php _t("delete");?></a>
+                                <a href="/party/edit/<?php echo $party->id; ?>" class="btn btn-default btn-sm btn-block"><i class="fa fa-edit"></i> <?php _t("edit");?></a>
+                                <a href="/party/delete/<?php echo $party->id; ?>" class="btn btn-danger btn-sm btn-block delete-control"><i class="fa fa-trash"></i> <?php _t("delete");?></a>
                             </div>
                         </div>
                     </div>
@@ -212,6 +212,7 @@
                     $nodata = 0;
                     $currentYear = date('Y', time());
                     foreach($allparties as $party){
+                        $partyId = $party->id;
                         $partyYear = date('Y', $party->event_timestamp);
                         if( $partyYear < $currentYear){
                     ?>
@@ -223,7 +224,7 @@
                         }
                     ?>
                     <?php if($party->device_count < 1){ $nodata++; ?>
-                    <a class="no-data-wrap party" href="/party/manage/<?php echo $party->idevents; ?>" <?php echo ($nodata == 1 ? 'id="attention"' : ''); ?>>
+                    <a id="party-<?php echo $partyId ?>" class="no-data-wrap party" href="/party/manage/<?php echo $partyId; ?>" <?php echo ($nodata == 1 ? 'id="attention"' : ''); ?>>
 
                         <div class="header-col-2 header-col">
                             <div class="date">
@@ -257,7 +258,7 @@
 
                     </a>
                     <?php } else {  ?>
-                    <a class=" party <?php echo ($party->guesstimates == true ? ' guesstimates' : ''); ?>"  href="/party/manage/<?php echo $party->idevents; ?>">
+                    <a id="party-<?php echo $partyId; ?>" class=" party <?php echo ($party->guesstimates == true ? ' guesstimates' : ''); ?>"  href="/party/manage/<?php echo $partyId; ?>">
                         <div class="header-col header-col-2">
                             <div class="date">
                                 <span class="month"><?php echo date('M', $party->event_timestamp); ?></span>
@@ -274,36 +275,40 @@
 
                         <div class="header-col">
                             <span class="largetext">
-                                <?php echo $party->pax; ?>
+                                <span id="party-<?php echo $partyId; ?>-participants">
+                                      <?php echo $party->pax; ?>
+                                </span>
                             </span>
                         </div>
 
                         <div class="header-col">
-                            <span class="largetext">
+                            <span id="party-<?php echo $partyId; ?>-volunteers" class="largetext">
                                 <?php echo $party->volunteers; ?>
                             </span>
                         </div>
 
                         <div class="header-col">
                             <span class="largetext">
-                                 <?php echo $party->co2; ?> kg
+                                <span id="party-<?php echo $partyId; ?>-co2-value"><?php echo $party->co2; ?></span> kg
                             </span>
                         </div>
 
                         <div class="header-col">
                             <span class="largetext fixed">
-                                <?php echo $party->fixed_devices; ?>
+                                <span id="party-<?php echo $partyId; ?>-fixed">
+                                    <?php echo $party->fixed_devices; ?>
+                                </span>
                             </span>
                         </div>
 
                         <div class="header-col">
-                            <span class="largetext repairable">
+                            <span id="party-<?php echo $partyId; ?>-repairable" class="largetext repairable">
                                 <?php echo $party->repairable_devices; ?>
                             </span>
                         </div>
 
                         <div class="header-col">
-                            <span class="largetext dead">
+                            <span id="party-<?php echo $partyId; ?>-dead" class="largetext dead">
                                 <?php echo $party->dead_devices; ?>
                             </span>
                         </div>
