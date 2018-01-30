@@ -7,24 +7,26 @@ class ApiController extends Controller {
 
         $Party = new Party;
         $Device = new Device;
+        $averageCo2PerKilo = $Device->getWasteEmissionRatio();
 
         $allparties = $Party->ofThisGroup('admin', true, true);
 
         $participants = 0;
         $hours_volunteered = 0;
 
-        foreach($allparties as $i => $party){
-            $participants += $party->pax;
 
-            // TODO: extract hours volunteered calculation out.
-            $hours_volunteered += (($party->volunteers > 0 ? $party->volunteers * 3 : 12 ) + 9);
+        foreach($allparties as $i => $party){
+            $party->calculateStatistics($averageCo2PerKilo, $Device->displacement);
+
+            $participants += $party->pax;
+            $hours_volunteered += $party->hours_volunteered;
         }
 
-        $co2Total = $Device->getWeights();
+        $impactStats = $Device->getWeights();
 
         $result[hours_volunteered] = $hours_volunteered;
         $result[items_fixed] = $Device->statusCount()[0]->counter;
-        $result[weights] = $co2Total[0]->total_weights;
+        $result[weights] = $impactStats[0]->total_weights;
 
         echo json_encode($result);
     }

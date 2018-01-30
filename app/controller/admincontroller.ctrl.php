@@ -29,7 +29,7 @@
                     
                     $this->TotalWeight = $weights[0]->total_weights;
                     $this->TotalEmission = $weights[0]->total_footprints;
-                    $this->EmissionRatio = $this->TotalEmission / $this->TotalWeight;
+                    $this->EmissionRatio = $Device->getWasteEmissionRatio();
                     
                 }
             }

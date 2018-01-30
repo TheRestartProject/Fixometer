@@ -23,14 +23,8 @@
                     header('Location: /user/forbidden');
                 }
                 else {
-                    $Device = new Device;
-                    $weights = $Device->getWeights();
-
-                    $this->TotalWeight = $weights[0]->total_weights;
-                    $this->TotalEmission = $weights[0]->total_footprints;
-                    $this->EmissionRatio = $this->TotalEmission / $this->TotalWeight;
-
-
+                    $deviceGateway = new Device;
+                    $this->EmissionsRatio = $deviceGateway->getWasteEmissionRatio();
                 }
             }
         }
@@ -189,7 +183,6 @@
             $this->set('waste_bar_chart_stats', array_reverse($wstats, true));
 
 
-            // $co2Total = $Device->getWeights();
             $co2ThisYear = $Device->countCO2ByYear(null, date('Y', time()));
 
             $this->set('co2Total', $this->TotalEmission);

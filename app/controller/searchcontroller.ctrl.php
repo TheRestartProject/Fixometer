@@ -2,8 +2,6 @@
 
   class SearchController extends Controller {
 
-    public $TotalWeight;
-    public $TotalEmission;
     public $EmissionRatio;
 
     public function __construct($model, $controller, $action){
@@ -20,12 +18,8 @@
             $this->set('user', $user);
             $this->set('header', true);
 
-            $Device = new Device;
-            $weights = $Device->getWeights();
-
-            $this->TotalWeight = $weights[0]->total_weights;
-            $this->TotalEmission = $weights[0]->total_footprints;
-            $this->EmissionRatio = $this->TotalEmission / $this->TotalWeight;
+            $DeviceGateway = new Device;
+            $this->EmissionRatio = $DeviceGateway->getWasteEmissionRatio();
 
 
             if(hasRole($this->user, 'Host')){
@@ -130,50 +124,20 @@
             $totalCO2 = 0;
             $totalWeight = 0;
           //  dbga($PartyList[12]->devices);
-            foreach($PartyList as $i => $party){
+            foreach($PartyList as $i => $party)
+            {
                 if($party->device_count == 0){
                     $need_attention++;
                 }
 
-                $partyIds[] = $party->idevents;
+                $partyIds[] = $party->id;
 
-
-                $party->co2 = 0;
-                $party->fixed_devices = 0;
-                $party->repairable_devices = 0;
-                $party->dead_devices = 0;
-                $party->guesstimates = false;
+                $party->calculateStatistics($this->EmissionRatio, $Device->displacement);
 
                 $participants += $party->pax;
-                $hours_volunteered += (($party->volunteers > 0 ? $party->volunteers * 3 : 12 ) + 9);
+                $hours_volunteered += $party->hours_volunteered;
 
-                foreach($party->devices as $device){
-
-
-
-                    switch($device->repair_status){
-
-                        case 1:
-
-                            $party->co2 =  $party->co2 + (!empty($device->estimate) && $device->category == 46 ? ($device->estimate * $this->EmissionRatio) : $device->footprint);
-                            $party->fixed_devices++;
-                            $totalWeight += (!empty($device->estimate) && $device->category==46 ? $device->estimate : $device->weight);
-
-                            break;
-                        case 2:
-                            $party->repairable_devices++;
-                            break;
-                        case 3:
-                            $party->dead_devices++;
-                            break;
-                    }
-                    if($device->category == 46){
-                        $party->guesstimates = true;
-                    }
-                }
-
-                $party->co2 = $party->co2 * $Device->displacement;
-
+                $totalWeight += $party->ewaste;
                 $totalCO2 += $party->co2;
             }
 

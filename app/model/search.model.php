@@ -6,9 +6,24 @@
       $conditions = array();
 
       $sql .= 'SELECT
-                *,
-                `e`.`location` AS `venue`,
-                UNIX_TIMESTAMP( CONCAT(`e`.`event_date`, " ", `e`.`start`) ) AS `event_timestamp`
+                        `e`.`idevents` AS `id`,
+                        UNIX_TIMESTAMP( CONCAT(`e`.`event_date`, " ", `e`.`start`) ) AS `event_date` ,
+                        UNIX_TIMESTAMP( CONCAT(`e`.`event_date`, " ", `e`.`start`) ) AS `event_timestamp`,
+                        UNIX_TIMESTAMP( CONCAT(`e`.`event_date`, " ", `e`.`end`) ) AS `event_end_timestamp`,
+                        `e`.`start` AS `start`,
+                        `e`.`end` AS `end`,
+                        `e`.`venue` as `venue`,
+                        `e`.`location` as `location`,
+                        `e`.`latitude`,
+                        `e`.`longitude`,
+                        `e`.`group`,
+                        `e`.`pax`,
+                        `e`.`volunteers`,
+                        `e`.`hours`,
+                        `e`.`free_text`,
+                        `e`.`wordpress_post_id`,
+                        `g`.`name` AS `group_name`,
+                        `d`.`device_count`
               FROM `events` AS `e`
 
               INNER JOIN `groups` as `g` ON `e`.`group` = `g`.`idgroups`
@@ -46,17 +61,19 @@
       $stmt = $this->database->prepare($sql);
       $stmt->execute();
 
-      $parties = $stmt->fetchAll(PDO::FETCH_OBJ);
+      $partiesDataObjects = $stmt->fetchAll(PDO::FETCH_OBJ);
 
+      $parties = array();
 
-      $devices = new Device;
-      foreach($parties as $i => $party){
-        $parties[$i]->devices = $devices->ofThisEvent($party->idevents);
+      $partiesGateway = new Party;
+
+      foreach($partiesDataObjects as $i => $partyDataObject)
+      {
+          $party = $partiesGateway->partyFromData($partyDataObject, true);
+          $parties[] = $party;
       }
 
-
       return $parties;
-
     }
 
     public function deviceStatusCount($parties){

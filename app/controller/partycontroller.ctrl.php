@@ -35,12 +35,8 @@
                 $User = new User;
                 $this->set('profile', $User->profilePage($this->user->id));
 
-                $Device = new Device;
-                $weights = $Device->getWeights();
-
-                $this->TotalWeight = $weights[0]->total_weights;
-                $this->TotalEmission = $weights[0]->total_footprints;
-                $this->EmissionRatio = $this->TotalEmission / $this->TotalWeight;
+                $deviceGateway = new Device;
+                $this->EmissionRatio = $deviceGateway->getWasteEmissionRatio();
             }
 
             $this->permissionsChecker = new PermissionsChecker($this->user, $this->hostParties);
@@ -565,7 +561,7 @@
                 $restarters = $User->find(array('idroles' => 4));
 
 
-                $party->calculateStatistics($Device->EmissionRatio, $Device->displacement);
+                $party->calculateStatistics($Device->getWasteEmissionRatio(), $Device->displacement);
 
                 $party->co2 = number_format(round($party->co2), 0, '.' , ',');
 

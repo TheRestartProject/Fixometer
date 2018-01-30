@@ -5,18 +5,13 @@
       public $TotalWeight;
       public $TotalEmission;
       public $EmissionRatio;
-      public function __construct($model, $controller, $action){
+
+      public function __construct($model, $controller, $action)
+      {
           parent::__construct($model, $controller, $action);
 
-
-                  $Device = new Device;
-                  $weights = $Device->getWeights();
-
-                  $this->TotalWeight = $weights[0]->total_weights;
-                  $this->TotalEmission = $weights[0]->total_footprints;
-                  $this->EmissionRatio = $this->TotalEmission / $this->TotalWeight;
-
-
+          $Device = new Device;
+          $this->EmissionRatio = $Device->getWasteEmissionRatio();
       }
 
         public function devices(){

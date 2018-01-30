@@ -339,10 +339,7 @@
             $Device = new Device;
 
 
-            $weights = $Device->getWeights();
-      			$TotalWeight = $weights[0]->total_weights;
-      			$TotalEmission = $weights[0]->total_footprints;
-      			$EmissionRatio = $TotalEmission / $TotalWeight;
+            $EmissionRatio = $Device->getWasteEmissionRatio();
 
 
             $allparties = $Party->ofThisGroup($id, true, true);
