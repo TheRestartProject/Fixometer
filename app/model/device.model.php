@@ -72,38 +72,60 @@
             return $ratio;
         }
 
-        public function getWeights($group = null){
-            /*
-            $sql = 'SELECT
-                        ROUND(SUM(`weight`), 0) AS `total_weights`,
-                        ROUND(SUM(`footprint`) * ' . $this->displacement . ', 0)  AS `total_footprints`,
-                        ROUND(SUM(`estimate`) * (SELECT * FROM view_weight_emission_ratio), 0) AS `estimate_emissions`
-                    FROM `'.$this->table.'` AS `d`
-                    INNER JOIN `categories` AS `c` ON  `d`.`category` = `c`.`idcategories`
-                    INNER JOIN `events` AS `e` ON  `d`.`event` = `e`.`idevents`
-                    WHERE `d`.`repair_status` = 1';
-            */
-            $sql = 'SELECT
-                    ROUND(SUM(`weight`), 0) + ROUND(SUM(ifnull(`estimate`,0)), 0) AS `total_weights`,
-                    ROUND(SUM(`footprint`) * ' . $this->displacement . ', 0) + (ROUND(SUM(ifnull(`estimate`,0)) * (SELECT * FROM `view_waste_emission_ratio`), 0))  AS `total_footprints`
+        /**
+         * Get the total values for waste weight and CO2 diverted due to repairs.
+         * For categorised devices, the figure for weight is the sum of all category weights,
+         * and for CO2, it is the sum of all category CO2 estimates, multiplied by the displacement rate.
+         * For misc devices, the figure for weights is the sum of all estimated weights for misc devices,
+         * and for CO2, it is the sum of all estimated weights multipled by the average CO2 per kilo.
+         * NOTE: for some reason, the Misc category has a weight of 1 in the DB.  This makes it tricky
+         * to achieve both categorised and misc calculations in one query.
+         * TODO: NGM: don't feel that we should be rounding here, we should only round immediately prior to display.  Leaving for now.
+         */
+        public function getWeights($group = null)
+        {
+            $categorisedDevicesSql = 'SELECT
+                    ROUND(SUM(`c`.`weight`), 0) AS `total_weights`,
+                    ROUND(SUM(`c`.`footprint`) * ' . $this->displacement . ', 0)  AS `total_footprints`
                 FROM `'.$this->table.'` AS `d`
                 INNER JOIN `categories` AS `c` ON  `d`.`category` = `c`.`idcategories`
                 INNER JOIN `events` AS `e` ON  `d`.`event` = `e`.`idevents`
                 WHERE `d`.`repair_status` = 1 AND `c`.`idcategories` != 46';
 
+            $miscDevicesSql = 'SELECT
+                    ROUND(SUM(ifnull(`d`.`estimate`,0)), 0) AS `total_misc_weights`,
+                    ROUND(SUM(ifnull(`estimate`,0)) * (SELECT * FROM `view_waste_emission_ratio`) * ' . $this->displacement . ', 0) AS `total_misc_footprints`
+                FROM `'.$this->table.'` AS `d`
+                INNER JOIN `categories` AS `c` ON  `d`.`category` = `c`.`idcategories`
+                INNER JOIN `events` AS `e` ON  `d`.`event` = `e`.`idevents`
+                WHERE `d`.`repair_status` = 1 AND `c`.`idcategories` = 46';
+
             if(!is_null($group) && is_numeric($group)){
-                $sql .= ' AND `e`.`group` = :group';
+                $categorisedDevicesSql .= ' AND `e`.`group` = :group';
+                $miscDevicesSql .= ' AND `e`.`group` = :group';
             }
 
-            $stmt = $this->database->prepare($sql);
+            $categorisedStmt = $this->database->prepare($categorisedDevicesSql);
+            $miscStmt = $this->database->prepare($miscDevicesSql);
+
             if(!is_null($group) && is_numeric($group)){
-                $stmt->bindParam(':group', $group, PDO::PARAM_INT);
+                $categorisedStmt->bindParam(':group', $group, PDO::PARAM_INT);
+                $miscStmt->bindParam(':group', $group, PDO::PARAM_INT);
             }
 
+            $categorisedStmt->execute();
+            $categorisedValues = $categorisedStmt->fetchAll();
+            $miscStmt->execute();
+            $miscValues = $miscStmt->fetchAll();
 
+            // TODO: converting to array of 1 anonymous object to match previous return type.
+            // Should just be 1 object (or array) though.
+            $totalsObj = new stdClass;
+            $totalsObj->total_weights = $categorisedValues[0]['total_weights'] + $miscValues[0]['total_misc_weights'];
+            $totalsObj->total_footprints = $categorisedValues[0]['total_footprints'] + $miscValues[0]['total_misc_footprints'];
+            $totals = array(0 => $totalsObj);
 
-            $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_OBJ);
+            return $totals;
         }
 
 
