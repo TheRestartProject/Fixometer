@@ -212,7 +212,7 @@
                         }
                     ?>
                     <?php if($party->device_count < 1){ $nodata++; ?>
-                    <a class="no-data-wrap party" href="/party/manage/<?php echo $party->idevents; ?>" <?php echo ($nodata == 1 ? 'id="attention"' : ''); ?>>
+                    <a class="no-data-wrap party" href="/party/manage/<?php echo $party->id; ?>" <?php echo ($nodata == 1 ? 'id="attention"' : ''); ?>>
 
                         <div class="header-col-2 header-col">
                             <div class="date">
@@ -222,7 +222,7 @@
                             </div>
 
                             <div class="short-body">
-                                <span class="location"><?php echo $party->venue; ?></span>
+                                <span class="location"><?php echo $party->getPartyName(); ?></span>
                                 <time datetime="<?php echo dbDate($party->event_date); ?>"><?php echo substr($party->start, 0, -3); ?></time>
 
                             </div>
@@ -246,7 +246,7 @@
 
                     </a>
                     <?php } else {  ?>
-                    <a class=" party <?php echo ($party->guesstimates == true ? ' guesstimates' : ''); ?>"  href="/party/manage/<?php echo $party->idevents; ?>">
+                    <a class=" party <?php echo ($party->guesstimates == true ? ' guesstimates' : ''); ?>"  href="/party/manage/<?php echo $party->id; ?>">
                         <div class="header-col header-col-2">
                             <div class="date">
                                 <span class="month"><?php echo date('M', $party->event_timestamp); ?></span>
@@ -255,7 +255,7 @@
                             </div>
 
                             <div class="short-body">
-                                <span class="location"><?php echo $party->venue; ?></span>
+                                <span class="location"><?php echo $party->getPartyName(); ?></span>
                                 <time datetime="<?php echo dbDate($party->event_date); ?>"><?php echo  substr($party->start, 0, -3); ?></time>
 
                             </div>

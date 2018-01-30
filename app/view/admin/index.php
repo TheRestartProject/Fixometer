@@ -63,31 +63,30 @@
             <div class="row" id="group-main-stats">
                 <div class="col">
                     <h5><?php _t("participants");?></h5>
-                    <span class="largetext"><?php echo $pax; ?></span>
+                    <span id="all-participants-value" class="largetext"><?php echo $pax; ?></span>
                 </div>
 
                 <div class="col">
                     <h5><?php _t("hours volunteered");?></h5>
-                    <span class="largetext"><?php echo $hours; ?></span>
+                    <span id="all-hoursvolunteered-value" class="largetext"><?php echo $hours; ?></span>
                 </div>
 
                 <div class="col">
                     <h5><?php _t("parties thrown");?></h5>
-                    <span class="largetext"><?php echo count($allparties); ?></span>
+                    <span id="all-partiesthrown-value" class="largetext"><?php echo count($allparties); ?></span>
                 </div>
 
                 <div class="col">
                     <h5><?php _t("waste prevented");?></h5>
                     <span class="largetext">
-                        <?php echo number_format(round($wasteTotal), 0, '.', ','); ?> kg
+                        <span id="all-wasteprevented-value"><?php echo number_format(round($wasteTotal), 0, '.', ','); ?></span> kg
                     </span>
                 </div>
 
                 <div class="col">
                     <h5><?php _t("CO<sub>2</sub> emission prevented");?></h5>
-
                     <span class="largetext">
-                        <?php echo number_format(round($co2Total), 0, '.', ','); ?> kg
+                        <span id="all-co2prevented-value"><?php echo number_format(round($co2Total), 0, '.', ','); ?></span> kg
                     </span>
                 </div>
 
@@ -258,7 +257,7 @@
 
                     </a>
                     <?php } else {  ?>
-                    <a id="party-<?php echo $partyId; ?>" class=" party <?php echo ($party->guesstimates == true ? ' guesstimates' : ''); ?>"  href="/party/manage/<?php echo $partyId; ?>">
+                    <a id="party-<?php echo $partyId; ?>" class="party-with-data party <?php echo ($party->guesstimates == true ? ' guesstimates' : ''); ?>"  href="/party/manage/<?php echo $partyId; ?>">
                         <div class="header-col header-col-2">
                             <div class="date">
                                 <span class="month"><?php echo date('M', $party->event_timestamp); ?></span>

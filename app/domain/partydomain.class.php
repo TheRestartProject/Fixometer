@@ -61,4 +61,12 @@ class PartyDomain
 
         return $assumedHostVolunteerHours + $volunteersHours;
     }
+
+    public function getPartyName()
+    {
+        if ($this->venue)
+            return $this->venue;
+        else
+            return $this->location;
+    }
 }
