@@ -286,14 +286,15 @@ time {
 .body {float: left;clear: none; width: 80% ;}
 .links { float: left;clear: none; width: 20%; }
 .short-body { float: left;clear: none; width: 25%; }
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
 .stat {
-    float: left;
-    clear: none;
-    width: 16.66666%;
     font-size: 36px;
     text-align: center;
     min-height: 70px;
-    height: 70px;
     .count;
     .footprint { margin: 0px 5px; background: @blue; color: white; font-size: 20px; padding: 7px 4px 6px; min-height: 100%;
         .subtext { display: inline-block; line-height: 20px; }
@@ -307,7 +308,6 @@ time {
 .subtext { font-size: 10px; text-transform: uppercase;  display: block; clear: both; }
 .largetext { font-size: 36px; text-align: center; display: block; clear: both;  min-height: 70px; height: 70px;  }
 
-.col { width: 50%; display: inline-block; float: left; text-align: center; }
 .col3 { width: 33.333%; display: inline-block; float: left; text-align: center;
     .largetext { height: 128px; line-height: 128px; }
     &:nth-child(2) {
