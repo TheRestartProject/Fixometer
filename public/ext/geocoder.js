@@ -28,8 +28,8 @@
 
                 function codeAddress() {
                   var address = document.getElementById('location').value;
-                  var venue   = document.getElementById('venue').value;
-                  geocoder.geocode( { 'address': venue + ' ' + address}, function(results, status) {
+                  //var venue   = document.getElementById('venue').value;
+                  geocoder.geocode( { 'address': address }, function(results, status) {
                     if (status == google.maps.GeocoderStatus.OK) {
                       map.setCenter(results[0].geometry.location);
                       var marker = new google.maps.Marker({
