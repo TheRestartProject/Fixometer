@@ -18,11 +18,11 @@
 
     <div class="stat1">
         <div class="footprint">
-            <div>
+            <div style="line-height:10px;margin-bottom:10px;">
             <span id="co2-diverted-value"><?php echo $party->co2; ?></span>
             <span class="subtext">kg of CO<sub>2</sub></span>
             </div>
-            <div>
+            <div style="line-height:10px">
             <span id="ewaste-diverted-value"><?php echo number_format($party->ewaste, 0); ?></span>
             <span class="subtext">kg of waste</span>
             </div>
