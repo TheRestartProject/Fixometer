@@ -388,16 +388,43 @@
 
             $categorisedYears = $categorisedStmt->fetchAll(PDO::FETCH_OBJ);
             $miscYears = $miscStmt->fetchAll(PDO::FETCH_OBJ);
-            $combined = array();
 
+            // Can't guarantee that all years have both categorised and
+            // misc values.  For example, 2012 only has parties with
+            // Misc devices (they were used as estimates for parties
+            // that happened before the Fixometer existed).
+            $combinedYears = array();
             for ($i = 0; $i < count($categorisedYears); $i++)
             {
-                $combinedYearObj = new stdClass;
-                $combinedYearObj->co2 = ($categorisedYears[$i]->co2 + $miscYears[$i]->co2) * $this->displacement;
-                $combinedYearObj->year = $categorisedYears[$i]->year;
+                $year = $categorisedYears[$i]->year;
+                $co2 = $categorisedYears[$i]->year;
 
-                $combined[] = $combinedYearObj;
+                $combinedYearObj = new stdClass;
+                $combinedYearObj->co2 = $categorisedYears[$i]->co2 * $this->displacement;
+                $combinedYearObj->year = $categorisedYears[$i]->year;
+                $combinedYears[$year] = $combinedYearObj;
             }
+
+            for ($j = 0; $j < count($miscYears); $j++)
+            {
+                $miscYear = $miscYears[$j]->year;
+                $miscCo2 = $miscYears[$j]->co2;
+
+                if (array_key_exists($miscYear, $combinedYears))
+                    $combinedYears[$miscYear]->co2 += $miscCo2;
+                else
+                {
+                    $combinedYearObj = new stdClass;
+                    $combinedYearObj->co2 = $miscCo2->co2 * $this->displacement;
+                    $combinedYearObj->year = $miscYear;
+                    $combinedYears[$miscYear] = $combinedYearObj;
+                }
+            }
+
+            $combined = array();
+            krsort($combinedYears);
+            foreach ($combinedYears as $combinedYearObj)
+                $combined[] = $combinedYearObj;
 
             return $combined;
         }
