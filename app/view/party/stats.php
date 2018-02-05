@@ -1,47 +1,47 @@
-                    
-                    <div class="data <?php echo isset($class) && $class === 'wide' ? 'wide' : 'regular'; ?>">
-                        <div class="stat double">
-                            <div class="col">
-                                <i class="fa fa-group"></i>
-                                <span class="subtext">participants</span>
-                            </div>
-                            <div class="col">
-                                <?php echo $party->pax; ?>    
-                            </div>
-                        </div>
-                        
-                        <div class="stat double">
-                            <div class="col">
-                                <img class="" alt="The Restart Project: Logo" src="/assets/images/logo_mini.png">
-                                <span class="subtext">restarters</span>
-                            </div>
-                            <div class="col"><?php echo $party->volunteers; ?></div>                            
-                        </div>
-                        
-                        <div class="stat">                            
-                            <div class="footprint">
-                                <span id="co2-diverted-value"><?php echo $party->co2; ?></span>
-                                <span class="subtext">kg of CO<sub>2</sub></span>
-                                <br />
-                                <span id="ewaste-diverted-value"><?php echo number_format($party->ewaste, 0); ?></span>
-                                <span class="subtext">kg of waste<span>
-                            </div>
-                        </div>
-                        
-                        <div class="stat fixed">
-                            <div class="col"><i class="status mid fixed"></i></div>
-                            <div class="col"><?php echo $party->fixed_devices; ?></div>    
-                        </div>
-                        
-                        <div class="stat repairable">
-                            <div class="col"><i class="status mid repairable"></i></div>
-                            <div class="col"><?php echo $party->repairable_devices; ?></div>
-                        </div>
-                        
-                        <div class="stat dead">
-                            <div class="col"><i class="status mid dead"></i></div>
-                            <div class="col"><?php echo $party->dead_devices; ?></div>
-                        </div>
-                        
-                    </div>
-                </div>
+<div class="" id="party-headline-stats">
+
+    <div class="stat1">
+        <span>
+                <i class="fa fa-group"></i>
+                <span class="subtext">participants</span>
+        </span>
+        <?php echo $party->pax; ?>
+    </div>
+
+    <div class="stat1">
+        <span>
+                <img class="" alt="The Restart Project: Logo" src="/assets/images/logo_mini.png">
+                <span class="subtext">restarters</span>
+            </span>
+                <?php echo $party->volunteers; ?>
+    </div>
+
+    <div class="stat1">
+        <div class="footprint">
+            <div style="line-height:10px;margin-bottom:10px;">
+            <span id="co2-diverted-value"><?php echo $party->co2; ?></span>
+            <span class="subtext">kg of CO<sub>2</sub></span>
+            </div>
+            <div style="line-height:10px">
+            <span id="ewaste-diverted-value"><?php echo number_format($party->ewaste, 0); ?></span>
+            <span class="subtext">kg of waste</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="stat1">
+            <i class="status-inline mid fixed"></i>
+            <span class="fixed"><?php echo $party->fixed_devices; ?></span>
+    </div>
+
+    <div class="stat1">
+            <i class="status-inline mid repairable"></i>
+            <span class="repairable"><?php echo $party->repairable_devices; ?></span>
+    </div>
+
+    <div class="stat1">
+            <i class="status-inline mid dead"></i>
+            <span class="dead"><?php echo $party->dead_devices; ?></span>
+    </div>
+
+</div>

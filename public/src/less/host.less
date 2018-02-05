@@ -35,6 +35,12 @@
         }
     }
 }
+.col {
+    display: inline-block;
+    float: left;
+    text-align: center;
+    width: 50%;
+}
 #impact-header { padding-top: 50px;
     .impact-avatar { padding: 20px; }
 }
@@ -63,6 +69,7 @@
     }
 }
 #impact-dataviz {
+    max-width:1319px; /* this is max width of the SVG */
     .texter {padding-bottom: 35px;  }
     span.datalabel {color: @litegray; font-size: 36px; font-weight: 300;line-height: 180%;  }
     span.blue { .Font-PatuaOne; color: @blue; font-size: 36px;line-height: 180%;  }
@@ -75,9 +82,23 @@
             top: 0;
             padding: 12% 0%;
             height: 60%;
-            .blue {padding-top: 40px; text-align: center; font-size: 36px; color: @blue; font-weight: 300; text-indent: 30px; }
-            .consume { padding-top: 10px; text-align: center;  color: white; font-weight: 400; font-size: 60px; font-weight: bold;
-                small { font-size: 48px; }
+            .blue {
+                padding-top: 4vw;
+                text-align: center;
+                font-size: 3vw;
+                color: @blue;
+                font-weight: 300;
+            }
+            .consume {
+                padding-top: 1vw;
+                text-align: center;
+                color: white;
+                font-weight: 400;
+                font-size: 5vw;
+                font-weight: bold;
+                small {
+                    font-size: 4vw;
+                }
             }
         }
         &.car .text {
@@ -90,7 +111,7 @@
 
     .di_manufacture {
 
-        .lightblue { font-size: 36px; font-weight: 300; color: @blue; margin: 45px auto; padding: 20px 0px;
+        .lightblue { font-size: 4vw; font-weight: 300; color: @blue; margin: 45px auto; padding: 20px 0px;
             .dark { color: @darkgray; }
         }
         .legend { color: @blue; padding: 30px 0px;
@@ -195,9 +216,49 @@ time {
     border-bottom: 1px solid @litegray;
 }
 
+#party-headline-stats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    text-align: center;
+
+    .stat1 {
+        flex: 1;
+        flex-direction: row;
+        display:flex;
+        align-items: center;
+        font-size: 36px;
+        justify-content: space-around;
+        min-height: 70px;
+        padding: 0 5px;
+        .count;
+        .footprint { margin: 0; background: @blue; color: white; font-size: 20px; padding: 10px 2px; width: 100%;
+                     .subtext { display: inline-block; line-height: 20px; }
+                   }
+    }
+
+    .stat-inner {
+        flex: 1;
+        text-align: center;
+
+    }
+
+}
+@media only screen and (max-device-width : 780px) {
+    #party-headline-stats {
+        .stat1 {
+            flex-direction: column;
+        }
+    }
+}
+
 #group-main-stats {
+    display:flex;
+    flex-wrap: wrap;
+    align-items: center;
     .col {
-        width: 20%;
+        flex: 1;
         padding: 6px;
         border-right: 1px solid @blue;
         text-align: center;
@@ -222,6 +283,10 @@ time {
             .largetext { font-size: 18px; height: auto; min-height: 24px; }
         }
     }
+
+    @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+		    flex-direction: column;
+	  }
 }
 
 
@@ -270,14 +335,19 @@ time {
 .body {float: left;clear: none; width: 80% ;}
 .links { float: left;clear: none; width: 20%; }
 .short-body { float: left;clear: none; width: 25%; }
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
 .stat {
     float: left;
     clear: none;
     width: 16.66666%;
+    height: 70px;
     font-size: 36px;
     text-align: center;
     min-height: 70px;
-    height: 70px;
     .count;
     .footprint { margin: 0px 5px; background: @blue; color: white; font-size: 20px; padding: 7px 4px 6px; min-height: 100%;
         .subtext { display: inline-block; line-height: 20px; }
@@ -291,7 +361,6 @@ time {
 .subtext { font-size: 10px; text-transform: uppercase;  display: block; clear: both; }
 .largetext { font-size: 36px; text-align: center; display: block; clear: both;  min-height: 70px; height: 70px;  }
 
-.col { width: 50%; display: inline-block; float: left; text-align: center; }
 .col3 { width: 33.333%; display: inline-block; float: left; text-align: center;
     .largetext { height: 128px; line-height: 128px; }
     &:nth-child(2) {

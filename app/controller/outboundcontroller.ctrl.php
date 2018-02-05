@@ -108,7 +108,7 @@
 					$info['consume_image'] 	= 'Counters_C1_TV.svg';
 					$info['consume_label'] 	= 'Like watching TV for';
 					$info['consume_eql_to'] = ((1 / 0.024) * $co2 ) / 24;
-					$info['consume_eql_to'] = number_format(round($info['consume_eql_to']), 0, '.', ',') . '<small>days</small>';
+					$info['consume_eql_to'] = number_format(round($info['consume_eql_to']), 0, '.', ',') . ' <small>days</small>';
 
 					$info['manufacture_eql_to'] = round($co2 / 100);
 					$info['manufacture_img'] = 'Icons_03_Sofa.svg';

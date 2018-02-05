@@ -988,7 +988,7 @@
         <div><strong>CO<sub>2</sub> <?php _t("equivalence visualisation");?></strong></div>
         <p><?php _t("This widget displays an infographic of an easy-to-understand equivalent of the CO<sub>2</sub> emissions that your group has diverted, such as equivalent number of cars manufactured.");?></p>
         <code style="padding:0">
-            <pre>&lt;iframe src="https://community.therestartproject.org/outbound/info/group/<?php echo $group->idgroups; ?>" frameborder="0" width="100%" height="600"&gt;&lt;/iframe&gt;</pre>
+            <pre>&lt;iframe src="https://community.therestartproject.org/outbound/info/group/<?php echo $group->idgroups; ?>" frameborder="0" width="700" height="850"&gt;&lt;/iframe&gt;</pre>
         </code>
       </div>
       <div class="modal-footer">
