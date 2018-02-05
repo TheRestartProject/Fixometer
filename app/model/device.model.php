@@ -85,16 +85,16 @@
         public function getWeights($group = null)
         {
             $categorisedDevicesSql = 'SELECT
-                    ROUND(SUM(`c`.`weight`), 0) AS `total_weights`,
-                    ROUND(SUM(`c`.`footprint`) * ' . $this->displacement . ', 0)  AS `total_footprints`
+                    SUM(`c`.`weight`) AS `total_weights`,
+                    SUM(`c`.`footprint`) * ' . $this->displacement . '  AS `total_footprints`
                 FROM `'.$this->table.'` AS `d`
                 INNER JOIN `categories` AS `c` ON  `d`.`category` = `c`.`idcategories`
                 INNER JOIN `events` AS `e` ON  `d`.`event` = `e`.`idevents`
                 WHERE `d`.`repair_status` = 1 AND `c`.`idcategories` != 46';
 
             $miscDevicesSql = 'SELECT
-                    ROUND(SUM(ifnull(`d`.`estimate`,0)), 0) AS `total_misc_weights`,
-                    ROUND(SUM(ifnull(`estimate`,0)) * (SELECT * FROM `view_waste_emission_ratio`) * ' . $this->displacement . ', 0) AS `total_misc_footprints`
+                    SUM(ifnull(`d`.`estimate`,0)) AS `total_misc_weights`,
+                    SUM(ifnull(`estimate`,0)) * (SELECT * FROM `view_waste_emission_ratio`) * ' . $this->displacement . ' AS `total_misc_footprints`
                 FROM `'.$this->table.'` AS `d`
                 INNER JOIN `categories` AS `c` ON  `d`.`category` = `c`.`idcategories`
                 INNER JOIN `events` AS `e` ON  `d`.`event` = `e`.`idevents`
