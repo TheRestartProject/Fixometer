@@ -397,25 +397,25 @@
             for ($i = 0; $i < count($categorisedYears); $i++)
             {
                 $year = $categorisedYears[$i]->year;
-                $co2 = $categorisedYears[$i]->year;
+                $co2 = $categorisedYears[$i]->co2 * $this->displacement;
 
                 $combinedYearObj = new stdClass;
-                $combinedYearObj->co2 = $categorisedYears[$i]->co2 * $this->displacement;
-                $combinedYearObj->year = $categorisedYears[$i]->year;
+                $combinedYearObj->co2 = $co2;
+                $combinedYearObj->year = $year;
                 $combinedYears[$year] = $combinedYearObj;
             }
 
             for ($j = 0; $j < count($miscYears); $j++)
             {
                 $miscYear = $miscYears[$j]->year;
-                $miscCo2 = $miscYears[$j]->co2;
+                $miscCo2 = $miscYears[$j]->co2 * $this->displacement;
 
                 if (array_key_exists($miscYear, $combinedYears))
                     $combinedYears[$miscYear]->co2 += $miscCo2;
                 else
                 {
                     $combinedYearObj = new stdClass;
-                    $combinedYearObj->co2 = $miscCo2->co2 * $this->displacement;
+                    $combinedYearObj->co2 = $miscCo2;
                     $combinedYearObj->year = $miscYear;
                     $combinedYears[$miscYear] = $combinedYearObj;
                 }
