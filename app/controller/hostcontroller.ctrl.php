@@ -24,6 +24,9 @@
                 }
                 else {
                     $deviceGateway = new Device;
+                    $weights = $deviceGateway->getWeights()[0];
+                    $this->TotalEmission = $weights->total_footprints;
+                    $this->TotalWeight = $weights->total_weights;
                     $this->EmissionsRatio = $deviceGateway->getWasteEmissionRatio();
                 }
             }
@@ -104,47 +107,20 @@
                     $need_attention++;
                 }
 
-                $party->co2 = 0;
-                $party->fixed_devices = 0;
-                $party->repairable_devices = 0;
-                $party->dead_devices = 0;
+                $party->calculateStatistics($this->EmissionsRatio, $Device->displacement);
 
                 $participants += $party->pax;
-                $hours_volunteered += (($party->volunteers > 0 ? $party->volunteers * 3 : 12 ) + 9);
+                $hours_volunteered += $party->hours_volunteered;
 
-                foreach($party->devices as $device){
-                    if($device->repair_status == DEVICE_FIXED){
-                        $party->co2 += (!empty($device->estimate) && $device->category == 46 ? ($device->estimate * $this->EmissionRatio) : $device->footprint);
-
-                    }
-
-                    switch($device->repair_status){
-                        case 1:
-                            $party->fixed_devices++;
-                            break;
-                        case 2:
-                            $party->repairable_devices++;
-                            break;
-                        case 3:
-                            $party->dead_devices++;
-                            break;
-                    }
-                }
-
-                $party->co2 = number_format(round($party->co2 * $Device->displacement), 0, '.' , ',');
+                $party->co2 = number_format(round($party->co2), 0, '.' , ',');
             }
+
             $this->set('pax', $participants);
             $this->set('hours', $hours_volunteered);
             $weights = $Device->getWeights($group->idgroups);
             $this->set('weights', $weights);
 
             $devices = $Device->ofThisGroup($group->idgroups);
-
-            /*
-            foreach($devices as $i => $device){
-
-            }
-            */
 
             $this->set('need_attention', $need_attention);
 
