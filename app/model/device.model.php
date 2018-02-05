@@ -322,42 +322,84 @@
             return $r;
         }
 
+
+        /**
+         * Calculates the CO2 grouped by year.
+         * Can optionally be filtered by a group or a given year (or both).
+         *
+         * Split into two queries, one for categorised devices, and one for
+         * misc devices, as not yet come up with a reliable way to pull both
+         * out of one query.  Makes for a messy method though.
+         * TODO: put unit tests around this method and refactor it.
+         */
         public function countCO2ByYear($group = null, $year = null) {
-            $sql = 'SELECT
-                        (ROUND(SUM(`c`.`footprint`), 0) * ' . $this->displacement . ') + ( CASE WHEN `d`.`category` = 46 THEN IFNULL(ROUND(SUM(`estimate`) * (SELECT * FROM `view_waste_emission_ratio`), 0),0) ELSE 0 END) AS `co2`,
+            $categorisedSql = 'SELECT
+                        SUM(`c`.`footprint`) AS `co2`,
                         YEAR(`e`.`event_date`) AS `year`
                     FROM `' . $this->table . '` AS `d`
                     INNER JOIN `events` AS `e`
                         ON `d`.`event` = `e`.`idevents`
                     INNER JOIN `categories` AS `c`
                         ON `d`.`category` = `c`.`idcategories`
-                    WHERE `d`.`repair_status` = 1 ';
+                    WHERE `d`.`repair_status` = 1 AND `d`.category != 46';
+            $miscSql = 'SELECT
+                    SUM(ifnull(`d`.estimate, 0)) * (select * from view_waste_emission_ratio) AS `co2`,
+                    YEAR(`e`.`event_date`) AS `year`
+                FROM `' . $this->table . '` AS `d`
+                INNER JOIN `events` AS `e`
+                    ON `d`.`event` = `e`.`idevents`
+                INNER JOIN `categories` AS `c`
+                    ON `d`.`category` = `c`.`idcategories`
+                WHERE `d`.`repair_status` = 1 AND `d`.category = 46';
 
             if(!is_null($group)){
-                $sql.=' AND `e`.`group` = :group ';
+                $categorisedSql .= ' AND `e`.`group` = :group ';
+                $miscSql .= ' AND `e`.`group` = :group ';
             }
             if(!is_null($year)){
-                $sql.=' AND YEAR(`e`.`event_date`) = :year ';
+                $categorisedSql .= ' AND YEAR(`e`.`event_date`) = :year ';
+                $miscSql .= ' AND YEAR(`e`.`event_date`) = :year ';
             }
-            $sql.= ' GROUP BY `year`
-                    ORDER BY `year` DESC'; // was grouped by category too at some point
-          //  echo $sql;
-            $stmt = $this->database->prepare($sql);
+            $categorisedSql .= ' GROUP BY `year`
+                    ORDER BY `year` DESC';
+            $miscSql .= ' GROUP BY `year`
+                    ORDER BY `year` DESC';
+
+            $categorisedStmt = $this->database->prepare($categorisedSql);
+            $miscStmt = $this->database->prepare($miscSql);
 
             if(!is_null($group) && is_numeric($group)){
-                $stmt->bindParam(':group', $group, PDO::PARAM_INT);
+                $categorisedStmt->bindParam(':group', $group, PDO::PARAM_INT);
+                $miscStmt->bindParam(':group', $group, PDO::PARAM_INT);
             }
             if(!is_null($year) && is_numeric($year)){
-                $stmt->bindParam(':year', $year, PDO::PARAM_INT);
+                $categorisedStmt->bindParam(':year', $year, PDO::PARAM_INT);
+                $miscStmt->bindParam(':year', $year, PDO::PARAM_INT);
             }
 
-            $q = $stmt->execute();
-            if(!$q){
-                dbga($stmt->errorCode()); dbga($stmt->errorInfo() );
+            $query1 = $categorisedStmt->execute();
+            $query2 = $miscStmt->execute();
+            if(!$query1){
+                dbga($categorisedStmt->errorCode()); dbga($categorisedStmt->errorInfo() );
             }
-            return $stmt->fetchAll(PDO::FETCH_OBJ);
+            if(!$query2){
+                dbga($miscStmt->errorCode()); dbga($miscStatment->errorInfo() );
+            }
 
+            $categorisedYears = $categorisedStmt->fetchAll(PDO::FETCH_OBJ);
+            $miscYears = $miscStmt->fetchAll(PDO::FETCH_OBJ);
+            $combined = array();
 
+            for ($i = 0; $i < count($categorisedYears); $i++)
+            {
+                $combinedYearObj = new stdClass;
+                $combinedYearObj->co2 = ($categorisedYears[$i]->co2 + $miscYears[$i]->co2) * $this->displacement;
+                $combinedYearObj->year = $categorisedYears[$i]->year;
+
+                $combined[] = $combinedYearObj;
+            }
+
+            return $combined;
         }
 
         public function countWasteByYear($group = null, $year = null) {
