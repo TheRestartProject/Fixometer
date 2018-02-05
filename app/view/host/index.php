@@ -511,9 +511,15 @@
                 <h5 class="text-center"><?php _t("e-Waste Prevented to date");?></h5>
 
                 <span class="largetext">
-                    <?php echo $weights[0]->total_weights; ?> kg
+                    <span id="group-ewaste-value">
+                        <?php echo number_format(round($weights[0]->total_weights), 0, '.', ','); ?>
+                    </span>
+                    kg
                 </span>
-                <span class="subtext text-center"><?php _t("Total:");?>" <?php echo number_format(round($wasteTotal), 0, '.', ','); ?> kg</span>
+                <span class="subtext text-center">
+                    <?php _t("Total:");?>
+                    <span id="total-ewaste-value"><?php echo number_format(round($wasteTotal), 0, '.', ','); ?></span>
+                    kg</span>
                 <hr />
 
                 <h5 class="text-center"><?php _t("e-Waste prevented this year");?></h5>
@@ -523,9 +529,18 @@
                         if($y->year == date('Y', time())) {
                 ?>
                 <span class="largetext">
-                    <?php echo number_format(round($y->waste), 0, '.', ','); ?> kg
+                    <span id="group-ewaste-thisyear-value">
+                        <?php echo number_format(round($y->waste), 0, '.', ','); ?>
+                    </span>
+                    kg
                 </span>
-                <span class="subtext text-center">Total: <?php echo number_format(round($wasteThisYear), 0, '.', ','); ?> kg</span>
+                <span class="subtext text-center">
+                    Total:
+                    <span id="total-ewaste-thisyear-value">
+                        <?php echo number_format(round($wasteThisYear), 0, '.', ','); ?>
+                    </span>
+                    kg
+                </span>
                 <?php
                         }
                     }
@@ -542,9 +557,14 @@
                     }
                 ?>
                 <span class="largetext">
-                    <?php echo number_format(round($sum), 0, '.', ','); ?> kg of CO<sub>2</sub>
+                    <span id="group-co2-value"><?php echo number_format(round($sum), 0, '.', ','); ?></span>
+                    kg of CO<sub>2</sub>
                 </span>
-                <span class="subtext text-center">Total: <?php echo number_format(round($co2Total), 0, '.', ','); ?> kg of CO<sub>2</sub></span>
+                <span class="subtext text-center">
+                    Total:
+                    <span id="total-co2-value"><?php echo number_format(round($co2Total), 0, '.', ','); ?></span>
+                    kg of CO<sub>2</sub>
+                </span>
 
                 <hr />
 
@@ -555,9 +575,17 @@
                         if($y->year == date('Y', time())) {
                 ?>
                 <span class="largetext">
-                    <?php echo number_format(round($y->co2), 0, '.', ','); ?> <?php _t("kg of CO");?><sub>2</sub>
+                    <span id="group-co2-thisyear-value">
+                        <?php echo number_format(round($y->co2), 0, '.', ','); ?>
+                    </span>
+                        <?php _t("kg of CO");?><sub>2</sub>
                 </span>
-                <span class="subtext text-center"><?php _t("Total:");?>" <?php echo number_format(round($co2ThisYear), 0, '.', ','); ?> <?php _t("kg of CO");?><sub>2</sub></span>
+                <span class="subtext text-center">
+                    <?php _t("Total:");?>
+                    <span id="total-co2-thisyear-value">
+                        <?php echo number_format(round($co2ThisYear), 0, '.', ','); ?>
+                    </span>
+                        <?php _t("kg of CO");?><sub>2</sub></span>
                 <?php
                         }
                     }
