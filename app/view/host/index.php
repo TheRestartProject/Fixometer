@@ -121,14 +121,16 @@
                     <h5><?php _t("waste prevented");?></h5>
 
                     <span class="largetext">
-                        <?php echo $weights[0]->total_weights; ?> kg
+                        <?php echo number_format(round($weights[0]->total_weights), 0, '.', ','); ?> kg
                     </span>
                 </div>
 
                 <div class="col">
                     <h5><?php _t("CO<sub>2</sub> emission prevented");?></h5>
 
-                    <span class="largetext"><?php echo $weights[0]->total_footprints; ?> kg</span>
+                    <span class="largetext">
+                        <?php echo number_format(round($weights[0]->total_footprints), 0, '.', ','); ?> kg
+                    </span>
                 </div>
 
             </div>
@@ -186,8 +188,8 @@
                                 <span clasS="location"><?php echo (!empty($party->venue) ? $party->venue : $party->location); ?></span>
                             </div>
                             <div class="links">
-                                <a href="/party/edit/<?php echo $party->idevents; ?>" class="btn btn-default btn-sm btn-block"><i class="fa fa-edit"></i> edit</a>
-                                <a href="/party/delete/<?php echo $party->idevents; ?>" class="btn btn-danger btn-sm btn-block delete-control"><i class="fa fa-trash"></i> delete</a>
+                                <a href="/party/edit/<?php echo $party->id; ?>" class="btn btn-default btn-sm btn-block"><i class="fa fa-edit"></i> edit</a>
+                                <a href="/party/delete/<?php echo $party->id; ?>" class="btn btn-danger btn-sm btn-block delete-control"><i class="fa fa-trash"></i> delete</a>
                             </div>
                         </div>
                     </div>
@@ -265,7 +267,7 @@
                         }
                     ?>
                     <?php if($party->device_count < 1){ $nodata++; ?>
-                    <a class="no-data-wrap party" href="/party/manage/<?php echo $party->idevents; ?>" <?php echo ($nodata == 1 ? 'id="attention"' : ''); ?>>
+                    <a class="no-data-wrap party" href="/party/manage/<?php echo $party->id; ?>" <?php echo ($nodata == 1 ? 'id="attention"' : ''); ?>>
 
                         <div class="header-col header-col-2">
                             <div class="date">
@@ -299,7 +301,7 @@
 
                     </a>
                     <?php } else {  ?>
-                    <a class="party"  href="/party/manage/<?php echo $party->idevents; ?>">
+                    <a class="party"  href="/party/manage/<?php echo $party->id; ?>">
                         <div class="header-col header-col-2">
                             <div class="date">
                                 <span class="month"><?php echo date('M', $party->event_timestamp); ?></span>
@@ -417,7 +419,7 @@
                             $sum += $y->waste;
                         }
                     ?>
-                    <span class="datalabel"> <?php _t("Total waste prevented:"); ?> </span><span class="blue">  <?php echo $weights[0]->total_weights; ?> kg </span>
+                    <span class="datalabel"> <?php _t("Total waste prevented:"); ?> </span><span class="blue">  <?php echo number_format(round($weights[0]->total_weights), 0, '.', ','); ?> kg </span>
 
                 </div>
                 <div class="col-md-12 text-center texter">
@@ -428,7 +430,7 @@
                         }
                         //$di_co2 = number_format(round($sum), 0, '.', ',');
                     ?>
-                    <span class="datalabel"><?php _t("Total CO<sub>2</sub> emission prevented:");?>" </span><span class="blue"><?php echo $weights[0]->total_footprints; ?> kg</span>
+                    <span class="datalabel"><?php _t("Total CO<sub>2</sub> emission prevented:");?> </span><span class="blue"><?php echo number_format(round($weights[0]->total_footprints), 0, '.', ','); ?> kg</span>
 
                 </div>
                 <div class="col-md-12">
@@ -640,7 +642,7 @@
                             <span class="largetext dead">
                                 <?php echo (int)$group_device_count_status[2]->counter; ?>
                             </span>
-                            <span class="subtext textblue"><?php _t("total:");?>" <?php echo $device_count_status[2]->counter; ?></span>
+                            <span class="subtext textblue"><?php _t("total:");?> <?php echo $device_count_status[2]->counter; ?></span>
                         </div>
                     </div>
                 </div>
@@ -705,17 +707,17 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="table-label"><?php _t("Most seen:");?>"</td>
+                                    <td class="table-label"><?php _t("Most seen:");?></td>
                                     <td class="table-data"><?php echo $mostleast[1]['most_seen'][0]->name; ?></td>
                                     <td class="table-count"><?php echo $mostleast[1]['most_seen'][0]->counter; ?></td>
                                 </tr>
                                 <tr>
-                                    <td class="table-label"><?php _t("Most repaired:");?>"</td>
+                                    <td class="table-label"><?php _t("Most repaired:");?></td>
                                     <td class="table-data"><?php echo $mostleast[1]['most_repaired'][0]->name; ?></td>
                                     <td class="table-count"><?php echo $mostleast[1]['most_repaired'][0]->counter; ?></td>
                                 </tr>
                                 <tr>
-                                    <td class="table-label"><?php _t("Least repaired:");?>"</td>
+                                    <td class="table-label"><?php _t("Least repaired:");?></td>
                                     <td class="table-data"><?php echo $mostleast[1]['least_repaired'][0]->name; ?></td>
                                     <td class="table-count"><?php echo $mostleast[1]['least_repaired'][0]->counter; ?></td>
                                 </tr>
