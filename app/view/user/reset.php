@@ -10,7 +10,7 @@
     <div class="shader"></div>
     <h2><span class="title-text"><?php _t("Reset your password");?></span></h2>
 
-    <p class="explainer-text"><?php _t("Please input your new password here, and then click the button below to reset your password.");?>"</p>
+    <p class="explainer-text"><?php _t("Please input your new password here, and then click the button below to reset your password.");?></p>
 
     <form class="" method="post" action="/user/reset?recovery=<?php echo $recovery; ?>">
         <input type="hidden" name="recovery" value="<?php echo $recovery; ?>">
@@ -20,7 +20,7 @@
         </div>
         <div class="form-group">
             <label for="confirm_password" class="text-center"><?php _t("Confirm Password");?></label>
-            <input type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="<?php _t("Confirm Your new password...");?>"
+            <input type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="<?php _t("Confirm Your new password...");?>" />
         </div>
         <div class="form-group text-center">
             <button type="submit" class="form-control btn btn-primary login-button" name="submit" id="submit"><i class="fa fa-sign-in"></i><span class="sr-only">Login</span></button>
