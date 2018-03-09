@@ -7,7 +7,7 @@
         public $TotalWeight;
         public $TotalEmission;
         public $EmissionRatio;
-
+       
         public function __construct($model, $controller, $action)
         {
             parent::__construct($model, $controller, $action);
@@ -194,7 +194,6 @@
                                             'post_type' => 'party',
                                             'custom_fields' => $custom_fields
                                             );
-                            
                             $party_name = !empty($data['venue']) ? $data['venue'] : $data['location'];
                             $wpid = $wpClient->newPost($party_name, $free_text, $content);
 
@@ -202,8 +201,11 @@
                         }
 
                         if(hasRole($this->user, 'Host')){
+                         
+                            $this->sendCreationNotificationEmail($venue, $location, $event_date, $start, $end, $group);
                             header('Location: /host?action=pc&code=200');
-                        }else if(hasRole($this->user, 'Administrator')){
+                              
+                          }else if(hasRole($this->user, 'Administrator')){
                             header('Location: /admin?action=pc&code=200');
                           }
                      }
@@ -220,7 +222,31 @@
                 $this->set('udata', $_POST);
             }
 
+        }
 
+        public function sendCreationNotificationEmail($venue, $location, $event_date, $start, $end, $group_id){
+            $Groups = new Group;
+
+            $group = $Groups->findOne($group_id);
+            $group_name = $group->name;
+
+            $hostname = $this->user->name;
+
+            // send email to Admin
+            $message = "<p>Hi,</p>" .
+            "<p>This is an automatic email to let you know that <strong>". $hostname . " </strong>has created a party on the <strong>" . APPNAME . "</strong>.</p>" .
+            "<p><strong>Group Name:</strong> ". $group_name ." <p>" .
+            "<p><strong>Party Name:</strong> ". $venue ." </p>" .
+            "<p><strong>Party Location:</strong> " . $location ." </p>" .
+            "<p><strong>Party Date:</strong> ". $event_date ." </p>" .
+            "<p><strong>Party Start Time:</strong> ". $start ." </p>" .
+            "<p><strong>Party End Time:</strong> ". $end ." </p>" ;
+
+            $subject = APPNAME . ": Party created by the host : " . $hostname . " ";
+            $headers = "From: " . APPEMAIL . "\r\n";
+            $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+            $email= NOTIFICATION_EMAIL;
+            $sender = mail($email, $subject, $message, $headers);
         }
 
         /** sync all parties to wordpress - CREATES PARTIES! **/
