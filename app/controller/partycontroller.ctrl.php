@@ -194,8 +194,9 @@
                                             'post_type' => 'party',
                                             'custom_fields' => $custom_fields
                                             );
-
-                            $wpid = $wpClient->newPost($location, $free_text, $content);
+                            
+                            $party_name = !empty($data['venue']) ? $data['venue'] : $data['location'];
+                            $wpid = $wpClient->newPost($party_name, $free_text, $content);
 
                             $this->Party->update(array('wordpress_post_id' => $wpid), $idParty);
                         }
