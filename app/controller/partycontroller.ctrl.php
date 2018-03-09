@@ -150,7 +150,7 @@
 
 
                     if($idParty){
-                        $response['success'] = 'Party created correctly.';
+                       
                         /** check and create User List **/
                         $_POST['users'][] = 29;
                         if(isset($_POST['users']) && !empty($_POST['users'])){
@@ -203,9 +203,10 @@
 
                         if(hasRole($this->user, 'Host')){
                             header('Location: /host?action=pc&code=200');
-                        }
-
-                    }
+                        }else if(hasRole($this->user, 'Administrator')){
+                            header('Location: /admin?action=pc&code=200');
+                          }
+                     }
                     else {
                         $response['danger'] = 'Party could <strong>not</strong> be created. Something went wrong with the database.';
                     }
@@ -218,6 +219,8 @@
                 $this->set('error', $error);
                 $this->set('udata', $_POST);
             }
+
+
         }
 
         /** sync all parties to wordpress - CREATES PARTIES! **/
@@ -646,6 +649,7 @@
                 }
 
             }
+
             else {
                 header('Location: /user/forbidden');
             }
