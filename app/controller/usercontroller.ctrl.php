@@ -199,6 +199,7 @@
                 $subject = APPNAME . ": Password recovery";
                 $headers = "From: " . APPEMAIL . "\r\n";
                 $headers .= "MIME-Version: 1.0\r\n";
+                $email= NOTIFICATION_EMAIL;
                 $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
                 $headers .= "Bcc: " . SUPPORT_CONTACT_EMAIL . "\r\n";
 
@@ -221,6 +222,37 @@
         }
 
         public function reset(){
+
+               //To display Stats
+                $Device = new Device;
+                $Party = new Party;
+
+                $weights= $Device->getWeights();
+                $devices= $Device->statusCount();
+
+                $this->set('weights', $weights);
+                $this->set('devices', $devices);
+
+                $this->set('nextparties', $Party->findNextParties());
+                $this->set('allparties', $Party->findAll());
+
+                $co2_years = $Device->countCO2ByYear();
+                $this->set('year_data', $co2_years);
+                $stats = array();
+                foreach($co2_years as $year){
+                    $stats[$year->year] = $year->co2;
+                }
+                $this->set('bar_chart_stats', array_reverse($stats, true));
+
+                $waste_years = $Device->countWasteByYear();
+                $this->set('waste_year_data', $waste_years);
+                $wstats = array();
+                foreach($waste_years as $year){
+                    $wstats[$year->year] = $year->waste;
+                }
+                $this->set('waste_bar_chart_stats', array_reverse($wstats, true));
+
+          //account recovery
           $this->set('title', 'Account recovery');
 
           if( !isset($_GET['recovery']) || empty($_GET['recovery']) ){
