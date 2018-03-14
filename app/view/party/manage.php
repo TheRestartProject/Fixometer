@@ -223,7 +223,7 @@
                                      estimate-box">
                                     <small><?php _t("Please input an estimate weight (in kg)");?></small>
                                     <div class="input-group">
-                                    <input type="text" name="device[<?php echo $i; ?>][estimate]" id="device[<?php echo $i; ?>][estimate]" class="form-control" placeholder="<?php _t("Estimate...");?>" value="<?php echo $devices[$i-1]->estimate; ?>">
+                                    <input type="number" step="00.01" min="0" max="99.99" name="device[<?php echo $i; ?>][estimate]" id="device[<?php echo $i; ?>][estimate]" class="form-control" placeholder="<?php _t("Estimate...");?>" value="<?php echo $devices[$i-1]->estimate; ?>">
                                     <span class="input-group-addon">kg</span>
                                     </div>
                                 </div>
@@ -379,7 +379,7 @@
                                 <div class="form-group hide estimate-box">
                                     <small><?php _t("Please input an estimate weight (in kg)");?></small>
                                     <div class="input-group">
-                                        <input type="text" name="device[<?php echo $i; ?>][estimate]" id="device[<?php echo $i; ?>][estimate]" class="form-control" placeholder="<?php _t("Estimate...");?>">
+                                        <input type="number" step="00.01" min="0" max="99.99" name="device[<?php echo $i; ?>][estimate]" id="device[<?php echo $i; ?>][estimate]" class="form-control" placeholder="<?php _t("Estimate...");?>">
                                         <span class="input-group-addon">kg</span>
                                     </div>
                                 </div>
