@@ -199,7 +199,6 @@
                 $subject = APPNAME . ": Password recovery";
                 $headers = "From: " . APPEMAIL . "\r\n";
                 $headers .= "MIME-Version: 1.0\r\n";
-                $email= NOTIFICATION_EMAIL;
                 $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
                 $headers .= "Bcc: " . SUPPORT_CONTACT_EMAIL . "\r\n";
 
