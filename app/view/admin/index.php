@@ -25,7 +25,7 @@
                         <?php _t("Groups");?>
                       <span class="fa fa-chevron-down"></span>
                     </button>
-                    <ul class="dropdown-menu">
+                    <ul id ="group-dropdown" class="dropdown-menu">
                         <?php foreach($grouplist as $group) { ?>
                         <li class="group-list clearfix">
                             <div class="pull-left">
@@ -35,7 +35,7 @@
                                 <div class="profile-pic clearfix" style="background: #ddd; width: 40px; height: 40px; ">&nbsp;</div>
                                 <?php } ?>
                             </div>
-                            <div class="pull-left">
+                            <div class="pull-left group-option">
                                 <a  href="/host/index/<?php echo $group->id; ?>" ><?php echo $group->name; ?></a>
                             </div>
                         </li>
