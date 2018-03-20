@@ -76,7 +76,7 @@ $('.device-image-delete').click(function(e){
                           '<td>' + n + '.</td>'+
                           '<td>' +
                               '<div class="form-group">' +
-                                  '<select id="device[' + n +'][category]" name="device[' + n + '][category]" class="category-select  form-control" data-live-search="true" tite="Choose category...">' +
+                                  '<select id="device[' + n +'][category]" name="device[' + n + '][category]" class="category-select  form-control" data-live-search="true" tite="Choose category..." required="true">' +
                                   '<option></option>' +
                                   categories +
                                   '<option value="46">None of the above...</option>' +
@@ -161,8 +161,15 @@ $('.device-image-delete').click(function(e){
                                   '</div>' +
                               '</div>' +
                           '</td>' +
-                          '<td></td>' +
+                          '<td><a id="remove" class="btn delete-control" href="onclick="removeData()""><i class="fa fa-trash"></i></a></td>' +
                       '</tr>';
+
+
+function removeData(){
+var element = document.getElementById('remove');
+element.parentNode.removeChild(element);
+return false;
+}
 
       $('#device-table tbody').append(tablerow);
 

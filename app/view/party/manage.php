@@ -205,9 +205,10 @@
                                 <input type="hidden" name="device[<?php echo $i; ?>][id]" value="<?php echo $devices[$i-1]->iddevices; ?>">
 
                             </td>
-                            <td>
-                                <div class="form-group">
-                                    <select id="device[<?php echo $i; ?>][category]" name="device[<?php echo $i; ?>][category]" class="category-select form-control" data-live-search="true">
+                            <td>       
+                                <div class="form-group" id="bootstrapSelectForm">
+                                    <select id="device[<?php echo $i; ?>][category]" name="device[<?php echo $i; ?>][category]" class="category-select form-control" data-live-search="true" required="true">
+                                         <option></option>
                                         <?php foreach($categories as $cluster){ ?>
                                         <optgroup label="<?php echo $cluster->name; ?>">
                                             <?php foreach($cluster->categories as $c){ ?>
@@ -216,7 +217,7 @@
                                         </optgroup>
                                         <?php } ?>
                                         <option value="46" <?php echo ($devices[$i-1]->category == 46 ? ' selected':''); ?>><?php _t("None of the above...");?></option>
-                                    </select>
+                                    </select>                                    
                                 </div>
                                 <div class="form-group
                                     <?php echo ($devices[$i-1]->category == 46 ? 'show' : 'hide'); ?>
@@ -276,8 +277,8 @@
 
                             </td>
                             <?php endif ?>
-
                             <td>
+                            
                                 <div class="form-group">
                                     <div class="radio">
                                         <label>
@@ -363,8 +364,9 @@
                         <tr>
                             <td><?php echo $i; ?>.</td>
                             <td>
+
                                 <div class="form-group">
-                                    <select id="device[<?php echo $i; ?>][category]" name="device[<?php echo $i; ?>][category]" class="selectpicker form-control category-select" data-live-search="true" title="Choose category...">
+                                    <select id="device[<?php echo $i; ?>][category]" name="device[<?php echo $i; ?>][category]" class="selectpicker form-control category-select" data-live-search="true" title="Choose category..." required="true">
                                         <option></option>
                                         <?php foreach($categories as $cluster){ ?>
                                         <optgroup label="<?php echo $cluster->name; ?>">
@@ -376,7 +378,7 @@
                                         <option value="46"><?php _t("None of the above...");?></option>
                                     </select>
                                 </div>
-                                <div class="form-group hide estimate-box">
+                                <div class="form-group hide estimate-box" required>
                                     <small><?php _t("Please input an estimate weight (in kg)");?></small>
                                     <div class="input-group">
                                         <input type="number" step="00.01" min="0" max="99.99" name="device[<?php echo $i; ?>][estimate]" id="device[<?php echo $i; ?>][estimate]" class="form-control" placeholder="<?php _t("Estimate...");?>">
@@ -458,7 +460,7 @@
 
                                 </div>
                             </td>
-
+                              <td></td>
                         </tr>
                         <?php } ?>
 
@@ -474,6 +476,7 @@
                 <div class="text-center">
                     <br /><br />
                     <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-floppy-o"></i> <?php _t("Save");?></button>
+        
                     <br /><br /><br />
                 </div>
             </div>
