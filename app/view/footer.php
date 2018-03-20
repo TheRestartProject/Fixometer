@@ -11,7 +11,7 @@
                 <h3>The Fixometer</h3>
                 <p>
                 <p>
-                   This tool was developed by The Restart Project with funding from the Shuttleworth Foundation. It was created with support from WRAP's Innovation in Waste Prevention Fund, in collaboration with The Engine Room and Circular Ecology.</p>
+                   This tool is developed by The Restart Project with support from the Shuttleworth Foundation. It was created with support from WRAP's Innovation in Waste Prevention Fund, in collaboration with The Engine Room and Circular Ecology.</p>
                     If you are a community group and would like to use the Fixometer, please email us at <a href="mailto:community@therestartproject.org">community@therestartproject.org</a>. For technical support, please email <a href="mailto:tech@therestartproject.org">tech@therestartproject.org</a>.
                    
                     <br /><br />
