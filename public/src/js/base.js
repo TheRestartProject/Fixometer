@@ -16,6 +16,12 @@ $(document).ready(function(){
     $($(this).data('form')).find('.selectpicker').val('default').selectpicker('refresh');
   });
 
+  $(document).on('click', 'a.removebutton', function () {
+    
+     $(this).closest('tr').remove();
+     return false;
+ });
+
 /*
   $('.file').fileinput({
     data-preview-file-icon="<i class="fa fa-file"></i>",
@@ -161,15 +167,8 @@ $('.device-image-delete').click(function(e){
                                   '</div>' +
                               '</div>' +
                           '</td>' +
-                          '<td><a id="remove" class="btn delete-control" href="onclick="removeData()""><i class="fa fa-trash"></i></a></td>' +
+                          '<td><a class="removebutton btn delete-control"><i class="fa fa-trash"></i></a></td>' +
                       '</tr>';
-
-
-function removeData(){
-var element = document.getElementById('remove');
-element.parentNode.removeChild(element);
-return false;
-}
 
       $('#device-table tbody').append(tablerow);
 
@@ -457,3 +456,7 @@ return false;
 
 
 });
+
+
+
+ 
