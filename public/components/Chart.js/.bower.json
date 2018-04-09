@@ -14,8 +14,7 @@
     "tag": "v1.0.2",
     "commit": "930b16a0af59201dcfcd1594b0e7540db4d04c9f"
   },
-  "_source": "git://github.com/nnnick/Chart.js.git",
+  "_source": "https://github.com/nnnick/Chart.js.git",
   "_target": "~1.0.2",
-  "_originalSource": "Chart.js",
-  "_direct": true
+  "_originalSource": "Chart.js"
 }

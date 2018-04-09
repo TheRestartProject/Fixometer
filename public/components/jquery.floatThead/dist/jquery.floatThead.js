@@ -1,4 +1,4 @@
-// @preserve jQuery.floatThead 1.2.12 - http://mkoryak.github.io/floatThead/ - Copyright (c) 2012 - 2015 Misha Koryak
+// @preserve jQuery.floatThead 1.2.13 - http://mkoryak.github.io/floatThead/ - Copyright (c) 2012 - 2015 Misha Koryak
 // @license MIT
 
 /* @author Misha Koryak
@@ -23,7 +23,7 @@
     headerCellSelector: 'tr:visible:first>*:visible', //thead cells are this.
     zIndex: 1001, //zindex of the floating thead (actually a container div)
     debounceResizeMs: 10, //Deprecated!
-    useAbsolutePositioning: true, //if set to NULL - defaults: has scrollContainer=true, doesn't have scrollContainer=false
+    useAbsolutePositioning: null, //if set to NULL - defaults: has scrollContainer=true, doesn't have scrollContainer=false
     scrollingTop: 0, //String or function($table) - offset from top of window where the header should not pass above
     scrollingBottom: 0, //String or function($table) - offset from the bottom of the table where the header should stop scrolling
     scrollContainer: function($table){
@@ -216,7 +216,7 @@
       var $tbody = $table.children('tbody:first');
       if($header.length == 0 || $tbody.length == 0){
         $table.data('floatThead-lazy', opts);
-        $table.one('reflow', function(){
+        $table.unbind("reflow").one('reflow', function(){
           $table.floatThead(opts);
         });
         return;
@@ -439,7 +439,7 @@
         if(!headerFloated){
           headerFloated = true;
           if(useAbsolutePositioning){ //#53, #56
-            var tw = tableWidth($table, $fthCells);
+            var tw = tableWidth($table, $fthCells, true);
             var wrapperWidth = $wrapper.width();
             if(tw > wrapperWidth){
               $table.css('minWidth', tw);
@@ -755,6 +755,9 @@
 
 
       var windowResizeEvent = function(){
+        if($table.is(":hidden")){
+          return;
+        }
         updateScrollingOffsets();
         calculateScrollBarSize();
         ensureReflow();
@@ -763,6 +766,9 @@
         repositionFloatContainer(calculateFloatContainerPos('resize'), true, true);
       };
       var reflowEvent = util.debounce(function(){
+        if($table.is(":hidden")){
+          return;
+        }
         calculateScrollBarSize();
         updateScrollingOffsets();
         ensureReflow();
@@ -791,15 +797,24 @@
           .on('page',   reflowEvent);
       }
 
+      $window.on(eventName('shown.bs.tab'), reflowEvent); // people cant seem to figure out how to use this plugin with bs3 tabs... so this :P
+      $window.on(eventName('tabsactivate'), reflowEvent); // same thing for jqueryui
+
 
       if (canObserveMutations) {
-        var mutationElement = $scrollContainer.length ? $scrollContainer[0] : $table[0];
+        var mutationElement = null;
+        if(_.isFunction(opts.autoReflow)){
+          mutationElement = opts.autoReflow($table, $scrollContainer)
+        }
+        if(!mutationElement) {
+          mutationElement = $scrollContainer.length ? $scrollContainer[0] : $table[0]
+        }
         mObs = new MutationObserver(function(e){
-          var wasThead = function(nodes){
-            return nodes && nodes[0] && nodes[0].nodeName == "THEAD";
+          var wasTableRelated = function(nodes){
+            return nodes && nodes[0] && (nodes[0].nodeName == "THEAD" || nodes[0].nodeName == "TD"|| nodes[0].nodeName == "TH");
           };
           for(var i=0; i < e.length; i++){
-            if(!(wasThead(e[i].addedNodes) || wasThead(e[i].removedNodes))){
+            if(!(wasTableRelated(e[i].addedNodes) || wasTableRelated(e[i].removedNodes))){
               reflowEvent();
               break;
             }
