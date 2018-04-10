@@ -97,7 +97,8 @@
 
                             }
                             else {
-                                echo '<div class="alert alert-info">No Image</div>';
+                                echo '<img src="/uploads/mid_1474993329ef38d3a4b9478841cc2346f8e131842fdcfd073b307.jpg" class="img-responsive" style="width: 25%; height: 25%; ">';
+                                // echo '<div class="alert alert-info">No Image</div>';
                             }
                             ?>
                         </div>

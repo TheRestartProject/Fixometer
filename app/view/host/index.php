@@ -34,7 +34,7 @@
                                 <?php if(!empty($g->path)) { ?>
                                 <img src="/uploads/thumbnail_<?php echo $g->path; ?>" width="40" height="40" alt="<?php echo $g->name; ?> Image" class="profile-pic" />
                                 <?php } else { ?>
-                                <div class="profile-pic clearfix" style="background: #ddd; width: 40px; height: 40px; ">&nbsp;</div>
+                                <img src="/uploads/mid_1474993329ef38d3a4b9478841cc2346f8e131842fdcfd073b307.jpg" width="40" height="40" alt="<?php echo $group->name; ?> Image" class="profile-pic clearfix">&nbsp;</img>
                                 <?php } ?>
                             </div>
                             <div class="pull-left">
@@ -85,7 +85,7 @@
 
                 <div class="media-left">
                     <?php if(empty($group->path)){ ?>
-                    <img src="https://www.placehold.it/60?text=group+avatar" alt="<?php echo $group->name; ?> Image" class="profile-pic" />
+                    <img src="/uploads/mid_1474993329ef38d3a4b9478841cc2346f8e131842fdcfd073b307.jpg" width="60" height="60" alt="<?php echo $group->name; ?> Image" class="profile-pic" />
                     <?php } else { ?>
                     <img src="/uploads/thumbnail_<?php echo $group->path; ?>" width="60" height="60" alt="<?php echo $group->name; ?> Image" class="profile-pic" />
                     <?php } ?>
