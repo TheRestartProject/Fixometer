@@ -74,7 +74,7 @@
                                 <?php endif ?>
                                 <div class="form-group">
                                     <label for="profile">Profile Picture:</label>
-                                    <input type="file" class="form-control file" name="profile" data-show-upload="false" data-show-caption="true">
+                                    <input type="file" class="form-control file" name="profile"data-show-upload="false" data-show-caption="true">
                                 </div>
 
 
