@@ -14,6 +14,30 @@ $(document).ready(function(){
     $($(this).data('form')).find('.selectpicker').val('default').selectpicker('refresh');
   });
 
+/** Delete option for newly created devices ( /party/manage ) (Host management page) **/
+  $(document).on('click', 'a.removebutton', function () {
+     $(this).closest('tr').remove();
+     return false;
+ });
+
+/** Show/Hide Repairable details ( /party/manage ) (Host management page) **/
+  $(document).on('click', '.repairable', function() {
+    var detailsWrap = $(this).data('target-details');
+    if ($(this).is(':checked')) {
+      $(detailsWrap).show();
+    }
+
+  });
+
+
+  $('.repairable').each(function(index) {
+    if ($(this).val() == '2' && $(this).is(':checked')) {
+      var repairableOptionsSelector = $(this).data('target-details');
+      var repairableOptionsElement = $(repairableOptionsSelector);
+      repairableOptionsElement.show();
+    }
+  });      
+    
 /*
   $('.file').fileinput({
     data-preview-file-icon="<i class="fa fa-file"></i>",
@@ -74,7 +98,7 @@ $('.device-image-delete').click(function(e){
                           '<td>' + n + '.</td>'+
                           '<td>' +
                               '<div class="form-group">' +
-                                  '<select id="device[' + n +'][category]" name="device[' + n + '][category]" class="category-select  form-control" data-live-search="true" tite="Choose category...">' +
+                                  '<select id="device[' + n +'][category]" name="device[' + n + '][category]" class="category-select  form-control" data-live-search="true" tite="Choose category..." required="true">' +
                                   '<option></option>' +
                                   categories +
                                   '<option value="46">None of the above...</option>' +
@@ -159,7 +183,7 @@ $('.device-image-delete').click(function(e){
                                   '</div>' +
                               '</div>' +
                           '</td>' +
-                          '<td></td>' +
+                          '<td><a class="removebutton btn delete-control"><i class="fa fa-trash"></i></a></td>' +
                       '</tr>';
 
       $('#device-table tbody').append(tablerow);
@@ -348,7 +372,7 @@ $('.device-image-delete').click(function(e){
   $('.repairable').click(function(){
         var detailsWrap = $(this).data('target-details');
         if ($(this).is(':checked')) {
-            $(detailsWrap).slideDown('slow');
+            $(detailsWrap).show();
         }
     });
 
@@ -445,6 +469,8 @@ $('.device-image-delete').click(function(e){
     $('#party-list').perfectScrollbar();
   }
 
-
-
 });
+
+
+
+ 
