@@ -5,6 +5,7 @@ define( 'APPKEY',   'l[56pOkjg_I8874.');  // should be a random string
 define( 'APPEMAIL', 'your@email.org'); // auto generated emails are sent from this address
 define( 'SUPPORT_CONTACT_EMAIL', "fry@planetexpress.com"); // address users can contact for help
 define('NOTIFICATION_EMAIL', "hubert@planetexpress.com");
+define('GA_TRACKING_ID', "UA-12345678-1");
 
 /** Secret! **/
 define( 'SECRET',   strrev(md5(APPKEY)));
