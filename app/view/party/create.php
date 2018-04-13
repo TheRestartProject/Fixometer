@@ -99,9 +99,6 @@
                                 </div>
 
 
-
-
-
                                 <div class="form-group">
                                     <label for="free_text"><?php _t("Description:");?></label>
                                     <i class="fa fa-question-circle" data-toggle="popover" title="Promotional description of your event" data-content="This is a description of the party that is displayed to members of the public to in advance of the party.  This information is published on The Restart Project website, and helps to promote your event."></i>

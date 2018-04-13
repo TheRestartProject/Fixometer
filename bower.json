@@ -22,10 +22,11 @@
     "bootstrap-sortable": "~1.11.1",
     "bootstrap": "~3.3.4",
     "fontawesome": "~4.3.0",
-    "bootstrap-select": "~1.12.2"
+    "bootstrap-select": "~1.12.2",
+    "summernote-cleaner": "*"
   },
   "devDependencies": {
-    "eonasdan-bootstrap-datetimepicker": "~4.7.14",
+    "eonasdan-bootstrap-datetimepicker": "~4.17.45",
     "summernote": "latest",
     "bootstrap-fileinput": "~4.2.0",
     "Chart.js": "~1.0.2",
