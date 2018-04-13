@@ -470,7 +470,6 @@
                                 $error = true;
                             }
 
-
                             if(!isset($device['repaired_by']) || empty($device['repaired_by'])){
                                 $device['repaired_by'] = 29;
                             }
@@ -496,10 +495,7 @@
                                 }
                             }
 
-
-
                             $response['success'] = 'Party info updated!';
-
                         }
                     }
 

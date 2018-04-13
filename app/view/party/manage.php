@@ -5,7 +5,8 @@
         <div class="col-md-12">
             <h1><?php _t("Edit Party");?>
                 <small>
-                    <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-floppy-o"></i> <?php _t("save");?></button>
+                    <button type="submit" id=btn_save onClick="onClickFun(this)" class="btn btn-primary btn-sm"><i class="fa fa-floppy-o"></i> <?php _t("save");?></button>
+
                     <a href="/party/edit/<?php echo $party->id; ?>" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> <?php _t("edit details");?></a>
 
                     <?php $home_url = (hasRole($user, 'Administrator') ? '/admin' : '/host'); ?>
@@ -207,7 +208,7 @@
                             </td>
                             <td>
                                 <div class="form-group">
-                                    <select id="device[<?php echo $i; ?>][category]" name="device[<?php echo $i; ?>][category]" class="category-select form-control" data-live-search="true">
+                                    <select id="device[<?php echo $i; ?>][category]" name="device[<?php echo $i; ?>][category]" class="category-select form-control" data-live-search="true" required>
                                         <?php foreach($categories as $cluster){ ?>
                                         <optgroup label="<?php echo $cluster->name; ?>">
                                             <?php foreach($cluster->categories as $c){ ?>
@@ -217,7 +218,7 @@
                                         <?php } ?>
                                         <option value="46" <?php echo ($devices[$i-1]->category == 46 ? ' selected':''); ?>><?php _t("None of the above...");?></option>
                                     </select>
-                                </div>
+                                </div>                      
                                 <div class="form-group
                                     <?php echo ($devices[$i-1]->category == 46 ? 'show' : 'hide'); ?>
                                      estimate-box">
@@ -364,7 +365,7 @@
                             <td><?php echo $i; ?>.</td>
                             <td>
                                 <div class="form-group">
-                                    <select id="device[<?php echo $i; ?>][category]" name="device[<?php echo $i; ?>][category]" class="selectpicker form-control category-select" data-live-search="true" title="Choose category...">
+                                    <select id="device[<?php echo $i; ?>][category]" name="device[<?php echo $i; ?>][category]" class="selectpicker form-control category-select" data-live-search="true" title="Choose category..." required>
                                         <option></option>
                                         <?php foreach($categories as $cluster){ ?>
                                         <optgroup label="<?php echo $cluster->name; ?>">
@@ -473,7 +474,18 @@
                 </table>
                 <div class="text-center">
                     <br /><br />
-                    <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-floppy-o"></i> <?php _t("Save");?></button>
+                    <button type="submit" id="btn_save" onClick="onClickFun(this)" class="btn btn-primary btn-lg"><i class="fa fa-floppy-o"></i> <?php _t("Save");?></button>
+
+                    <script type="text/javascript">
+                        function onClickFun(el){
+                            el.innerHTML='Saving...';
+                            el.addEventListener("click", function(event){
+                                event.preventDefault()
+                            });
+                            
+                        }
+                    </script>
+
                     <br /><br /><br />
                 </div>
             </div>
