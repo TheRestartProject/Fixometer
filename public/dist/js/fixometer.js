@@ -31,7 +31,7 @@ $(document).ready(function(){
 
 
   $('.repairable').each(function(index) {
-    if ($(this).val() == '2' || $(this).is(':checked')) {
+    if ($(this).val() == '2' && $(this).is(':checked')) {
       var repairableOptionsSelector = $(this).data('target-details');
       var repairableOptionsElement = $(repairableOptionsSelector);
       repairableOptionsElement.show();
