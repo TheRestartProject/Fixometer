@@ -364,7 +364,11 @@
 
             <section class="row" id="impact-header">
                 <div class="col-sm-12 text-center">
+                    <?php if(!empty($group->path)) { ?>
                     <img src="/uploads/mid_<?php echo $group->path; ?>" class="img-circle impact-avatar" width="120" />
+                    <?php } else { ?>
+                    <img src="/uploads/mid_1474993329ef38d3a4b9478841cc2346f8e131842fdcfd073b307.jpg" class="img-circle impact-avatar" width="120" />&nbsp;</img>
+                    <?php } ?>
                     <h2><?php echo $group->name; ?></h2>
 
                     <p class="big">
