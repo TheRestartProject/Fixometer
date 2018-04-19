@@ -1,11 +1,11 @@
 
-<form action="/party/manage/<?php echo $party->id; ?>" method="post" id="party-edit" enctype="multipart/form-data">
+<form action="/party/manage/<?php echo $party->id; ?>" method="post" onsubmit="myFunction(this)" id="party-edit" enctype="multipart/form-data">
 <div class="container">
     <div class="row">
         <div class="col-md-12">
             <h1><?php _t("Edit Party");?>
                 <small>
-                    <button type="submit" id=btn_save onClick="onClickFun(this)" class="btn btn-primary btn-sm"><i class="fa fa-floppy-o"></i> <?php _t("save");?></button>
+                    <button type="submit" class="btn_save btn btn-primary btn-sm"><i class="fa fa-floppy-o"></i> <?php _t("save");?></button>
 
                     <a href="/party/edit/<?php echo $party->id; ?>" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> <?php _t("edit details");?></a>
 
@@ -208,7 +208,7 @@
                             </td>
                             <td>
                                 <div class="form-group">
-                                    <select id="device[<?php echo $i; ?>][category]" name="device[<?php echo $i; ?>][category]" class="category-select form-control" data-live-search="true" required>
+                                    <select id="device[<?php echo $i; ?>][category]" name="device[<?php echo $i; ?>][category]" class="category-select form-control" value="category" data-live-search="true" required>
                                         <?php foreach($categories as $cluster){ ?>
                                         <optgroup label="<?php echo $cluster->name; ?>">
                                             <?php foreach($cluster->categories as $c){ ?>
@@ -474,15 +474,20 @@
                 </table>
                 <div class="text-center">
                     <br /><br />
-                    <button type="submit" id="btn_save" onClick="onClickFun(this)" class="btn btn-primary btn-lg"><i class="fa fa-floppy-o"></i> <?php _t("Save");?></button>
+                    <button type="submit" class="btn_save btn btn-primary btn-lg"><i class="fa fa-floppy-o"></i> <?php _t("Save");?></button>
 
                     <script type="text/javascript">
-                        function onClickFun(el){
-                            el.innerHTML='Saving...';
-                            el.addEventListener("click", function(event){
-                                event.preventDefault()
+                       // document.getElementById("party-edit").onsubmit = myFunction();
+                        function myFunction(el){
+                            var save_buttons = document.getElementsByClassName('btn_save');
+                            for(i=0; i<=save_buttons.length; i++){
+                            save_buttons[i].innerHTML='Saving...';
+                            save_buttons[i].innerHTML='Saving...';
+                            }
+                            el.addEventListener("submit", function(event){
+                                event.preventDefault();
                             });
-                            
+                                                      
                         }
                     </script>
 
