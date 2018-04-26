@@ -32,7 +32,7 @@
                         <li class="group-list clearfix">
                             <div class="pull-left">
                                 <?php if(!empty($g->path)) { ?>
-                                <img src="/uploads/thumbnail_<?php echo $g->path; ?>" width="40" height="40" alt="<?php echo $g->name; ?> Image" class="profile-pic" />
+                                <img src="/uploads/thumbnail_<?php echo $g->path; ?>" width="60" height="60" alt="<?php echo $g->name; ?> Image" class="profile-pic" />
                                 <?php } else { ?>
                                 <img src="/uploads/mid_1474993329ef38d3a4b9478841cc2346f8e131842fdcfd073b307.jpg" width="40" height="40" alt="<?php echo $group->name; ?> Image" class="profile-pic clearfix"/>
                                 <?php } ?>

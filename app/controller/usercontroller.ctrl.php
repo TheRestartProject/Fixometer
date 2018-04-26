@@ -377,9 +377,12 @@
                             $error['role'] = 'Please select a role for the User.';
                         }
 
-                        if(empty($group)){
-                            $group = NULL;
+                         if((empty($groups)) && ($role == '3'))
+                        {                        
+                            $groups = NULL;
+                            $error['group'] = 'Please select a group for the User.';                            
                         }
+
                         if(!$this->User->checkEmail($email)){
                             $error['email'] = 'This email is already in use in our database. Please use another one.';
                         }

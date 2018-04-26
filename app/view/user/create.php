@@ -43,7 +43,7 @@
 
                             </div>
                             <div class="col-md-6">
-                              <?php /*
+                               <?php /*
 
                                 <div class="form-group <?php if(isset($error) && isset($error['name']) && !empty($error['name'])) { echo "has-error"; } ?>">
                                     <label for="password">Password:</label>
@@ -56,18 +56,17 @@
                                 </div>
 
                                 */ ?>
-
                                 <div class="form-group <?php if(isset($error) && isset($error['group']) && !empty($error['group'])) { echo "has-error"; } ?>">
                                     <label for="group">Group(s):</label>
+                                    <?php if(isset($error) && isset($error['group']) && !empty($error['group'])) { echo '<span class="help-block text-danger">' . $error['group'] . '</span>'; } ?>
                                         <?php foreach($groups as $group){ ?>
                                         <div class="checkbox">
                                             <label>
                                                 <input value="<?php echo $group->id; ?>" type="checkbox" name="groups[]" id="group-<?php echo $group->id; ?>"> <?php echo $group->name; ?>
                                             </label>
+                                             <?php } ?>
                                         </div>
-
-                                        <?php } ?>
-                                        <?php if(isset($error) && isset($error['group']) && !empty($error['group'])) { echo '<span class="help-block text-danger">' . $error['group'] . '</span>'; } ?>
+                                        
                                 </div>
 
                                 <div class="form-group">
