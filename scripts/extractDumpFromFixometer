@@ -1,0 +1,16 @@
+#!/bin/sh -
+
+TMPAREA=`mktemp -d`
+
+SOURCE_DB_USER=<username>
+SOURCE_DB_PASSWORD="<password>"
+SOURCE_DB_NAME=<database name>
+SOURCE_DB_HOST=<database hostname or IP address>
+SOURCE_DB_PORT=<database port>
+
+TARGET_FILE=$TMPAREA/fixometer.dump
+
+mysqldump -u $SOURCE_DB_USER --single-transaction --compress -p$SOURCE_DB_PASSWORD --host=$SOURCE_DB_HOST --port=$SOURCE_DB_PORT $SOURCE_DB_NAME > $TARGET_FILE
+
+echo "SQL dump file is: $TARGET_FILE"
+exit 0

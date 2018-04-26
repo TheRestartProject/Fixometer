@@ -1,0 +1,28 @@
+#!/bin/sh -x
+
+# loadDumpIntoAB <sqlfile> <A|B>
+
+DUMPFILE=$1
+AB_INSTANCE=$2
+
+if [ ! -f "$DUMPFILE" ]; then
+  echo "ERROR: File $DUMPFILE not found"
+  exit 1
+fi
+
+if [ "$AB_INSTANCE" != "A" ] && [ "$AB_INSTANCE" != "B" ]; then
+  echo "ERROR: A or B instance not specified"
+  exit 1
+fi
+
+TARGET_DB_USER=fixometer_root
+TARGET_DB_PASSWORD=<password>
+TARGET_DB_HOST=localhost
+TARGET_DB_PORT=3306
+SOURCE_DB_NAME=<name of source database>	## This should be the name in the supplied sqlfile
+
+echo "Loading into $AB_INSTANCE"
+sed -e 's/'$SOURCE_DB_NAME'/fixometer_'$AB_INSTANCE'/g' $DUMPFILE | mysql -vvv -u$TARGET_DB_USER -p$TARGET_DB_PASSWORD --host=$TARGET_DB_HOST --port=$TARGET_DB_PORT fixometer_$AB_INSTANCE
+
+
+
