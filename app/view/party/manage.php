@@ -516,6 +516,8 @@
             <code style="padding:0">
               <pre>&lt;iframe src="https://community.therestartproject.org/outbound/info/party/<?php echo $party->id; ?>" frameborder="0" width="700" height="1050"&gt;&lt;/iframe&gt;</pre>
             </code>
+            <div><strong><?php _t("Note");?></strong></div>
+            <p><em><?php _t("Please be aware that you may need to change the <strong>width</strong> and <strong>height</strong> values to fit the visualisation into your own page.");?></em></p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal"><?php _t("Close");?></button>
