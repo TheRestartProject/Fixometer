@@ -122,8 +122,8 @@
 
                 if(empty($error)) {
 
-                    $startTime = date('Y-m-d', $event_date) . ' ' . $start;
-                    $endTime = date('Y-m-d', $event_date) . ' ' . $end;
+                    $startTime =  $event_date . ' ' . $start;
+                    $endTime = $event_date . ' ' . $end;
 
                     $dtStart = new DateTime($startTime);
                     $dtDiff = $dtStart->diff(new DateTime($endTime));
@@ -146,8 +146,6 @@
                                     'volunteers'    => $volunteers
                                     );
                     $idParty = $this->Party->create($data);
-
-
 
                     if($idParty){
                        
@@ -522,9 +520,7 @@
                                             array('key' => 'party_stats',           'value' => $idparty),
                                             array('key' => 'party_lat',             'value' => $party->latitude),
                                             array('key' => 'party_lon',             'value' => $party->longitude)
-
                                         );
-
 
                         /** Start WP XML-RPC **/
                         $wpClient = new \HieuLe\WordpressXmlrpcClient\WordpressClient();
@@ -540,15 +536,12 @@
                                         'custom_fields' => $custom_fields
                                         );
 
-
                         // Check for WP existence in DB
                         // $theParty = $this->Party->findOne($idparty);
                         if(!empty($party->wordpress_post_id)){
                             // echo "WP id present (" . $party->wordpress_post_id . ")! Editing...<br />";
                             // we need to remap all custom fields because they all get unique IDs across all posts, so they don't get mixed up.
                             $thePost = $wpClient->getPost($party->wordpress_post_id);
-
-
 
                             foreach( $thePost['custom_fields'] as $i => $field ){
                                 foreach( $custom_fields as $k => $set_field){
@@ -587,18 +580,15 @@
                   $this->set('response', $response);
                 }
 
-
                 $party      = $this->Party->findThis($id, true);
                 $categories = $Category->listed();
                 $restarters = $User->find(array('idroles' => 4));
-
 
                 $party->co2 = 0;
                 $party->ewaste = 0;
                 $party->fixed_devices = 0;
                 $party->repairable_devices = 0;
                 $party->dead_devices = 0;
-
 
                 if(!empty($party->devices)){
                     foreach($party->devices as $device){
@@ -679,7 +669,6 @@
             }
         }
 
-
         public function stats($id, $class = null){
             $Device = new Device;
 
@@ -736,11 +725,7 @@
 
                 $Image->deleteImage($id, $path);
 
-
-
                 echo json_encode(array('hey' => 'Deleting stuff here!'));
-
-
             }
         }
 
