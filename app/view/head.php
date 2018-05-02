@@ -66,17 +66,5 @@
             var feature__device_age = <?php var_export(featureIsEnabled(FEATURE__DEVICE_AGE)); ?>;
         </script>
 
-
-    <?php
-    if($charts) {
-    ?>
-    <script src="/components/Chart.js/Chart.min.js"></script>
-    <script>
-        // MAIN CHART CONFIG
-        Chart.defaults.global.responsive = true;
-    </script>
-    <?php
-    }
-    ?>
     </head>
     <body>

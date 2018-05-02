@@ -13,7 +13,7 @@
             <span class="header-text">
             Welcome, <strong><?php echo $user->name; ?></strong>. 
             
-            <?php if ($showbadges) { ?> 
+            <?php if ($showbadges = "") { ?> 
                 <span class="">You have <a class="label label-success" href="#upcomingparties"><?php echo count($upcomingparties); ?></a> upcoming <?php echo (count($upcomingparties) == 1 ? 'party' : 'parties'); ?>.
                 <?php if ($need_attention > 0) { ?>
                     <a class="label label-danger" href="#attention"><?php echo $need_attention; ?></a> <?php echo ($need_attention == 1 ? 'party needs' : 'parties need'); ?> your attention.</span>
