@@ -1,5 +1,5 @@
 <?php
-
+ 
     class GroupController extends Controller {
 
         public function __construct($model, $controller, $action){
@@ -319,12 +319,25 @@
 
         public function delete($id){
             if(hasRole($this->user, 'Administrator')){
+
+                $group = $this->Group->findOne($id);
+                $wpId = $group->wordpress_post_id;
+
                 $r = $this->Group->delete($id);
+               echo 'test';
+                $groupModel = new Group;
+                $imgDelete = $groupModel->deleteImage($id);
+
                 if(!$r){
                     $response = 'd:err';
                 }
                 else {
                     $response = 'd:ok';
+
+                    $wpClient = new \HieuLe\WordpressXmlrpcClient\WordpressClient();
+                    $wpClient->setCredentials(WP_XMLRPC_ENDPOINT, WP_XMLRPC_USER, WP_XMLRPC_PSWD);
+
+                    $deletion = $wpClient->deletePost($wpId);
                 }
                 header('Location: /group/index/' . $response);
             }

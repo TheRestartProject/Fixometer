@@ -116,9 +116,6 @@
             $stmt = $this->database->prepare($sql);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
-
-
-
             return $stmt->fetch(PDO::FETCH_OBJ);
         }
 
@@ -144,9 +141,35 @@
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
 
-
-
             return $stmt->fetchAll(PDO::FETCH_OBJ);
         }
 
+         public function numberofParties($id){
+            $sql = 'SELECT  COUNT(*) AS numParties FROM `events` WHERE `group`= :id';
+            $stmt = $this->database->prepare($sql);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            $p = $stmt->fetchObject();
+            return $p->numParties;
+
+         }
+
+         public function deleteImage($id){
+            $sql = 'SELECT * FROM `images`
+                            INNER JOIN `xref` ON `xref`.`object` = `images`.`idimages`
+                            WHERE `xref`.`object_type` = 5 AND `xref`.`reference` = :id
+                            AND `xref`.`reference_type` = 2
+                            GROUP BY `images`.`path`';
+
+                            $stmt = $this->database->prepare($sql);
+                            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+                            $stmt->execute();
+                            $image = $stmt->fetchObject();
+
+                                $mid_filePath = UPLOADS_URL .'mid_'.$image->path;
+                                $thumbnail_filePath = UPLOADS_URL .'thumbnail_'.$image->path;
+                                
+                                $midPath = unlink($mid_filePath);
+                                $thumbnailPath = unlink($thumbnail_filePath);
+        }
     }

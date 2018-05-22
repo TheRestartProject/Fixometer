@@ -18,18 +18,26 @@
                         <?php } ?>
                     </tr>
                 </thead>
-
+ 
                 <tbody>
                     <?php foreach($list as $g){ ?>
                     <tr>
                         <td><?php echo $g->id; ?></td>
+                        <?php 
+                        $Group  = new Group;
+                        $numberofParties = $Group->numberofParties($g->id);
+                        ?>
                         <td><a href="/group/edit/<?php echo $g->id; ?>" title="edit group"><?php echo $g->name; ?></a></td>
                         <td><?php echo $g->location . ', ' . $g->area; ?></td>
                         <td><?php echo $g->frequency; ?> <?php _t("Parties/Year");?></td>
                         <td><?php echo $g->user_list; ?></td>
                         <?php if(hasRole($user, 'Administrator')){ ?>
                         <td><a href="/group/edit/<?php echo $g->id; ?>"><i class="fa fa-pencil"></i></a></td>
+
+                        <?php if($numberofParties == 0){?>
                         <td><a href="/group/delete/<?php echo $g->id; ?>" class="delete-control"><i class="fa fa-trash"></i></a></td>
+                        <?php } ?>
+                    
                         <?php } ?>
                     </tr>
                     <?php } ?>

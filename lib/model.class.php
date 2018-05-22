@@ -1,5 +1,5 @@
 <?php
-
+ 
     /** Main Model Class
      * exposes the $database var (PDO OBject)
      * to model classes that extend it
@@ -173,7 +173,6 @@
             if(!is_numeric($id)){
                 new Error(620, 'Invalid parameter. (model.class.php, 168)');
                 return false;
-
             }
             else {
                 $sql = 'DELETE FROM `' . $this->table . '` WHERE `id' . $this->table . '` = :id';
