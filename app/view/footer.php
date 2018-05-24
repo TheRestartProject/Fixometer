@@ -14,7 +14,7 @@
                 
                  <p>If you are a community group and would like to use the Fixometer, please email us at <a href="mailto:community@therestartproject.org">community@therestartproject.org</a>. For technical support, please email <a href="mailto:tech@therestartproject.org">tech@therestartproject.org</a>.</p>
 
-                 <p>To view our privacy policy <a href="https://therestartproject.org/data-and-privacy-policy/">click here</a>.</p>
+                 <p>To view our privacy policy <a target="_blank" href="https://therestartproject.org/privacy-policy/fixometer">click here</a>.</p>
                    
                  <p>Image on the login page &copy; <em class="blue">Heather Agyepong</em></p>
             </div>
