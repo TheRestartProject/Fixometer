@@ -474,7 +474,7 @@
                 </table>
                 <div class="text-center">
                     <br /><br />
-                    <button type="submit" id="btn_save" onClick="onClickFun(this)" class="btn btn-primary btn-lg"><i class="fa fa-floppy-o"></i> <?php _t("Save");?></button>
+                    <button type="submit" id="btn_save" class="btn btn-primary btn-lg"><i class="fa fa-floppy-o"></i> <?php _t("Save");?></button>
 
                     <script type="text/javascript">
                         function onClickFun(el){
