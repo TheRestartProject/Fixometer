@@ -9,14 +9,14 @@
             <div class="col-md">
                 
                 <h3>The Fixometer</h3>
-                <p>
-                <p>
-                   This tool is developed by The Restart Project with support from the Shuttleworth Foundation. It was created with support from WRAP's Innovation in Waste Prevention Fund, in collaboration with The Engine Room and Circular Ecology.</p>
-                    If you are a community group and would like to use the Fixometer, please email us at <a href="mailto:community@therestartproject.org">community@therestartproject.org</a>. For technical support, please email <a href="mailto:tech@therestartproject.org">tech@therestartproject.org</a>.
+                
+                <p>This tool is developed by The Restart Project with support from the Shuttleworth Foundation. It was created with support from WRAP's Innovation in Waste Prevention Fund, in collaboration with The Engine Room and Circular Ecology.</p>
+                
+                 <p>If you are a community group and would like to use the Fixometer, please email us at <a href="mailto:community@therestartproject.org">community@therestartproject.org</a>. For technical support, please email <a href="mailto:tech@therestartproject.org">tech@therestartproject.org</a>.</p>
+
+                 <p>To view our privacy policy <a target="_blank" href="https://therestartproject.org/data-and-privacy-policy/fixometer">click here</a>.</p>
                    
-                    <br /><br />
-                    Image on the login page &copy; <em class="blue">Heather Agyepong</em>
-                </p>
+                 <p>Image on the login page &copy; <em class="blue">Heather Agyepong</em></p>
             </div>
             
             <div class="col-mdd">
