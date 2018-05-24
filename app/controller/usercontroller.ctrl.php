@@ -425,11 +425,12 @@
 
                               // send email to User
                               $message = "<p>Hi,</p>" .
-                                       "<p>This is an automatic email to let you know that we have just created an account for you on the <strong>" . APPNAME . "</strong>.</p>" .
+                                       "<p>This is an automatic email to let you know that on your request we have just created an account for you on the <strong>" . APPNAME . "</strong>.</p>" .
                                        "<p>Please click on this link to set your password: <a href=\"" . BASE_URL . "/user/reset/?recovery=" . $data['recovery'] . "\">" . BASE_URL . "/user/reset/?recovery=" . $data['recovery'] . "</a>.</p>" .
                                        "<p>If the link doesn't work, please copy and paste it in the address bar of your browser.</p>" .
                                        "<p>The link will be active for the next 24 hours.</p>" .
                               "<p>If you have any issues, please contact <a href='mailto:" . SUPPORT_CONTACT_EMAIL . "'>" . SUPPORT_CONTACT_EMAIL . "</a>.</p>" .
+                              "<p>Through the Fixometer, we keep your name and email, and data on your activity on the platform as long as you remain a user. You can ask for your account to be deleted at any time and we’ll never share your details with anyone else. You can also read our <a href= 'https://therestartproject.org/data-and-privacy-policy/fixometer/'>full privacy policy</a> on The Restart Project website.</p>" .
                                        "<p>Thanks for using the " . APPNAME . "!</p>" .
                                        "<p><em>The Restart Project</em></p>";
                               $subject = APPNAME . ": Account created - please set your password";
