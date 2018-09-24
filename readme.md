@@ -1,3 +1,5 @@
+*PLEASE NOTE!  The code in this repository is several months out of date.  We have made major changes as part of the integration of the Fixometer into [restarters.net](https://restarters.net/about).  The changes have not yet been merged into this public repository - we will be doing so very soon.  If you would like urgently like to get the latest code, please contact tech at therestartproject.org.*
+
 # Fixometer
 
 The Fixometer is our tool to monitor the growing impact of our community repair activities and those of our network of partners. It allows members of the Restart community to log fixes occurring at the events they run, capturing the environmental and social impact of their work.  To find out more visit [the Fixometer page on our website](https://therestartproject.org/fixometer/).
