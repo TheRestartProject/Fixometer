@@ -1,4 +1,4 @@
-*PLEASE NOTE!  The code in this repository is several months out of date.  We have made major changes as part of the integration of the Fixometer into [restarters.net](https://restarters.net/about).  The changes have not yet been merged into this public repository - we will be doing so very soon.  If you would like urgently like to get the latest code, please contact tech at therestartproject.org.*
+*PLEASE NOTE!  The code in this repository is archived.  We have made major changes as part of the integration of the Fixometer into [restarters.net](https://restarters.net/about).  The new software is at https://github.com/therestartproject/restarters.net.*
 
 # Fixometer
 
